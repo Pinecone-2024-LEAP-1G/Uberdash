@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, Model, models } from "mongoose";
+import { Schema, model, Model, models } from "mongoose";
 
 export type Discount = {
   _id: Schema.Types.ObjectId;
