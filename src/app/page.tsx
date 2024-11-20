@@ -1,5 +1,6 @@
 // import { Sidebar } from "lucide-react";
 import { MenuItem } from "../components/MenuItem";
+import { RestrauntMenu } from "../components/RestrauntMenu";
 
 const Home = () => {
   return (
@@ -11,6 +12,8 @@ const Home = () => {
         points="4.3"
         bonus="Buy 1,Get 1 Free"
       />
+
+      <RestrauntMenu />
     </div>
   );
 
