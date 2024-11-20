@@ -13,7 +13,6 @@ type Restaurant = {
   banner: string;
   info: string;
   rating: number;
-  reviews: [Schema.Types.ObjectId];
 };
 
 const RestaurantSchema = new Schema<Restaurant>({
@@ -23,7 +22,6 @@ const RestaurantSchema = new Schema<Restaurant>({
   banner: { type: String },
   info: { type: String },
   rating: { type: Number, default: 0 },
-  reviews: { type: [Schema.Types.ObjectId], default: [] },
 });
 
 export const RestaurantModel: Model<Restaurant> =
