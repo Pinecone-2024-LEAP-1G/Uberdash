@@ -2,6 +2,8 @@ import { Schema, model, Model, models } from "mongoose";
 
 export type Review = {
   _id: Schema.Types.ObjectId;
+  user_id: Schema.Types.ObjectId;
+  restaurant_id: Schema.Types.ObjectId;
   comment: string;
   rating: number;
 };
@@ -16,4 +18,4 @@ const ReviewSchema = new Schema<Review>(
 );
 
 export const ReviewModel: Model<Review> =
-  models.discounts || model<Review>("review", ReviewSchema);
+  models.review || model<Review>("review", ReviewSchema);
