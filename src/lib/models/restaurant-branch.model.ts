@@ -15,6 +15,7 @@ type RestaurantBranch = {
 const RestaurantBranchSchema = new Schema<RestaurantBranch>({
     restaurantId : {type : Schema.Types.ObjectId, ref : "restaurants"},
     branchName : {type : String, required : true},
+<<<<<<< HEAD
     location : {type: {
         type: String, 
         enum: ['Point'], 
@@ -24,6 +25,9 @@ const RestaurantBranchSchema = new Schema<RestaurantBranch>({
         type: [Number],
         required: true
       }}
+=======
+    location : {type : Location}
+>>>>>>> 2ca24f54d02e61077f42604e0017066b2d54208f
 })
 
 export const RestaurantBranchModel = models['restaurant-branches'] || model<RestaurantBranch>("restaurant-branches", RestaurantBranchSchema) 

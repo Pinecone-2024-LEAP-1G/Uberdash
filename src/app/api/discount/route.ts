@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { DiscountModel } from "@/lib/models";
+=======
+import { DiscountModel } from "@/app/model/discount";
+>>>>>>> 2ca24f54d02e61077f42604e0017066b2d54208f
 import { NextRequest } from "next/server";
 
 export const GET = async () => {

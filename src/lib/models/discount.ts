@@ -22,4 +22,8 @@ const DiscountSchema = new Schema<Discount>(
 );
 
 export const DiscountModel: Model<Discount> =
+<<<<<<< HEAD
   models.discount || model<Discount>("discount", DiscountSchema);
+=======
+  models.discounts || model<Discount>("discounts", DiscountSchema);
+>>>>>>> 2ca24f54d02e61077f42604e0017066b2d54208f
