@@ -1,7 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 
 export type Order = {
+  id: Schema.Types.ObjectId;
+  status: string;
+  orderItemCount: number;
+  priceWithoutDiscount: number;
+  priceWithDiscount: number;
   userId: Schema.Types.ObjectId;
+<<<<<<< HEAD
   status: String;
   orderItemCount: String;
   district: String;
@@ -10,32 +16,85 @@ export type Order = {
   orderItems: any;
   updatedDate: any;
   createdDate: any;
+=======
+  cancelledTime?: Date;
+  readyToStartTime?: Date;
+  inPreparationTime?: Date;
+  readyForPickupTime?: Date;
+  onTheWayTime?: Date;
+  deliveredTime?: Date;
+  discountCodeId?: Schema.Types.ObjectId;
+  deliveryAddressId?: Schema.Types.ObjectId;
+>>>>>>> 40d06de (order model hiij duusgav)
 };
+
 const OrderSchema = new Schema<Order>({
+  id: {
+    type: Schema.Types.ObjectId,
+    auto: true,
+  },
+  status: {
+    type: String,
+    required: true,
+    enum: [
+      "Pending",
+      "Cancelled",
+      "ReadyToStart",
+      "InPreparation",
+      "ReadyForPickup",
+      "OnTheWay",
+      "Delivered",
+    ],
+    default: "Pending",
+  },
+  orderItemCount: {
+    type: Number,
+    required: true,
+  },
+  priceWithoutDiscount: {
+    type: Number,
+    required: true,
+  },
+  priceWithDiscount: {
+    type: Number,
+    required: true,
+  },
   userId: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: "User",
   },
-  status: {
-    type: String,
-    required: true,
+  cancelledTime: {
+    type: Date,
   },
+<<<<<<< HEAD
   orderItemCount: {
     type: String,
+=======
+  readyToStartTime: {
+    type: Date,
+>>>>>>> 40d06de (order model hiij duusgav)
   },
-  district: { type: String, required: true },
-  Khoroo: {
-    type: String,
-    required: true,
+  inPreparationTime: {
+    type: Date,
   },
-  Apartment: {
-    type: String,
-    required: true,
+  readyForPickupTime: {
+    type: Date,
   },
-  orderItems: [{ type: Schema.Types.ObjectId, ref: "OrderItems" }],
-  createdDate: { type: Date, default: Date.now },
-  updatedDate: { type: Date, default: Date.now },
+  onTheWayTime: {
+    type: Date,
+  },
+  deliveredTime: {
+    type: Date,
+  },
+  discountCodeId: {
+    type: Schema.Types.ObjectId,
+    ref: "DiscountCode",
+  },
+  deliveryAddressId: {
+    type: Schema.Types.ObjectId,
+    ref: "DeliveryAddress",
+  },
 });
 
 const OrderModel = mongoose.model<Order>("Order", OrderSchema);
