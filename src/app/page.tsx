@@ -3,7 +3,7 @@ import { Sidebar } from "lucide-react";
 
 const Home = () => {
   return (
-    <div>
+    <div className="mx-auto container">
       <Header />
     </div>
   );
