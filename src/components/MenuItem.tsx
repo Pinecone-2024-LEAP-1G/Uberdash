@@ -20,7 +20,7 @@ export const MenuItem = () => {
           <HeartSvg />
         </div>
       </div>
-      <div className="mt-3 gap-1 flex w-[257px] justify-between ">
+      <div className="mt-3 gap-1 flex w-[288px] justify-between ">
         <div>
           <p className="text-[18px] font-medium text-ellipsis">
             Pappa Johns Burger
