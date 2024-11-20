@@ -51,7 +51,7 @@ const OrderSchema = new Schema<Order>({
   userId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "user",
+    ref: "users",
   },
   cancelledTime: {
     type: Date,
