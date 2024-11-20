@@ -12,7 +12,7 @@ export const GET = async () => {
   }
 };
 
-console.log("ss")
+
 export const POST = async (request: NextRequest) => {
   const {  email, password } = await request.json();
 
