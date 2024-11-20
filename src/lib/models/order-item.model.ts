@@ -1,6 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
-type OrderItem = {
+export type OrderItem = {
   _id: Schema.Types.ObjectId;
   price: number;
   quantity: number;

@@ -22,6 +22,7 @@ export type Order = {
   deliveredTime?: Date;
   discountCodeId?: Schema.Types.ObjectId;
   deliveryAddressId?: Schema.Types.ObjectId;
+  orderItems: Schema.Types.ObjectId;
 };
 
 const OrderSchema = new Schema<Order>({
@@ -70,6 +71,7 @@ const OrderSchema = new Schema<Order>({
     type: Schema.Types.ObjectId,
     ref: "addresses",
   },
+  orderItems: { type: Schema.Types.ObjectId, ref: "order-items" },
 });
 
 const OrderModel = models.orders || model<Order>("orders", OrderSchema);

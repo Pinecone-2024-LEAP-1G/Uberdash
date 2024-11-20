@@ -1,13 +1,16 @@
 import { OrderItemModel } from "@/lib/models";
+import OrderModel from "@/lib/models/order";
 import { NextRequest } from "next/server";
 
 export const GET = async (_request: NextRequest) => {
   try {
-    const order = await OrderItemModel.find();
+    const orderItems = await OrderItemModel.find();
 
-    return Response.json({ order });
+    console.log(orderItems);
+
+    return Response.json({ orderItems });
   } catch (error) {
-    return Response.json({ error_message: error });
+    return Response.json({ error });
   }
 };
 
@@ -15,18 +18,28 @@ export const POST = async (request: NextRequest) => {
   const { price, quantity, orderId, restaurantId } = await request.json();
 
   try {
-    const orderItem = await OrderItemModel.create({
+    const orderItems = await OrderItemModel.create({
       price,
       quantity,
       orderId,
       restaurantId,
     });
 
+    const { _id } = orderItems;
+
+    const updatedOrder = await OrderModel.findByIdAndUpdate(
+      {
+        _id: orderId,
+      },
+      { $push: { orderItems: _id } },
+      { new: true }
+    );
+
     return Response.json({
-      message: "succesfully created order Item",
-      orderItem,
+      orderItems,
+      updatedOrder,
     });
   } catch (error) {
-    return Response.json({ error_message: error });
+    return Response.json({ error });
   }
 };
