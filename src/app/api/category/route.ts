@@ -2,6 +2,7 @@ import { CategoryModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 export const GET = async () => {
+  console.log("ihuskfdj")
   try {
     const category = await CategoryModel.find();
 
@@ -12,15 +13,13 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { id, name } = await request.json();
-
+  const { name } = await request.json();
   try {
     const category = await CategoryModel.create({
-    id, name,
+     name,
     });
-
     return Response.json({ message: "success", category });
   } catch (error) {
-    return Response.json({ message: error });
+    return Response.json({ error });
   }
 };

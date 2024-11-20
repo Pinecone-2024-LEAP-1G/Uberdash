@@ -10,4 +10,4 @@ const CategorySchema = new Schema<Category>({
 });
 
 export const CategoryModel: Model<Category> =
-  models.Category || model<Category>("Category", CategorySchema);
+  models.categories || model<Category>("categories", CategorySchema);
