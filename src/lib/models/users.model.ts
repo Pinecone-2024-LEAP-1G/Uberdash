@@ -12,4 +12,4 @@ const userSchema = new Schema<User>({
 });
 
 export const UserModel: Model<User> =
-  models.users || model<User>("users", userSchema);
+  models.user || model<User>("user", userSchema);
