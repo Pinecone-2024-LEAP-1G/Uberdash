@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, {models,  Schema } from "mongoose";
 
 export type Order = {
   id: Schema.Types.ObjectId;
@@ -72,5 +72,5 @@ const OrderSchema = new Schema<Order>({
   },
 });
 
-const OrderModel = mongoose.model<Order>("order", OrderSchema);
+const OrderModel = mongoose.model<Order>("orders", OrderSchema);
 export default OrderModel;
