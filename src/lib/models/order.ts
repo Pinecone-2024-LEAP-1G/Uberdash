@@ -1,4 +1,4 @@
-import mongoose, {models,  Schema } from "mongoose";
+import mongoose, {models,  Schema , model} from "mongoose";
 
 export type Order = {
   id: Schema.Types.ObjectId;
@@ -64,13 +64,13 @@ const OrderSchema = new Schema<Order>({
   deliveredTime: Date,
   discountCodeId: {
     type: Schema.Types.ObjectId,
-    ref: "discount-code",
+    ref: "discounts",
   },
   deliveryAddressId: {
     type: Schema.Types.ObjectId,
-    ref: "delivery-address",
+    ref: "addresses",
   },
 });
 
-const OrderModel = mongoose.model<Order>("orders", OrderSchema);
+const OrderModel = models.orders  || model<Order>("orders", OrderSchema);
 export default OrderModel;
