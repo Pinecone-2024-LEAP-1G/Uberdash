@@ -51,7 +51,7 @@ const OrderSchema = new Schema<Order>({
   userId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "User",
+    ref: "user",
   },
   cancelledTime: {
     type: Date,
@@ -73,13 +73,13 @@ const OrderSchema = new Schema<Order>({
   },
   discountCodeId: {
     type: Schema.Types.ObjectId,
-    ref: "DiscountCode",
+    ref: "discount-code",
   },
   deliveryAddressId: {
     type: Schema.Types.ObjectId,
-    ref: "DeliveryAddress",
+    ref: "delivery-address",
   },
 });
 
-const OrderModel = mongoose.model<Order>("Order", OrderSchema);
+const OrderModel = mongoose.model<Order>("order", OrderSchema);
 export default OrderModel;
