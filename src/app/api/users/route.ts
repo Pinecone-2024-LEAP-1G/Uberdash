@@ -12,13 +12,11 @@ export const GET = async () => {
   }
 };
 
-
 export const POST = async (request: NextRequest) => {
   const {  email, password } = await request.json();
 
   try {
     const user = await UserModel.create({
-      
       email,
       password,
     });
