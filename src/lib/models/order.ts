@@ -2,7 +2,14 @@ import mongoose, { Schema } from "mongoose";
 
 export type Order = {
   id: Schema.Types.ObjectId;
-  status: string;
+  status:
+    | "Pending"
+    | "Cancelled"
+    | "ReadyToStart"
+    | "InPreparation"
+    | "ReadyForPickup"
+    | "OnTheWay"
+    | "Delivered";
   orderItemCount: number;
   priceWithoutDiscount: number;
   priceWithDiscount: number;
@@ -18,10 +25,6 @@ export type Order = {
 };
 
 const OrderSchema = new Schema<Order>({
-  id: {
-    type: Schema.Types.ObjectId,
-    auto: true,
-  },
   status: {
     type: String,
     required: true,
@@ -53,24 +56,12 @@ const OrderSchema = new Schema<Order>({
     required: true,
     ref: "users",
   },
-  cancelledTime: {
-    type: Date,
-  },
-  readyToStartTime: {
-    type: Date,
-  },
-  inPreparationTime: {
-    type: Date,
-  },
-  readyForPickupTime: {
-    type: Date,
-  },
-  onTheWayTime: {
-    type: Date,
-  },
-  deliveredTime: {
-    type: Date,
-  },
+  cancelledTime: Date,
+  readyToStartTime: Date,
+  inPreparationTime: Date,
+  readyForPickupTime: Date,
+  onTheWayTime: Date,
+  deliveredTime: Date,
   discountCodeId: {
     type: Schema.Types.ObjectId,
     ref: "discount-code",
