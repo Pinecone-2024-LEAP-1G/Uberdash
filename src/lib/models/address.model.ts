@@ -21,4 +21,4 @@ const AddressmeSchema = new Schema<Address>({
 });
 
 export const AddressModel: Model<Address> =
-  models.addresses || model<Address>("address", AddressmeSchema);
+  models.addresses || model<Address>("addresses", AddressmeSchema);
