@@ -7,16 +7,6 @@ export type Order = {
   priceWithoutDiscount: number;
   priceWithDiscount: number;
   userId: Schema.Types.ObjectId;
-<<<<<<< HEAD
-  status: String;
-  orderItemCount: String;
-  district: String;
-  Khoroo: String;
-  Apartment: String;
-  orderItems: any;
-  updatedDate: any;
-  createdDate: any;
-=======
   cancelledTime?: Date;
   readyToStartTime?: Date;
   inPreparationTime?: Date;
@@ -25,7 +15,6 @@ export type Order = {
   deliveredTime?: Date;
   discountCodeId?: Schema.Types.ObjectId;
   deliveryAddressId?: Schema.Types.ObjectId;
->>>>>>> 40d06de (order model hiij duusgav)
 };
 
 const OrderSchema = new Schema<Order>({
@@ -67,13 +56,8 @@ const OrderSchema = new Schema<Order>({
   cancelledTime: {
     type: Date,
   },
-<<<<<<< HEAD
-  orderItemCount: {
-    type: String,
-=======
   readyToStartTime: {
     type: Date,
->>>>>>> 40d06de (order model hiij duusgav)
   },
   inPreparationTime: {
     type: Date,
