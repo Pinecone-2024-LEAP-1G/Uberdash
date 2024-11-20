@@ -11,6 +11,12 @@ const ReviewSchema = new Schema<Review>(
   {
     comment: { type: String, required: true },
     rating: { type: Number, required: true },
+    user_id: { type: Schema.Types.ObjectId, required: true, ref: "users" },
+    restaurant_id: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "restaurant",
+    },
   },
   {
     timestamps: true,
