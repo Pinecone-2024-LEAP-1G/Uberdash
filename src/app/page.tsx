@@ -1,8 +1,13 @@
-import { Sidebar } from "lucide-react";
+// import { Sidebar } from "lucide-react";
+import { MenuItem } from "../components/MenuItem";
 
-const Home = () =>{
-  return(
-    <Sidebar/>
-  )
-}
-export default Home
+const Home = () => {
+  return (
+    <div>
+      <MenuItem />
+    </div>
+  );
+
+  //  <Sidebar />;
+};
+export default Home;
