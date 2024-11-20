@@ -16,10 +16,6 @@
     "@radix-ui/react-tooltip": "^1.1.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-<<<<<<< HEAD
-=======
-    "expres": "^0.0.5",
->>>>>>> 2ca24f54d02e61077f42604e0017066b2d54208f
     "express": "^4.21.1",
     "lucide-react": "^0.460.0",
     "mongoose": "^8.8.2",
