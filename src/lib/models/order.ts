@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 export type Order = {
   userId: Schema.Types.ObjectId;
   status: String;
-  orderStatus: String;
+  orderItemCount: String;
   district: String;
   Khoroo: String;
   Apartment: String;
@@ -21,10 +21,8 @@ const OrderSchema = new Schema<Order>({
     type: String,
     required: true,
   },
-  orderStatus: {
+  orderItemCount: {
     type: String,
-    enum: ["Ordered", "PreparingToShip", "Shipped", "Delivered"],
-    default: "Ordered",
   },
   district: { type: String, required: true },
   Khoroo: {
