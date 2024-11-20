@@ -6,16 +6,16 @@ type Location = {
 }
 
 type RestaurantBranch = {
-    _id : string,
-    restaurant_id  : Schema.Types.ObjectId,
-    branch_name : string,
+    _id : Schema.Types.ObjectId,
+    restaurantId  : Schema.Types.ObjectId,
+    branchName : string,
     location : Location,
 }
 
 const RestaurantBranchSchema = new Schema<RestaurantBranch>({
-    restaurant_id : {type : Schema.Types.ObjectId, ref : "Restaurant"},
-    branch_name : {type : String, required : true},
+    restaurantId : {type : Schema.Types.ObjectId, ref : "restaurants"},
+    branchName : {type : String, required : true},
     location : {type : Location}
 })
 
-export const RestaurantBranchModel = models.RestaurantBranch || model<RestaurantBranch>("RestaurantBranch", RestaurantBranchSchema) 
+export const RestaurantBranchModel = models['restaurant-branches'] || model<RestaurantBranch>("restaurant-branches", RestaurantBranchSchema) 

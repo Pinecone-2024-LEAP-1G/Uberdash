@@ -7,7 +7,7 @@ type MenuItem = {
   size: string;
   price: number;
   available: boolean;
-  category_id: Schema.Types.ObjectId;
+  categoryId: Schema.Types.ObjectId;
 };
 
 const menuItemSchema = new Schema<MenuItem>({
@@ -16,8 +16,8 @@ const menuItemSchema = new Schema<MenuItem>({
   size: { type: String },
   price: { type: Number },
   available: { type: Boolean, default: true },
-  category_id: { type: Schema.Types.ObjectId, required: true, ref: "Category" },
+  categoryId: { type: Schema.Types.ObjectId, required: true, ref: "category" },
 });
 
 export const menuItemModel: Model<MenuItem> =
-  models.MenuItem || model<MenuItem>("MenuItem", menuItemSchema);
+  models['menu-items'] || model<MenuItem>("menu-items", menuItemSchema);

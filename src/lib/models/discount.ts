@@ -4,17 +4,17 @@ export type Discount = {
   _id: Schema.Types.ObjectId;
   name: string;
   active: boolean;
-  time_used: number;
-  max_used: number;
-  discount_percent: number;
+  timeUsed: number;
+  maxUsed: number;
+  discountPercent: number;
 };
 const DiscountSchema = new Schema<Discount>(
   {
     name: { type: String, required: true },
     active: { type: Boolean, default: true },
-    time_used: { type: Number, required: true },
-    max_used: { type: Number, required: true },
-    discount_percent: { type: Number, required: true },
+    timeUsed: { type: Number, required: true },
+    maxUsed: { type: Number, required: true },
+    discountPercent: { type: Number, required: true },
   },
   {
     timestamps: true,
@@ -22,4 +22,4 @@ const DiscountSchema = new Schema<Discount>(
 );
 
 export const DiscountModel: Model<Discount> =
-  models.discount || model<Discount>("discount", DiscountSchema);
+  models.discounts || model<Discount>("discounts", DiscountSchema);
