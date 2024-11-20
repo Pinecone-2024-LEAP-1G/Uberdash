@@ -1,4 +1,5 @@
 import FilterTags from "@/components/layout/FilterTags";
+import { Footer } from "@/components/Footer";
 import { MenuItem } from "../components/MenuItem";
 import { RestrauntMenu } from "../components/RestrauntMenu";
 import { MenuItemLastCard } from "../components/FoodCardPlus";
@@ -34,7 +35,9 @@ const Home = () => {
         percentage="70%"
         like="(500)"
       />
+      <Footer />
     </div>
   );
 };
+
 export default Home;
