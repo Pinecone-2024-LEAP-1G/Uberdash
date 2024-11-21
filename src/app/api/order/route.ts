@@ -4,6 +4,16 @@ import { NextRequest } from "next/server";
 
 type CreateOrderRequsetBody = Order & { orderItems: [OrderItem] };
 
+export const GET = async () => {
+  try {
+    const order = await OrderModel.find();
+
+    return Response.json({ order });
+  } catch (error) {
+    return Response.json({ error });
+  }
+};
+
 export const POST = async (request: NextRequest) => {
   const {
     priceWithoutDiscount,
@@ -26,7 +36,7 @@ export const POST = async (request: NextRequest) => {
 
   try {
     const order = await OrderModel.create({
-      orderItemCount: newOrders.length,
+      orderItemCount: newOrderIds.length,
       priceWithoutDiscount,
       priceWithDiscount,
       userId,
@@ -46,23 +56,6 @@ export const POST = async (request: NextRequest) => {
       order,
     });
   } catch (error) {
-    console.error("Error creating order:", error);
-
-    return Response.json(
-      {
-        error: error instanceof Error ? error.message : "Unknown error",
-      },
-      { status: 500 }
-    );
-  }
-};
-
-export const GET = async () => {
-  try {
-    const order = await OrderModel.find();
-
-    Response.json({ order });
-  } catch (error) {
-    Response.json({ error });
+    return Response.json({ error });
   }
 };

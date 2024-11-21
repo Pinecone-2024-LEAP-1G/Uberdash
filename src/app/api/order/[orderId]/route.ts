@@ -1,5 +1,6 @@
 import OrderModel from "@/lib/models/order";
 import { NextRequest } from "next/server";
+import path from "path";
 
 export const GET = async (
   request: NextRequest,
@@ -8,12 +9,14 @@ export const GET = async (
   const orderId = (await params).orderId;
   try {
     const order = await OrderModel.findOne({ _id: orderId })
-      .populate("userId")
+      .populate({ path: "userId" })
       .populate({
         path: "orderItems",
-      });
-    Response.json({ order: order });
+      })
+      .populate({ path: "discountCodeId" })
+      .populate({ path: "deliveryAddressId" });
+    return Response.json({ order: order });
   } catch (error) {
-    Response.json({ error });
+    return Response.json({ error });
   }
 };
