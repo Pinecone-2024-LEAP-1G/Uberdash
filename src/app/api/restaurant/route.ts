@@ -11,13 +11,14 @@ export const GET = async () => {
 };
 
 export const POST = async (req: NextRequest) => {
-  const { name, image, banner, info } = await req.json();
+  const { ownerId, name, image, banner, info } = await req.json();
   try {
     const newRestaurant = await RestaurantModel.create({
       name,
       image,
       banner,
       info,
+      ownerId,
     });
     return Response.json({ newRestaurant });
   } catch (error) {

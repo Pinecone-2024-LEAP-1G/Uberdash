@@ -7,6 +7,7 @@ type Restaurant = {
   banner: string;
   info: string;
   rating: number;
+  ownerId: Schema.Types.ObjectId;
 };
 
 const RestaurantSchema = new Schema<Restaurant>({
@@ -15,6 +16,7 @@ const RestaurantSchema = new Schema<Restaurant>({
   banner: { type: String },
   info: { type: String },
   rating: { type: Number, default: 0 },
+  ownerId: { type: Schema.Types.ObjectId, ref: "restaurant-owner" },
 });
 
 export const RestaurantModel: Model<Restaurant> =
