@@ -1,5 +1,4 @@
 import { Header } from "@/components/layout/header";
-import { Sidebar } from "lucide-react";
 
 const Home = () => {
   return (

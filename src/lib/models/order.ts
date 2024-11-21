@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import mongoose, {models,  Schema , model} from "mongoose";
-=======
-import mongoose, { Schema } from "mongoose";
->>>>>>> 2ca24f54d02e61077f42604e0017066b2d54208f
+import { models, Schema, model } from "mongoose";
 
 export type Order = {
   id: Schema.Types.ObjectId;
@@ -68,7 +64,6 @@ const OrderSchema = new Schema<Order>({
   deliveredTime: Date,
   discountCodeId: {
     type: Schema.Types.ObjectId,
-<<<<<<< HEAD
     ref: "discounts",
   },
   deliveryAddressId: {
@@ -77,16 +72,5 @@ const OrderSchema = new Schema<Order>({
   },
 });
 
-const OrderModel = models.orders  || model<Order>("orders", OrderSchema);
-=======
-    ref: "discount-code",
-  },
-  deliveryAddressId: {
-    type: Schema.Types.ObjectId,
-    ref: "delivery-address",
-  },
-});
-
-const OrderModel = mongoose.model<Order>("order", OrderSchema);
->>>>>>> 2ca24f54d02e61077f42604e0017066b2d54208f
+const OrderModel = models.order || model<Order>("order", OrderSchema);
 export default OrderModel;
