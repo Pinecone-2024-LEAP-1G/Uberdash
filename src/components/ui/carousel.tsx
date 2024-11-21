@@ -228,7 +228,7 @@ const CarouselNext = React.forwardRef<
       ref={ref}
       variant={variant}
       size={size}
-      className={cn(" h-8 w-8 rounded-full")}
+      className={cn("h-8 w-8 rounded-full")}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
