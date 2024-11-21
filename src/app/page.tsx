@@ -4,6 +4,7 @@ import { Drawers } from "@/components/Drawer";
 import { MenuItem } from "../components/MenuItem";
 import { RestrauntMenu } from "../components/RestrauntMenu";
 import { MenuItemLastCard } from "../components/FoodCardPlus";
+import { Singup } from "@/components/Sign-in";
 
 const Home = () => {
   return (
@@ -38,6 +39,7 @@ const Home = () => {
         like="(500)"
       />
       <Footer />
+      <Singup />
     </div >
   );
 };
