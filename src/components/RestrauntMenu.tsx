@@ -23,7 +23,7 @@ export const RestrauntMenu = ({
       <div className="w-[408px] flex py-4 pl-4 flex-col ">
         <p className="text-[16px] font-medium">{name}</p>
         <div className="flex items-center gap-1 text-[14px] font-normal mt-[4px]">
-          <p>{price}</p>
+          <p>{price} </p>
           <div className="w-[3px] h-[3px] bg-[black] rounded-full"></div>
           <LikeSvg />
           <p>{percentage}</p>
