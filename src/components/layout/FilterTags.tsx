@@ -1,22 +1,24 @@
 "use client";
 import React, { useState } from "react";
 import { filterOptions, mockItems } from "../utils/FilteredOptions";
+import { useQueryState } from "nuqs";
 const FilterTags: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
   const [filteredItems, setFilteredItems] = useState(mockItems);
+  const [filtered, setFiltered] = useQueryState("filter");
 
-  const handleFilterClick = (filterValue: string) => {
-    setSelectedFilter(filterValue);
+  // const handleFilterClick = (filterValue: string) => {
+  //   setSelectedFilter(filterValue);
 
-    if (filterValue) {
-      const filtered = mockItems.filter(
-        (item) => item.category === filterValue
-      );
-      setFilteredItems(filtered);
-    } else {
-      setFilteredItems(mockItems);
-    }
-  };
+  //   if (filterValue) {
+  //     const filtered = mockItems.filter(
+  //       (item) => item.category === filterValue
+  //     );
+  //     setFilteredItems(filtered);
+  //   } else {
+  //     setFilteredItems(mockItems);
+  //   }
+  // };
 
   return (
     <div>
