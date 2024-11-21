@@ -8,6 +8,7 @@ export const filterOptions = [
   { id: 7, label: "Dietary", value: "dietary" },
   { id: 8, label: "Sort", value: "sort" },
 ];
+
 export const mockItems = [
   { id: 1, name: "Item 1", category: "uberOne", rating: 4.5 },
   { id: 2, name: "Item 2", category: "offers", rating: 4.2 },
