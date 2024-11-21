@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { connectToMongoDB } from "@/lib/db";
-
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
   );
