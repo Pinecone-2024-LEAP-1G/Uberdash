@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { connectToMongoDB } from "@/lib/db";
-
+import { Header } from "../components/layout/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Header />
         {children}
       </body>
     </html>
