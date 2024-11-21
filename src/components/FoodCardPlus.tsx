@@ -10,7 +10,7 @@ type food = {
   like: string;
 };
 
-export const FoodCard = ({
+export const MenuItemLastCard = ({
   image,
   mostLiked,
   name,
