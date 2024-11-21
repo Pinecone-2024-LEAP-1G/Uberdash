@@ -36,7 +36,7 @@ const Home = () => {
         like="(500)"
       />
       <Footer />
-    </div>
+    </div >
   );
 };
 
