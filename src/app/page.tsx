@@ -1,6 +1,4 @@
-// import { Sidebar } from "lucide-react";
-import { MenuItem } from "../components/MenuItem";
-import { RestrauntMenu } from "../components/RestrauntMenu";
+import FilterTags from "@/components/layout/FilterTags";
 
 const Home = () => {
   return (
@@ -23,9 +21,8 @@ const Home = () => {
             enim."
         image="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMzllMTJjODlhNzE2ZWEyYmYwNzE1MTM0MTBjYWE0Y2UvNTE0M2YxZTIxOGM2N2MyMGZlNWE0Y2QzM2Q5MGIwN2IuanBlZw=="
       />
+      <FilterTags />
     </div>
   );
-
-  //  <Sidebar />;
 };
 export default Home;
