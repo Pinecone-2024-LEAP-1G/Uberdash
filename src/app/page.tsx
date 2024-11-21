@@ -1,3 +1,5 @@
+"use client";
+
 import FilterTags from "@/components/layout/FilterTags";
 import { MenuItem } from "../components/MenuItem";
 import { RestrauntMenu } from "../components/RestrauntMenu";
