@@ -10,7 +10,7 @@ export const GET = async (
     const order = await OrderModel.findOne({ _id: orderId })
       .populate("userId")
       .populate({
-        path: "orderItem",
+        path: "orderItems",
       });
     Response.json({ order: order });
   } catch (error) {

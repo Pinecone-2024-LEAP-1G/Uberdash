@@ -42,10 +42,27 @@ export const POST = async (request: NextRequest) => {
     });
 
     return Response.json({
-      message: "succesfully created order",
+      message: "Successfully created order",
       order,
     });
   } catch (error) {
-    return Response.json({ error });
+    console.error("Error creating order:", error);
+
+    return Response.json(
+      {
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
+};
+
+export const GET = async () => {
+  try {
+    const order = await OrderModel.find();
+
+    Response.json({ order });
+  } catch (error) {
+    Response.json({ error });
   }
 };

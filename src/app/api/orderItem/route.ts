@@ -6,8 +6,6 @@ export const GET = async (_request: NextRequest) => {
   try {
     const orderItems = await OrderItemModel.find();
 
-    console.log(orderItems);
-
     return Response.json({ orderItems });
   } catch (error) {
     return Response.json({ error });
