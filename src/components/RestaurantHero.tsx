@@ -1,21 +1,11 @@
 "use client";
 
-import {
-  CircleX,
-  Ellipsis,
-  Heart,
-  Info,
-  Italic,
-  Keyboard,
-  Search,
-  UserPlus,
-} from "lucide-react";
+import { CircleX, Ellipsis, Heart, Info, Search, UserPlus } from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -45,7 +35,7 @@ export const RestaurantHero = (props: { name: string }) => {
             <Heart
               style={{ width: 16, height: 16 }}
               onClick={() => setIsClicked(!isClicked)}
-              fill={`${isClicked === true ? "black" : "white"}`}
+              fill={`${isClicked ? "black" : "white"}`}
             />
           </button>
           <DropdownMenu>
@@ -104,7 +94,7 @@ export const RestaurantHero = (props: { name: string }) => {
             />
             <div
               className={` justify-center items-center w-8 h-8  ${
-                search === "" ? "hidden" : "flex"
+                !search ? "hidden" : "flex"
               }`}
             >
               <CircleX
