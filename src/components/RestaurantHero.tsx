@@ -1,14 +1,5 @@
 "use client";
-
-import {
-  CircleX,
-  Ellipsis,
-  Heart,
-  Info,
-  LayoutDashboard,
-  Search,
-  UserPlus,
-} from "lucide-react";
+import { Ellipsis, Heart, Info, UserPlus } from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -17,7 +8,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "./ui/input";
 
 export const RestaurantHero = (props: {
   name: string;
@@ -25,13 +15,8 @@ export const RestaurantHero = (props: {
 }) => {
   const { name, description } = props;
 
-  const [search, setSearch] = useState("");
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [more, setMore] = useState<boolean>(false);
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
 
   return (
     <div className="container max-w-[1200px] mx-auto">
@@ -108,32 +93,6 @@ export const RestaurantHero = (props: {
             >
               {`${!more ? "More" : "Less"}`}
             </span>
-          </div>
-          <div className="bg-[#f3f3f3] rounded-3xl w-[360px] flex items-center justify-center h-8">
-            <div className="flex justify-center items-center w-8 h-8">
-              <Search style={{ width: 14, height: 14 }} />
-            </div>
-            <Input
-              style={{ fontSize: 14 }}
-              type="text"
-              placeholder={`Search in ${name}`}
-              className="bg-[#F3F3F3] h-8 rounded-3xl w-full border-none focus-visible:ring-0 focus-visible:ring-offset-0"
-              value={search}
-              onChange={handleSearch}
-            />
-            <div
-              className={` justify-center items-center w-8 h-8  ${
-                !search ? "hidden" : "flex"
-              }`}
-            >
-              <CircleX
-                role="button"
-                fill="black"
-                color="white"
-                style={{ width: 16, height: 16 }}
-                onClick={() => setSearch("")}
-              />
-            </div>
           </div>
         </div>
       </div>
