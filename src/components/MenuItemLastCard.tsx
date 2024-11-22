@@ -21,7 +21,7 @@ export const MenuItemLastCard = ({
   return (
     <div className="w-[220px] h-[252px] mt-4 ml-4   ">
       <div
-        className="w-[220px] h-[188px]  relative cursor-pointer rounded-xl"
+        className="w-[220px] h-[188px] relative cursor-pointer rounded-xl"
         style={{
           backgroundImage: `url(${image})`,
           backgroundRepeat: "no-repeat",
@@ -29,10 +29,6 @@ export const MenuItemLastCard = ({
           backgroundSize: "cover",
         }}
       >
-        <div
-          className="absolute inset-0 bg-slate-400 rounded-xl"
-          style={{ opacity: 0.2 }}
-        ></div>
         <div className="w-[98px] h-[24px] bg-[#0e8345] text-[12px] font-medium px-3 py-1 absolute top-2  rounded-br-[12px] rounded-tr-[12px]">
           <p className="text-white">{mostLiked}</p>
         </div>
@@ -43,11 +39,11 @@ export const MenuItemLastCard = ({
       <div>
         <p>{name}</p>
         <div className="flex items-center gap-1 text-[14px] font-normal ">
-          <p className="text-[16px] font-medium">{price}</p>
+          <p>{price}$</p>
           <div className="w-[3px] h-[3px] bg-[black] rounded-full"></div>
           <LikeSvg />
-          <p>{percentage}</p>
-          <p>{like}</p>
+          <p>{percentage}%</p>
+          <p>{`(${like})`}</p>
         </div>
       </div>
     </div>

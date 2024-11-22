@@ -1,6 +1,14 @@
 "use client";
 
-import { CircleX, Ellipsis, Heart, Info, Search, UserPlus } from "lucide-react";
+import {
+  CircleX,
+  Ellipsis,
+  Heart,
+  Info,
+  LayoutDashboard,
+  Search,
+  UserPlus,
+} from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -10,15 +18,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const RestaurantHero = (props: { name: string }) => {
-  const { name } = props;
+export const RestaurantHero = (props: {
+  name: string;
+  description: string;
+}) => {
+  const { name, description } = props;
 
   const [search, setSearch] = useState("");
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [more, setMore] = useState<boolean>(false);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
+
   return (
     <div className="container max-w-[1200px] mx-auto">
       <div
@@ -78,17 +91,32 @@ export const RestaurantHero = (props: { name: string }) => {
       </div>
       <div className="mt-12 mx-2 ">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-semibold">{name}</h1>
-
-          <div className="bg-[#f3f3f3] rounded-3xl w-[360px] flex">
-            <div className="flex justify-center items-center w-8 h-8x">
+          <div className="flex flex-col w-2/3">
+            <h1 className="text-3xl font-semibold">{name}</h1>
+            <p
+              className={`  text-sm w-full ${
+                !more ? "overflow-hidden h-10" : "overflow-none h-auto"
+              }`}
+            >
+              {description}
+            </p>
+            <span
+              className="text-sm font-bold"
+              role="button"
+              onClick={() => setMore(!more)}
+            >
+              {`${!more ? "More" : "Less"}`}
+            </span>
+          </div>
+          <div className="bg-[#f3f3f3] rounded-3xl w-[360px] flex items-center justify-center h-8">
+            <div className="flex justify-center items-center w-8 h-8">
               <Search style={{ width: 14, height: 14 }} />
             </div>
             <input
               style={{ fontSize: 14 }}
               type="text"
               placeholder={`Search in ${name}`}
-              className="bg-[#f3f3f3] rounded-3xl w-full "
+              className="bg-[#f3f3f3] rounded-3xl w-full"
               value={search}
               onChange={handleSearch}
             />
