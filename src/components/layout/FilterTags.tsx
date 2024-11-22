@@ -19,7 +19,7 @@ const FilterTags: React.FC = () => {
   );
 
   const handleFilterClick = (filterValue: string) => {
-    setSelectedFilters((prev) => {
+    setSelectedFilters((prev: string[] | null) => {
       const filters = Array.isArray(prev) ? prev : [];
       if (filters.includes(filterValue)) {
         return filters.filter((f) => f !== filterValue);
