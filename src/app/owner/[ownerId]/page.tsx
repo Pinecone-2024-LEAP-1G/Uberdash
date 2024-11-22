@@ -1,6 +1,8 @@
 "use client";
 
 import { NextRequest } from "next/server";
+import { DataGridView } from "@/components/DataGridView";
+import { AdminSideBoard } from "@/components/AdminSideBoard";
 
 export default async function Page({
   params,
@@ -8,8 +10,11 @@ export default async function Page({
   params: { ownerId: string };
 }) {
   const restaurantOwnerId = params.ownerId;
-  
-  return(
-    <div></div>
-  )
+
+  return (
+    <div className="flex gap-4">
+      <AdminSideBoard />
+      <DataGridView restaurantOwnerId={restaurantOwnerId} />
+    </div>
+  );
 }
