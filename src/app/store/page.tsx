@@ -3,12 +3,34 @@ import { MenuItemLastCard, RestaurantHero, RestrauntMenu } from "@/components";
 import { CircleX, Search } from "lucide-react";
 import { Input } from "../../components/ui/input";
 import { useState } from "react";
+import { ReviewRating } from "@/components/ReviewRating";
 
 const Store = () => {
   const [search, setSearch] = useState("");
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
+
+  const myArr = [
+    {
+      comment: `My friend ordered from here a few months ago and I fell in love. The
+fries are seasoned perfectly and the chicken is nice and juicy. I'm not
+a big fan of chicken, but I'll definitely have some Dave's Hot Chicken!
+Thank you!`,
+      rating: 4.6,
+      userName: "Janet C",
+      date: "09/19/24",
+    },
+    {
+      comment: `My friend ordered from here a few months ago and I fell in love. The
+fries are seasoned perfectly and the chicken is nice and juicy. I'm not
+a big fan of chicken, but I'll definitely have some Dave's Hot Chicken!
+Thank you!`,
+      rating: 4.6,
+      userName: "Janet C",
+      date: "09/19/24",
+    },
+  ];
   return (
     <div className="container mx-auto max-w-[1200px]">
       <RestaurantHero
@@ -26,7 +48,9 @@ const Store = () => {
               the evening hours and holds a customer rating of approximately
               4.2.`}
       />
-
+      <div className="w-2/3">
+        <ReviewRating reviews={myArr} />
+      </div>
       <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
       <div className="grid grid-cols-5 my-4 gap-6">
         {Array.from({ length: 5 }).map((_, index) => (
