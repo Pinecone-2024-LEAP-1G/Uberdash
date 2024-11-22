@@ -19,24 +19,29 @@ const Store = () => {
               4.2.`}
       />
 
-      <h1 className="text-2xl font-semibold">Featured Items</h1>
-      <div className="grid grid-cols-4">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <MenuItemLastCard
-            image={
-              "https://tb-static.uber.com/prod/image-proc/processed_images/566742da5288066d7c19bdaf14a3e9a8/5954bcb006b10dbfd0bc160f6370faf3.jpeg"
-            }
-            mostLiked="#1 most liked"
-            name="2 Sliders w/ Fries"
-            price="17.89"
-            percentage="91"
-            like="1064"
-          />
+      <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
+      <div className="grid grid-cols-5 my-4 gap-6">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-center w-[220px]"
+          >
+            <MenuItemLastCard
+              image={
+                "https://tb-static.uber.com/prod/image-proc/processed_images/566742da5288066d7c19bdaf14a3e9a8/5954bcb006b10dbfd0bc160f6370faf3.jpeg"
+              }
+              mostLiked="#1 most liked"
+              name="2 Sliders w/ Fries"
+              price="17.89"
+              percentage="91"
+              like="1064"
+            />
+          </div>
         ))}
       </div>
-      <h1 className="text-2xl font-semibold">Picked for you</h1>
+      <h1 className="text-2xl font-semibold my-4">Picked for you</h1>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-4 my-4 gap-6">
         {Array.from({ length: 10 }).map((_, index) => (
           <div key={index} className="col-span-2">
             <RestrauntMenu

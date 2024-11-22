@@ -19,7 +19,7 @@ export const MenuItemLastCard = ({
   like,
 }: food) => {
   return (
-    <div className="w-[220px] h-[252px] mt-4 ml-4   ">
+    <div className="w-[220px] h-[252px]">
       <div
         className="w-[220px] h-[188px] relative cursor-pointer rounded-xl"
         style={{
