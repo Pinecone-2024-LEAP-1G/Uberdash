@@ -17,6 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "./ui/input";
 
 export const RestaurantHero = (props: {
   name: string;
@@ -112,11 +113,11 @@ export const RestaurantHero = (props: {
             <div className="flex justify-center items-center w-8 h-8">
               <Search style={{ width: 14, height: 14 }} />
             </div>
-            <input
+            <Input
               style={{ fontSize: 14 }}
               type="text"
               placeholder={`Search in ${name}`}
-              className="bg-[#f3f3f3] rounded-3xl w-full"
+              className="bg-[#F3F3F3] h-8 rounded-3xl w-full border-none focus-visible:ring-0 focus-visible:ring-offset-0"
               value={search}
               onChange={handleSearch}
             />
