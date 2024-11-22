@@ -5,7 +5,6 @@ import { MenuItem } from "../components/MenuItem";
 import { RestrauntMenu } from "../components/RestrauntMenu";
 import { MenuItemLastCard } from "../components/FoodCardPlus";
 
-
 const Home = () => {
   return (
     <div className="px-11">
@@ -38,9 +37,9 @@ const Home = () => {
         percentage="70%"
         like="(500)"
       />
-      <Footer />
 
-    </div >
+      <Footer />
+    </div>
   );
 };
 
