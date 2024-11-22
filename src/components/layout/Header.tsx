@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 export const Header = () => {
   return (
     <div className="flex w-full justify-center h-20 ">
-      <div className="flex w-full justify-center fixed z-10 bg-white py-4 border-b">
+      <div className="flex w-full justify-center fixed z-10 bg-white py-4">
         <div className="flex justify-between items-center">
           <Menu className="w-56" />
           <div className="flex items-center w-96 mr-96 font-bold text-2xl">

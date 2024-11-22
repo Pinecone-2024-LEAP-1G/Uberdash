@@ -1,6 +1,14 @@
+"use client";
 import { MenuItemLastCard, RestaurantHero, RestrauntMenu } from "@/components";
+import { CircleX, Search } from "lucide-react";
+import { Input } from "../../components/ui/input";
+import { useState } from "react";
 
 const Store = () => {
+  const [search, setSearch] = useState("");
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
   return (
     <div className="container mx-auto max-w-[1200px]">
       <RestaurantHero
@@ -40,7 +48,32 @@ const Store = () => {
         ))}
       </div>
       <h1 className="text-2xl font-semibold my-4">Picked for you</h1>
-
+      <div className="bg-[#f3f3f3] rounded-3xl w-[360px] flex items-center justify-center h-8">
+        <div className="flex justify-center items-center w-8 h-8">
+          <Search style={{ width: 14, height: 14 }} />
+        </div>
+        <Input
+          style={{ fontSize: 14 }}
+          type="text"
+          placeholder={`Search in ${"Dave's Hot Chicken"}`}
+          className="bg-[#F3F3F3] h-8 rounded-3xl w-full border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+          value={search}
+          onChange={handleSearch}
+        />
+        <div
+          className={` justify-center items-center w-8 h-8  ${
+            !search ? "hidden" : "flex"
+          }`}
+        >
+          <CircleX
+            role="button"
+            fill="black"
+            color="white"
+            style={{ width: 16, height: 16 }}
+            onClick={() => setSearch("")}
+          />
+        </div>
+      </div>
       <div className="grid grid-cols-4 my-4 gap-6">
         {Array.from({ length: 10 }).map((_, index) => (
           <div key={index} className="col-span-2">
