@@ -8,5 +8,8 @@ export default async function Page({
   params: { ownerId: string };
 }) {
   const restaurantOwnerId = params.ownerId;
-  console.log(restaurantOwnerId);
+  
+  return(
+    <div></div>
+  )
 }
