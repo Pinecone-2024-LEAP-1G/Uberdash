@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input"
 
-export const Singup = () => {
+export const Singin = () => {
     return (
         <div className="w-[332px] h-[536px]  justify-center flex  ">
             <div className="p-7" >
