@@ -12,9 +12,7 @@ const FilterTags: React.FC = () => {
     }
   );
 
-  React.useEffect(() => {
-    console.log("Selected Filters Updated:", selectedFilters);
-  }, [selectedFilters]);
+  React.useEffect(() => {}, [selectedFilters]);
 
   const filteredItems = mockItems.filter((item) =>
     selectedFilters?.length ? selectedFilters.includes(item.category) : true
@@ -31,12 +29,10 @@ const FilterTags: React.FC = () => {
     });
   };
 
-  // Helper function to build the query string from the filters
   const buildCategoryQuery = (filters: string[]) => {
-    return (Array.isArray(filters) ? filters : []).join(","); // Join the filters with commas
+    return (Array.isArray(filters) ? filters : []).join(",");
   };
 
-  // Update the URL when filters change
   React.useEffect(() => {
     if (selectedFilters?.length) {
       const queryString = buildCategoryQuery(selectedFilters);
