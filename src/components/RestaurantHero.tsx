@@ -1,6 +1,5 @@
 "use client";
-
-import { CircleX, Ellipsis, Heart, Info, Search, UserPlus } from "lucide-react";
+import { Ellipsis, Heart, Info, UserPlus } from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -9,16 +8,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export const RestaurantHero = (props: { name: string }) => {
-  const { name } = props;
+export const RestaurantHero = (props: {
+  name: string;
+  description: string;
+}) => {
+  const { name, description } = props;
 
-  const [search, setSearch] = useState("");
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [more, setMore] = useState<boolean>(false);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
   return (
     <div className="container max-w-[1200px] mx-auto">
       <div
@@ -78,32 +79,41 @@ export const RestaurantHero = (props: { name: string }) => {
       </div>
       <div className="mt-12 mx-2 ">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-semibold">{name}</h1>
-
-          <div className="bg-[#f3f3f3] rounded-3xl w-[360px] flex">
-            <div className="flex justify-center items-center w-8 h-8x">
-              <Search style={{ width: 14, height: 14 }} />
+          <div className="flex flex-col ">
+            <div className="flex justify-between">
+              <h1 className="text-3xl font-semibold">{name}</h1>
+              <div className="flex gap-4">
+                <Tabs defaultValue="delivery" className="w-[200px]">
+                  <TabsList className="grid w-full grid-cols-2 rounded-3xl">
+                    <TabsTrigger value="delivery" className=" rounded-3xl">
+                      Delivery
+                    </TabsTrigger>
+                    <TabsTrigger value="pickup" className=" rounded-3xl">
+                      Pickup
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+                <Button className="text-black bg-[#f3f3f3] hover:bg-gray-200 rounded-3xl">
+                  <UserPlus fill="black" />
+                  Group order
+                </Button>
+              </div>
             </div>
-            <input
-              style={{ fontSize: 14 }}
-              type="text"
-              placeholder={`Search in ${name}`}
-              className="bg-[#f3f3f3] rounded-3xl w-full "
-              value={search}
-              onChange={handleSearch}
-            />
-            <div
-              className={` justify-center items-center w-8 h-8  ${
-                !search ? "hidden" : "flex"
-              }`}
-            >
-              <CircleX
+            <div className="mt-4 w-2/3">
+              <p
+                className={`  text-sm w-full ${
+                  !more ? "overflow-hidden h-10" : "overflow-none h-auto"
+                }`}
+              >
+                {description}
+              </p>
+              <span
+                className="text-sm font-bold"
                 role="button"
-                fill="black"
-                color="white"
-                style={{ width: 16, height: 16 }}
-                onClick={() => setSearch("")}
-              />
+                onClick={() => setMore(!more)}
+              >
+                {`${!more ? "More" : "Less"}`}
+              </span>
             </div>
           </div>
         </div>
