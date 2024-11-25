@@ -20,8 +20,9 @@ export const ReviewRating = (props: { reviews: Review[] }) => {
           <p>{reviews.length} Ratings</p>
         </div>
         <div className="w-2/3 mr-8">
-          {reviews.map((review) => (
+          {reviews.map((review, index) => (
             <Comment
+              key={index}
               comment={review.comment}
               rating={review.rating}
               date={review.date}
