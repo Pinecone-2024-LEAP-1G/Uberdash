@@ -1,7 +1,7 @@
 import FilterTags from "@/components/layout/FilterTags";
 import { MenuItem } from "@/components/MenuItem";
 import { MenuItemSlider } from "@/components/MenuItemSlider";
-import { RatingInfo } from "@/components/Rating";
+
 import { RestrauntMenu } from "@/components/RestrauntMenu";
 
 
@@ -28,10 +28,7 @@ const Home = () => {
       />
       <FilterTags />
       <MenuItemSlider title={""} />
-      <RatingInfo name="Himadri S."
-        rating={4}
-        date='2013-04-07T10:20:30Z'
-        comment="He is the nicest and most accommodating person ever!!" />
+
     </div>
   )
 };
