@@ -5,11 +5,7 @@ import { MenuItemLastCard } from "../components/MenuItemLastCard";
 import { BasketDrawer } from "@/components/basket-drawer/BasketDrawer";
 
 const Home = () => {
-  return (
-    <div>
-      <BasketDrawer />
-    </div>
-  );
+  return <div>{/* <BasketDrawer /> */}</div>;
 };
 
 export default Home;

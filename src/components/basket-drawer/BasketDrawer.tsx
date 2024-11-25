@@ -12,6 +12,11 @@ import ThreeDot from "../ui/ThreeDot";
 import DownArrow from "../ui/DownArrow";
 import { useState } from "react";
 import { OrderNote } from "../basket-drawer/OrderNote";
+import { ShoppingCart } from "lucide-react";
+import UberOne from "../ui/UberOne";
+import { Buttons } from "../basket-drawer/ButtonCard";
+import { SecondButton } from "../basket-drawer/SecondButton";
+import { ThreeDotModal } from "./ThreeDotSelect";
 
 export const BasketDrawer: React.FC = () => {
   const [defValue, setDefValue] = useState<string>("1");
@@ -22,13 +27,17 @@ export const BasketDrawer: React.FC = () => {
 
   return (
     <Sheet>
-      <SheetTrigger>Open</SheetTrigger>
+      <SheetTrigger>
+        <div className="ml-56">
+          <ShoppingCart />
+        </div>
+      </SheetTrigger>
       <SheetContent>
         <SheetHeader className="gap-4">
           <SheetTitle className="text-[32px] font-bold leading-10 flex items-center justify-between mt-14">
             Casa Durango
             <div className="w-9 h-9 bg-[#F3F3F3] rounded-full flex items-center justify-center hover:bg-[#b1b0b0]">
-              <ThreeDot />
+              <ThreeDotModal />
             </div>
           </SheetTitle>
           <div className="flex justify-between">
@@ -104,6 +113,25 @@ export const BasketDrawer: React.FC = () => {
             </div>
             <div className="mt-4">
               <OrderNote />
+            </div>
+            <div className="flex justify-between text-[18px] font-medium mt-4 mb-4">
+              <p>Subtotal</p>
+              <p>$14.00</p>
+            </div>
+            <div className="w-[446px] h-[350.5px]"></div>
+            <div className="flex mt-4 ">
+              <div className="bg-[#fdf2dc] w-[48px] h-[49px] items-center justify-center flex">
+                <UberOne />
+              </div>
+              <div>
+                <p className="w-[410px] bg-[#fdf2dc]  h-[49px] flex items-center text-[#9F6402] text-[16px] font-medium">
+                  Add $0.01 to save with Uber One
+                </p>
+              </div>
+            </div>
+            <div className="mt-4">
+              <Buttons />
+              <SecondButton />
             </div>
           </div>
         </SheetHeader>

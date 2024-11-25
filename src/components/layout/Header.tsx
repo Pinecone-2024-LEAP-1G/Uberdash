@@ -1,6 +1,9 @@
 import { Menu, Search, ShoppingCart } from "lucide-react";
 import { Input } from "../ui/input";
 
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { BasketDrawer } from "../basket-drawer/BasketDrawer";
+
 export const Header = () => {
   return (
     <div className=" flex w-full justify-center">
@@ -16,7 +19,8 @@ export const Header = () => {
             placeholder="search"
           />
         </div>
-        <ShoppingCart className="w-56" />
+
+        <BasketDrawer />
       </div>
     </div>
   );
