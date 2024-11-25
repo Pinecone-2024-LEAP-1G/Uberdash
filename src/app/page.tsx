@@ -3,11 +3,10 @@
 import FilterTags from "@/components/layout/FilterTags";
 import { MenuItem } from "../components/MenuItem";
 import { RestrauntMenu } from "../components/RestrauntMenu";
-import { MenuItemLastCard } from "../components/MenuItemLastCard";
 import { BasketDrawer } from "@/components/basket-drawer/BasketDrawer";
 import Link from "next/link";
 import { MenuItemSlider } from "@/components/MenuItemSlider";
-import { Drawers } from "@/components/Drawer";
+import { Drawers } from "@/components";
 
 const Home = () => {
   return (
@@ -38,9 +37,10 @@ const Home = () => {
         />
         <FilterTags />
         <MenuItemSlider title={""} />
+
       </div>
     </div>
-  );
+  )
 };
 
 export default Home;
