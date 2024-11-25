@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { MenuItem } from "./MenuItem";
 import axios from "axios";
+import { MenuItemSlider } from "./MenuItemSlider";
 
 type MenuTypes = {
   image: string;
@@ -36,6 +37,15 @@ export const FastFoodFilter = ({
     fetchdata();
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      {
+        <div>
+          {" "}
+          <MenuItemSlider />{" "}
+        </div>
+      }
+    </div>
+  );
 };
 //   <MenuItem image={} name={} duration={} points={} bonus={} />;
