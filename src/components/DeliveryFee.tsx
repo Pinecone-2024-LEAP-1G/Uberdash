@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 export const DeliveryFee = () => {
   return (

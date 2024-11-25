@@ -76,16 +76,6 @@ export const RestaurantHero = (props: { name: string }) => {
       <div className="mt-12 mx-2 flex justify-between w-full">
         <h1 className="text-3xl font-semibold mb-4">{name}</h1>
         <div className="flex gap-4">
-          <Tabs defaultValue="delivery" className="w-[200px]">
-            <TabsList className="grid w-full grid-cols-2 rounded-3xl">
-              <TabsTrigger value="delivery" className=" rounded-3xl">
-                Delivery
-              </TabsTrigger>
-              <TabsTrigger value="pickup" className=" rounded-3xl">
-                Pickup
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
           <Button className="text-black bg-[#f3f3f3] hover:bg-gray-200 rounded-3xl">
             <UserPlus fill="black" />
             Group order
