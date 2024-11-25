@@ -1,5 +1,6 @@
 "use client";
 
+import { MenuItem } from "@/components";
 import { FastFoodFilter } from "@/components/FastFoodFilter";
 import FilterTags from "@/components/layout/FilterTags";
 
