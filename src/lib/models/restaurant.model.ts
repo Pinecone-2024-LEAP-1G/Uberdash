@@ -1,6 +1,6 @@
 import { Schema, models, Model, model } from "mongoose";
 
-type Restaurant = {
+export type Restaurant = {
   _id: string;
   name: string;
   image: string;

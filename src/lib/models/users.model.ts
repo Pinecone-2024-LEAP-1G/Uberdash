@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from "mongoose";
 
-type User = {
+export type User = {
   _id: Schema.Types.ObjectId;
   email: string;
   password: string;
