@@ -2,10 +2,14 @@ import { Model, Schema, model, models } from "mongoose";
 
 export type MenuItem = {
 <<<<<<< HEAD
+<<<<<<< HEAD
   _id: string;
 =======
   _id: Schema.Types.ObjectId;
 >>>>>>> 5c0d7a8 (update)
+=======
+  _id: Schema.Types.ObjectId;
+>>>>>>> 79d2559bf56d8996f392605d1deafc4cc128f659
   name: string;
   description: string;
   size: string;
