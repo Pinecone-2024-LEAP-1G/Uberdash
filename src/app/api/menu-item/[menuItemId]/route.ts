@@ -7,7 +7,7 @@ export const GET = async (
 ) => {
   const menuItemId = (await params).menuItemId;
   try {
-    const menuItem = await menuItemModel.find({ _id: menuItemId });
+    const menuItem = await menuItemModel.findById({ _id: menuItemId });
     return Response.json({ menuItem });
   } catch (error) {
     return Response.json({ message: error });
