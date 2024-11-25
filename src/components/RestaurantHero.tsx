@@ -12,10 +12,12 @@ import { Button } from "./ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const RestaurantHero = (props: {
-  name: string;
-  description: string;
+  name: string | undefined;
+  description: string | undefined;
+  banner: string | undefined;
+  image: string | undefined;
 }) => {
-  const { name, description } = props;
+  const { name, description, banner, image } = props;
 
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [more, setMore] = useState<boolean>(false);
@@ -25,7 +27,7 @@ export const RestaurantHero = (props: {
       <div
         className="flex w-full h-[250px] rounded-xl justify-end items-start pt-4 pr-6 relative"
         style={{
-          backgroundImage: `url(https://tb-static.uber.com/prod/image-proc/processed_images/aa5e66633bde7518be5c3ccc2d7b359f/30be7d11a3ed6f6183354d1933fbb6c7.jpeg)`,
+          backgroundImage: `url(${banner})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -73,7 +75,7 @@ export const RestaurantHero = (props: {
           </DropdownMenu>
         </div>
         <img
-          src="https://tb-static.uber.com/prod/image-proc/processed_images/37d9c66cc6cf8d5376416ea725980b7d/029e6f4e0c81c14572126109dfe867f3.jpeg"
+          src={image}
           className="rounded-full w-[76px] h-[76px] absolute left-2 top-[210px]"
         />
       </div>
