@@ -1,11 +1,11 @@
 import { model, models, Schema } from "mongoose";
 
-type Location = {
+export type Location = {
   type: "Point";
   coordinates: [number, number];
 };
 
-type RestaurantBranch = {
+export type RestaurantBranch = {
   _id: Schema.Types.ObjectId;
   restaurantId: Schema.Types.ObjectId;
   branchName: string;

@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from "mongoose";
 
-type MenuItem = {
+export type MenuItem = {
   _id: string;
   name: string;
   description: string;

@@ -1,6 +1,6 @@
 import { Model, Schema, models, model } from "mongoose";
 
-type Address = {
+export type Address = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
