@@ -48,8 +48,8 @@ const FilterTags: React.FC = () => {
 
   return (
     <div>
-      <div>
-        <div className="flex gap-3 bg-[#F3F3F3] p-2">
+      <div className="">
+        <div className="flex gap-3  p-2">
           {filterOptions.map((option) => (
             <button
               key={option.id}
