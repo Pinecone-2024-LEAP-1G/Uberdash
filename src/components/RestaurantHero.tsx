@@ -11,14 +11,10 @@ import {
 import { Button } from "./ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export const RestaurantHero = (props: {
-  name: string;
-  description: string;
-}) => {
-  const { name, description } = props;
+export const RestaurantHero = (props: { name: string }) => {
+  const { name } = props;
 
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [more, setMore] = useState<boolean>(false);
 
   return (
     <div className="container max-w-[1200px] mx-auto">
@@ -77,45 +73,13 @@ export const RestaurantHero = (props: {
           className="rounded-full w-[76px] h-[76px] absolute left-2 top-[210px]"
         />
       </div>
-      <div className="mt-12 mx-2 ">
-        <div className="flex justify-between">
-          <div className="flex flex-col ">
-            <div className="flex justify-between">
-              <h1 className="text-3xl font-semibold">{name}</h1>
-              <div className="flex gap-4">
-                <Tabs defaultValue="delivery" className="w-[200px]">
-                  <TabsList className="grid w-full grid-cols-2 rounded-3xl">
-                    <TabsTrigger value="delivery" className=" rounded-3xl">
-                      Delivery
-                    </TabsTrigger>
-                    <TabsTrigger value="pickup" className=" rounded-3xl">
-                      Pickup
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-                <Button className="text-black bg-[#f3f3f3] hover:bg-gray-200 rounded-3xl">
-                  <UserPlus fill="black" />
-                  Group order
-                </Button>
-              </div>
-            </div>
-            <div className="mt-4 w-2/3">
-              <p
-                className={`  text-sm w-full ${
-                  !more ? "overflow-hidden h-10" : "overflow-none h-auto"
-                }`}
-              >
-                {description}
-              </p>
-              <span
-                className="text-sm font-bold"
-                role="button"
-                onClick={() => setMore(!more)}
-              >
-                {`${!more ? "More" : "Less"}`}
-              </span>
-            </div>
-          </div>
+      <div className="mt-12 mx-2 flex justify-between w-full">
+        <h1 className="text-3xl font-semibold mb-4">{name}</h1>
+        <div className="flex gap-4">
+          <Button className="text-black bg-[#f3f3f3] hover:bg-gray-200 rounded-3xl">
+            <UserPlus fill="black" />
+            Group order
+          </Button>
         </div>
       </div>
     </div>

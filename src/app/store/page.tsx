@@ -4,6 +4,8 @@ import { CircleX, Search } from "lucide-react";
 import { Input } from "../../components/ui/input";
 import { useState } from "react";
 import { ReviewRating } from "@/components/ReviewRating";
+import { RestaurantLocation } from "@/components/RestaurantLocation";
+import { DeliveryFee } from "@/components/DeliveryFee";
 
 const Store = () => {
   const [search, setSearch] = useState("");
@@ -33,9 +35,12 @@ Thank you!`,
   ];
   return (
     <div className="container mx-auto max-w-[1200px]">
-      <RestaurantHero
-        name="Dave's Hot Chicken"
-        description={`Dave's Hot Chicken in Little Tokyo, Los Angeles, offers a fast
+      <RestaurantHero name="Dave's Hot Chicken" />
+      <div className="flex gap-4">
+        <div className="w-2/3">
+          <ReviewRating
+            reviews={myArr}
+            description={`Dave's Hot Chicken in Little Tokyo, Los Angeles, offers a fast
               food dining experience centered on spicy chicken dishes. Popular
               among customers are combinations like "2 Sliders w/ Fries" and "1
               Tender & 1 Slider w/ Fries." The menu features a variety of
@@ -47,9 +52,12 @@ Thank you!`,
               like Oreo and M&M. The restaurant is particularly favored during
               the evening hours and holds a customer rating of approximately
               4.2.`}
-      />
-      <div className="w-2/3">
-        <ReviewRating reviews={myArr} />
+          />
+        </div>
+        <div className="w-1/3 flex flex-col gap-4">
+          <DeliveryFee />
+          <RestaurantLocation />
+        </div>
       </div>
       <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
       <div className="grid grid-cols-5 my-4 gap-6">

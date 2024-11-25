@@ -1,17 +1,40 @@
+"use client";
 import { ArrowDownWideNarrow } from "lucide-react";
 import { Comment } from "./Comment";
 import { Button } from "./ui/button";
+import { useState } from "react";
 type Review = {
   comment: string;
   rating: number;
   date: string;
   userName: string;
 };
-export const ReviewRating = (props: { reviews: Review[] }) => {
-  const { reviews } = props;
+
+export const ReviewRating = (props: {
+  reviews: Review[];
+  description: string;
+}) => {
+  const { reviews, description } = props;
+  const [more, setMore] = useState<boolean>(false);
 
   return (
     <div>
+      <div className="mt-4 ">
+        <p
+          className={`  text-sm w-full ${
+            !more ? "overflow-hidden h-10" : "overflow-none h-auto"
+          }`}
+        >
+          {description}
+        </p>
+        <span
+          className="text-sm font-bold"
+          role="button"
+          onClick={() => setMore(!more)}
+        >
+          {`${!more ? "More" : "Less"}`}
+        </span>
+      </div>
       <h1 className="text-2xl font-semibold gap-4 my-3">Rating and reviews</h1>
       <div className="border rounded-2xl flex px-2 py-4">
         <div className="w-1/3 flex flex-col items-center">
