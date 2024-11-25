@@ -2,13 +2,8 @@
 import { AdminSideBoard } from "@/components/AdminSideBoard";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Category } from "@/components/Category";
-
-type Category = {
-  _id: string;
-  name: string;
-  image: string;
-};
+import { Category } from "@/lib/types";
+import { CategoryComp } from "@/components/Category";
 
 const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
 
@@ -30,7 +25,7 @@ const Categories = () => {
       <AdminSideBoard />
       <div className="grid gap-x-5 grid-cols-6">
         {categories?.map((oneCategory, index) => {
-          return <Category key={index} categoryId={oneCategory._id} />;
+          return <CategoryComp key={index} categoryId={oneCategory._id} />;
         })}
       </div>
     </div>

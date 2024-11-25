@@ -15,7 +15,7 @@ type Category = {
   image: string;
 };
 
-export const Category = ({ categoryId }: CategoryID) => {
+export const CategoryComp = ({ categoryId }: CategoryID) => {
   const [isEdit, setIsEdit] = useQueryState<string>("edit", parseAsString);
   const [myCategory, setMyCategory] = useState<Category>();
   useEffect(() => {

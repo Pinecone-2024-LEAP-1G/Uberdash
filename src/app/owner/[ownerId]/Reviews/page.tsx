@@ -3,20 +3,12 @@ import { AdminSideBoard } from "@/components/AdminSideBoard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { ReviewType } from "@/lib/types";
 
 const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
 
-type Review = {
-  _id: string;
-  userId: string;
-  restaurantId: string;
-  comment: string;
-  rating: number;
-  createdAt: string; // ISO 8601 string provided by the backend
-};
-
 const Reviews = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
@@ -55,10 +47,10 @@ const Reviews = () => {
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSizeOptions={[10]} // Available page sizes
+          pageSizeOptions={[10]}
           initialState={{
             pagination: {
-              paginationModel: { pageSize: 10, page: 0 }, // Default pagination state
+              paginationModel: { pageSize: 10, page: 0 },
             },
           }}
         />
