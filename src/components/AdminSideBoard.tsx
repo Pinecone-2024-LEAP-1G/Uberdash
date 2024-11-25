@@ -7,7 +7,6 @@ import {
   MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const ownerId: string = "673e90415a6e8e222657bbb4";
 

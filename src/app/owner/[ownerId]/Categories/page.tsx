@@ -4,46 +4,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "@/components/Category";
 
-type Restaurant = {
+type Category = {
   _id: string;
   name: string;
   image: string;
-  banner: string;
-  info: string;
-  rating: number;
-  ownerId: string;
-};
-
-type MenuItem = {
-  _id: string;
-  name: string;
-  description: string;
-  size: string;
-  price: number;
-  available: boolean;
-  categoryId: string;
-};
-
-type category = {
-  categoryId: String;
 };
 
 const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
 
 const Categories = () => {
-  const [restaurant, setRestaurant] = useState<Restaurant>();
-  const [categoryId, setCategoryId] = useState<String>();
-
-  const [menuItems, setMenuItems] = useState<MenuItem>();
+  const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/restaurant/getByOwnerId", {
-        ownerId: restaurantOwnerId,
-      })
+      .get("http://localhost:3000/api/category")
       .then(function (response) {
-        setCategoryId(response.data.menuItems[0].categoryId);
-        setRestaurant(response.data.restaurant);
-        setMenuItems(response.data.menuItems);
+        setCategories(response.data.category);
       })
       .catch(function (error) {
         console.log(error);
@@ -51,9 +26,13 @@ const Categories = () => {
   }, []);
 
   return (
-    <div>
-      {categoryId && <Category categoryId={categoryId} />}
+    <div className="p-4 flex gap-3 w-full">
       <AdminSideBoard />
+      <div className="grid gap-x-5 grid-cols-6">
+        {categories?.map((oneCategory, index) => {
+          return <Category key={index} categoryId={oneCategory._id} />;
+        })}
+      </div>
     </div>
   );
 };
