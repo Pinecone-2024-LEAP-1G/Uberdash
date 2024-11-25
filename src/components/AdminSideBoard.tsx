@@ -37,10 +37,10 @@ export const AdminSideBoard = () => {
           <p> Reviews </p>
         </div>
       </Link>
-      <Link href={`/owner/${ownerId}/Dashboard`}>
+      <Link href={`/owner/${ownerId}/Products`}>
         <div className="w-40 flex gap-3 bg-white px-3 hover:bg-slate-300 py-2">
           <LayoutDashboard />
-          <p> Dashboard </p>
+          <p> Products </p>
         </div>
       </Link>
     </div>
