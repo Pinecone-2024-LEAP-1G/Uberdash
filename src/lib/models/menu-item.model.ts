@@ -8,6 +8,7 @@ export type MenuItem = {
   price: number;
   available: boolean;
   image: string;
+  duration: string;
   categoryId: Schema.Types.ObjectId;
   restaurantId: Schema.Types.ObjectId;
 };
@@ -19,6 +20,7 @@ const menuItemSchema = new Schema<MenuItem>({
   price: { type: Number },
   image: { type: String },
   available: { type: Boolean, default: true },
+  duration: { type: String, default: "25-40" },
   categoryId: {
     type: Schema.Types.ObjectId,
     required: true,
