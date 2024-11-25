@@ -1,7 +1,9 @@
 import FilterTags from "@/components/layout/FilterTags";
 import { MenuItem } from "@/components/MenuItem";
 import { MenuItemSlider } from "@/components/MenuItemSlider";
+import { RatingInfo } from "@/components/Rating";
 import { RestrauntMenu } from "@/components/RestrauntMenu";
+
 
 const Home = () => {
   return (
@@ -25,9 +27,13 @@ const Home = () => {
         image="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMzllMTJjODlhNzE2ZWEyYmYwNzE1MTM0MTBjYWE0Y2UvNTE0M2YxZTIxOGM2N2MyMGZlNWE0Y2QzM2Q5MGIwN2IuanBlZw=="
       />
       <FilterTags />
-      <MenuItemSlider />
+      <MenuItemSlider title={""} />
+      <RatingInfo name="Himadri S."
+        rating={4}
+        date='2013-04-07T10:20:30Z'
+        comment="He is the nicest and most accommodating person ever!!" />
     </div>
-  );
+  )
 };
 
 export default Home;
