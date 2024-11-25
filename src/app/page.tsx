@@ -1,15 +1,20 @@
+"use client";
+
+import { MenuItem } from "@/components";
+import { FastFoodFilter } from "@/components/FastFoodFilter";
 import FilterTags from "@/components/layout/FilterTags";
-import { MenuItem } from "../components/MenuItem";
-import { RestrauntMenu } from "../components/RestrauntMenu";
-import { MenuItemLastCard } from "../components/MenuItemLastCard";
-import { BasketDrawer } from "@/components/basket-drawer/BasketDrawer";
 
 const Home = () => {
   return (
-    <div>
-      <BasketDrawer />
+    <div className="container mx-auto max-w-[1200px]">
+      <FilterTags />
+      <FastFoodFilter />
     </div>
   );
 };
 
 export default Home;
+// </>
+// </>
+// </>
+// </>
