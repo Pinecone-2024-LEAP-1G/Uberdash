@@ -7,10 +7,15 @@ import axios from "axios";
 import { MenuItemType } from "@/lib/types";
 import { OwnerMenuItem } from "@/components/OwnerMenuItem";
 
+import { CreateProduct } from "@/components/CreateProduct";
+
 const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
 
 const Dashboard = () => {
   const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
+
+  const [isCreateProduct, setIsCreateProduct] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchdata = async () => {
       try {
@@ -25,12 +30,21 @@ const Dashboard = () => {
     };
     fetchdata();
   }, []);
-  console.log(menuItems);
+
+  const handleCreateProduct = () => {
+    setIsCreateProduct(!isCreateProduct);
+  };
   return (
     <div className="p-4 flex gap-3 w-full">
+      {isCreateProduct && (
+        <CreateProduct handleCreateProduct={handleCreateProduct} />
+      )}
       <AdminSideBoard />
       <div className="flex flex-col gap-4 items-start ">
-        <div className="flex gap-2 px-3 py-2 rounded-xl border border-gray-200 hover:bg-slate-300">
+        <div
+          onClick={handleCreateProduct}
+          className="flex gap-2 px-3 py-2 rounded-xl border border-gray-200 hover:bg-slate-300"
+        >
           <Plus />
           <button> Create Product </button>
         </div>
