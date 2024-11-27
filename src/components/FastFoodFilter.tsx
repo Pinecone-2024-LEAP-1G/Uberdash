@@ -13,7 +13,6 @@ export const FastFoodFilter = () => {
       const response = await axios.get<{ menuItems: MenuItemType[] }>(
         `http://localhost:3000/api/menu-item`
       );
-      console.log(response.data.menuItems);
       setMainFood(response.data.menuItems);
     } catch (error) {
       console.log(error);
