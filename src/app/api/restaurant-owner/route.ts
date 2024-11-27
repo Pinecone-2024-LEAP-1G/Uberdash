@@ -12,7 +12,6 @@ export const GET = async () => {
 
 export const POST = async (req: NextRequest) => {
   const { email, password } = await req.json();
-  console.log(email);
   try {
     const newOwner = await RestaurantOwnerModel.create({ email, password });
     return Response.json({ newOwner });

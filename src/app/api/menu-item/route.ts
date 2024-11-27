@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { menuItemModel } from "@/lib/models";
-import { MenuItem } from "@/components/MenuItem";
 
 export const GET = async () => {
   try {

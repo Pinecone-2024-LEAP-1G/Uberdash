@@ -1,15 +1,17 @@
 "use client";
 
+import { AllFoods } from "@/components/AllFoods";
+import { FastFoodFilter } from "@/components/FastFoodFilter";
 import FilterTags from "@/components/layout/FilterTags";
-import { MenuItem } from "../components/MenuItem";
-import { RestrauntMenu } from "../components/RestrauntMenu";
-import { BasketDrawer } from "@/components/basket-drawer/BasketDrawer";
-import Link from "next/link";
-import { MenuItemSlider } from "@/components/MenuItemSlider";
-import { Drawers } from "@/components";
 
 const Home = () => {
-  return <div>{/* <BasketDrawer /> */}</div>;
+  return (
+    <div className="container mx-auto max-w-[1200px] space-y-6">
+      <FilterTags />
+      <FastFoodFilter />
+      <AllFoods />
+    </div>
+  );
 };
 
 export default Home;

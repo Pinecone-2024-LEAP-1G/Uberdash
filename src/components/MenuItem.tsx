@@ -4,7 +4,7 @@ type MenuTypes = {
   image: string;
   name: string;
   duration: string;
-  points: string;
+  points: number;
   bonus: string;
 };
 
@@ -16,9 +16,9 @@ export const MenuItem = ({
   bonus,
 }: MenuTypes) => {
   return (
-    <div>
+    <div className="w-[288px] rounded-xl shadow-md overflow-hidden">
       <div
-        className="w-[288px] h-[130px] rounded-xl "
+        className="w-full h-[130px] rounded-xl"
         style={{
           backgroundImage: `url(${image})`,
           backgroundRepeat: "no-repeat",
@@ -33,7 +33,8 @@ export const MenuItem = ({
           <HeartSvg />
         </div>
       </div>
-      <div className="mt-3 gap-1 flex w-[288px] justify-between ">
+
+      <div className="mt-3 gap-1 flex w-full justify-between px-3">
         <div>
           <p className="text-[18px] font-medium text-ellipsis">{name}</p>
           <p className="text-[14px] text-[#706f6f] font-thin ">{duration}</p>

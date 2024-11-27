@@ -12,7 +12,6 @@ export const GET = async () => {
 
 export const POST = async (request: NextRequest) => {
   const { name, image } = await request.json();
-  console.log(image);
   try {
     const category = await CategoryModel.create({
       name,
