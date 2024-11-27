@@ -1,14 +1,43 @@
 "use client";
-import { MenuItemLastCard, RestaurantHero, RestrauntMenu } from "@/components";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { RestaurantHero } from "./RestaurantHero";
+import { ReviewRating } from "./ReviewRating";
+import { MenuItemLastCard } from "../MenuItemLastCard";
 import { CircleX, Search } from "lucide-react";
-import { Input } from "../../components/ui/input";
-import { useState } from "react";
-import { ReviewRating } from "@/components/ReviewRating";
-import { RestaurantLocation } from "@/components/RestaurantLocation";
-import { DeliveryFee } from "@/components/DeliveryFee";
+import { Input } from "../ui/input";
+import { RestrauntMenu } from "../RestrauntMenu";
+import { RestaurantLocation } from "./RestaurantLocation";
+import { DeliveryFee } from "./DeliveryFee";
 
-const Store = () => {
+type Restaurant = {
+  name: string;
+  banner: string;
+  image: string;
+  info: string;
+};
+
+export const RestaurantDetail = ({
+  restaurantId,
+}: {
+  restaurantId: string;
+}) => {
   const [search, setSearch] = useState("");
+  const [restaurant, setRestaurant] = useState<Restaurant>();
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/restaurant/${restaurantId}`
+        );
+        setRestaurant(response.data.restaurant);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchdata();
+  }, []);
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
@@ -35,24 +64,14 @@ Thank you!`,
   ];
   return (
     <div className="container mx-auto max-w-[1200px]">
-      <RestaurantHero name="Dave's Hot Chicken" />
+      <RestaurantHero
+        name={restaurant?.name}
+        banner={restaurant?.banner}
+        image={restaurant?.image}
+      />
       <div className="flex gap-4">
         <div className="w-2/3">
-          <ReviewRating
-            reviews={myArr}
-            description={`Dave's Hot Chicken in Little Tokyo, Los Angeles, offers a fast
-              food dining experience centered on spicy chicken dishes. Popular
-              among customers are combinations like "2 Sliders w/ Fries" and "1
-              Tender & 1 Slider w/ Fries." The menu features a variety of
-              options such as the Hot Box selections with either sliders or
-              tenders, and for those preferring plant-based choices, cauliflower
-              versions of sliders and tenders are available. Additionally,
-              Dave's Hot Chicken provides a range of shakes, including flavors
-              like strawberry, vanilla, and chocolate, enhanced with toppings
-              like Oreo and M&M. The restaurant is particularly favored during
-              the evening hours and holds a customer rating of approximately
-              4.2.`}
-          />
+          <ReviewRating reviews={myArr} description={restaurant?.info} />
         </div>
         <div className="w-1/3 flex flex-col gap-4">
           <DeliveryFee />
@@ -117,8 +136,8 @@ Thank you!`,
               percentage="80%"
               like="(1100)"
               discription=" Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Aenean massa.Nulla consequat massa quis
-            enim."
+          commodo ligula eget dolor. Aenean massa.Nulla consequat massa quis
+          enim."
               image="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMzllMTJjODlhNzE2ZWEyYmYwNzE1MTM0MTBjYWE0Y2UvNTE0M2YxZTIxOGM2N2MyMGZlNWE0Y2QzM2Q5MGIwN2IuanBlZw=="
             />
           </div>
@@ -127,4 +146,3 @@ Thank you!`,
     </div>
   );
 };
-export default Store;

@@ -1,7 +1,7 @@
 "use client";
 import { ArrowDownWideNarrow } from "lucide-react";
-import { Comment } from "./Comment";
-import { Button } from "./ui/button";
+import { Comment } from "../Comment";
+import { Button } from "../ui/button";
 import { useState } from "react";
 type Review = {
   comment: string;
@@ -12,7 +12,7 @@ type Review = {
 
 export const ReviewRating = (props: {
   reviews: Review[];
-  description: string;
+  description: string | undefined;
 }) => {
   const { reviews, description } = props;
   const [more, setMore] = useState<boolean>(false);

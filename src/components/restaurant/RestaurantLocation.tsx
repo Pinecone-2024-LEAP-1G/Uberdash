@@ -8,7 +8,7 @@ export const RestaurantLocation = () => {
   return (
     <div
       className="border rounded-2xl h-[334px] flex flex-col justify-end"
-      style={{ backgroundImage: `url(./map.png)`, backgroundSize: "cover" }}
+      style={{ backgroundImage: `url(/map.png)`, backgroundSize: "cover" }}
     >
       <div className={`bg-white ${openDetail ? "hidden" : "flex"}`}>
         <div className="w-20 h-16 items-center justify-center flex">
@@ -28,9 +28,8 @@ export const RestaurantLocation = () => {
         className={`bg-white flex items-start flex-col ${
           openDetail ? "h-full rounded-2xl" : "rounded-b-2xl"
         }`}
-        onClick={() => setOpenDetail(!openDetail)}
       >
-        <div className="flex w-full">
+        <div className="flex w-full" onClick={() => setOpenDetail(!openDetail)}>
           <div className="w-20 h-16 items-center justify-center flex">
             <Clock3 width={16} height={16} />
           </div>
