@@ -118,9 +118,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
                 onChange={(e) => setSize(e.target.value)}
                 className="py-2 px-3 rounded-xl border border-gray-200"
               >
-                <option selected disabled>
-                  Choose Size
-                </option>
+                <option disabled>Choose Size</option>
                 <option> 2XL </option>
                 <option> XL </option>
                 <option> L </option>

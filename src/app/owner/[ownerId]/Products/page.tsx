@@ -8,6 +8,7 @@ import { MenuItemType } from "@/lib/types";
 import { OwnerMenuItem } from "@/components/OwnerMenuItem";
 
 import { CreateProduct } from "@/components/CreateProduct";
+import { Delete } from "@/components/Delete";
 
 const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
 
@@ -15,6 +16,8 @@ const Dashboard = () => {
   const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
 
   const [isCreateProduct, setIsCreateProduct] = useState<boolean>(false);
+
+  const [isDeleteProduct, setIsDeleteProduct] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -34,8 +37,13 @@ const Dashboard = () => {
   const handleCreateProduct = () => {
     setIsCreateProduct(!isCreateProduct);
   };
+
+  const handleDelete = () => {
+    setIsDeleteProduct(!isDeleteProduct);
+  };
   return (
     <div className="p-4 flex gap-3 w-full">
+      {isDeleteProduct && <Delete handleDelete={handleDelete} />}
       {isCreateProduct && (
         <CreateProduct handleCreateProduct={handleCreateProduct} />
       )}
