@@ -16,7 +16,7 @@ import { ShoppingCart } from "lucide-react";
 import UberOne from "../ui/UberOne";
 import { Buttons } from "../basket-drawer/ButtonCard";
 import { SecondButton } from "../basket-drawer/SecondButton";
-import { ThreeDotModal } from "./ThreeDotSelect";
+import SmallModal from "./ThreeDotSelect";
 
 export const BasketDrawer: React.FC = () => {
   const [defValue, setDefValue] = useState<string>("1");
@@ -37,7 +37,7 @@ export const BasketDrawer: React.FC = () => {
           <SheetTitle className="text-[32px] font-bold leading-10 flex items-center justify-between mt-14">
             Casa Durango
             <div className="w-9 h-9 bg-[#F3F3F3] rounded-full flex items-center justify-center hover:bg-[#b1b0b0]">
-              <ThreeDotModal />
+              <SmallModal />
             </div>
           </SheetTitle>
           <div className="flex justify-between">
