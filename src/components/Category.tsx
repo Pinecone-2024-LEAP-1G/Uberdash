@@ -30,12 +30,10 @@ export const CategoryComp = ({ categoryId }: CategoryID) => {
         console.log(error);
       });
   }, []);
-  console.log(myCategory);
   const ownerId: string = "673e90415a6e8e222657bbb4";
   const edit = (id: string) => {
     setIsEdit(id);
   };
-  console.log(isEdit);
   return (
     <div className="flex flex-col gap-5 rounded-lg border border-gray-300 items-center">
       <img src={myCategory?.image} className="w-48 h-36 rounded-lg  " />
