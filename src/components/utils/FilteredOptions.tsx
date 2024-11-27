@@ -2,11 +2,8 @@ export const filterOptions = [
   { id: 1, label: "Uber One", value: "uberOne" },
   { id: 2, label: "Offers", value: "offers" },
   { id: 3, label: "Under 30 min", value: "under30" },
-  { id: 4, label: "Best overall", value: "bestOverall" },
   { id: 5, label: "Rating", value: "rating" },
   { id: 6, label: "Price", value: "price" },
-  { id: 7, label: "Dietary", value: "dietary" },
-  { id: 8, label: "Sort", value: "sort" },
 ];
 
 export const mockItems = [
