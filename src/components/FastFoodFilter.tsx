@@ -23,7 +23,6 @@ export const FastFoodFilter = () => {
   useEffect(() => {
     fetchdata();
   }, []);
-  // Group the food items by category
   const groupByCategory = () => {
     const categoryMap: { [key: string]: MenuItemType[] } = {};
 
@@ -40,17 +39,15 @@ export const FastFoodFilter = () => {
 
   return (
     <div>
-      {/* Iterate over each category group and render */}
       {Object.keys(groupByCategory()).map((categoryId, index) => {
         const categoryItems = groupByCategory()[categoryId];
         return (
           <div key={index}>
             <h3>Category: {mainFood[0].name}</h3>
-            {/* You can add actual category name */}
             <div>
               <MenuItemSlider
                 categoryItems={categoryItems}
-                name="Mac donalds"
+                name="Featured Fast Food"
               />
             </div>
           </div>

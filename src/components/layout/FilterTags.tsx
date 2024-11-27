@@ -2,6 +2,7 @@
 import React from "react";
 import { filterOptions, mockItems } from "../utils/FilteredOptions";
 import { useQueryState } from "nuqs";
+import { PopOverTags } from "./PopOverTags";
 
 const FilterTags: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useQueryState<string>(
@@ -63,6 +64,7 @@ const FilterTags: React.FC = () => {
               {option.label}
             </button>
           ))}
+          <PopOverTags rate={0} />
         </div>
       </div>
       <div>

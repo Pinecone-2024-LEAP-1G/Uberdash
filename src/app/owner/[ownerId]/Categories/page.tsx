@@ -15,9 +15,7 @@ const Categories = () => {
       .then(function (response) {
         setCategories(response.data.category);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   }, []);
 
   return (

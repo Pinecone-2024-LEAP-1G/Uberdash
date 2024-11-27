@@ -2,7 +2,6 @@ import { NextRequest } from "next/server";
 import { menuItemModel } from "@/lib/models";
 
 export const GET = async () => {
-  console.log("hehe");
   try {
     const menuItems = await menuItemModel.find();
     return Response.json({ menuItems });
