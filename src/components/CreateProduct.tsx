@@ -16,7 +16,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   const [categories, setCategories] = useState<Category[]>([]);
 
   const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<number>();
+  const [price, setPrice] = useState<number>(0);
   const [image, setImage] = useState<string>("");
   const [size, setSize] = useState<string>("");
   const [categoryId, setCategoryId] = useState<string>("");
@@ -36,6 +36,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
         image,
       });
       if (response) {
+        console.log(response);
         handleCreateProduct();
       }
     } catch (error) {
@@ -66,7 +67,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
     fetchdata();
     fetchRestaurant();
   }, []);
-  console.log(categoryId);
+
   const handleToggle = () => {
     handleCreateProduct();
   };

@@ -2,19 +2,21 @@ import { MenuItemType } from "@/lib/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Pen, BadgeMinus } from "lucide-react";
+import { Delete } from "./Delete";
 
 type OwnerMenuItemProps = {
   menuItemId: string;
-  handleDelete: () => void;
-  handleEdit: (id: string) => void;
 };
 
-export const OwnerMenuItem = ({
-  menuItemId,
-  handleDelete,
-  handleEdit,
-}: OwnerMenuItemProps) => {
+type DeleteType = {
+  itemId: string;
+  handleDelete: () => void;
+};
+
+export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
   const [menuItem, setMenuItem] = useState<MenuItemType>();
+
+  const [isdelete, setDelete] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +32,17 @@ export const OwnerMenuItem = ({
     fetchData();
   }, [menuItemId]);
 
+  const handleDelete = () => {
+    setDelete(!isdelete);
+  };
+  const newProps: DeleteType = {
+    itemId: menuItemId,
+    handleDelete: handleDelete,
+  };
+
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-gray-300 items-center">
+      {isdelete && <Delete {...newProps} />}
       <img
         src={menuItem?.image}
         alt={menuItem?.name}
@@ -50,7 +61,7 @@ export const OwnerMenuItem = ({
         </div>
         <div
           className="flex gap-2 items-center px-2 py-1.5 hover:bg-slate-200 rounded-2xl cursor-pointer"
-          onClick={() => handleEdit(menuItemId)}
+          onClick={() => console.log("sajhd")}
         >
           <Pen size={16} />
           <button className="text-sm">Edit</button>
