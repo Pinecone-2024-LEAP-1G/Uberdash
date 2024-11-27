@@ -8,16 +8,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "./ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "../ui/button";
 
 export const RestaurantHero = (props: {
   name: string | undefined;
-  description: string | undefined;
   banner: string | undefined;
   image: string | undefined;
 }) => {
-  const { name, description, banner, image } = props;
+  const { name, banner, image } = props;
 
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
