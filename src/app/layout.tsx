@@ -5,7 +5,7 @@ import { Header } from "../components/layout/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
-import { ProductProvider } from "../Providers/MenuItem.Provider";
+import { FoodProvider } from "../Providers/MenuItem.Provider";
 
 export const metadata: Metadata = {
   title: "Хурдан хоол",
@@ -21,7 +21,7 @@ export default function RootLayout({
 
   return (
     <CartProvider>
-      <ProductProvider>
+      <FoodProvider>
         <html lang="en">
           <body className="min-h-screen">
             <NuqsAdapter>
@@ -31,7 +31,7 @@ export default function RootLayout({
             </NuqsAdapter>
           </body>
         </html>
-      </ProductProvider>
+      </FoodProvider>
     </CartProvider>
   );
 }

@@ -7,7 +7,7 @@ import {
   ReactNode,
 } from "react";
 
-export type Product = {
+export type Food = {
   image: string;
   _id: string;
   name: string;
@@ -19,7 +19,7 @@ export type Product = {
   restaurantId: string;
 };
 
-type CartItem = Product & {
+type CartItem = Food & {
   quantity: number;
 };
 

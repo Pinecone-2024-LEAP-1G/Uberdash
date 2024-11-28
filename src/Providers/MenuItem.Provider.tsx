@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "./CartProvider";
+import { Food } from "./CartProvider";
 import axios from "axios";
 import {
   createContext,
@@ -9,41 +9,41 @@ import {
   ReactNode,
 } from "react";
 
-interface ProductContextType {
-  productItems: Product[];
+interface FoodContextType {
+  foodItems: Food[];
 }
 
-const ProductContext = createContext<ProductContextType>({
-  productItems: [],
+const FoodContext = createContext<FoodContextType>({
+  foodItems: [],
 });
 
-const useProduct = () => useContext(ProductContext);
+const useFood = () => useContext(FoodContext);
 
-interface ProductProviderProps {
+interface FoodProviderProps {
   children: ReactNode;
 }
 
-const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
-  const [productItems, setProductItems] = useState<Product[]>([]);
+const FoodProvider: React.FC<FoodProviderProps> = ({ children }) => {
+  const [foodItems, setFoodItems] = useState<Food[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchFoods = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/menu-item`);
-        setProductItems(response.data.menuItems);
+        setFoodItems(response.data.menuItems);
       } catch (err) {
-        console.error("Error fetching products:", err);
+        console.error("Error fetching Foods:", err);
       }
     };
 
-    fetchProducts();
+    fetchFoods();
   }, []);
 
   return (
-    <ProductContext.Provider value={{ productItems }}>
+    <FoodContext.Provider value={{ foodItems }}>
       {children}
-    </ProductContext.Provider>
+    </FoodContext.Provider>
   );
 };
 
-export { useProduct, ProductProvider };
+export { useFood, FoodProvider };
