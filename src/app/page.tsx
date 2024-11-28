@@ -1,15 +1,11 @@
 "use client";
 
-import FilterTags from "@/components/layout/FilterTags";
-import { MenuItem } from "../components/MenuItem";
-import { RestrauntMenu } from "../components/RestrauntMenu";
-import { BasketDrawer } from "@/components/basket-drawer/BasketDrawer";
-import Link from "next/link";
-import { MenuItemSlider } from "@/components/MenuItemSlider";
-import { Drawers } from "@/components";
+import { Restuarants } from "@/components/Restuarants";
 
 const Home = () => {
-  return <div>{/* <BasketDrawer /> */}</div>;
+  return <div className="h-screen">
+    <Restuarants/>
+  </div>;
 };
 
 export default Home;

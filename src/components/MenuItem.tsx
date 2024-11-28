@@ -5,20 +5,13 @@ type MenuTypes = {
   name: string;
   duration: string;
   points: string;
-  bonus: string;
 };
 
-export const MenuItem = ({
-  image,
-  name,
-  duration,
-  points,
-  bonus,
-}: MenuTypes) => {
+export const MenuItem = ({ image, name, duration, points }: MenuTypes) => {
   return (
-    <div>
+    <div className="m-3">
       <div
-        className="w-[288px] h-[130px] rounded-xl "
+        className="w-[288px] h-[130px] rounded-xl  "
         style={{
           backgroundImage: `url(${image})`,
           backgroundRepeat: "no-repeat",
@@ -27,9 +20,7 @@ export const MenuItem = ({
         }}
       >
         <div className="flex justify-between items-center pt-2 px-3 ">
-          <p className="text-[#ffffff] bg-[#0e8345] text-ellipsis p-1 whitespace-nowrap rounded-sm text-[14px] ">
-            {bonus}
-          </p>
+          <p className="text-[#ffffff] bg-[#0e8345] text-ellipsis p-1 whitespace-nowrap rounded-sm text-[14px] "></p>
           <HeartSvg />
         </div>
       </div>

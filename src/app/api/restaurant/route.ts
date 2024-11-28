@@ -3,7 +3,7 @@ import { RestaurantModel } from "@/lib/models";
 
 export const GET = async () => {
   try {
-    const restaurants = RestaurantModel.find();
+    const restaurants = await RestaurantModel.find();
     return Response.json({ restaurants });
   } catch (error) {
     return Response.json({ error });
