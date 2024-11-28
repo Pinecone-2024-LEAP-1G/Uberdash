@@ -2,12 +2,8 @@
 
 import { AllFoods } from "@/components/AllFoods";
 import { FastFoodFilter } from "@/components/FastFoodFilter";
-<<<<<<< HEAD
-import { Restuarants } from "@/components/Restuarants";
-import FilterTags from "@/components/layout/FilterTags";
-=======
 import { PopOverPrice } from "@/components/layout/PopOverPrice";
->>>>>>> 792da9e (pop over price component hiiv)
+import { Restuarants } from "@/components/Restuarants";
 
 const Home = () => {
   return (
