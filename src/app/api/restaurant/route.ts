@@ -1,5 +1,7 @@
 import { NextRequest } from "next/server";
-import { RestaurantModel } from "@/lib/models";
+import { Restaurant, RestaurantModel, Review, ReviewModel } from "@/lib/models";
+
+type CreateReview = Restaurant & { reviews: [Review] };
 
 export const GET = async () => {
   try {
@@ -11,7 +13,13 @@ export const GET = async () => {
 };
 
 export const POST = async (req: NextRequest) => {
-  const { ownerId, name, image, banner, info } = await req.json();
+  const { ownerId, name, image, banner, info, reviews } =
+    (await req.json()) as CreateReview;
+
+  const newReviews = await ReviewModel.insertMany<Review>(reviews);
+
+  const newReviewIds = newReviews.map((newReview) => newReview._id);
+
   try {
     const newRestaurant = await RestaurantModel.create({
       name,
@@ -19,6 +27,7 @@ export const POST = async (req: NextRequest) => {
       banner,
       info,
       ownerId,
+      reviews: newReviewIds,
     });
     return Response.json({ newRestaurant });
   } catch (error) {

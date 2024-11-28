@@ -8,7 +8,10 @@ export const GET = async (
 ) => {
   const restaurantId = (await params).restaurantId;
   try {
-    const restaurant = await RestaurantModel.findById({ _id: restaurantId });
+    const restaurant = await RestaurantModel.findById({
+      _id: restaurantId,
+    });
+    // .populate({ path: "reviews" });
 
     return Response.json({ restaurant });
   } catch (error) {
