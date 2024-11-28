@@ -4,6 +4,8 @@ import { connectToMongoDB } from "@/lib/db";
 import { Header } from "../components/layout/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
+import { CartProvider } from "./Providers/CartProvider";
+import { ProductProvider } from "./Providers/MenuItem.Provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,14 +20,18 @@ export default function RootLayout({
   connectToMongoDB();
 
   return (
-    <html lang="en">
-      <body className="min-h-screen">
-        <NuqsAdapter>
-          <Header />
-          {children}
-          <Footer />
-        </NuqsAdapter>
-      </body>
-    </html>
+    <CartProvider>
+      <ProductProvider>
+        <html lang="en">
+          <body className="min-h-screen">
+            <NuqsAdapter>
+              <Header />
+              {children}
+              <Footer />
+            </NuqsAdapter>
+          </body>
+        </html>
+      </ProductProvider>
+    </CartProvider>
   );
 }
