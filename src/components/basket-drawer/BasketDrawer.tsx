@@ -15,8 +15,7 @@ import UberOne from "../ui/UberOne";
 import { Buttons } from "../basket-drawer/ButtonCard";
 import { SecondButton } from "../basket-drawer/SecondButton";
 import SmallModal from "./ThreeDotSelect";
-import { useCart } from "@/app/Providers/CartProvider";
-
+import { useCart } from "@/Providers/CartProvider";
 export const BasketDrawer: React.FC = () => {
   const [defValue, setDefValue] = useState<string>("1");
   const [count, setCount] = useState<number>(0);
