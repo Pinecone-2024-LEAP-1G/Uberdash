@@ -36,7 +36,7 @@ export const Restuarants = () => {
             image={restaurant.banner}
             name={restaurant.name}
             duration={"10-20min"}
-            points={"4.7"}
+            points={"4,7"}
           />
         ))}
       </div>
