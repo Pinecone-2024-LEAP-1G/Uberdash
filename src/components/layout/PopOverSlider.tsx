@@ -15,7 +15,7 @@ type PopOverProps = {
   onSliderChange: (value: number) => void;
 };
 
-export const PopOverTags = ({
+export const PopOverSlider = ({
   rate,
   selected,
   onClick,

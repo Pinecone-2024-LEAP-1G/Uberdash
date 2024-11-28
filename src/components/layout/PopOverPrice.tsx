@@ -99,9 +99,3 @@ export const PopOverPrice = () => {
     </Popover>
   );
 };
-
-const a = {
-  value: "one",
-};
-
-const copyA = { ...a };
