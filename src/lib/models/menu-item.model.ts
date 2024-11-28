@@ -1,7 +1,7 @@
 import { Model, Schema, model, models } from "mongoose";
 
 export type MenuItem = {
-  _id: string;
+  _id: Schema.Types.ObjectId;
   name: string;
   description: string;
   size: string;
