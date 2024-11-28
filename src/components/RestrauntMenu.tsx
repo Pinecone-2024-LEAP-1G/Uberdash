@@ -1,4 +1,4 @@
-import { Product, useCart } from "@/app/Providers/CartProvider";
+import { Product, useCart } from "@/Providers/CartProvider";
 import { LikeSvg } from "../components/ui/Like-svg";
 import PlusSign from "../components/ui/PlusSignSvg";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import PlusSign from "./ui/PlusSignSvg";
 import { LikeSvg } from "./ui/Like-svg";
-import { Product, useCart } from "@/app/Providers/CartProvider";
+import { Product, useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
 
 interface MenuItemProps {
