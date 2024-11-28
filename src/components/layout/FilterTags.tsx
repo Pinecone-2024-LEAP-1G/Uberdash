@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { filterOptions, mockItems } from "../utils/FilteredOptions";
 import { useQueryState } from "nuqs";
 import { PopOverTags } from "./PopOverTags";
+import { PopOverPrice } from "./PopOverPrice";
 
 const FilterTags: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useQueryState<string[]>(
@@ -14,6 +15,7 @@ const FilterTags: React.FC = () => {
 
   const [popOverSelected, setPopOverSelected] = useState<boolean>(false);
   const [sliderValue, setSliderValue] = useState<number>(4);
+  const [pricePopOverSelected, setPricePopOverSelected] = useState<string>();
 
   const filteredItems = mockItems.filter((item) =>
     selectedFilters.length ? selectedFilters.includes(item.category) : true
@@ -43,6 +45,9 @@ const FilterTags: React.FC = () => {
       return filters.join(",");
     }
     return "";
+  };
+  const handlePopOverClickPrice = () => {
+    setPricePopOverSelected();
   };
 
   useEffect(() => {
@@ -79,6 +84,7 @@ const FilterTags: React.FC = () => {
           sliderValue={sliderValue}
           onSliderChange={handleSliderChange}
         />
+        <PopOverPrice />
       </div>
       <div>
         {filteredItems.map((item) => (
