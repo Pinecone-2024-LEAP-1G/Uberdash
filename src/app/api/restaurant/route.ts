@@ -5,7 +5,7 @@ type CreateReview = Restaurant & { reviews: [Review] };
 
 export const GET = async () => {
   try {
-    const restaurants = RestaurantModel.find();
+    const restaurants = await RestaurantModel.find();
     return Response.json({ restaurants });
   } catch (error) {
     return Response.json({ error });

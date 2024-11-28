@@ -8,15 +8,9 @@ type MenuTypes = {
   bonus: string;
 };
 
-export const MenuItem = ({
-  image,
-  name,
-  duration,
-  points,
-  bonus,
-}: MenuTypes) => {
+export const MenuItem = ({ image, name, duration, points }: MenuTypes) => {
   return (
-    <div className="w-[288px] rounded-xl shadow-md overflow-hidden">
+    <div className="w-[288px] rounded-xl shadow-md overflow-hidden ">
       <div
         className="w-full h-[130px] rounded-xl"
         style={{
@@ -27,9 +21,7 @@ export const MenuItem = ({
         }}
       >
         <div className="flex justify-between items-center pt-2 px-3 ">
-          <p className="text-[#ffffff] bg-[#0e8345] text-ellipsis p-1 whitespace-nowrap rounded-sm text-[14px] ">
-            {bonus}
-          </p>
+          <p className="text-[#ffffff] bg-[#0e8345] text-ellipsis p-1 whitespace-nowrap rounded-sm text-[14px] "></p>
           <HeartSvg />
         </div>
       </div>
