@@ -1,65 +1,41 @@
-import React, { useState, useEffect } from "react";
+import { useQueryStates } from "nuqs";
+import { PopOverSlider } from "./PopOverSlider";
 import { filterOptions, mockItems } from "../utils/FilteredOptions";
-import { useQueryState } from "nuqs";
-import { PopOverTags } from "./PopOverTags";
 import { PopOverPrice } from "./PopOverPrice";
 
-const FilterTags: React.FC = () => {
-  const [selectedFilters, setSelectedFilters] = useQueryState<string[]>(
-    "category",
-    {
+export const FilterTags = () => {
+  const [queryStates, setQueryStates] = useQueryStates({
+    category: {
       defaultValue: [],
-      transform: (value: string | null) => (value ? value.split(",") : []),
-    }
-  );
+      parse: (value: string | null) => (value ? value.split(",") : []),
+    },
+    rating: {
+      defaultValue: 1,
+      parse: (value: string | null) => (value ? Number(value) : 1),
+    },
+  });
 
-  const [popOverSelected, setPopOverSelected] = useState<boolean>(false);
-  const [sliderValue, setSliderValue] = useState<number>(4);
-  const [pricePopOverSelected, setPricePopOverSelected] = useState<string>();
+  const { category: selectedFilters, rating } = queryStates;
 
-  const filteredItems = mockItems.filter((item) =>
-    selectedFilters.length ? selectedFilters.includes(item.category) : true
-  );
+  const filteredItems = mockItems
+    .filter((item) =>
+      selectedFilters.length ? selectedFilters.includes(item.category) : true
+    )
+    .filter((item) => item.rating >= rating);
 
   const handleFilterClick = (filterValue: string) => {
-    setSelectedFilters((prevFilters) => {
-      const filters = Array.isArray(prevFilters) ? prevFilters : [];
-      if (filters.includes(filterValue)) {
-        return filters.filter((f) => f !== filterValue);
-      } else {
-        return [...filters, filterValue];
-      }
+    setQueryStates({
+      category: selectedFilters.includes(filterValue)
+        ? selectedFilters.filter((f: string) => f !== filterValue)
+        : [...selectedFilters, filterValue],
     });
   };
 
-  const handlePopOverClick = () => {
-    setPopOverSelected((prev) => !prev);
-  };
-
   const handleSliderChange = (value: number) => {
-    setSliderValue(value);
+    setQueryStates({
+      rating: value,
+    });
   };
-
-  const buildCategoryQuery = (filters: string[]) => {
-    if (Array.isArray(filters)) {
-      return filters.join(",");
-    }
-    return "";
-  };
-  const handlePopOverClickPrice = () => {
-    setPricePopOverSelected();
-  };
-
-  useEffect(() => {
-    const queryString = selectedFilters.length
-      ? `?category=${buildCategoryQuery(selectedFilters)}`
-      : "";
-    window.history.replaceState(
-      null,
-      "",
-      `${window.location.pathname}${queryString}`
-    );
-  }, [selectedFilters]);
 
   return (
     <div>
@@ -77,15 +53,17 @@ const FilterTags: React.FC = () => {
             {option.label}
           </button>
         ))}
-        <PopOverTags
-          rate={sliderValue}
-          selected={popOverSelected}
-          onClick={handlePopOverClick}
-          sliderValue={sliderValue}
+
+        <PopOverSlider
+          rate={rating}
+          selected={rating > 1}
+          onClick={() => {}}
+          sliderValue={rating}
           onSliderChange={handleSliderChange}
         />
         <PopOverPrice />
       </div>
+
       <div>
         {filteredItems.map((item) => (
           <div key={item.id}>{item.name}</div>
@@ -94,5 +72,3 @@ const FilterTags: React.FC = () => {
     </div>
   );
 };
-
-export default FilterTags;
