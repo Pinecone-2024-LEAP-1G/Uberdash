@@ -65,7 +65,6 @@ Thank you!`,
       date: "09/19/24",
     },
   ];
-  console.log(productItems);
 
   return (
     <div className="container mx-auto max-w-[1200px]">
