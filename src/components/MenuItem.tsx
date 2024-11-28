@@ -10,7 +10,7 @@ type MenuTypes = {
 
 export const MenuItem = ({ image, name, duration, points }: MenuTypes) => {
   return (
-    <div className="w-[288px] rounded-xl shadow-md overflow-hidden">
+    <div className="w-[288px] rounded-xl shadow-md overflow-hidden ">
       <div
         className="w-full h-[130px] rounded-xl"
         style={{

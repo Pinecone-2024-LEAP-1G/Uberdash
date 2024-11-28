@@ -24,12 +24,12 @@ export const Restuarants = () => {
   }, []);
 
   return (
-    <div className="m-6">
+    <div className="m-6 gap-3">
       <div className="text-4xl mt-2 font-bold mx-auto max-w-[1200px] m-6">
         All stores
       </div>
 
-      <div className=" grid grid-cols-4 max-w-[1200px] mx-auto ">
+      <div className=" grid grid-cols-4 max-w-[1200px] mx-auto gap-10">
         {restaurants.map((restaurant) => (
           <MenuItem
             key={restaurant._id}
