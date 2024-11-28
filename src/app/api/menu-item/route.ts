@@ -37,3 +37,14 @@ export const POST = async (req: NextRequest) => {
     return Response.json({ message: error });
   }
 };
+
+export const DELETE = async (req: NextRequest) => {
+  const { itemId } = await req.json();
+  try {
+    const deleted = await menuItemModel.findByIdAndDelete({ _id: itemId });
+
+    return Response.json({ item: deleted });
+  } catch (error) {
+    return Response.json({ message: error });
+  }
+};
