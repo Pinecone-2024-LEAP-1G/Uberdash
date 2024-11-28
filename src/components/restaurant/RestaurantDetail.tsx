@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { RestrauntMenu } from "../RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
-import { useProduct } from "@/app/Providers/MenuItem.Provider";
+import { useProduct } from "@/Providers/MenuItem.Provider";
 
 type Restaurant = {
   name: string;

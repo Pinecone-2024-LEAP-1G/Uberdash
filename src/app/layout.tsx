@@ -4,8 +4,8 @@ import { connectToMongoDB } from "@/lib/db";
 import { Header } from "../components/layout/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
-import { CartProvider } from "./Providers/CartProvider";
-import { ProductProvider } from "./Providers/MenuItem.Provider";
+import { CartProvider } from "../Providers/CartProvider";
+import { ProductProvider } from "../Providers/MenuItem.Provider";
 
 export const metadata: Metadata = {
   title: "Хурдан хоол",
