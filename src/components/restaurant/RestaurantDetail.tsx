@@ -86,7 +86,6 @@ Thank you!`,
       <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
       <div className="grid grid-cols-5 my-4 gap-6">
         {productItems.map((productItem, _index) => {
-          // <div className="flex items-center justify-center w-[220px]">
           {
             if (productItem.restaurantId === restaurantId) {
               return (
@@ -99,7 +98,6 @@ Thank you!`,
               return;
             }
           }
-          // </div>
         })}
       </div>
       <div className="flex items-center justify-between">
@@ -133,7 +131,6 @@ Thank you!`,
       </div>
       <div className="grid grid-cols-4 my-4 gap-6">
         {productItems.map((productItem, _index) => {
-          // <div className="flex items-center justify-center w-[220px]">
           {
             if (productItem.restaurantId === restaurantId) {
               return (
@@ -149,22 +146,7 @@ Thank you!`,
               return;
             }
           }
-          // </div>
         })}
-        {/* {Array.from({ length: 10 }).map((_, index) => (
-          <div key={index} className="col-span-2">
-            <RestrauntMenu
-              name="Burrito Bowl"
-              price="$12.50"
-              percentage="80%"
-              like="(1100)"
-              discription=" Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-          commodo ligula eget dolor. Aenean massa.Nulla consequat massa quis
-          enim."
-              image="https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC9pbWFnZS1wcm9jL3Byb2Nlc3NlZF9pbWFnZXMvMzllMTJjODlhNzE2ZWEyYmYwNzE1MTM0MTBjYWE0Y2UvNTE0M2YxZTIxOGM2N2MyMGZlNWE0Y2QzM2Q5MGIwN2IuanBlZw=="
-            />
-          </div>
-        ))} */}
       </div>
     </div>
   );
