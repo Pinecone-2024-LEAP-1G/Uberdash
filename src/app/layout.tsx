@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { connectToMongoDB } from "@/lib/db";
-import { Header } from "../components/layout/header/Header";
+import { Header } from "../components/layout/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
 

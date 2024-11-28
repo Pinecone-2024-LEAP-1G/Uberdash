@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Menu, Search } from "lucide-react";
-import { Input } from "../../ui/input";
-import { BasketDrawer } from "../../basket-drawer/BasketDrawer";
+import { Input } from "../ui/input";
+import { BasketDrawer } from "../basket-drawer/BasketDrawer";
 
 export const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
