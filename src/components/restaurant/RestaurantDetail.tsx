@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { RestrauntMenu } from "../RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
-import { useProduct } from "@/Providers/MenuItem.Provider";
+import { useFood } from "../../Providers/MenuItem.Provider";
 
 type Restaurant = {
   name: string;
@@ -25,7 +25,7 @@ export const RestaurantDetail = ({
 }) => {
   const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
-  const { productItems } = useProduct();
+  const { foodItems } = useFood();
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -84,14 +84,11 @@ Thank you!`,
       </div>
       <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
       <div className="grid grid-cols-5 my-4 gap-6">
-        {productItems.map((productItem, _index) => {
+        {foodItems.map((foodItem, _index) => {
           {
-            if (productItem.restaurantId === restaurantId) {
+            if (foodItem.restaurantId === restaurantId) {
               return (
-                <MenuItemLastCard
-                  menuItem={productItem}
-                  key={productItem._id}
-                />
+                <MenuItemLastCard menuItem={foodItem} key={foodItem._id} />
               );
             } else {
               return;
@@ -129,13 +126,13 @@ Thank you!`,
         </div>
       </div>
       <div className="grid grid-cols-4 my-4 gap-6">
-        {productItems.map((productItem, _index) => {
+        {foodItems.map((foodItem, _index) => {
           {
-            if (productItem.restaurantId === restaurantId) {
+            if (foodItem.restaurantId === restaurantId) {
               return (
-                <div key={productItem._id} className="col-span-2">
+                <div key={foodItem._id} className="col-span-2">
                   <RestrauntMenu
-                    menuItem={productItem}
+                    menuItem={foodItem}
                     percentage="80%"
                     like="(1100)"
                   />

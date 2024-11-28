@@ -4,7 +4,7 @@ type MenuTypes = {
   image: string;
   name: string;
   duration: string;
-  points: number;
+  points: string;
   bonus: string;
 };
 

@@ -4,6 +4,7 @@ import { Restaurant } from "@/lib/models";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MenuItem } from "./MenuItem";
+import Link from "next/link";
 
 export const Restuarants = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
@@ -31,13 +32,16 @@ export const Restuarants = () => {
 
       <div className=" grid grid-cols-4 max-w-[1200px] mx-auto gap-10">
         {restaurants.map((restaurant) => (
-          <MenuItem
-            key={restaurant._id}
-            image={restaurant.banner}
-            name={restaurant.name}
-            duration={"10-20min"}
-            points={"4,7"}
-          />
+          <Link href={`/restaurant/${restaurant._id}`}>
+            <MenuItem
+              key={restaurant._id}
+              image={restaurant.banner}
+              name={restaurant.name}
+              duration={"10-20min"}
+              points={"4,7"}
+              bonus={""}
+            />
+          </Link>
         ))}
       </div>
     </div>
