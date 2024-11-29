@@ -25,7 +25,7 @@ const haversineDistance = (
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { location } = await req.json();
+    const { location, restaurantId } = await req.json();
     const { coordinates } = location;
     const [userLongitude, userLatitude] = coordinates;
 
@@ -36,7 +36,9 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const restaurantBranches = await RestaurantBranchModel.find();
+    const restaurantBranches = await RestaurantBranchModel.find({
+      restaurantId,
+    });
 
     const restaurantBranchesWithDistance = restaurantBranches.map((branch) => {
       const { location: branchLocation } = branch;
