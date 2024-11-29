@@ -3,23 +3,29 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import ThreeDot from "../ui/ThreeDot";
 import DownArrow from "../ui/DownArrow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OrderNote } from "../basket-drawer/OrderNote";
 import { ShoppingCart } from "lucide-react";
 import UberOne from "../ui/UberOne";
 import { Buttons } from "../basket-drawer/ButtonCard";
 import { SecondButton } from "../basket-drawer/SecondButton";
 import SmallModal from "./ThreeDotSelect";
-
+import { useCart } from "@/Providers/CartProvider";
 export const BasketDrawer: React.FC = () => {
   const [defValue, setDefValue] = useState<string>("1");
+  const [count, setCount] = useState<number>(0);
+
+  const { cartItems } = useCart();
+
+  useEffect(() => {
+    const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    setCount(totalCount);
+  }, [cartItems]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDefValue(e.target.value);
@@ -28,8 +34,11 @@ export const BasketDrawer: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="ml-56">
-          <ShoppingCart />
+        <div className="ml-56 flex w-20">
+          <ShoppingCart className="relative" />
+          <p className="bg-green-500 text-white rounded-full absolute w-5 h-5 text-sm text-center right-[-64px] top-[20px]">
+            {count}
+          </p>
         </div>
       </SheetTrigger>
       <SheetContent>

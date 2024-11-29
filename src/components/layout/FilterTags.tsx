@@ -1,72 +1,69 @@
-"use client";
-import React from "react";
+import { useQueryStates } from "nuqs";
+import { PopOverSlider } from "./PopOverSlider";
 import { filterOptions, mockItems } from "../utils/FilteredOptions";
-import { useQueryState } from "nuqs";
-import { PopOverTags } from "./PopOverTags";
+import { PopOverPrice } from "./PopOverPrice";
 
-const FilterTags: React.FC = () => {
-  const [selectedFilters, setSelectedFilters] = useQueryState<string>(
-    "category",
-    {
+export const FilterTags = () => {
+  const [queryStates, setQueryStates] = useQueryStates({
+    category: {
       defaultValue: [],
-      transform: (value: string | null) => (value ? value.split(",") : []),
-    }
-  );
+      parse: (value: string | null) => (value ? value.split(",") : []),
+    },
+    rating: {
+      defaultValue: 1,
+      parse: (value: string | null) => (value ? Number(value) : 1),
+    },
+  });
 
-  React.useEffect(() => {}, [selectedFilters]);
+  const { category: selectedFilters, rating } = queryStates;
 
-  const filteredItems = mockItems.filter((item) =>
-    selectedFilters?.length ? selectedFilters.includes(item.category) : true
-  );
+  const filteredItems = mockItems
+    .filter((item) =>
+      selectedFilters.length ? selectedFilters.includes(item.category) : true
+    )
+    .filter((item) => item.rating >= rating);
 
   const handleFilterClick = (filterValue: string) => {
-    setSelectedFilters((prev) => {
-      const filters = Array.isArray(prev) ? prev : [];
-      if (filters.includes(filterValue)) {
-        return filters.filter((f) => f !== filterValue);
-      } else {
-        return [...filters, filterValue];
-      }
+    setQueryStates({
+      category: selectedFilters.includes(filterValue)
+        ? selectedFilters.filter((f: string) => f !== filterValue)
+        : [...selectedFilters, filterValue],
     });
   };
 
-  const buildCategoryQuery = (filters: string[]) => {
-    return (Array.isArray(filters) ? filters : []).join(",");
+  const handleSliderChange = (value: number) => {
+    setQueryStates({
+      rating: value,
+    });
   };
-
-  React.useEffect(() => {
-    if (selectedFilters?.length) {
-      const queryString = buildCategoryQuery(selectedFilters);
-      window.history.replaceState(
-        null,
-        "",
-        `${window.location.pathname}?category=${queryString}`
-      );
-    } else {
-      window.history.replaceState(null, "", `${window.location.pathname}`);
-    }
-  }, [selectedFilters]);
 
   return (
     <div>
-      <div className="">
-        <div className="flex gap-3  p-2">
-          {filterOptions.map((option) => (
-            <button
-              key={option.id}
-              onClick={() => handleFilterClick(option.value)}
-              className={`px-4 py-2 rounded-full ${
-                selectedFilters?.includes(option.value)
-                  ? "bg-black text-white"
-                  : "bg-gray-200 text-black"
-              }`}
-            >
-              {option.label}
-            </button>
-          ))}
-          <PopOverTags rate={0} />
-        </div>
+      <div className="flex gap-3 p-2">
+        {filterOptions.map((option) => (
+          <button
+            key={option.id}
+            onClick={() => handleFilterClick(option.value)}
+            className={`px-4 py-2 rounded-full ${
+              selectedFilters.includes(option.value)
+                ? "bg-black text-white"
+                : "bg-gray-200 text-black"
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+
+        <PopOverSlider
+          rate={rating}
+          selected={rating > 1}
+          onClick={() => {}}
+          sliderValue={rating}
+          onSliderChange={handleSliderChange}
+        />
+        <PopOverPrice />
       </div>
+
       <div>
         {filteredItems.map((item) => (
           <div key={item.id}>{item.name}</div>
@@ -75,5 +72,3 @@ const FilterTags: React.FC = () => {
     </div>
   );
 };
-
-export default FilterTags;
