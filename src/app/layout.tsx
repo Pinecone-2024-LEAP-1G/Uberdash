@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <NuqsAdapter>
           <Header />
-          {children}
+          <main className="flex-grow ">{children}</main>
           <Footer />
         </NuqsAdapter>
       </body>
