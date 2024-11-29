@@ -13,15 +13,35 @@ export const FilterTags = () => {
       defaultValue: 1,
       parse: (value: string | null) => (value ? Number(value) : 1),
     },
+    price: {
+      defaultValue: [],
+      parse: (value: string | null) =>
+        value ? value.split(",").map(Number) : [],
+    },
   });
 
-  const { category: selectedFilters, rating } = queryStates;
+  const { category: selectedFilters, rating, price } = queryStates;
+
+  const priceRanges = {
+    1: { min: 1.99, max: 4.99 },
+    2: { min: 5, max: 6.99 },
+    3: { min: 7, max: 9.99 },
+    4: { min: 10, max: Infinity },
+  };
 
   const filteredItems = mockItems
     .filter((item) =>
       selectedFilters.length ? selectedFilters.includes(item.category) : true
     )
-    .filter((item) => item.rating >= rating);
+    .filter((item) => item.rating >= rating)
+    .filter((item) => {
+      if (price.length === 0) return true;
+      return price.some(
+        (range) =>
+          item.price >= priceRanges[range].min &&
+          item.price <= priceRanges[range].max
+      );
+    });
 
   const handleFilterClick = (filterValue: string) => {
     setQueryStates({
