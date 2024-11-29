@@ -3,7 +3,6 @@ export const filterOptions = [
   { id: 2, label: "Offers", value: "offers" },
   { id: 3, label: "Under 30 min", value: "under30" },
   { id: 5, label: "Rating", value: "rating" },
-  { id: 6, label: "Price", value: "price" },
 ];
 
 export const mockItems = [
