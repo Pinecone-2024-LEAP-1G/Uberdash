@@ -3,19 +3,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { RestaurantHero } from "./RestaurantHero";
 import { ReviewRating } from "./ReviewRating";
-import { MenuItemLastCard } from "../MenuItemLastCard";
+import { MenuItemLastCard } from "./MenuItemLastCard";
 import { CircleX, Search } from "lucide-react";
 import { Input } from "../ui/input";
-import { RestrauntMenu } from "../RestrauntMenu";
+import { RestrauntMenu } from "./RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
 import { useFood } from "../../Providers/MenuItem.Provider";
+import { useReview } from "@/Providers/Review.Provider";
+import { Schema } from "mongoose";
 
 type Restaurant = {
   name: string;
   banner: string;
   image: string;
   info: string;
+};
+
+export type Review = {
+  _id?: Schema.Types.ObjectId;
+  userId?: Schema.Types.ObjectId;
+  restaurantId: any;
+  comment?: string;
+  rating?: number;
+  createdAt: Date;
 };
 
 export const RestaurantDetail = ({
@@ -26,6 +37,7 @@ export const RestaurantDetail = ({
   const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const { foodItems } = useFood();
+  const { reviews } = useReview();
 
   const restaurantProps = { restaurantId: restaurantId };
 
@@ -33,7 +45,7 @@ export const RestaurantDetail = ({
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/restaurant/${restaurantId}`
+          `${process.env.NEXT_PUBLIC_URL}/api/restaurant/${restaurantId}`
         );
         setRestaurant(response.data.restaurant);
       } catch (error) {
@@ -67,6 +79,10 @@ Thank you!`,
       date: "09/19/24",
     },
   ];
+  const checkRestaurantId = (review: Review) => {
+    return review.restaurantId === restaurantId;
+  };
+  const filteredReviews = reviews.filter((review) => checkRestaurantId(review));
 
   return (
     <div className="container mx-auto max-w-[1200px]">
@@ -77,7 +93,10 @@ Thank you!`,
       />
       <div className="flex gap-4">
         <div className="w-2/3">
-          <ReviewRating reviews={myArr} description={restaurant?.info} />
+          <ReviewRating
+            reviews={filteredReviews}
+            description={restaurant?.info}
+          />
         </div>
         <div className="w-1/3 flex flex-col gap-4">
           <DeliveryFee />

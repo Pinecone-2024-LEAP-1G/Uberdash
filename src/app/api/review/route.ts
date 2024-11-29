@@ -1,4 +1,3 @@
-import { RestaurantModel } from "@/lib/models";
 import { ReviewModel } from "@/lib/models/review.model";
 import { NextRequest } from "next/server";
 
@@ -12,24 +11,21 @@ export const POST = async (request: NextRequest) => {
       userId,
       restaurantId,
     });
-    const { _id } = reviews;
-
-    const updatedRestaurant = await RestaurantModel.findById(restaurantId);
-    if (!updatedRestaurant) {
-      return Response.json(
-        { error_message: "Restaurant not found" },
-        { status: 404 }
-      );
-    }
-    updatedRestaurant.reviews.push(_id);
-    await updatedRestaurant.save();
 
     return Response.json({
       message: "succesfully created review",
       reviews,
-      updatedRestaurant,
     });
   } catch (error) {
     return Response.json({ error_message: error });
+  }
+};
+
+export const GET = async (_request: NextRequest) => {
+  try {
+    const review = await ReviewModel.find();
+    return Response.json({ review });
+  } catch (error) {
+    return Response.json({ error });
   }
 };

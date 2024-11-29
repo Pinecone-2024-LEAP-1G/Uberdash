@@ -3,12 +3,7 @@ import { ArrowDownWideNarrow } from "lucide-react";
 import { Comment } from "../Comment";
 import { Button } from "../ui/button";
 import { useState } from "react";
-type Review = {
-  comment: string;
-  rating: number;
-  date: string;
-  userName: string;
-};
+import { Review } from "./RestaurantDetail";
 
 export const ReviewRating = (props: {
   reviews: Review[];
@@ -48,8 +43,9 @@ export const ReviewRating = (props: {
               key={index}
               comment={review.comment}
               rating={review.rating}
-              date={review.date}
-              userName={review.userName}
+              createdAt={review.createdAt}
+              userId={review.userId}
+              restaurantId={undefined}
             />
           ))}
           <Button className="bg-[#f3f3f3] text-black rounded-3xl hover:bg-gray-300">

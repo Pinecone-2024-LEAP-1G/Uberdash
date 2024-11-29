@@ -20,7 +20,7 @@ export const CategoryComp = ({ categoryId }: CategoryID) => {
   const [myCategory, setMyCategory] = useState<Category>();
   useEffect(() => {
     axios
-      .post(`http://localhost:3000/api/category/categoryId`, {
+      .post(`${process.env.NEXT_PUBLIC_URL}/api/category/categoryId`, {
         categoryId,
       })
       .then(function (response) {

@@ -1,10 +1,10 @@
-import PlusSign from "./ui/PlusSignSvg";
-import { LikeSvg } from "./ui/Like-svg";
-import { Product, useCart } from "@/Providers/CartProvider";
+import { Food, useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
+import { LikeSvg } from "../ui/Like-svg";
+import PlusSign from "../ui/PlusSignSvg";
 
 interface MenuItemProps {
-  menuItem: Product;
+  menuItem: Food;
 }
 
 export const MenuItemLastCard = ({ menuItem }: MenuItemProps) => {
