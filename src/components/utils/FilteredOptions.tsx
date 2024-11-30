@@ -10,5 +10,4 @@ export const mockItems = [
   { id: 2, name: "Item 2", category: "offers", rating: 4.2 },
   { id: 3, name: "Item 3", category: "under30", rating: 3.8 },
   { id: 4, name: "Item 4", category: "bestOverall", rating: 4.9 },
-  { id: 5, name: "Item 5", category: "rating", rating: 4.7 },
 ];

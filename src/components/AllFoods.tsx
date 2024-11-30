@@ -33,7 +33,7 @@ export const AllFoods = () => {
             key={foodItem._id}
             image={foodItem.image}
             name={foodItem.name}
-            duration={foodItem.duration}
+            duration="25'-40'"
             points={foodItem.price}
             bonus="Buy 1, Get 1 Free"
           />
