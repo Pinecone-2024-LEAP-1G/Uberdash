@@ -42,7 +42,6 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
     };
     dataFetcher();
   }, []);
-  console.log(branchesWithDistance);
   useEffect(() => {
     let dist: number[] = [];
     branchesWithDistance.map((oneBranch) => {

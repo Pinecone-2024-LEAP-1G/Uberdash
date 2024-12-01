@@ -1,10 +1,35 @@
 "use client";
 import { ChevronDown, ChevronUp, Clock3, Copy, MapPin } from "lucide-react";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-export const RestaurantLocation = () => {
+type Location = {
+  type: "Point";
+  coordinates: [number, number];
+};
+
+const myLocation: Location = {
+  type: "Point",
+  coordinates: [47.918841, 106.917562],
+};
+
+type resId = {
+  restaurantId: string;
+};
+
+export const RestaurantLocation = ({ restaurantId }: resId) => {
   const [openDetail, setOpenDetail] = useState<boolean>(false);
-
+  const [branches, setBranches] = useState([]);
+  useEffect(() => {
+    const dataFetch = async () => {
+      const response = await axios.post(
+        "http://localhost:3000/api/restaurant-branch/distance",
+        { location: myLocation, restaurantId }
+      );
+      console.log(response.data.restaurantBranches);
+    };
+    dataFetch();
+  }, []);
   return (
     <div
       className="border rounded-2xl h-[334px] flex flex-col justify-end"

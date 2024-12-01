@@ -27,6 +27,8 @@ export const RestaurantDetail = ({
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const { foodItems } = useFood();
 
+  const restaurantProps = { restaurantId: restaurantId };
+
   useEffect(() => {
     const fetchdata = async () => {
       try {
@@ -79,7 +81,7 @@ Thank you!`,
         </div>
         <div className="w-1/3 flex flex-col gap-4">
           <DeliveryFee />
-          <RestaurantLocation />
+          <RestaurantLocation {...restaurantProps} />
         </div>
       </div>
       <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
