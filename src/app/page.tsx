@@ -4,7 +4,6 @@ import { AllFoods } from "@/components/AllFoods";
 import { FastFoodFilter } from "@/components/FastFoodFilter";
 // import FilterTags from "@/components/layout/FilterTags";
 import { AddOrderModal } from "@/components/AddOrderModal";
-import { Restuarants } from "@/components/Restuarants";
 
 const Home = () => {
   return (
@@ -12,7 +11,6 @@ const Home = () => {
       {/* <FilterTags /> */}
       <FastFoodFilter />
       <AllFoods />
-      <Restuarants />
       <AddOrderModal />
     </div>
   );

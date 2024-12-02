@@ -6,6 +6,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Хурдан хоол",
@@ -20,18 +21,20 @@ export default function RootLayout({
   connectToMongoDB();
 
   return (
-    <CartProvider>
-      <FoodProvider>
-        <html lang="en">
-          <body className="min-h-screen">
-            <NuqsAdapter>
-              <Header />
-              {children}
-              <Footer />
-            </NuqsAdapter>
-          </body>
-        </html>
-      </FoodProvider>
-    </CartProvider>
+    <SessionProvider>
+      <CartProvider>
+        <FoodProvider>
+          <html lang="en">
+            <body className="min-h-screen">
+              <NuqsAdapter>
+                <Header />
+                {children}
+                <Footer />
+              </NuqsAdapter>
+            </body>
+          </html>
+        </FoodProvider>
+      </CartProvider>
+    </SessionProvider>
   );
 }
