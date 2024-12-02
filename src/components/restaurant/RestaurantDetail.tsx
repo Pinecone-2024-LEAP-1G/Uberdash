@@ -10,7 +10,6 @@ import { RestrauntMenu } from "./RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
 import { useFood } from "../../Providers/MenuItem.Provider";
-import { useReview } from "@/Providers/Review.Provider";
 import { Review } from "@/lib/models";
 import { Schema } from "mongoose";
 
@@ -26,12 +25,26 @@ export const RestaurantDetail = ({
 }: {
   restaurantId: Schema.Types.ObjectId;
 }) => {
+  const restaurantProps = { restaurantId: restaurantId };
   const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
+  const [reviews, setReviews] = useState<Review[]>([]);
   const { foodItems } = useFood();
-  const { reviews } = useReview();
 
-  const restaurantProps = { restaurantId: restaurantId };
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_URL}/api/review`
+        );
+        setReviews(response.data.review);
+      } catch (err) {
+        console.error("Error fetching Review:", err);
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   useEffect(() => {
     const fetchdata = async () => {
