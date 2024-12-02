@@ -2,6 +2,7 @@
 import { ChevronDown, ChevronUp, Clock3, Copy, MapPin } from "lucide-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { ObjectId } from "mongoose";
 
 type Location = {
   type: "Point";
@@ -14,7 +15,7 @@ const myLocation: Location = {
 };
 
 type resId = {
-  restaurantId: string;
+  restaurantId: ObjectId;
 };
 
 export const RestaurantLocation = ({ restaurantId }: resId) => {

@@ -44,7 +44,7 @@ export function DataGridView({ restaurantOwnerId }: DataGridViewProps) {
   const [menuItems, setMenuItems] = useState<MenuItem>();
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/restaurant/getByOwnerId", {
+      .post(`${process.env.NEXT_PUBLIC_URL}/api/restaurant/getByOwnerId`, {
         ownerId: restaurantOwnerId,
       })
       .then(function (response) {

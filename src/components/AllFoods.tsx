@@ -11,7 +11,7 @@ export const AllFoods = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get<{ menuItems: MenuItemType[] }>(
-        `http://localhost:3000/api/menu-item`
+        `${process.env.NEXT_PUBLIC_URL}/api/menu-item`
       );
       setMainFood(response.data.menuItems);
     } catch (error) {

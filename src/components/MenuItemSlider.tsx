@@ -41,7 +41,7 @@ export const MenuItemSlider = (props: {
                   name={categoryItem.name}
                   image={categoryItem.image}
                   duration={categoryItem.duration}
-                  points={4.3}
+                  points="4.3"
                   bonus="Buy 1,Get 1 Free"
                 />
               </div>

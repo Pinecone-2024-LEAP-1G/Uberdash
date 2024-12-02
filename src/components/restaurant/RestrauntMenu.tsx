@@ -1,12 +1,12 @@
-import { Product, useCart } from "@/Providers/CartProvider";
-import { LikeSvg } from "../components/ui/Like-svg";
-import PlusSign from "../components/ui/PlusSignSvg";
+import { Food, useCart } from "@/Providers/CartProvider";
+import { LikeSvg } from "../ui/Like-svg";
+import PlusSign from "../ui/PlusSignSvg";
 import { useState } from "react";
 
 type Restraunt = {
   percentage: string;
   like: string;
-  menuItem: Product;
+  menuItem: Food;
 };
 
 export const RestrauntMenu = ({ like, percentage, menuItem }: Restraunt) => {

@@ -3,13 +3,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { RestaurantHero } from "./RestaurantHero";
 import { ReviewRating } from "./ReviewRating";
-import { MenuItemLastCard } from "../MenuItemLastCard";
+import { MenuItemLastCard } from "./MenuItemLastCard";
 import { CircleX, Search } from "lucide-react";
 import { Input } from "../ui/input";
-import { RestrauntMenu } from "../RestrauntMenu";
+import { RestrauntMenu } from "./RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
 import { useFood } from "../../Providers/MenuItem.Provider";
+import { Review } from "@/lib/models";
+import { Schema } from "mongoose";
 
 type Restaurant = {
   name: string;
@@ -21,19 +23,34 @@ type Restaurant = {
 export const RestaurantDetail = ({
   restaurantId,
 }: {
-  restaurantId: string;
+  restaurantId: Schema.Types.ObjectId;
 }) => {
+  const restaurantProps = { restaurantId: restaurantId };
   const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
+  const [reviews, setReviews] = useState<Review[]>([]);
   const { foodItems } = useFood();
 
-  const restaurantProps = { restaurantId: restaurantId };
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_URL}/api/review`
+        );
+        setReviews(response.data.review);
+      } catch (err) {
+        console.error("Error fetching Review:", err);
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   useEffect(() => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/restaurant/${restaurantId}`
+          `${process.env.NEXT_PUBLIC_URL}/api/restaurant/${restaurantId}`
         );
         setRestaurant(response.data.restaurant);
       } catch (error) {
@@ -47,26 +64,10 @@ export const RestaurantDetail = ({
     setSearch(event.target.value);
   };
 
-  const myArr = [
-    {
-      comment: `My friend ordered from here a few months ago and I fell in love. The
-fries are seasoned perfectly and the chicken is nice and juicy. I'm not
-a big fan of chicken, but I'll definitely have some Dave's Hot Chicken!
-Thank you!`,
-      rating: 4.6,
-      userName: "Janet C",
-      date: "09/19/24",
-    },
-    {
-      comment: `My friend ordered from here a few months ago and I fell in love. The
-fries are seasoned perfectly and the chicken is nice and juicy. I'm not
-a big fan of chicken, but I'll definitely have some Dave's Hot Chicken!
-Thank you!`,
-      rating: 4.6,
-      userName: "Janet C",
-      date: "09/19/24",
-    },
-  ];
+  const checkRestaurantId = (review: Review) => {
+    return review.restaurantId === restaurantId;
+  };
+  const filteredReviews = reviews.filter((review) => checkRestaurantId(review));
 
   return (
     <div className="container mx-auto max-w-[1200px]">
@@ -77,7 +78,10 @@ Thank you!`,
       />
       <div className="flex gap-4">
         <div className="w-2/3">
-          <ReviewRating reviews={myArr} description={restaurant?.info} />
+          <ReviewRating
+            reviews={filteredReviews}
+            description={restaurant?.info}
+          />
         </div>
         <div className="w-1/3 flex flex-col gap-4">
           <DeliveryFee />

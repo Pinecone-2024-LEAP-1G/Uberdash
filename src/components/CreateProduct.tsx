@@ -25,16 +25,19 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
 
   const CreateProduct = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/api/menu-item", {
-        name,
-        description,
-        size,
-        price,
-        available: true,
-        categoryId,
-        restaurantId,
-        image,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_URL}/api/menu-item`,
+        {
+          name,
+          description,
+          size,
+          price,
+          available: true,
+          categoryId,
+          restaurantId,
+          image,
+        }
+      );
       if (response) {
         console.log(response);
         handleCreateProduct();

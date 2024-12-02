@@ -16,7 +16,7 @@ export const Delete: React.FC<DeleteType> = (props: DeleteType) => {
     const deleteOne = async () => {
       try {
         const response = await axios.delete(
-          `http://localhost:3000/api/menu-item/delete/${itemId}`
+          `${process.env.NEXT_PUBLIC_URL}/api/menu-item/delete/${itemId}`
         );
         if (response.status == 200) {
           handleDelete();

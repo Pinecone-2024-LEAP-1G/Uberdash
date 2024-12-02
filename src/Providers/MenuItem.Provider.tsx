@@ -29,7 +29,9 @@ const FoodProvider: React.FC<FoodProviderProps> = ({ children }) => {
   useEffect(() => {
     const fetchFoods = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/menu-item`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_URL}/api/menu-item`
+        );
         setFoodItems(response.data.menuItems);
       } catch (err) {
         console.error("Error fetching Foods:", err);

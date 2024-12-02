@@ -1,4 +1,5 @@
 "use client";
+import { ObjectId } from "mongoose";
 import {
   createContext,
   useState,
@@ -16,7 +17,7 @@ export type Food = {
   description: string;
   size: string;
   available: boolean;
-  restaurantId: string;
+  restaurantId: ObjectId;
 };
 
 type CartItem = Food & {
