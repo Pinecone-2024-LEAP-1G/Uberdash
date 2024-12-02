@@ -7,7 +7,6 @@ import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
 import { ReviewProvider } from "@/Providers/Review.Provider";
-import { UserProvider } from "@/Providers/User.Provider";
 
 export const metadata: Metadata = {
   title: "Хурдан хоол",
@@ -23,21 +22,19 @@ export default function RootLayout({
 
   return (
     <CartProvider>
-      <UserProvider>
-        <FoodProvider>
-          <ReviewProvider>
-            <html lang="en">
-              <body className="min-h-screen">
-                <NuqsAdapter>
-                  <Header />
-                  {children}
-                  <Footer />
-                </NuqsAdapter>
-              </body>
-            </html>
-          </ReviewProvider>
-        </FoodProvider>
-      </UserProvider>
+      <FoodProvider>
+        <ReviewProvider>
+          <html lang="en">
+            <body className="min-h-screen">
+              <NuqsAdapter>
+                <Header />
+                {children}
+                <Footer />
+              </NuqsAdapter>
+            </body>
+          </html>
+        </ReviewProvider>
+      </FoodProvider>
     </CartProvider>
   );
 }

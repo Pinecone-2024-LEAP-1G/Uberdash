@@ -1,6 +1,6 @@
 "use client";
 import { ArrowDownWideNarrow } from "lucide-react";
-import { Comment } from "../Comment";
+import { Comment } from "./Comment";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Review } from "./RestaurantDetail";

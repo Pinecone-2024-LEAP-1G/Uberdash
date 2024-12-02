@@ -11,6 +11,7 @@ import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
 import { useFood } from "../../Providers/MenuItem.Provider";
 import { useReview } from "@/Providers/Review.Provider";
+import { Review } from "@/lib/models";
 import { Schema } from "mongoose";
 
 type Restaurant = {
@@ -20,19 +21,10 @@ type Restaurant = {
   info: string;
 };
 
-export type Review = {
-  _id?: Schema.Types.ObjectId;
-  userId?: Schema.Types.ObjectId;
-  restaurantId: any;
-  comment?: string;
-  rating?: number;
-  createdAt: Date;
-};
-
 export const RestaurantDetail = ({
   restaurantId,
 }: {
-  restaurantId: string;
+  restaurantId: Schema.Types.ObjectId;
 }) => {
   const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
@@ -59,26 +51,6 @@ export const RestaurantDetail = ({
     setSearch(event.target.value);
   };
 
-  const myArr = [
-    {
-      comment: `My friend ordered from here a few months ago and I fell in love. The
-fries are seasoned perfectly and the chicken is nice and juicy. I'm not
-a big fan of chicken, but I'll definitely have some Dave's Hot Chicken!
-Thank you!`,
-      rating: 4.6,
-      userName: "Janet C",
-      date: "09/19/24",
-    },
-    {
-      comment: `My friend ordered from here a few months ago and I fell in love. The
-fries are seasoned perfectly and the chicken is nice and juicy. I'm not
-a big fan of chicken, but I'll definitely have some Dave's Hot Chicken!
-Thank you!`,
-      rating: 4.6,
-      userName: "Janet C",
-      date: "09/19/24",
-    },
-  ];
   const checkRestaurantId = (review: Review) => {
     return review.restaurantId === restaurantId;
   };
