@@ -1,38 +1,50 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-
-const icon = new L.Icon({
-  iconUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
+import { LatLngExpression } from "leaflet";
 
 type LatLng = {
-  lat: number;
-  lng: number;
+  lat: number | undefined;
+  lng: number | undefined;
 };
 
-type Location = {
+type Location1 = {
   locations: LatLng[];
 };
 
-const Map = ({ locations }: Location) => {
+const Map = ({ locations }: Location1) => {
+  const validLocations = locations.filter(
+    (location) => location.lat !== undefined && location.lng !== undefined
+  );
+
+  if (validLocations.length === 0)
+    return <div>No valid locations available</div>;
+
+  const center: LatLngExpression =
+    validLocations.length === 2
+      ? [
+          (validLocations[0].lat + validLocations[1].lat) / 2,
+          (validLocations[0].lng + validLocations[1].lng) / 2,
+        ]
+      : [validLocations[0].lat!, validLocations[0].lng!];
+
   return (
     <MapContainer
-      center={locations[0]}
-      zoom={13}
-      style={{ height: "100vh", width: "100%" }}
+      center={center}
+      zoom={100}
+      style={{ height: "200px", width: "300px" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {locations.map((loc, index) => (
-        <Marker key={index} position={loc} icon={icon}>
+      {validLocations.map((location, index) => (
+        <Marker key={index} position={[location.lat!, location.lng!]}>
           <Popup>
-            Location {index + 1}: {loc.lat}, {loc.lng}
+            <div>
+              <h4>Location {index + 1}</h4>
+              <p>
+                Coordinates: {location.lat}, {location.lng}
+              </p>
+            </div>
           </Popup>
         </Marker>
       ))}

@@ -2,10 +2,20 @@
 import { ChevronDown, ChevronUp, Clock3, Copy, MapPin } from "lucide-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Map from "../Map";
 
 type Location = {
   type: "Point";
   coordinates: [number, number];
+};
+
+type LatLng = {
+  lat: number | undefined;
+  lng: number | undefined;
+};
+
+type Location1 = {
+  locations: LatLng[];
 };
 
 export type restaurantBranchWithDistance = {
@@ -27,6 +37,8 @@ type resId = {
 export const RestaurantLocation = ({ restaurantId }: resId) => {
   const [openDetail, setOpenDetail] = useState<boolean>(false);
   const [branches, setBranches] = useState<restaurantBranchWithDistance[]>([]);
+  const [closestBranch, setClosestBranch] =
+    useState<restaurantBranchWithDistance>();
   useEffect(() => {
     const dataFetch = async () => {
       const response = await axios.post(
@@ -34,15 +46,38 @@ export const RestaurantLocation = ({ restaurantId }: resId) => {
         { location: myLocation, restaurantId }
       );
       setBranches(response.data.restaurantBranches);
+      const closest = response.data.restaurantBranches.reduce(
+        (
+          prev: restaurantBranchWithDistance,
+          curr: restaurantBranchWithDistance
+        ) => (prev.distance < curr.distance ? prev : curr)
+      );
+      setClosestBranch(closest);
     };
     dataFetch();
   }, []);
-  console.log(branches);
+  const myLatLng: LatLng = {
+    lat: myLocation.coordinates[0],
+    lng: myLocation.coordinates[1],
+  };
+  const branchLatLng: LatLng = {
+    lat: closestBranch?.location.coordinates[0],
+    lng: closestBranch?.location.coordinates[1],
+  };
+  const location1: Location1 = {
+    locations: [myLatLng, branchLatLng],
+  };
+  console.log(location1);
+
   return (
     <div
       className="border rounded-2xl h-[334px] flex flex-col justify-end"
       style={{ backgroundImage: `url(/map.png)`, backgroundSize: "cover" }}
     >
+      <div className="w-[300px] h-[150px]">
+        <Map locations={location1.locations} />
+      </div>
+
       <div className={`bg-white ${openDetail ? "hidden" : "flex"}`}>
         <div className="w-20 h-16 items-center justify-center flex">
           <MapPin width={18} height={18} />
