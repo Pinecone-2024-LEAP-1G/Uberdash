@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Menu, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { BasketDrawer } from "../basket-drawer/BasketDrawer";
+import Link from "next/link";
 
 export const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -48,9 +49,11 @@ export const Header = () => {
           <div className="w-[48px] h-[48px] flex items-center ">
             <Menu className="" />
           </div>
-          <div className="flex items-center w-96  font-bold text-2xl">
-            Хурдан хоол
-          </div>
+          <Link href="/">
+            <div className="flex items-center w-96  font-bold text-2xl">
+              Хурдан хоол
+            </div>
+          </Link>
         </div>
         <div
           className="relative bg-[#F3F3F3] rounded-full flex items-center justify-center gap-6 pl-6 pr-12 w-full"
