@@ -4,8 +4,14 @@ import { useState, useRef, useEffect } from "react";
 import { Menu, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { BasketDrawer } from "../basket-drawer/BasketDrawer";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export const Header = () => {
+  const { data: session } = useSession();
+
+  console.log({ session });
+
   const [searchTerm, setSearchTerm] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -48,9 +54,11 @@ export const Header = () => {
           <div className="w-[48px] h-[48px] flex items-center ">
             <Menu className="" />
           </div>
-          <div className="flex items-center w-96  font-bold text-2xl">
-            Хурдан хоол
-          </div>
+          <Link href={"/"}>
+            <div className="flex items-center w-96  font-bold text-2xl">
+              Хурдан хоол
+            </div>
+          </Link>
         </div>
         <div
           className="relative bg-[#F3F3F3] rounded-full flex items-center justify-center gap-6 pl-6 pr-12 w-full"
@@ -83,6 +91,23 @@ export const Header = () => {
                 <div className="px-4 py-2 text-gray-500">No results found</div>
               )}
             </div>
+          )}
+        </div>
+        <div className="flex">
+          {!session ? (
+            <button
+              onClick={() => signIn("google")}
+              className="w-24 bg-[#F3F3F3] rounded-full ml-8"
+            >
+              Log in
+            </button>
+          ) : (
+            <button
+              onClick={() => signOut()}
+              className="w-24 bg-[#F3F3F3] rounded-full ml-8"
+            >
+              Sign out
+            </button>
           )}
         </div>
         <div className="flex items-center">
