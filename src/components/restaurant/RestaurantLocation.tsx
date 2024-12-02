@@ -8,6 +8,13 @@ type Location = {
   coordinates: [number, number];
 };
 
+export type restaurantBranchWithDistance = {
+  _id: string;
+  restaurantId: string;
+  branchName: string;
+  location: Location;
+  distance: number;
+};
 const myLocation: Location = {
   type: "Point",
   coordinates: [47.918841, 106.917562],
@@ -19,17 +26,18 @@ type resId = {
 
 export const RestaurantLocation = ({ restaurantId }: resId) => {
   const [openDetail, setOpenDetail] = useState<boolean>(false);
-  const [branches, setBranches] = useState([]);
+  const [branches, setBranches] = useState<restaurantBranchWithDistance[]>([]);
   useEffect(() => {
     const dataFetch = async () => {
       const response = await axios.post(
         "http://localhost:3000/api/restaurant-branch/distance",
         { location: myLocation, restaurantId }
       );
-      console.log(response.data.restaurantBranches);
+      setBranches(response.data.restaurantBranches);
     };
     dataFetch();
   }, []);
+  console.log(branches);
   return (
     <div
       className="border rounded-2xl h-[334px] flex flex-col justify-end"
