@@ -1,8 +1,7 @@
-
-const title = ()=> {
-    return (
-        <div>
-            <p>Stories near you</p>
-        </div>
-    )
-}
+const title = () => {
+  return (
+    <div>
+      <p>Stories near you</p>
+    </div>
+  );
+};
