@@ -4,8 +4,6 @@ import { AllFoods } from "@/components/AllFoods";
 import { FastFoodFilter } from "@/components/FastFoodFilter";
 // import FilterTags from "@/components/layout/FilterTags";
 import { AddOrderModal } from "@/components/AddOrderModal";
-import { Restuarants } from "@/components/Restuarants";
-import { signIn } from "next-auth/react";
 
 const Home = () => {
   return (
