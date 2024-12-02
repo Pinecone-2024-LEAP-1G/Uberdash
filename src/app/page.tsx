@@ -14,7 +14,6 @@ const Home = () => {
       {/* <FilterTags /> */}
       <FastFoodFilter />
       <AllFoods />
-      <Restuarants />
       <AddOrderModal />
     </div>
   );
