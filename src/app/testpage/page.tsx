@@ -1,4 +1,11 @@
+"use client";
+import { RestaurantList } from "@/components/RestaurantList";
+
 const Home = () => {
-  return <div></div>;
+  return (
+    <div>
+      <RestaurantList />
+    </div>
+  );
 };
 export default Home;
