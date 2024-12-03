@@ -4,19 +4,51 @@ import { useCart } from "@/Providers/CartProvider";
 import { MinusIcon, PlusIcon, Trash2 } from "lucide-react";
 import { useState } from "react";
 
-const Counter = ({ quantity, id }: { quantity: number; id: string }) => {
+type CartItem = {
+  quantity: number;
+  image: string;
+  _id: string;
+  name: string;
+  categoryId: string;
+  price: number;
+  description: string;
+  size: string;
+  available: boolean;
+  restaurantId: string;
+};
+
+const Counter = ({
+  quantity,
+  id,
+  cartItem,
+}: {
+  quantity: number;
+  id: string;
+  cartItem: [CartItem];
+}) => {
   const [count, setCount] = useState(quantity);
-  const { removeFromCart } = useCart();
+  const { removeFromCart, addToCart, minusFromCart } = useCart();
+
   const handleMinusCount = () => {
     if (count >= 1) {
-      return setCount(count - 1);
+      return (
+        setCount(count - 1), minusFromCart({ ...cartItem, quantity: count })
+      );
     } else {
       return;
     }
   };
+
   const handlePlusCount = () => {
-    return setCount(count + 1);
+    return (
+      setCount(count + 1),
+      addToCart({
+        ...cartItem,
+        quantity: count,
+      })
+    );
   };
+
   return (
     <div className="flex bg-gray-100 rounded-2xl">
       <button

@@ -7,30 +7,31 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import DownArrow from "../ui/DownArrow";
 import { useEffect, useState } from "react";
 import { OrderNote } from "../basket-drawer/OrderNote";
 import { ShoppingCart } from "lucide-react";
-import UberOne from "../ui/UberOne";
 import { Buttons } from "../basket-drawer/ButtonCard";
-import { SecondButton } from "../basket-drawer/SecondButton";
 import SmallModal from "./ThreeDotSelect";
 import { useCart } from "@/Providers/CartProvider";
 import Counter from "../Counter";
+
 export const BasketDrawer: React.FC = () => {
-  const [defValue, setDefValue] = useState<string>("1");
   const [count, setCount] = useState<number>(0);
   const [totalAmount, setTotalAmount] = useState<number>(0);
-  const { cartItems, clearCart } = useCart();
+  const { cartItems } = useCart();
 
   useEffect(() => {
     const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
     setCount(totalCount);
   }, [cartItems]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDefValue(e.target.value);
-  };
+  useEffect(() => {
+    const total = cartItems.reduce(
+      (acc, item) => acc + Number(item.price) * item.quantity,
+      0
+    );
+    setTotalAmount(total);
+  }, [cartItems]);
 
   return (
     <Sheet>
@@ -43,17 +44,17 @@ export const BasketDrawer: React.FC = () => {
         </div>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader className="gap-4">
-          <SheetTitle className="text-[32px] font-bold leading-10 flex items-center justify-between mt-14">
-            Casa Durango
-            <div className="w-9 h-9 bg-[#F3F3F3] rounded-full flex items-center justify-center hover:bg-[#b1b0b0]">
-              <SmallModal />
-            </div>
-          </SheetTitle>
-          <div className="flex justify-between border-b border-[#D6D8DB]">
-            <p className="text-[16px] font-medium mb-4">{count} items</p>
-          </div>
+        <SheetHeader className="gap-4 h-screen justify-between">
           <div>
+            <SheetTitle className="text-[32px] font-bold leading-10 flex items-center justify-between mt-14">
+              Restaurant Name
+              <div className="w-9 h-9 bg-[#F3F3F3] rounded-full flex items-center justify-center hover:bg-[#b1b0b0]">
+                <SmallModal />
+              </div>
+            </SheetTitle>
+            <div className="flex justify-between border-b border-[#D6D8DB]">
+              <p className="text-[16px] font-medium mb-4">{count} items</p>
+            </div>
             {cartItems.map((cartItem) => {
               return (
                 <div
@@ -73,7 +74,11 @@ export const BasketDrawer: React.FC = () => {
                       ${Number(cartItem.price) * cartItem.quantity}
                     </p>
                   </div>
-                  <Counter quantity={cartItem.quantity} id={cartItem._id} />
+                  <Counter
+                    quantity={cartItem.quantity}
+                    id={cartItem._id}
+                    cartItem={cartItem}
+                  />
                 </div>
               );
             })}
@@ -84,21 +89,9 @@ export const BasketDrawer: React.FC = () => {
               <p>Subtotal</p>
               <p>${totalAmount}</p>
             </div>
-            <div className="w-[446px] h-[350.5px]"></div>
-            <div className="flex mt-4 ">
-              <div className="bg-[#fdf2dc] w-[48px] h-[49px] items-center justify-center flex">
-                <UberOne />
-              </div>
-              <div>
-                <p className="w-[410px] bg-[#fdf2dc]  h-[49px] flex items-center text-[#9F6402] text-[16px] font-medium">
-                  Add $0.01 to save with Uber One
-                </p>
-              </div>
-            </div>
-            <div className="mt-4">
-              <Buttons />
-              <SecondButton />
-            </div>
+          </div>
+          <div className="h-28">
+            <Buttons />
           </div>
         </SheetHeader>
       </SheetContent>
