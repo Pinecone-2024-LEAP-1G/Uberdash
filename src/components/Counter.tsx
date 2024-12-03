@@ -2,6 +2,7 @@
 
 import { useCart } from "@/Providers/CartProvider";
 import { MinusIcon, PlusIcon, Trash2 } from "lucide-react";
+import { ObjectId } from "mongoose";
 import { useState } from "react";
 
 type CartItem = {
@@ -10,11 +11,11 @@ type CartItem = {
   _id: string;
   name: string;
   categoryId: string;
-  price: number;
+  price: string;
   description: string;
   size: string;
   available: boolean;
-  restaurantId: string;
+  restaurantId: ObjectId;
 };
 
 const Counter = ({
@@ -24,7 +25,7 @@ const Counter = ({
 }: {
   quantity: number;
   id: string;
-  cartItem: [CartItem];
+  cartItem: CartItem;
 }) => {
   const [count, setCount] = useState(quantity);
   const { removeFromCart, addToCart, minusFromCart } = useCart();
