@@ -6,6 +6,7 @@ import { FastFoodFilter } from "@/components/FastFoodFilter";
 import { AddOrderModal } from "@/components/AddOrderModal";
 import { Restuarants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
+import { signIn } from "next-auth/react";
 
 const Home = () => {
   return (
@@ -14,8 +15,8 @@ const Home = () => {
       {/* <FilterTags /> */}
       <FastFoodFilter />
       <AllFoods />
-      <Restuarants />
       <AddOrderModal />
+      {/* <AddOrderModal /> */}
     </div>
   );
 };

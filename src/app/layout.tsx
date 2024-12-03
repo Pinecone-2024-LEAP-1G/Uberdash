@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import "./globals.css";
 import { connectToMongoDB } from "@/lib/db";
 import { Header } from "../components/layout/Header";
@@ -6,11 +7,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
-
-export const metadata: Metadata = {
-  title: "Хурдан хоол",
-  description: "Хоолоо захиалж ид",
-};
+import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -20,18 +17,20 @@ export default function RootLayout({
   connectToMongoDB();
 
   return (
-    <CartProvider>
-      <FoodProvider>
-        <html lang="en">
-          <body className="min-h-screen">
-            <NuqsAdapter>
-              <Header />
-              {children}
-              <Footer />
-            </NuqsAdapter>
-          </body>
-        </html>
-      </FoodProvider>
-    </CartProvider>
+    <SessionProvider>
+      <CartProvider>
+        <FoodProvider>
+          <html lang="en">
+            <body className="min-h-screen">
+              <NuqsAdapter>
+                <Header />
+                {children}
+                <Footer />
+              </NuqsAdapter>
+            </body>
+          </html>
+        </FoodProvider>
+      </CartProvider>
+    </SessionProvider>
   );
 }
