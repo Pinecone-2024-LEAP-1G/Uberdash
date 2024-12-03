@@ -29,12 +29,14 @@ interface CartContextType {
   addToCart: (newItem: CartItem) => void;
   removeFromCart: (itemId: string) => void;
   clearCart: () => void;
+  minusFromCart: (newItem: CartItem) => void;
 }
 const CartContext = createContext<CartContextType>({
   cartItems: [],
   addToCart: () => {},
   removeFromCart: () => {},
   clearCart: () => {},
+  minusFromCart: () => {},
 });
 
 export const useCart = () => useContext(CartContext);
@@ -85,13 +87,37 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setCartItems(cartItems.filter((item) => item._id !== itemId));
   };
 
+  const minusFromCart = (newItem: CartItem) => {
+    const existingItem = cartItems.find(
+      (cartItem) => cartItem._id === newItem._id
+    );
+
+    if (existingItem) {
+      const updatedItems = cartItems.map((cartItem) => {
+        if (cartItem._id === newItem._id) {
+          return {
+            ...cartItem,
+            quantity: cartItem.quantity - 1,
+          };
+        }
+
+        return cartItem;
+      });
+
+      setCartItems(updatedItems);
+      return;
+    }
+
+    setCartItems([...cartItems, newItem]);
+  };
+
   const clearCart = () => {
     setCartItems([]);
   };
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, clearCart }}
+      value={{ cartItems, addToCart, removeFromCart, clearCart, minusFromCart }}
     >
       {children}
     </CartContext.Provider>
