@@ -36,21 +36,19 @@ export const MenuCategories = () => {
     <Carousel className="w=-full flex items-center">
       <CarouselPrevious />
       <CarouselContent className="w-[1152px]">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="flex gap-3">
-              {menuCategories.map((menuCategory, index) => {
-                return (
-                  <MenuCategory
-                    key={index}
-                    title={menuCategory.title}
-                    image={menuCategory.image}
-                  />
-                );
-              })}
-            </div>
-          </CarouselItem>
-        ))}
+        <CarouselItem>
+          <div className="flex gap-3">
+            {menuCategories.map((menuCategory, index) => {
+              return (
+                <MenuCategory
+                  key={index}
+                  title={menuCategory.title}
+                  image={menuCategory.image}
+                />
+              );
+            })}
+          </div>
+        </CarouselItem>
       </CarouselContent>
       <CarouselNext />
     </Carousel>
