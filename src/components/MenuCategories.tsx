@@ -1,4 +1,12 @@
+import { title } from "process";
 import { MenuCategory } from "./MenuCategory";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const menuCategories = [
   {
@@ -11,20 +19,38 @@ const menuCategories = [
     image:
       "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/Grocery_v2.png",
   },
+  {
+    title: "Chicken",
+    image:
+      "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Chicken.png",
+  },
+  {
+    title: "Korean",
+    image:
+      "https://cn-geo1.uber.com/static/mobile-content/eats/cuisine-filters/v1/Korean.png",
+  },
 ];
 
 export const MenuCategories = () => {
   return (
-    <div className="flex gap-2">
-      {menuCategories.map((menuCategory, index) => {
-        return (
-          <MenuCategory
-            key={index}
-            title={menuCategory.title}
-            image={menuCategory.image}
-          />
-        );
-      })}
-    </div>
+    <Carousel className="w=-full flex items-center">
+      <CarouselPrevious />
+      <CarouselContent className="w-[1152px]">
+        <CarouselItem>
+          <div className="flex gap-3">
+            {menuCategories.map((menuCategory, index) => {
+              return (
+                <MenuCategory
+                  key={index}
+                  title={menuCategory.title}
+                  image={menuCategory.image}
+                />
+              );
+            })}
+          </div>
+        </CarouselItem>
+      </CarouselContent>
+      <CarouselNext />
+    </Carousel>
   );
 };
