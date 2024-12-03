@@ -51,14 +51,11 @@ const Counter = ({
 
   return (
     <div className="flex bg-gray-100 rounded-2xl">
-      <button
-        className="pl-4 font-semibold "
-        onClick={() => handleMinusCount()}
-      >
+      <button className="pl-4 font-semibold ">
         {count === 1 ? (
           <Trash2 className="w-4 h-4" onClick={() => removeFromCart(id)} />
         ) : (
-          <MinusIcon className="w-4 h-4" />
+          <MinusIcon className="w-4 h-4" onClick={() => handleMinusCount()} />
         )}
       </button>
       <p className="w-8 h-8 flex justify-center items-center">{count}</p>

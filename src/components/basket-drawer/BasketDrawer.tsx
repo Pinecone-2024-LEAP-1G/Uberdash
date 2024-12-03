@@ -47,7 +47,7 @@ export const BasketDrawer: React.FC = () => {
         <SheetHeader className="gap-4 h-screen justify-between">
           <div>
             <SheetTitle className="text-[32px] font-bold leading-10 flex items-center justify-between mt-14">
-              Restaurant Name
+              Orders
               <div className="w-9 h-9 bg-[#F3F3F3] rounded-full flex items-center justify-center hover:bg-[#b1b0b0]">
                 <SmallModal />
               </div>
