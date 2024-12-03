@@ -10,8 +10,8 @@ import { MenuCategories } from "@/components/MenuCategories";
 const Home = () => {
   return (
     <div className="container mx-auto max-w-[1200px] space-y-6">
-      {/* <FilterTags /> */}
       <MenuCategories />
+      {/* <FilterTags /> */}
       <FastFoodFilter />
       <AllFoods />
       <Restuarants />
