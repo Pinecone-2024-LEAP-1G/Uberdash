@@ -10,8 +10,6 @@ import Link from "next/link";
 export const Header = () => {
   const { data: session } = useSession();
 
-  console.log({ session });
-
   const [searchTerm, setSearchTerm] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -110,9 +108,7 @@ export const Header = () => {
             </button>
           )}
         </div>
-        <div className="flex items-center">
-          <BasketDrawer />
-        </div>
+        <BasketDrawer />
       </div>
     </div>
   );

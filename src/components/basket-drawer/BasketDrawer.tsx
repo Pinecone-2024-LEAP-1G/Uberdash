@@ -36,9 +36,9 @@ export const BasketDrawer: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="ml-56 flex w-20">
+        <div className="ml-56 flex w-8 border">
           <ShoppingCart className="relative" />
-          <p className="bg-green-500 text-white rounded-full absolute w-5 h-5 text-sm text-center right-[-64px] top-[20px]">
+          <p className="bg-green-500 text-white rounded-full absolute w-5 h-5 text-sm text-center right-[-155px] top-[20px]">
             {count}
           </p>
         </div>
