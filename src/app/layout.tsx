@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import "./globals.css";
 import { connectToMongoDB } from "@/lib/db";
 import { Header } from "../components/layout/Header";
@@ -7,11 +8,6 @@ import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
 import { SessionProvider } from "next-auth/react";
-
-export const metadata: Metadata = {
-  title: "Хурдан хоол",
-  description: "Хоолоо захиалж ид",
-};
 
 export default function RootLayout({
   children,
