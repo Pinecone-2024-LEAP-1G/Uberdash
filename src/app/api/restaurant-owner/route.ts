@@ -11,9 +11,9 @@ export const GET = async () => {
 };
 
 export const POST = async (req: NextRequest) => {
-  const { email, password } = await req.json();
+  const { email } = await req.json();
   try {
-    const newOwner = await RestaurantOwnerModel.create({ email, password });
+    const newOwner = await RestaurantOwnerModel.create({ email });
     return Response.json({ newOwner });
   } catch (error) {
     return Response.json({ error });
