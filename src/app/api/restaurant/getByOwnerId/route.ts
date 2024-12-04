@@ -1,9 +1,5 @@
 import { NextRequest } from "next/server";
-import {
-  RestaurantModel,
-  menuItemModel,
-  RestaurantOwnerModel,
-} from "@/lib/models";
+import { RestaurantModel, menuItemModel } from "@/lib/models";
 
 export const POST = async (req: NextRequest) => {
   const { ownerId } = await req.json();
