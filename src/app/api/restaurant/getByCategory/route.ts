@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { menuItemModel } from "@/lib/models";
+import { menuItemModel, RestaurantModel } from "@/lib/models";
 import mongoose from "mongoose";
 
 export const POST = async (req: NextRequest) => {
@@ -18,6 +18,9 @@ export const POST = async (req: NextRequest) => {
         },
       },
     ]);
+    await RestaurantModel.populate(restaurantIds, {
+      path: "_id",
+    });
     return Response.json({ restaurantIds });
   } catch (error) {
     return Response.json({ error });
