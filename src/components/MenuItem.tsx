@@ -52,7 +52,7 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
     }
   }, [branchesWithDistance]);
   return (
-    <div className="w-[288px] rounded-xl shadow-md overflow-hidden ">
+    <div className="w-[288px] rounded-xl overflow-hidden ">
       <div
         className="w-full h-[130px] rounded-xl"
         style={{
