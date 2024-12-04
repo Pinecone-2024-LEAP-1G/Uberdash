@@ -9,7 +9,7 @@ export default async function Page({
 }: {
   params: { ownerId: string };
 }) {
-  const restaurantOwnerId = params.ownerId;
+  const restaurantOwnerId = await params.ownerId;
 
   return (
     <div className="flex gap-4">
