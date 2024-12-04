@@ -1,6 +1,5 @@
 import OrderModel from "@/lib/models/order";
 import { NextRequest } from "next/server";
-import path from "path";
 
 export const GET = async (
   request: NextRequest,
