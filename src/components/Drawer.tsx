@@ -1,42 +1,86 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Dialog } from "@radix-ui/react-dialog";
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Menu, Heart, ShoppingBag, HelpCircle } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
-export function Drawers() {
+export const Drawers = () => {
+  const { data: session } = useSession();
+
   const SHEET_SIDES = ["left"] as const;
 
   type SheetSide = (typeof SHEET_SIDES)[number];
+
   return (
-    <Dialog>
+    <>
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
-          <SheetTitle></SheetTitle>
           <SheetTrigger asChild>
-            <Button variant="outline">{side}</Button>
+            <button className="p-3 bg-white rounded-full hover:bg-gray-200 focus:outline-none shadow transition-colors duration-200 ease-in hover:duration-150">
+              <Menu className="w-8 h-8 text-gray-800" />
+            </button>
           </SheetTrigger>
-          <SheetContent side={side} style={{ maxWidth: "335px" }}>
-            <div className="grid gap-4 py-4">
-              <button className="h-[46px] bg-black rounded-2xl text-base flex text-center justify-center text-white py-3 ">
-                Sign up
+          <SheetContent
+            side={side}
+            className="animate-slide-in-left"
+            style={{ maxWidth: "335px" }}
+          >
+            <SheetTitle></SheetTitle>
+
+            <div className="flex items-center gap-2 py-3">
+              <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                {/*zurag oruulah heseg datanaas */}
+              </div>
+              <span className="text-lg font-semibold">
+                {session?.user?.name || "User"}
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
+                <ShoppingBag className="w-5 h-5 text-gray-600" />
+                Orders
               </button>
-              <button className="h-[46px] bg-slate-300 rounded-2xl flex text-center justify-center text-black py-3  ">
-                Log in
+              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
+                <Heart className="w-5 h-5 text-gray-600" />
+                Favorites
+              </button>
+
+              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
+                <HelpCircle className="w-5 h-5 text-gray-600" />
+                Help
               </button>
             </div>
-            <div>
-              <button className="flex pt-3">Create a business account</button>
-              <button className="flex pt-4">Add your restaurant</button>
-              <button className="flex pt-4">Sign up to deliver</button>
+
+            <div className="mt-4">
+              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center">
+                Create a business account
+              </button>
+              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center mt-2">
+                Add your restaurant
+              </button>
+              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center mt-2">
+                Sign up to deliver
+              </button>
             </div>
+
+            {session && (
+              <div className="mt-4">
+                <button
+                  onClick={() => signOut()}
+                  className="w-full bg-[#F3F3F3] rounded-full py-2 text-center"
+                >
+                  Sign out
+                </button>
+              </div>
+            )}
           </SheetContent>
         </Sheet>
       ))}
-    </Dialog>
+    </>
   );
-}
+};
