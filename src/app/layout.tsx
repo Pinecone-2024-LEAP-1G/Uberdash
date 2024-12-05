@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
 import { SessionProvider } from "next-auth/react";
+import { Toaster, toast } from "sonner";
 
 export default function RootLayout({
   children,
@@ -22,7 +23,15 @@ export default function RootLayout({
               <NuqsAdapter>
                 <Header />
                 {children}
+                <button
+                  onClick={() => {
+                    toast.success("hi");
+                  }}
+                >
+                  click me
+                </button>
                 <Footer />
+                <Toaster />
               </NuqsAdapter>
             </body>
           </html>

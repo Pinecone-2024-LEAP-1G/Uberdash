@@ -2,6 +2,7 @@ import { Food, useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
 import { LikeSvg } from "../ui/Like-svg";
 import PlusSign from "../ui/PlusSignSvg";
+import { toast } from "sonner";
 
 interface MenuItemProps {
   menuItem: Food;
@@ -16,6 +17,7 @@ export const MenuItemLastCard = ({ menuItem }: MenuItemProps) => {
       ...menuItem,
       quantity: count,
     });
+    toast.success("амжилттай сагслагдалаа");
   };
 
   return (
