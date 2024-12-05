@@ -23,13 +23,6 @@ export default function RootLayout({
               <NuqsAdapter>
                 <Header />
                 {children}
-                <button
-                  onClick={() => {
-                    toast.success("hi");
-                  }}
-                >
-                  click me
-                </button>
                 <Footer />
                 <Toaster />
               </NuqsAdapter>
