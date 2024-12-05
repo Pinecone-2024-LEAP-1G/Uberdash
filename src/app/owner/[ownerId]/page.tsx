@@ -1,15 +1,12 @@
-"use client";
-
-import { NextRequest } from "next/server";
 import { DataGridView } from "@/components/DataGridView";
 import { AdminSideBoard } from "@/components/AdminSideBoard";
 
 export default async function Page({
   params,
 }: {
-  params: { ownerId: string };
+  params: Promise<{ ownerId: string }>;
 }) {
-  const restaurantOwnerId = params.ownerId;
+  const restaurantOwnerId = (await params)?.ownerId;
 
   return (
     <div className="flex gap-4">

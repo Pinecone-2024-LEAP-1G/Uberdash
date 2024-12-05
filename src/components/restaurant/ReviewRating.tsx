@@ -34,7 +34,7 @@ export const ReviewRating = (props: {
       <div className="border rounded-2xl flex px-2 py-4">
         <div className="w-1/3 flex flex-col items-center">
           <p className="text-4xl">{4.6}</p>
-          <p>"RatingStar"</p>
+          <p>RatingStar</p>
           <p>{reviews.length} Ratings</p>
         </div>
         <div className="w-2/3 mr-8">

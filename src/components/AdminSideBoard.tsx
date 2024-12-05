@@ -1,7 +1,6 @@
 import {
   BadgeDollarSign,
   ChartBarStacked,
-  DollarSign,
   Info,
   LayoutDashboard,
   MessageSquare,

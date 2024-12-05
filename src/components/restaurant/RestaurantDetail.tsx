@@ -64,10 +64,9 @@ export const RestaurantDetail = ({
     setSearch(event.target.value);
   };
 
-  const checkRestaurantId = (review: Review) => {
-    return review.restaurantId === restaurantId;
-  };
-  const filteredReviews = reviews.filter((review) => checkRestaurantId(review));
+  const filteredReviews = reviews.filter(
+    (review) => review.restaurantId === restaurantId
+  );
 
   return (
     <div className="container mx-auto max-w-[1200px]">
@@ -90,7 +89,7 @@ export const RestaurantDetail = ({
       </div>
       <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
       <div className="grid grid-cols-5 my-4 gap-6">
-        {foodItems.map((foodItem, _index) => {
+        {foodItems.map((foodItem) => {
           {
             if (foodItem.restaurantId === restaurantId) {
               return (
@@ -132,7 +131,7 @@ export const RestaurantDetail = ({
         </div>
       </div>
       <div className="grid grid-cols-4 my-4 gap-6">
-        {foodItems.map((foodItem, _index) => {
+        {foodItems.map((foodItem) => {
           {
             if (foodItem.restaurantId === restaurantId) {
               return (
