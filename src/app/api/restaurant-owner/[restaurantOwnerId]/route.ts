@@ -1,7 +1,9 @@
 import { NextRequest } from "next/server";
 import { RestaurantOwnerModel } from "@/lib/models";
 import mongoose from "mongoose";
+import { connectToMongoDB } from "@/lib/db";
 
+connectToMongoDB();
 export const GET = async (
   _req: NextRequest,
   { params }: { params: Promise<{ restaurantOwnerId: string }> }

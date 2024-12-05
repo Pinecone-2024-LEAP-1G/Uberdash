@@ -1,6 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import { DiscountModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const GET = async () => {
   try {
     const discounts = await DiscountModel.find();

@@ -1,6 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import { RestaurantModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const GET = async (
   _request: NextRequest,
   { params }: { params: Promise<{ restaurantId: string }> }

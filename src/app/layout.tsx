@@ -1,7 +1,6 @@
 "use client";
 
 import "./globals.css";
-import { connectToMongoDB } from "@/lib/db";
 import { Header } from "../components/layout/Header";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
@@ -14,8 +13,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  connectToMongoDB();
-
   return (
     <SessionProvider>
       <CartProvider>

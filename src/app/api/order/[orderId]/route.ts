@@ -1,7 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import OrderModel from "@/lib/models/order";
 import { NextRequest } from "next/server";
-import path from "path";
 
+connectToMongoDB();
 export const GET = async (
   request: NextRequest,
   { params }: { params: Promise<{ orderId: string }> }

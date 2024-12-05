@@ -1,6 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import { ReviewModel } from "@/lib/models/review.model";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const POST = async (request: NextRequest) => {
   const { comment, rating, userId, restaurantId } = await request.json();
 

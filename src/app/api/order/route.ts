@@ -1,7 +1,9 @@
+import { connectToMongoDB } from "@/lib/db";
 import { OrderItem, OrderItemModel } from "@/lib/models";
 import OrderModel, { Order } from "@/lib/models/order";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 type CreateOrderRequsetBody = Order & { orderItems: [OrderItem] };
 
 export const GET = async () => {
