@@ -7,6 +7,7 @@ import { AddOrderModal } from "@/components/AddOrderModal";
 import { Restuarants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
 
+
 const Home = () => {
   return (
     <div className="container mx-auto max-w-[1200px] space-y-6">
