@@ -6,6 +6,7 @@ import { Input } from "../ui/input";
 import { BasketDrawer } from "../basket-drawer/BasketDrawer";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { Drawers } from "../Drawer";
 
 export const Header = () => {
   const { data: session } = useSession();
@@ -48,12 +49,12 @@ export const Header = () => {
   return (
     <div className="flex container justify-center h-20 mx-auto">
       <div className="flex container justify-center fixed z-10 bg-white py-4">
-        <div className="flex justify-between items-center">
-          <div className="w-[48px] h-[48px] flex items-center ">
-            <Menu className="" />
+        <div className="flex justify-between items-center gap-3">
+          <div className="w-[48px] h-[48px] flex items-center">
+            <Drawers />
           </div>
           <Link href={"/"}>
-            <div className="flex items-center w-96  font-bold text-2xl">
+            <div className="flex items-center w-96 font-bold text-2xl">
               Хурдан хоол
             </div>
           </Link>
@@ -99,14 +100,7 @@ export const Header = () => {
             >
               Log in
             </button>
-          ) : (
-            <button
-              onClick={() => signOut()}
-              className="w-24 bg-[#F3F3F3] rounded-full ml-8"
-            >
-              Sign out
-            </button>
-          )}
+          ) : null}
         </div>
         <BasketDrawer />
       </div>
