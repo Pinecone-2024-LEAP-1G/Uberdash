@@ -35,7 +35,9 @@ export const RestaurantDetail = ({
     const fetchReviews = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_URL}/api/review`
+          `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+          /api/review`
         );
         setReviews(response.data.review);
       } catch (err) {
@@ -50,7 +52,9 @@ export const RestaurantDetail = ({
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_URL}/api/restaurant/${restaurantId}`
+          `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+          /api/restaurant/${restaurantId}`
         );
         setRestaurant(response.data.restaurant);
       } catch (error) {

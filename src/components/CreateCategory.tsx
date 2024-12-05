@@ -20,7 +20,13 @@ export const CreateCategoryComp: React.FC<DeleteType> = (props) => {
     const createCategory = async () => {
       try {
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_URL}/api/category`,
+          `
+                  ${
+                    process.env.NEXT_PUBLIC_URL ??
+                    process.env.NEXT_PUBLIC_URL_PROD
+                  }
+
+          /api/category`,
           { name, image }
         );
         if (response.status == 200) {

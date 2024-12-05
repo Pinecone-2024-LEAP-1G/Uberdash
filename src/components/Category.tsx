@@ -20,9 +20,14 @@ export const CategoryComp = ({ categoryId }: CategoryID) => {
   console.log(isEdit);
   useEffect(() => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/api/category/categoryId`, {
-        categoryId,
-      })
+      .post(
+        `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+        /api/category/categoryId`,
+        {
+          categoryId,
+        }
+      )
       .then(function (response) {
         setMyCategory(response.data.category);
       })

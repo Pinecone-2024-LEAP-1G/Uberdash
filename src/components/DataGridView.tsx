@@ -47,9 +47,14 @@ export function DataGridView({ restaurantOwnerId }: DataGridViewProps) {
 
   useEffect(() => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/api/restaurant/getByOwnerId`, {
-        ownerId: restaurantOwnerId,
-      })
+      .post(
+        `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+        /api/restaurant/getByOwnerId`,
+        {
+          ownerId: restaurantOwnerId,
+        }
+      )
       .then(function (response) {
         setRestaurant(response.data.restaurant);
         setMenuItems(response.data.menuItems);
