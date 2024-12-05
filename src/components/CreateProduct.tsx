@@ -26,7 +26,9 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   const CreateProduct = async () => {
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}/api/menu-item`,
+        `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+        /api/menu-item`,
         {
           name,
           description,
