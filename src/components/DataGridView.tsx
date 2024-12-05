@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import axios from "axios";
@@ -40,13 +42,19 @@ type DataGridViewProps = {
 };
 export function DataGridView({ restaurantOwnerId }: DataGridViewProps) {
   const [restaurant, setRestaurant] = useState<Restaurant>();
-
   const [menuItems, setMenuItems] = useState<MenuItem>();
+  console.log(restaurant, menuItems);
+
   useEffect(() => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/api/restaurant/getByOwnerId`, {
-        ownerId: restaurantOwnerId,
-      })
+      .post(
+        `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+        /api/restaurant/getByOwnerId`,
+        {
+          ownerId: restaurantOwnerId,
+        }
+      )
       .then(function (response) {
         setRestaurant(response.data.restaurant);
         setMenuItems(response.data.menuItems);

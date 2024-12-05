@@ -87,7 +87,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setCartItems([...cartItems, newItem]);
   };
 
-  const removeFromCart = (itemId: String) => {
+  const removeFromCart = (itemId: string) => {
     setCartItems(cartItems.filter((item) => item._id !== itemId));
   };
 

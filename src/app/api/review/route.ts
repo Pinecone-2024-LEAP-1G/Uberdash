@@ -23,7 +23,7 @@ export const POST = async (request: NextRequest) => {
   }
 };
 
-export const GET = async (_request: NextRequest) => {
+export const GET = async () => {
   try {
     const review = await ReviewModel.find();
     return Response.json({ review });

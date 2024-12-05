@@ -22,7 +22,9 @@ export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_URL}/api/menu-item/${menuItemId}`
+          `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+          /api/menu-item/${menuItemId}`
         );
         setMenuItem(response.data.menuItem);
       } catch (error) {

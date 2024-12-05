@@ -11,7 +11,7 @@ type Restraunt = {
 
 export const RestrauntMenu = ({ like, percentage, menuItem }: Restraunt) => {
   const { addToCart } = useCart();
-  const [count, setCount] = useState<number>(1);
+  const [count] = useState<number>(1);
 
   const handleAddToCard = () => {
     addToCart({

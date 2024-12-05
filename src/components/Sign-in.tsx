@@ -1,11 +1,12 @@
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
 
 export const Singin = () => {
   return (
     <div className="w-[332px] h-[536px]  justify-center flex  ">
       <div className="p-7">
         <div className="text-2xl">
-          <p>What's your phone number or email?</p>
+          <p>What&apos;s your phone number or email?</p>
         </div>
         <div className="py-8">
           <div className="py-4">
@@ -26,7 +27,7 @@ export const Singin = () => {
         </div>
         <div>
           <button className="w-full h-[48px] bg-slate-200 flex justify-center text-center py-3 text-black rounded-xl mt-6 ">
-            <img src="./google.svg" className="mr-2 py-1" />
+            <Image src="./google.svg" className="mr-2 py-1" alt={"img"} />
             Continue with Google
           </button>
         </div>

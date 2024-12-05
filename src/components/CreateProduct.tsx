@@ -8,7 +8,7 @@ type CreateProductProps = {
   handleCreateProduct: () => void;
 };
 
-const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
+const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
 
 export const CreateProduct: React.FC<CreateProductProps> = ({
   handleCreateProduct,
@@ -26,7 +26,9 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   const CreateProduct = async () => {
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}/api/menu-item`,
+        `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+        /api/menu-item`,
         {
           name,
           description,

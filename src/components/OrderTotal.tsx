@@ -1,7 +1,7 @@
 import { useCart } from "@/Providers/CartProvider";
 
 export const OrderTotal = () => {
-  const { cartItems, cartItemsTotalPrice, deliveryFee } = useCart();
+  const { cartItemsTotalPrice, deliveryFee } = useCart();
   return (
     <div className="mt-5 w-[400px]">
       <h1 className="text-lg font-bold">Үнийн мэдээлэл</h1>

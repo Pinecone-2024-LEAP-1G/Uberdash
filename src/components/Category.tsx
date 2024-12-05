@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Pen } from "lucide-react";
 import { BookImage } from "lucide-react";
-import Link from "next/link";
-import { parseAsBoolean, parseAsString, useQueryState } from "nuqs";
+import { parseAsString, useQueryState } from "nuqs";
 
 type CategoryID = {
   categoryId: string;
@@ -18,11 +17,17 @@ type Category = {
 export const CategoryComp = ({ categoryId }: CategoryID) => {
   const [isEdit, setIsEdit] = useQueryState<string>("edit", parseAsString);
   const [myCategory, setMyCategory] = useState<Category>();
+  console.log(isEdit);
   useEffect(() => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_URL}/api/category/categoryId`, {
-        categoryId,
-      })
+      .post(
+        `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+        /api/category/categoryId`,
+        {
+          categoryId,
+        }
+      )
       .then(function (response) {
         setMyCategory(response.data.category);
       })
@@ -30,7 +35,6 @@ export const CategoryComp = ({ categoryId }: CategoryID) => {
         console.log(error);
       });
   }, []);
-  const ownerId: string = "673e90415a6e8e222657bbb4";
   const edit = (id: string) => {
     setIsEdit(id);
   };
