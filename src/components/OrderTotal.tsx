@@ -1,24 +1,23 @@
+import { useCart } from "@/Providers/CartProvider";
+
 export const OrderTotal = () => {
+  const { cartItems, cartItemsTotalPrice, deliveryFee } = useCart();
   return (
     <div className="mt-5 w-[400px]">
       <h1 className="text-lg font-bold">Үнийн мэдээлэл</h1>
       <div className=" border-b-[1px] h-[90px]">
         <div className="flex justify-between mt-4">
           <p>Захиалга</p>
-          <p>$38.28</p>
+          <p>${cartItemsTotalPrice}</p>
         </div>
         <div className="flex justify-between">
           <p>Хүргэлт</p>
-          <p>$3.49</p>
-        </div>
-        <div className="flex justify-between">
-          <p>Бусад</p>
-          <p>$7.14</p>
+          <p>${deliveryFee}</p>
         </div>
       </div>
       <div className="flex justify-between font-bold text-lg mt-3">
         <p>Нийт төлбөр</p>
-        <p>$48.91</p>
+        <p>${cartItemsTotalPrice + deliveryFee}</p>
       </div>
       <div className="text-gray-500 text-sm mt-3">
         <p>
