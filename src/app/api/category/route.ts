@@ -1,6 +1,8 @@
+import { connectToMongoDB } from "@/lib/db";
 import { CategoryModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
+connectToMongoDB();
 export const GET = async () => {
   try {
     const category = await CategoryModel.find();

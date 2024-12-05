@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import { RestaurantOwnerModel } from "@/lib/models";
+import { connectToMongoDB } from "@/lib/db";
 
+connectToMongoDB();
 export const GET = async () => {
   try {
     const owners = await RestaurantOwnerModel.find();

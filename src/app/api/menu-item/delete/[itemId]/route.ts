@@ -1,5 +1,8 @@
 import { NextRequest } from "next/server";
 import { menuItemModel } from "@/lib/models";
+import { connectToMongoDB } from "@/lib/db";
+
+connectToMongoDB();
 
 export const DELETE = async (
   _req: NextRequest,

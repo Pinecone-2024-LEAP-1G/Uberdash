@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import { MenuItem } from "./MenuItem";
 import Link from "next/link";
 
-export const Restuarants = () => {
+export const Restaurants = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
   useEffect(() => {
-    const getRestuarants = async () => {
+    const getRestaurants = async () => {
       try {
         const { data } = await axios.get<{ restaurants: Restaurant[] }>(
           "/api/restaurant"
@@ -20,7 +20,7 @@ export const Restuarants = () => {
         console.log(error);
       }
     };
-    getRestuarants();
+    getRestaurants();
   }, []);
 
   return (
@@ -30,13 +30,13 @@ export const Restuarants = () => {
       </div>
       <div className=" grid grid-cols-4 max-w-[1200px] mx-auto gap-10">
         {restaurants.map((restaurant) => (
-          <Link href={`/restaurant/${restaurant._id}`}>
+          <Link href={`/restaurant/${restaurant._id}`} key={restaurant._id}>
             <MenuItem
               key={restaurant._id}
               restaurantId={restaurant._id}
               image={restaurant.banner}
               name={restaurant.name}
-              points={"4,7"}
+              points={4}
               bonus={""}
             />
           </Link>

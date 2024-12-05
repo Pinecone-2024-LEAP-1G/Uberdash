@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { RestaurantBranchModel } from "@/lib/models";
+import { connectToMongoDB } from "@/lib/db";
 
 const toRadians = (degree: number) => degree * (Math.PI / 180);
 
@@ -23,6 +24,7 @@ const haversineDistance = (
   return R * c;
 };
 
+connectToMongoDB();
 export const POST = async (req: NextRequest) => {
   try {
     const { location, restaurantId } = await req.json();

@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import { RestaurantModel, menuItemModel, ReviewModel } from "@/lib/models";
+import { connectToMongoDB } from "@/lib/db";
 
+connectToMongoDB();
 export const POST = async (req: NextRequest) => {
   const { ownerId } = await req.json();
   try {
