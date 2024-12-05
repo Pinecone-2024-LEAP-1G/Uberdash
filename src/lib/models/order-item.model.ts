@@ -6,6 +6,7 @@ export type OrderItem = {
   quantity: number;
   orderId: Schema.Types.ObjectId;
   restaurantId: Schema.Types.ObjectId;
+  menuItem: Schema.Types.ObjectId;
 };
 
 const OrderItemSchema = new Schema<OrderItem>({
@@ -13,6 +14,7 @@ const OrderItemSchema = new Schema<OrderItem>({
   quantity: { type: Number },
   orderId: { type: Schema.Types.ObjectId, ref: "orders" },
   restaurantId: { type: Schema.Types.ObjectId, ref: "restaurants" },
+  menuItem: { type: Schema.Types.ObjectId, ref: "menu-items" },
 });
 
 export const OrderItemModel =
