@@ -23,6 +23,8 @@ export const Restaurants = () => {
     getRestaurants();
   }, []);
 
+  console.log(restaurants);
+
   return (
     <div className="m-6 gap-3">
       <div className="text-4xl mt-2 font-bold mx-auto max-w-[1200px] m-6">
