@@ -6,12 +6,22 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { SelectQuantity } from "@/components/basket-drawer/SelectQuantity";
+import PlusSign from "./ui/PlusSignSvg";
+import { Food } from "@/Providers/CartProvider";
 
-export const AddOrderModal = () => {
+type menuItemProps = {
+  menuItem: Food;
+};
+
+export const AddOrderModal = ({ menuItem }: menuItemProps) => {
   return (
     <div>
       <Dialog>
-        <DialogTrigger>Open</DialogTrigger>
+        <div>
+          <DialogTrigger>
+            <PlusSign />
+          </DialogTrigger>
+        </div>
         <DialogContent className=" h-[700px]">
           <DialogHeader>
             <DialogTitle>
@@ -21,8 +31,7 @@ export const AddOrderModal = () => {
                     <div
                       className="absolute inset-0 bg-cover bg-center"
                       style={{
-                        backgroundImage:
-                          "url('https://tb-static.uber.com/prod/image-proc/processed_images/98b8ba2dde94440f4cb7537f94f127b9/5143f1e218c67c20fe5a4cd33d90b07b.jpeg')",
+                        backgroundImage: `url(${menuItem.image})`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         backgroundSize: "cover",
@@ -32,13 +41,14 @@ export const AddOrderModal = () => {
                   </div>
                 </div>
                 <div className="mt-[72px] w-[492px] h-[160px] ">
-                  <p className="text-[32px] font-bold leading-10">Fried rice</p>
+                  <p className="text-[32px] font-bold leading-10">
+                    {menuItem.name}
+                  </p>
                   <p className="text-[20px] leading-5 whitespace-pre-wrap text-[#0E8345] font-bold mb-2">
-                    $12.00
+                    ${menuItem.price}
                   </p>
                   <p className="text-[14px] overflow-hidden font-normal text-[#767575] pt-2 mb-[10px]">
-                    Choice of chicken , beef ,BBQ pork, mushroom, or mixed
-                    vegetables
+                    {menuItem.description}
                   </p>
                   <p className="w-fit bg-[#dfdddd] text-[#5E5E5E] px-2 py-1 rounded gap-1 text-[16px] font-medium leading-4 mt-7">
                     #1 most liked

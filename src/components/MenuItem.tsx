@@ -35,7 +35,7 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
   useEffect(() => {
     const dataFetcher = async () => {
       const response = await axios.post(
-        "http://localhost:3000/api/restaurant-branch/distance",
+        "http://localhost:3001/api/restaurant-branch/distance",
         { location: myLocation, restaurantId }
       );
       setBranchesWithDistance(response.data.restaurantBranches);
