@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
+import { Food } from "@/Providers/CartProvider";
 
 type Location = {
   type: "Point";
@@ -21,6 +22,9 @@ type MenuTypes = {
   points: number;
   bonus: string;
   restaurantId: string;
+};
+type menuItemProps = {
+  menuItem?: Food;
 };
 
 export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {

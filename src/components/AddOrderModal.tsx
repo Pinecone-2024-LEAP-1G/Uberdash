@@ -10,10 +10,14 @@ import PlusSign from "./ui/PlusSignSvg";
 import { Food } from "@/Providers/CartProvider";
 
 type menuItemProps = {
-  menuItem: Food;
+  menuItem?: Food; // Made menuItem optional for safety
 };
 
 export const AddOrderModal = ({ menuItem }: menuItemProps) => {
+  if (!menuItem) {
+    return;
+  }
+
   return (
     <div>
       <Dialog>
@@ -22,16 +26,18 @@ export const AddOrderModal = ({ menuItem }: menuItemProps) => {
             <PlusSign />
           </DialogTrigger>
         </div>
-        <DialogContent className=" h-[700px]">
+        <DialogContent className="h-[700px]">
           <DialogHeader>
             <DialogTitle>
-              <div className=" flex gap-6 ">
+              <div className="flex gap-6">
                 <div className="w-[492px]">
-                  <div className="w-[492px] h-[492px] absolute inset-0  overflow-hidden top-[72px] left-4">
+                  <div className="w-[492px] h-[492px] absolute inset-0 overflow-hidden top-[72px] left-4">
                     <div
                       className="absolute inset-0 bg-cover bg-center"
                       style={{
-                        backgroundImage: `url(${menuItem.image})`,
+                        backgroundImage: `url(${
+                          menuItem.image || "/fallback-image.png"
+                        })`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         backgroundSize: "cover",
@@ -40,7 +46,8 @@ export const AddOrderModal = ({ menuItem }: menuItemProps) => {
                     <div className="absolute inset-0 bg-black/5"></div>
                   </div>
                 </div>
-                <div className="mt-[72px] w-[492px] h-[160px] ">
+
+                <div className="mt-[72px] w-[492px] h-[160px]">
                   <p className="text-[32px] font-bold leading-10">
                     {menuItem.name}
                   </p>
@@ -53,7 +60,8 @@ export const AddOrderModal = ({ menuItem }: menuItemProps) => {
                   <p className="w-fit bg-[#dfdddd] text-[#5E5E5E] px-2 py-1 rounded gap-1 text-[16px] font-medium leading-4 mt-7">
                     #1 most liked
                   </p>
-                  <div className="border-[0.5px] w-[492px] border-[#D6D8DB] mt-[22px] "></div>
+                  <div className="border-[0.5px] w-[492px] border-[#D6D8DB] mt-[22px]"></div>
+
                   <div className="mt-[200px]">
                     <div className="mt-7">
                       <SelectQuantity />
@@ -62,9 +70,9 @@ export const AddOrderModal = ({ menuItem }: menuItemProps) => {
                       <div className="mt-4">
                         <button
                           type="button"
-                          className="w-[492px] h-[56px] px-2 rounded-lg bg-[#000000] text-[18px] text-white mt-2 hover:bg-[#202020] "
+                          className="w-[492px] h-[56px] px-2 rounded-lg bg-[#000000] text-[18px] text-white mt-2 hover:bg-[#202020]"
                         >
-                          Add 1 to order $20.00
+                          Add 1 to order ${menuItem.price}
                         </button>
                       </div>
                     </div>
