@@ -2,6 +2,7 @@ import { Food, useCart } from "@/Providers/CartProvider";
 import { LikeSvg } from "../ui/Like-svg";
 import PlusSign from "../ui/PlusSignSvg";
 import { useState } from "react";
+import { AddOrderModal } from "../AddOrderModal";
 
 type Restraunt = {
   percentage: string;
@@ -54,7 +55,9 @@ export const RestrauntMenu = ({ like, percentage, menuItem }: Restraunt) => {
           className="w-9 h-9 rounded-full bg-white flex justify-center items-center  absolute bottom-2 right-2 hover:bg-slate-200"
           onClick={handleAddToCard}
         >
-          <PlusSign />
+          <div className="mt-[6px]">
+            <AddOrderModal />
+          </div>
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ export const MenuCategories = () => {
   }, []);
 
   return (
-    <Carousel className="w=-full flex items-center">
+    <Carousel className="w-full flex items-center">
       <CarouselPrevious />
       <CarouselContent className="w-[1152px]">
         <CarouselItem>
