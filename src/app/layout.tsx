@@ -6,6 +6,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Хурдан хоол",
@@ -27,6 +28,7 @@ export default function RootLayout({
             <NuqsAdapter>
               <Header />
               {children}
+              <Toaster />
               <Footer />
             </NuqsAdapter>
           </body>
