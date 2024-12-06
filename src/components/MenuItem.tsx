@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
+import { Food } from "@/Providers/CartProvider";
 
 type Location = {
   type: "Point";
@@ -22,6 +23,9 @@ type MenuTypes = {
   bonus: string;
   restaurantId: string;
 };
+type menuItemProps = {
+  menuItem?: Food;
+};
 
 export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
   const myLocation: Location = {
@@ -35,7 +39,7 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
   useEffect(() => {
     const dataFetcher = async () => {
       const response = await axios.post(
-        "http://localhost:3000/api/restaurant-branch/distance",
+        "http://localhost:3001/api/restaurant-branch/distance",
         { location: myLocation, restaurantId }
       );
       setBranchesWithDistance(response.data.restaurantBranches);
