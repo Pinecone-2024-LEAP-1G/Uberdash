@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { BasketDrawer } from "../basket-drawer/BasketDrawer";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Drawers } from "../Drawer";
 
@@ -48,7 +48,7 @@ export const Header = () => {
 
   return (
     <div className="flex container justify-center h-20 mx-auto">
-      <div className="flex container justify-center fixed z-10 bg-white py-4">
+      <div className="flex container justify-center fixed z-10 py-4">
         <div className="flex justify-between items-center gap-3">
           <div className="w-[48px] h-[48px] flex items-center">
             <Drawers />
