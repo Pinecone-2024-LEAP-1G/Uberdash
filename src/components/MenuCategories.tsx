@@ -15,7 +15,11 @@ export const MenuCategories = () => {
   useEffect(() => {
     const dataFetch = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/category");
+        const response = await axios.get(
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/category`
+        );
         setCategories(response.data.category);
       } catch (error) {
         console.log(error);

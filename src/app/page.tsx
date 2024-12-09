@@ -9,7 +9,7 @@ import { CategoryFilter } from "@/components/CategoryFilter";
 import { parseAsString, useQueryState } from "nuqs";
 
 const Home = () => {
-  const [category, setCategory] = useQueryState("category", parseAsString);
+  const category = useQueryState("category", parseAsString);
 
   return (
     <div className="container mx-auto max-w-[1200px] space-y-6">

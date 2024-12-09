@@ -39,11 +39,17 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
 
   useEffect(() => {
     const dataFetcher = async () => {
-      const response = await axios.post(
-        "http://localhost:3001/api/restaurant-branch/distance",
-        { location: myLocation, restaurantId }
-      );
-      setBranchesWithDistance(response.data.restaurantBranches);
+      try {
+        const response = await axios.post(
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/restaurant-branch/distance`,
+          { location: myLocation, restaurantId }
+        );
+        setBranchesWithDistance(response.data.restaurantBranches);
+      } catch (err) {
+        console.log(err);
+      }
     };
     dataFetcher();
   }, []);

@@ -4,10 +4,13 @@ import { useCart } from "@/Providers/CartProvider";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Restaurant } from "@/lib/models";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Checkout = () => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const { cartItems } = useCart();
+  const { data: session } = useSession();
 
   useEffect(() => {
     const getRestaurant = async () => {
@@ -27,10 +30,15 @@ const Checkout = () => {
       <div className="w-[400px] flex justify-between items-center">
         <div className="rounded-2xl flex px-3 py-4">
           <div className="flex gap-4">
-            <img
-              src={restaurant?.image}
-              className="w-[48px] h-[48px] rounded-full"
-            />
+            <div className="flex justify-center items-center w-20 h-20">
+              <Image
+                alt="img"
+                height={48}
+                width={48}
+                src={restaurant.image}
+                className="rounded-full"
+              />
+            </div>
             <div>
               <p className="text-base">{restaurant.name}</p>
               <p className="text-sm text-[#4b4b4b]">
@@ -41,7 +49,9 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Button className="w-full">Захиалга хийх</Button>
+      <Button className="w-full" onClick={() => console.log(session)}>
+        Захиалга хийх
+      </Button>
     </div>
   );
 };

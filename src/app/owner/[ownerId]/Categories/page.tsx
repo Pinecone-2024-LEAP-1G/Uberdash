@@ -17,7 +17,11 @@ const Categories = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/category")
+      .get(
+        `${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }api/category`
+      )
       .then(function (response) {
         setCategories(response.data.category);
       })

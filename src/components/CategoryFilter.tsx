@@ -13,12 +13,14 @@ type newRestaurant = {
 
 export const CategoryFilter = () => {
   const [restaurants, setRestaurants] = useState<newRestaurant[]>([]);
-  const [category, setCategory] = useQueryState("category", parseAsString);
+  const category = useQueryState("category", parseAsString);
   useEffect(() => {
     const getRestaurants = async () => {
       try {
         const restaraunts = await axios.post(
-          "http://localhost:3000/api/restaurant/getByCategory",
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/restaurant/getByCategory`,
           {
             categoryId: category,
           }
