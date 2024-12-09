@@ -44,7 +44,7 @@ export const PopOverSlider = ({
           </div>
           <Slider
             value={[sliderValue]}
-            onValueChange={(value) => onSliderChange(value[0])}
+            onValueChange={(value: number[]) => onSliderChange(value[0])}
             max={5}
             min={1}
             step={1}

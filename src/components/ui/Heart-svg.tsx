@@ -1,10 +1,26 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-export const HeartSvg = () => {
+type HeartSvgProps = {
+  restaurantsId: string;
+};
+
+export const HeartSvg = ({ restaurantsId }: HeartSvgProps) => {
   const [isClicked, setIsClicked] = useState(false);
+
+  const addFavoriteRestaurants = async () => {
+    try {
+      await axios.put("/api/users/674fc7ab07515adf7b3a0428", {
+        restaurantsId,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const toggleHeart = () => {
     setIsClicked((prev) => !prev);
+    addFavoriteRestaurants();
   };
 
   return (

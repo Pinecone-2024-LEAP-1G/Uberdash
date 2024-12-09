@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/sheet";
 import { Menu, Heart, ShoppingBag, HelpCircle } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import { RestaurantLike } from "./RestaurantLike";
+import Link from "next/link";
 
 export const Drawers = () => {
   const { data: session } = useSession();
@@ -43,10 +45,12 @@ export const Drawers = () => {
                 <ShoppingBag className="w-5 h-5 text-gray-600" />
                 Orders
               </button>
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
-                <Heart className="w-5 h-5 text-gray-600" />
-                Favorites
-              </button>
+              <Link href="/favourites">
+                <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
+                  <Heart className="w-5 h-5 text-gray-600" />
+                  Favorites
+                </button>
+              </Link>
 
               <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
                 <HelpCircle className="w-5 h-5 text-gray-600" />

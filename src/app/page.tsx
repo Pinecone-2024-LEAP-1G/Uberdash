@@ -7,6 +7,7 @@ import { Restaurants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { parseAsString, useQueryState } from "nuqs";
+import { RestaurantLike } from "@/components/RestaurantLike";
 
 const Home = () => {
   const [category, setCategory] = useQueryState("category", parseAsString);

@@ -3,6 +3,7 @@ import { UserModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
+
 export const GET = async () => {
   try {
     const users = await UserModel.find();
