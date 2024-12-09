@@ -1,6 +1,5 @@
 "use client";
 
-import { AllFoods } from "@/components/AllFoods";
 import { FastFoodFilter } from "@/components/FastFoodFilter";
 import { Restaurants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
@@ -15,7 +14,6 @@ const Home = () => {
       <MenuCategories />
       {category && <CategoryFilter />}
       <FastFoodFilter />
-      <AllFoods />
       <Restaurants />
     </div>
   );

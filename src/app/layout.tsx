@@ -8,6 +8,7 @@ import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
+import { AuthGuard } from "./AuthGuard";
 
 export default function RootLayout({
   children,
@@ -15,21 +16,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <SessionProvider>
-      <CartProvider>
-        <FoodProvider>
-          <html lang="en">
-            <body className="min-h-screen">
-              <NuqsAdapter>
-                <Header />
-                {children}
-                <Footer />
-                <Toaster />
-              </NuqsAdapter>
-            </body>
-          </html>
-        </FoodProvider>
-      </CartProvider>
-    </SessionProvider>
+    <html lang="en">
+      <body className="min-h-screen">
+        <SessionProvider>
+          <AuthGuard>
+            <CartProvider>
+              <FoodProvider>
+                <NuqsAdapter>
+                  <Header />
+                  {children}
+                  <Footer />
+                  <Toaster />
+                </NuqsAdapter>
+              </FoodProvider>
+            </CartProvider>
+          </AuthGuard>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }

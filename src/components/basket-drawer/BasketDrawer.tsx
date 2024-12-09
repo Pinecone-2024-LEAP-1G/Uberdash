@@ -36,11 +36,11 @@ export const BasketDrawer: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="ml-56 flex w-8">
-          <ShoppingCart className="relative" />
-          <p className="bg-green-500 text-white rounded-full absolute w-5 h-5 text-sm text-center right-[-155px] top-[20px]">
+        <div className="relative flex items-center ml-3">
+          <ShoppingCart className="w-6 h-6" />
+          <span className="bg-green-500 text-white rounded-full absolute w-5 h-5 text-xs flex items-center justify-center -top-2 -right-3">
             {count}
-          </p>
+          </span>
         </div>
       </SheetTrigger>
       <SheetContent>
