@@ -35,9 +35,9 @@ export const RestaurantDetail = ({
     const fetchReviews = async () => {
       try {
         const response = await axios.get(
-          `
-        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
-          /api/review`
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/review`
         );
         setReviews(response.data.review);
       } catch (err) {
