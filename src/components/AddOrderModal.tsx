@@ -7,10 +7,10 @@ import {
 } from "@/components/ui/dialog";
 import { SelectQuantity } from "@/components/basket-drawer/SelectQuantity";
 import PlusSign from "./ui/PlusSignSvg";
-import { Food } from "@/Providers/CartProvider";
+import { MenuItem } from "@/Providers/CartProvider";
 
 type menuItem = {
-  menuItem?: Food;
+  menuItem?: MenuItem;
 };
 
 export const AddOrderModal = ({ menuItem }: menuItem) => {

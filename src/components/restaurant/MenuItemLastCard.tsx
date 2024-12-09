@@ -1,6 +1,6 @@
 "use client";
 
-import { Food, useCart } from "@/Providers/CartProvider";
+import { MenuItem, useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
 import { LikeSvg } from "../ui/Like-svg";
 import PlusSign from "../ui/PlusSignSvg";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { AddOrderModal } from "@/components/AddOrderModal";
 
 interface MenuItemProps {
-  menuItem: Food;
+  menuItem: MenuItem;
 }
 
 export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
