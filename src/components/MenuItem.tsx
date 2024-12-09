@@ -43,6 +43,7 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
     dataFetcher();
   }, []);
   useEffect(() => {
+    // eslint-disable-next-line prefer-const
     let dist: number[] = [];
     branchesWithDistance.map((oneBranch) => {
       dist.push(oneBranch.distance);

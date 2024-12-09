@@ -20,7 +20,6 @@ type resId = {
 
 export const RestaurantLocation = ({ restaurantId }: resId) => {
   const [openDetail, setOpenDetail] = useState<boolean>(false);
-  const [branches, setBranches] = useState([]);
   useEffect(() => {
     const dataFetch = async () => {
       const response = await axios.post(

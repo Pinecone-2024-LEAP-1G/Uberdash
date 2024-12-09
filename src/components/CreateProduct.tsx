@@ -8,7 +8,7 @@ type CreateProductProps = {
   handleCreateProduct: () => void;
 };
 
-const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
+const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
 
 export const CreateProduct: React.FC<CreateProductProps> = ({
   handleCreateProduct,

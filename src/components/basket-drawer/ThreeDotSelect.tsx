@@ -1,7 +1,5 @@
 import { useState } from "react";
 import ThreeDot from "../ui/ThreeDot";
-import PlusSign from "../ui/PlusSignSvg";
-import PersonPlus from "../ui/PersonPlus";
 import TrashIcon from "../ui/TrashIcon";
 import { useCart } from "@/Providers/CartProvider";
 

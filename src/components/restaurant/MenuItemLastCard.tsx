@@ -10,7 +10,7 @@ interface MenuItemProps {
 
 export const MenuItemLastCard = ({ menuItem }: MenuItemProps) => {
   const { addToCart } = useCart();
-  const [count, setCount] = useState<number>(1);
+  const [count] = useState<number>(1);
 
   const handleAddToCard = () => {
     addToCart({

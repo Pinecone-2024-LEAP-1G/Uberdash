@@ -9,7 +9,6 @@ const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
     axios

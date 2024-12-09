@@ -1,4 +1,3 @@
-import { X } from "lucide-react";
 import axios from "axios";
 
 type DeleteType = {
@@ -21,7 +20,9 @@ export const Delete: React.FC<DeleteType> = (props: DeleteType) => {
         if (response.status == 200) {
           handleDelete();
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     deleteOne();
   };

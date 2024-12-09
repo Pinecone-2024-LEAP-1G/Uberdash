@@ -1,9 +1,10 @@
 import { RestaurantDetail } from "@/components/restaurant/RestaurantDetail";
+import { Schema } from "mongoose";
 
 const Store = async ({
   params,
 }: {
-  params: Promise<{ restaurantId: string }>;
+  params: Promise<{ restaurantId: Schema.Types.ObjectId }>;
 }) => {
   const restaurantId = (await params).restaurantId;
 

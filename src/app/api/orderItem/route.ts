@@ -4,7 +4,7 @@ import OrderModel from "@/lib/models/order";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
-export const GET = async (_request: NextRequest) => {
+export const GET = async () => {
   try {
     const orderItems = await OrderItemModel.find();
 

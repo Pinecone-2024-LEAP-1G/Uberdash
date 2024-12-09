@@ -13,8 +13,6 @@ export const Drawers = () => {
 
   const SHEET_SIDES = ["left"] as const;
 
-  type SheetSide = (typeof SHEET_SIDES)[number];
-
   return (
     <>
       {SHEET_SIDES.map((side) => (

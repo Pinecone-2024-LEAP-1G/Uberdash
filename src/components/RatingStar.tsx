@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 import moment from "moment";
 
 export type RatingInfoProps = {
-  name: string;
+  name?: string;
   rating: number;
   date: string;
 };

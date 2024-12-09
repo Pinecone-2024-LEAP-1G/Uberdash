@@ -1,10 +1,10 @@
 import React from "react";
 
 interface DownArrowProps {
-  className?: string; // optional className for styling
+  className?: string;
 }
 
-const DownArrow: React.FC<DownArrowProps> = ({ className }) => {
+const DownArrow: React.FC<DownArrowProps> = () => {
   return (
     <div>
       <svg
