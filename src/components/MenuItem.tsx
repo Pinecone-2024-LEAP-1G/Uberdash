@@ -36,6 +36,7 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
   const [branchesWithDistance, setBranchesWithDistance] = useState<
     restaurantBranchWithDistance[]
   >([]);
+
   useEffect(() => {
     const dataFetcher = async () => {
       const response = await axios.post(
@@ -46,6 +47,7 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
     };
     dataFetcher();
   }, []);
+
   useEffect(() => {
     // eslint-disable-next-line prefer-const
     let dist: number[] = [];

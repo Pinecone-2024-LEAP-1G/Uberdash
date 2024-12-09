@@ -35,7 +35,7 @@ const FoodProvider: React.FC<FoodProviderProps> = ({ children }) => {
         ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
           /api/menu-item`
         );
-        setFoodItems(response.data.menuItems);
+        setFoodItems(response?.data?.menuItems);
       } catch (err) {
         console.log("Error fetching Foods:", err);
       }

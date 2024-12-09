@@ -17,7 +17,7 @@ export const FastFoodFilter = () => {
       );
       setMenuItems(response.data.menuItems);
     } catch (error) {
-      console.error("Error fetching menu items:", error);
+      console.log("Error fetching menu items:", error);
     }
   };
 
