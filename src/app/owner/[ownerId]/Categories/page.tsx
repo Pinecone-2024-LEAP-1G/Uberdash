@@ -7,8 +7,6 @@ import { CategoryComp } from "@/components/Category";
 import { Plus } from "lucide-react";
 import { CreateCategoryComp } from "@/components/CreateCategory";
 
-const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
-
 type DeleteType = {
   handleCreateCategory: () => void;
 };

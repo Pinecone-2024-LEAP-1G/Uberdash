@@ -30,7 +30,9 @@ const FoodProvider: React.FC<FoodProviderProps> = ({ children }) => {
     const fetchFoods = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_URL}/api/menu-item`
+          `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+          /api/menu-item`
         );
         setFoodItems(response.data.menuItems);
       } catch (err) {

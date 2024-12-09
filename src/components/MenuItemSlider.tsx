@@ -11,7 +11,6 @@ import { MenuItem } from "./MenuItem";
 type Items = {
   name: string;
   image: string;
-  duration: string;
 };
 
 export const MenuItemSlider = (props: {
@@ -40,9 +39,9 @@ export const MenuItemSlider = (props: {
                 <MenuItem
                   name={categoryItem.name}
                   image={categoryItem.image}
-                  duration={categoryItem.duration}
-                  points="4.3"
+                  points={4}
                   bonus="Buy 1,Get 1 Free"
+                  restaurantId=""
                 />
               </div>
             </CarouselItem>

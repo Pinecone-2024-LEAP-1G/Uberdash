@@ -23,6 +23,7 @@ export const POST = async (req: NextRequest) => {
     await RestaurantModel.populate(restaurantIds, {
       path: "_id",
     });
+    console.log(restaurantIds);
     return Response.json({ restaurantIds });
   } catch (error) {
     return Response.json({ error });

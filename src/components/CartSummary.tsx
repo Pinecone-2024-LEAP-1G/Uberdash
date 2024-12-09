@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useCart } from "@/Providers/CartProvider";
+import Image from "next/image";
 
 export const CartSummary = () => {
   const { cartItems } = useCart();
@@ -30,10 +31,11 @@ export const CartSummary = () => {
                   className="mt-5 flex  w-[400px] h-[95px] justify-between"
                 >
                   <div className="flex">
-                    <img
-                      src={cartItem.image}
+                    <Image
+                      src="beer.jpeg"
                       className="w-[70px] h-[70px] rounded"
-                    ></img>
+                      alt={"img"}
+                    ></Image>
                     <div className="pl-3">
                       <p className="w-[210px]">{cartItem.name}</p>
                       <p className="text-gray-600">${cartItem.price}</p>

@@ -1,4 +1,3 @@
-import { X } from "lucide-react";
 import axios from "axios";
 
 type DeleteType = {
@@ -16,12 +15,16 @@ export const Delete: React.FC<DeleteType> = (props: DeleteType) => {
     const deleteOne = async () => {
       try {
         const response = await axios.delete(
-          `${process.env.NEXT_PUBLIC_URL}/api/menu-item/delete/${itemId}`
+          `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+          /api/menu-item/delete/${itemId}`
         );
         if (response.status == 200) {
           handleDelete();
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     deleteOne();
   };
