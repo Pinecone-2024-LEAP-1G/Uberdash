@@ -8,7 +8,7 @@ import {
   ReactNode,
 } from "react";
 
-export type MenuItem = {
+export type Food = {
   image: string;
   _id: string;
   name: string;
@@ -21,7 +21,7 @@ export type MenuItem = {
   percentage: string;
 };
 
-type CartItem = MenuItem & {
+type CartItem = Food & {
   quantity: number;
 };
 
