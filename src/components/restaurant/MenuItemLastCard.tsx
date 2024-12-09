@@ -1,23 +1,27 @@
-import { Food, useCart } from "@/Providers/CartProvider";
+"use client";
+
+import { useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
 import { LikeSvg } from "../ui/Like-svg";
-import PlusSign from "../ui/PlusSignSvg";
-import { toast } from "sonner";
+
+import { AddOrderModal } from "@/components/AddOrderModal";
+import { MenuItemType } from "@/lib/types";
 
 interface MenuItemProps {
-  menuItem: Food;
+  menuItem: MenuItemType;
 }
 
-export const MenuItemLastCard = ({ menuItem }: MenuItemProps) => {
+export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
   const { addToCart } = useCart();
   const [count] = useState<number>(1);
 
-  const handleAddToCard = () => {
-    addToCart({
-      ...menuItem,
-      quantity: count,
-    });
-    toast.success("амжилттай сагслагдалаа");
+  const handleAddToCart = () => {
+    if (menuItem) {
+      addToCart({
+        ...menuItem,
+        quantity: count,
+      });
+    }
   };
 
   return (
@@ -25,30 +29,32 @@ export const MenuItemLastCard = ({ menuItem }: MenuItemProps) => {
       <div
         className="w-[220px] h-[188px] relative cursor-pointer rounded-xl"
         style={{
-          backgroundImage: `url(${menuItem.image})`,
+          backgroundImage: `url("${menuItem?.image}")`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
       >
-        <div className="w-[98px] h-[24px] bg-[#0e8345] text-[12px] font-medium px-3 py-1 absolute top-2  rounded-br-[12px] rounded-tr-[12px]">
-          <p className="text-white">{"#1 most liked"}</p>
+        <div className="w-[98px] h-[24px] bg-[#0e8345] text-[12px] font-medium px-3 py-1 absolute top-2 rounded-br-[12px] rounded-tr-[12px]">
+          <p className="text-white">#1 most liked</p>
         </div>
         <div
-          className="w-9 h-9 rounded-full bg-white flex justify-center items-center  absolute bottom-2 right-2 hover:bg-slate-200"
-          onClick={handleAddToCard}
+          className="w-9 h-9 rounded-full bg-white flex justify-center items-center absolute bottom-2 right-2 hover:bg-slate-200"
+          onClick={handleAddToCart}
         >
-          <PlusSign />
+          <div className="mt-[6px]">
+            <AddOrderModal menuItem={menuItem} />
+          </div>
         </div>
       </div>
       <div>
         <p>{menuItem.name}</p>
-        <div className="flex items-center gap-1 text-[14px] font-normal ">
+        <div className="flex items-center gap-1 text-[14px] font-normal">
           <p>{menuItem.price}$</p>
           <div className="w-[3px] h-[3px] bg-[black] rounded-full"></div>
           <LikeSvg />
-          <p>{91}%</p>
-          <p>{`(${1064})`}</p>
+
+          <p>({1064})</p>
         </div>
       </div>
     </div>

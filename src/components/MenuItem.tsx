@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
+import { MenuItemType } from "@/lib/types";
 
 type Location = {
   type: "Point";
@@ -22,6 +23,9 @@ type MenuTypes = {
   bonus: string;
   restaurantId: string;
 };
+type menuItemProps = {
+  menuItem?: MenuItemType;
+};
 
 export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
   const myLocation: Location = {
@@ -32,16 +36,18 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
   const [branchesWithDistance, setBranchesWithDistance] = useState<
     restaurantBranchWithDistance[]
   >([]);
+
   useEffect(() => {
     const dataFetcher = async () => {
       const response = await axios.post(
-        "http://localhost:3000/api/restaurant-branch/distance",
+        "http://localhost:3001/api/restaurant-branch/distance",
         { location: myLocation, restaurantId }
       );
       setBranchesWithDistance(response.data.restaurantBranches);
     };
     dataFetcher();
   }, []);
+
   useEffect(() => {
     // eslint-disable-next-line prefer-const
     let dist: number[] = [];

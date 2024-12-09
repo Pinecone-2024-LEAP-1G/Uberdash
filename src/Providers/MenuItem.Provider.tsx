@@ -1,5 +1,6 @@
 "use client";
-import { Food } from "./CartProvider";
+import { MenuItemType } from "@/lib/types";
+
 import axios from "axios";
 import {
   createContext,
@@ -10,7 +11,7 @@ import {
 } from "react";
 
 interface FoodContextType {
-  foodItems: Food[];
+  foodItems: MenuItemType[];
 }
 
 const FoodContext = createContext<FoodContextType>({
@@ -24,7 +25,7 @@ interface FoodProviderProps {
 }
 
 const FoodProvider: React.FC<FoodProviderProps> = ({ children }) => {
-  const [foodItems, setFoodItems] = useState<Food[]>([]);
+  const [foodItems, setFoodItems] = useState<MenuItemType[]>([]);
 
   useEffect(() => {
     const fetchFoods = async () => {
@@ -34,9 +35,9 @@ const FoodProvider: React.FC<FoodProviderProps> = ({ children }) => {
         ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
           /api/menu-item`
         );
-        setFoodItems(response.data.menuItems);
+        setFoodItems(response?.data?.menuItems);
       } catch (err) {
-        console.error("Error fetching Foods:", err);
+        console.log("Error fetching Foods:", err);
       }
     };
 

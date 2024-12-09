@@ -41,7 +41,7 @@ export const RestaurantDetail = ({
         );
         setReviews(response.data.review);
       } catch (err) {
-        console.error("Error fetching Review:", err);
+        console.log("Error fetching Review:", err);
       }
     };
 

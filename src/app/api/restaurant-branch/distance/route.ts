@@ -66,7 +66,7 @@ export const POST = async (req: NextRequest) => {
       }
     );
   } catch (error) {
-    console.error(error);
+    console.log(error);
     return new Response(
       JSON.stringify({
         error: "An error occurred while processing your request.",
