@@ -3,7 +3,6 @@ import { AdminSideBoard } from "@/components/AdminSideBoard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { ReviewType } from "@/lib/types";
 import { Order } from "@/lib/models";
 
 const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";

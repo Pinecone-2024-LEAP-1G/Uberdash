@@ -1,8 +1,5 @@
 import { NextRequest } from "next/server";
 
-import { OrderItem } from "@/lib/models";
-import { Order } from "@/lib/models";
-import { OrderItemModel } from "@/lib/models";
 import mongoose from "mongoose";
 import { connectToMongoDB } from "@/lib/db";
 import OrderModel from "@/lib/models/order";

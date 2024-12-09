@@ -1,21 +1,12 @@
 "use client";
 
+import { MenuItemType } from "@/lib/types";
 import { useCart } from "@/Providers/CartProvider";
 import { MinusIcon, PlusIcon, Trash2 } from "lucide-react";
-import { ObjectId } from "mongoose";
 import { useState } from "react";
 
-type CartItem = {
+type CartItem = MenuItemType & {
   quantity: number;
-  image: string;
-  _id: string;
-  name: string;
-  categoryId: string;
-  price: string;
-  description: string;
-  size: string;
-  available: boolean;
-  restaurantId: ObjectId;
 };
 
 const Counter = ({
@@ -31,39 +22,41 @@ const Counter = ({
   const { removeFromCart, addToCart, minusFromCart } = useCart();
 
   const handleMinusCount = () => {
-    if (count >= 1) {
-      return (
-        setCount(count - 1), minusFromCart({ ...cartItem, quantity: count })
-      );
-    } else {
-      return;
+    if (count > 1) {
+      setCount(count - 1);
+      minusFromCart({
+        ...cartItem,
+        quantity: count - 1,
+      });
+    } else if (count === 1) {
+      setCount(0);
+      removeFromCart(id);
     }
   };
 
   const handlePlusCount = () => {
-    return (
-      setCount(count + 1),
-      addToCart({
-        ...cartItem,
-        quantity: count,
-      })
-    );
+    setCount(count + 1);
+    addToCart({
+      ...cartItem,
+      quantity: count + 1,
+    });
   };
 
   return (
     <div className="flex bg-gray-100 rounded-2xl">
-      <button className="pl-4 font-semibold ">
+      <button className="pl-4 font-semibold" onClick={handleMinusCount}>
         {count === 1 ? (
-          <Trash2 className="w-4 h-4" onClick={() => removeFromCart(id)} />
+          <Trash2 className="w-4 h-4" />
         ) : (
-          <MinusIcon className="w-4 h-4" onClick={() => handleMinusCount()} />
+          <MinusIcon className="w-4 h-4" />
         )}
       </button>
       <p className="w-8 h-8 flex justify-center items-center">{count}</p>
-      <button className="pr-4 font-semibold" onClick={() => handlePlusCount()}>
+      <button className="pr-4 font-semibold" onClick={handlePlusCount}>
         <PlusIcon className="w-4 h-4" />
       </button>
     </div>
   );
 };
+
 export default Counter;

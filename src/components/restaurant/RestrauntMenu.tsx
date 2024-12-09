@@ -1,6 +1,5 @@
 import { useCart } from "@/Providers/CartProvider";
 import { LikeSvg } from "../ui/Like-svg";
-import PlusSign from "../ui/PlusSignSvg";
 import { useState } from "react";
 import { AddOrderModal } from "../AddOrderModal";
 import { MenuItemType } from "@/lib/types";
