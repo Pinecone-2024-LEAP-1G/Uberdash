@@ -2,7 +2,6 @@
 
 import { AllFoods } from "@/components/AllFoods";
 import { FastFoodFilter } from "@/components/FastFoodFilter";
-import { AddOrderModal } from "@/components/AddOrderModal";
 import { Restaurants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
 import { CategoryFilter } from "@/components/CategoryFilter";
@@ -17,8 +16,6 @@ const Home = () => {
       {category && <CategoryFilter />}
       <FastFoodFilter />
       <AllFoods />
-
-      {/* <AddOrderModal /> */}
       <Restaurants />
     </div>
   );
