@@ -53,7 +53,7 @@ export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
           <p>{menuItem.price}$</p>
           <div className="w-[3px] h-[3px] bg-[black] rounded-full"></div>
           <LikeSvg />
-          <p>91%</p>
+          <p>{menuItem.percentage}</p>
           <p>({1064})</p>
         </div>
       </div>

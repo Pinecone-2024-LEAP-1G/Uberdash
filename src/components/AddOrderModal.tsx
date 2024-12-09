@@ -9,11 +9,11 @@ import { SelectQuantity } from "@/components/basket-drawer/SelectQuantity";
 import PlusSign from "./ui/PlusSignSvg";
 import { Food } from "@/Providers/CartProvider";
 
-type menuItemProps = {
-  menuItem?: Food; // Made menuItem optional for safety
+type menuItem = {
+  menuItem?: Food;
 };
 
-export const AddOrderModal = ({ menuItem }: menuItemProps) => {
+export const AddOrderModal = ({ menuItem }: menuItem) => {
   if (!menuItem) {
     return;
   }

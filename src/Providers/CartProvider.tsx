@@ -18,6 +18,7 @@ export type Food = {
   size: string;
   available: boolean;
   restaurantId: ObjectId;
+  percentage: string;
 };
 
 type CartItem = Food & {
