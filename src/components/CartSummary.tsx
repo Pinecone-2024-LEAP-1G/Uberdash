@@ -10,6 +10,12 @@ import Image from "next/image";
 
 export const CartSummary = () => {
   const { cartItems } = useCart();
+  let count = 0;
+
+  cartItems.map((cartItem) => {
+    count += cartItem.quantity;
+  });
+
   return (
     <div className="container w-fit mx-auto">
       <Accordion type="single" collapsible>
@@ -19,7 +25,7 @@ export const CartSummary = () => {
               <div className="flex">
                 <ShoppingCart />
                 <p className="pl-4 font-bold"> Захиалгын хураангуй</p>
-                <p className="pl-3">(1 items)</p>
+                <p className="pl-3">({count})</p>
               </div>
             </div>
           </AccordionTrigger>
@@ -32,7 +38,9 @@ export const CartSummary = () => {
                 >
                   <div className="flex">
                     <Image
-                      src="beer.jpeg"
+                      src={cartItem.image}
+                      height={70}
+                      width={70}
                       className="w-[70px] h-[70px] rounded"
                       alt={"img"}
                     ></Image>

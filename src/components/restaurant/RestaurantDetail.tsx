@@ -12,6 +12,7 @@ import { DeliveryFee } from "./DeliveryFee";
 import { useFood } from "../../Providers/MenuItem.Provider";
 import { Review } from "@/lib/models";
 import { Schema } from "mongoose";
+// import { useSession } from "next-auth/react";
 
 type Restaurant = {
   name: string;
@@ -26,10 +27,12 @@ export const RestaurantDetail = ({
   restaurantId: Schema.Types.ObjectId;
 }) => {
   const restaurantProps = { restaurantId: restaurantId };
+
   const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const [reviews, setReviews] = useState<Review[]>([]);
   const { foodItems } = useFood();
+  // const { data: session } = useSession();
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -53,8 +56,9 @@ export const RestaurantDetail = ({
       try {
         const response = await axios.get(
           `
-        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
-          /api/restaurant/${restaurantId}`
+     ${
+       process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+     }/api/restaurant/${restaurantId}`
         );
         setRestaurant(response.data.restaurant);
       } catch (error) {
