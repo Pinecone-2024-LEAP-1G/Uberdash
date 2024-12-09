@@ -19,10 +19,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/api/menu-item/ownerId",
-          { ownerId: restaurantOwnerId }
-        );
+        const response = await axios.post(`/api/menu-item/ownerId`, {
+          ownerId: restaurantOwnerId,
+        });
         setMenuItems(response.data.menuItem);
       } catch (error) {
         console.log(error);

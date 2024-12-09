@@ -12,9 +12,14 @@ const Reviews = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/restaurant/getReviews", {
-        ownerId: restaurantOwnerId,
-      })
+      .post(
+        `${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }api/restaurant/getReviews`,
+        {
+          ownerId: restaurantOwnerId,
+        }
+      )
       .then((response) => {
         setReviews(response.data.reviews);
       })

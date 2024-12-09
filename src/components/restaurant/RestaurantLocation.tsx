@@ -23,7 +23,9 @@ export const RestaurantLocation = ({ restaurantId }: resId) => {
   useEffect(() => {
     const dataFetch = async () => {
       const response = await axios.post(
-        "http://localhost:3000/api/restaurant-branch/distance",
+        `${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }/api/restaurant-branch/distance`,
         { location: myLocation, restaurantId }
       );
       console.log(response.data.restaurantBranches);
