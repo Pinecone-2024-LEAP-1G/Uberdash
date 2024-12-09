@@ -42,29 +42,35 @@ export const POST = async (req: NextRequest) => {
       restaurantId,
     });
 
-    const restaurantBranchesWithDistance = restaurantBranches.map((branch) => {
-      const { location: branchLocation } = branch;
-      const [branchLongitude, branchLatitude] = branchLocation.coordinates;
-
-      const distance = haversineDistance(
-        userLatitude,
-        userLongitude,
-        branchLatitude,
-        branchLongitude
+    if (!restaurantBranches.length) {
+      return new Response(
+        JSON.stringify({ error: "No branches found for this restaurant." }),
+        { status: 404 }
       );
+    }
 
-      return {
-        ...branch.toObject(),
-        distance,
-      };
+    const closestBranch = await restaurantBranches
+      .map((branch) => {
+        const { location: branchLocation } = branch;
+        const [branchLongitude, branchLatitude] = branchLocation.coordinates;
+
+        const distance = haversineDistance(
+          userLatitude,
+          userLongitude,
+          branchLatitude,
+          branchLongitude
+        );
+
+        return {
+          ...branch.toObject(),
+          distance,
+        };
+      })
+      .sort((a, b) => a.distance - b.distance)[0];
+
+    return new Response(JSON.stringify({ closestBranch }), {
+      status: 200,
     });
-
-    return new Response(
-      JSON.stringify({ restaurantBranches: restaurantBranchesWithDistance }),
-      {
-        status: 200,
-      }
-    );
   } catch (error) {
     console.log(error);
     return new Response(

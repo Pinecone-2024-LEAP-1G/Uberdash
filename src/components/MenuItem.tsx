@@ -37,29 +37,18 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
     const dataFetcher = async () => {
       try {
         const response = await axios.post(
-          `${
-            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-          }/api/restaurant-branch/distance`,
+          "http://localhost:3001/api/restaurant-branch/distance",
           { location: myLocation, restaurantId }
         );
+        console.log(response);
         setBranchesWithDistance(response.data.restaurantBranches);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.log(error);
       }
     };
     dataFetcher();
   }, []);
 
-  useEffect(() => {
-    // eslint-disable-next-line prefer-const
-    let dist: number[] = [];
-    branchesWithDistance.map((oneBranch) => {
-      dist.push(oneBranch.distance);
-    });
-    if (dist.length > 0) {
-      setMinDist(Math.min(...dist));
-    }
-  }, [branchesWithDistance]);
   return (
     <div className="w-[288px] rounded-xl overflow-hidden ">
       <div
