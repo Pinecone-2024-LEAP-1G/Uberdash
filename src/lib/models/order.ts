@@ -1,7 +1,7 @@
 import { models, Schema, model } from "mongoose";
 
 export type Order = {
-  id: Schema.Types.ObjectId;
+  _id: Schema.Types.ObjectId;
   status:
     | "Pending"
     | "Cancelled"
