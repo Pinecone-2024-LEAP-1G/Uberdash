@@ -18,7 +18,7 @@ export const RestaurantHero = (props: {
   const { name, banner, image } = props;
 
   const [isClicked, setIsClicked] = useState<boolean>(false);
-
+  console.log("hh");
   return (
     <div className="container max-w-[1200px] mx-auto">
       <div
@@ -38,6 +38,7 @@ export const RestaurantHero = (props: {
               fill={`${isClicked ? "black" : "white"}`}
             />
           </button>
+          <button className="bg-white p-2 rounded-full"></button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="bg-white p-2 rounded-full">

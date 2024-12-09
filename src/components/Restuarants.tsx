@@ -38,7 +38,11 @@ export const Restaurants = () => {
               restaurantId={restaurant._id}
               image={restaurant.banner}
               name={restaurant.name}
+<<<<<<< HEAD
               points={4}
+=======
+              points={4.7}
+>>>>>>> 4ab7c79 (rastaurant like)
               bonus={""}
             />
           </Link>
