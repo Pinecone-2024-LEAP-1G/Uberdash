@@ -1,5 +1,7 @@
 "use client";
-import { ObjectId } from "mongoose";
+
+import { MenuItemType } from "@/lib/types";
+
 import {
   createContext,
   useState,
@@ -8,20 +10,7 @@ import {
   ReactNode,
 } from "react";
 
-export type MenuItems = {
-  image: string;
-  _id: string;
-  name: string;
-  categoryId: string;
-  price: string;
-  description: string;
-  size: string;
-  available: boolean;
-  restaurantId: ObjectId;
-  percentage: string;
-};
-
-type CartItem = MenuItems & {
+type CartItem = MenuItemType & {
   quantity: number;
 };
 

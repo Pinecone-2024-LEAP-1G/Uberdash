@@ -1,13 +1,14 @@
-import { MenuItems, useCart } from "@/Providers/CartProvider";
+import { useCart } from "@/Providers/CartProvider";
 import { LikeSvg } from "../ui/Like-svg";
 import PlusSign from "../ui/PlusSignSvg";
 import { useState } from "react";
 import { AddOrderModal } from "../AddOrderModal";
+import { MenuItemType } from "@/lib/types";
 
 type RestrauntProps = {
   like: string;
   percentage: string;
-  menuItem: MenuItems;
+  menuItem: MenuItemType;
 };
 
 export const RestrauntMenu = ({

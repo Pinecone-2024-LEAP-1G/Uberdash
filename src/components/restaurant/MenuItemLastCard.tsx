@@ -1,14 +1,14 @@
 "use client";
 
-import { MenuItems, useCart } from "@/Providers/CartProvider";
+import { useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
 import { LikeSvg } from "../ui/Like-svg";
-import PlusSign from "../ui/PlusSignSvg";
-import { toast } from "sonner";
+
 import { AddOrderModal } from "@/components/AddOrderModal";
+import { MenuItemType } from "@/lib/types";
 
 interface MenuItemProps {
-  menuItem: MenuItems;
+  menuItem: MenuItemType;
 }
 
 export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
@@ -53,7 +53,7 @@ export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
           <p>{menuItem.price}$</p>
           <div className="w-[3px] h-[3px] bg-[black] rounded-full"></div>
           <LikeSvg />
-          <p>{menuItem.percentage}</p>
+
           <p>({1064})</p>
         </div>
       </div>
