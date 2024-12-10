@@ -10,6 +10,7 @@ import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
 import { AuthGuard } from "./AuthGuard";
 import { Suspense } from "react";
+import { LocationProvider } from "@/Providers/LocationProvider";
 
 export default function RootLayout({
   children,
@@ -23,14 +24,16 @@ export default function RootLayout({
           <SessionProvider>
             <AuthGuard>
               <CartProvider>
-                <FoodProvider>
-                  <NuqsAdapter>
-                    <Header />
-                    {children}
-                    <Footer />
-                    <Toaster />
-                  </NuqsAdapter>
-                </FoodProvider>
+                <LocationProvider>
+                  <FoodProvider>
+                    <NuqsAdapter>
+                      <Header />
+                      {children}
+                      <Footer />
+                      <Toaster />
+                    </NuqsAdapter>
+                  </FoodProvider>
+                </LocationProvider>
               </CartProvider>
             </AuthGuard>
           </SessionProvider>
