@@ -5,18 +5,37 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { SelectQuantity } from "@/components/basket-drawer/SelectQuantity";
 import PlusSign from "./ui/PlusSignSvg";
 import { MenuItemType } from "@/lib/types";
+import { useCart } from "@/Providers/CartProvider";
+import { ChangeEventHandler, useState } from "react";
+import { SelectQuantity } from "../components/basket-drawer/SelectQuantity";
 
 type MenuItem = {
   menuItem?: MenuItemType;
 };
 
 export const AddOrderModal = ({ menuItem }: MenuItem) => {
+  const { addToCart } = useCart();
+  const [count, setCount] = useState<number>(1);
   if (!menuItem) {
     return;
   }
+
+  const handleAddToCart = () => {
+    if (menuItem) {
+      addToCart({
+        ...menuItem,
+        quantity: count,
+      });
+    }
+  };
+
+  const handleChangeCount = (value: number) => {
+    setCount(value);
+  };
+
+  const totalAmount = menuItem.price * count;
 
   return (
     <div>
@@ -64,15 +83,16 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
 
                   <div className="mt-[200px]">
                     <div className="mt-7">
-                      <SelectQuantity />
+                      <SelectQuantity onChange={handleChangeCount} />
                     </div>
                     <div>
                       <div className="mt-4">
                         <button
                           type="button"
+                          onClick={handleAddToCart}
                           className="w-[492px] h-[56px] px-2 rounded-lg bg-[#000000] text-[18px] text-white mt-2 hover:bg-[#202020]"
                         >
-                          Add 1 to order ${menuItem.price}
+                          Add 1 to order ${totalAmount}
                         </button>
                       </div>
                     </div>

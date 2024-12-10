@@ -1,7 +1,5 @@
 "use client";
 
-import { useCart } from "@/Providers/CartProvider";
-import { useState } from "react";
 import { LikeSvg } from "../ui/Like-svg";
 
 import { AddOrderModal } from "@/components/AddOrderModal";
@@ -12,18 +10,6 @@ interface MenuItemProps {
 }
 
 export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
-  const { addToCart } = useCart();
-  const [count] = useState<number>(1);
-
-  const handleAddToCart = () => {
-    if (menuItem) {
-      addToCart({
-        ...menuItem,
-        quantity: count,
-      });
-    }
-  };
-
   return (
     <div className="w-[220px] h-[252px]">
       <div
@@ -38,10 +24,7 @@ export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
         <div className="w-[98px] h-[24px] bg-[#0e8345] text-[12px] font-medium px-3 py-1 absolute top-2 rounded-br-[12px] rounded-tr-[12px]">
           <p className="text-white">#1 most liked</p>
         </div>
-        <div
-          className="w-9 h-9 rounded-full bg-white flex justify-center items-center absolute bottom-2 right-2 hover:bg-slate-200"
-          onClick={handleAddToCart}
-        >
+        <div className="w-9 h-9 rounded-full bg-white flex justify-center items-center absolute bottom-2 right-2 hover:bg-slate-200">
           <div className="mt-[6px]">
             <AddOrderModal menuItem={menuItem} />
           </div>
