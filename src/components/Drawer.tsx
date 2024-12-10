@@ -30,11 +30,8 @@ export const Drawers = () => {
             <SheetTitle></SheetTitle>
 
             <div className="flex items-center gap-2 py-3">
-              <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                {/*zurag oruulah heseg datanaas */}
-              </div>
-              <span className="text-lg font-semibold">
-                {session?.user?.name || "User"}
+              <span className="text-lg font-semibold ml-3">
+                {session?.user?.name || ""}
               </span>
             </div>
 
