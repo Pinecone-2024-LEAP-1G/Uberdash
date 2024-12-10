@@ -11,11 +11,14 @@ const Checkout = () => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const { cartItems } = useCart();
   const { data: session } = useSession();
+  const [order, setOrder] = useState<[]>([]);
 
   useEffect(() => {
     const getRestaurant = async () => {
       const { data } = await axios.get<{ restaurant: Restaurant }>(
-        `/api/restaurant/${cartItems?.[0]?.restaurantId}`
+        ` ${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }/api/restaurant/${cartItems?.[0]?.restaurantId}`
       );
 
       setRestaurant(data.restaurant);
@@ -23,6 +26,39 @@ const Checkout = () => {
     getRestaurant();
   }, [cartItems?.[0]?.restaurantId]);
 
+  const postOrder = async () => {
+    try {
+      const newOrder = await axios.post(
+        `${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }/api/order/`,
+        {
+          userId: session?.user.id,
+          orderItems: [],
+        }
+      );
+      setOrder(newOrder);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const postOrderItem = async () => {
+    await axios.post(
+      ` ${
+        process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+      }/api/orderItem`,
+      {
+        price: 102,
+        quantity: 20,
+        orderId: order._id,
+        restaurantId: restaurant?._id,
+      }
+    );
+  };
+  const createOrder = () => {
+    postOrder();
+    postOrderItem();
+  };
   if (!restaurant) return null;
 
   return (
@@ -49,7 +85,7 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Button className="w-full" onClick={() => console.log(cartItems)}>
+      <Button className="w-full" onClick={() => createOrder()}>
         Захиалга хийх
       </Button>
     </div>
