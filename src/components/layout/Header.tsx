@@ -66,7 +66,7 @@ export const Header = () => {
           <Search />
           <Input
             className="bg-[#F3F3F3] border-none focus-visible:ring-0 focus-visible:ring-offset-0 w-[900px]"
-            placeholder="Search Uber Eats"
+            placeholder="Хайлт"
             value={searchTerm}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
@@ -87,7 +87,7 @@ export const Header = () => {
                   </div>
                 ))
               ) : (
-                <div className="px-4 py-2 text-gray-500">No results found</div>
+                <div className="px-4 py-2 text-gray-500">Хайлт олдсонгүй</div>
               )}
             </div>
           )}
@@ -98,7 +98,7 @@ export const Header = () => {
               onClick={() => signIn("google")}
               className="w-24 bg-[#F3F3F3] rounded-full ml-8"
             >
-              Log in
+              Нэвтрэх
             </button>
           ) : null}
         </div>

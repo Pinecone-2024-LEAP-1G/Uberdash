@@ -5,7 +5,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, Heart, ShoppingBag, HelpCircle } from "lucide-react";
+import { Menu, Heart, ShoppingBag } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 
 export const Drawers = () => {
@@ -38,28 +38,17 @@ export const Drawers = () => {
             <div className="flex flex-col gap-3">
               <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
                 <ShoppingBag className="w-5 h-5 text-gray-600" />
-                Orders
+                Захиалгын түүх
               </button>
               <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
                 <Heart className="w-5 h-5 text-gray-600" />
-                Favorites
-              </button>
-
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
-                <HelpCircle className="w-5 h-5 text-gray-600" />
-                Help
+                Дуртай
               </button>
             </div>
 
             <div className="mt-4">
               <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center">
-                Create a business account
-              </button>
-              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center mt-2">
-                Add your restaurant
-              </button>
-              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center mt-2">
-                Sign up to deliver
+                Бизнесийн аккаунт үүсгэх
               </button>
             </div>
 
@@ -69,7 +58,7 @@ export const Drawers = () => {
                   onClick={() => signOut()}
                   className="w-full bg-[#F3F3F3] rounded-full py-2 text-center"
                 >
-                  Sign out
+                  Гарах
                 </button>
               </div>
             )}
