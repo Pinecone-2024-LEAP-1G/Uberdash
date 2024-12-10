@@ -34,13 +34,15 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
     const dataFetcher = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/restaurant-branch/distance",
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/restaurant-branch/distance`,
           { location: myLocation, restaurantId }
         );
 
         setMinDist(response.data.closestBranch.distance);
       } catch (error) {
-        console.log(error);
+        console.log(error); // toast
       }
     };
     dataFetcher();
