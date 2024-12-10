@@ -29,26 +29,22 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
     coordinates: [47.918841, 106.917562],
   };
   const [minDist, setMinDist] = useState<number>(0);
-  const [branchesWithDistance, setBranchesWithDistance] = useState<
-    restaurantBranchWithDistance[]
-  >([]);
 
   useEffect(() => {
     const dataFetcher = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3001/api/restaurant-branch/distance",
+          "http://localhost:3000/api/restaurant-branch/distance",
           { location: myLocation, restaurantId }
         );
-        console.log(response);
-        setBranchesWithDistance(response.data.restaurantBranches);
+
+        setMinDist(response.data.closestBranch.distance);
       } catch (error) {
         console.log(error);
       }
     };
     dataFetcher();
   }, []);
-
   return (
     <div className="w-[288px] rounded-xl overflow-hidden ">
       <div

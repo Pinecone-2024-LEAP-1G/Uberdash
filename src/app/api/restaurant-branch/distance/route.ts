@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { RestaurantBranchModel } from "@/lib/models";
 import { connectToMongoDB } from "@/lib/db";
+import mongoose from "mongoose";
 
 const toRadians = (degree: number) => degree * (Math.PI / 180);
 
@@ -31,15 +32,18 @@ export const POST = async (req: NextRequest) => {
     const { coordinates } = location;
     const [userLongitude, userLatitude] = coordinates;
 
+    console.log(userLongitude);
+    console.log("hehe");
+
     if (!userLongitude || !userLatitude) {
       return new Response(
         JSON.stringify({ error: "Invalid coordinates provided." }),
         { status: 400 }
       );
     }
-
+    const id = mongoose.Types.ObjectId.createFromHexString(restaurantId);
     const restaurantBranches = await RestaurantBranchModel.find({
-      restaurantId,
+      restaurantId: id,
     });
 
     if (!restaurantBranches.length) {
