@@ -8,6 +8,7 @@ export type Restaurant = {
   info: string;
   rating: number;
   ownerId: Schema.Types.ObjectId;
+  menuItems: [Schema.Types.ObjectId];
 };
 
 const RestaurantSchema = new Schema<Restaurant>({
@@ -16,11 +17,16 @@ const RestaurantSchema = new Schema<Restaurant>({
   banner: { type: String },
   info: { type: String },
   rating: { type: Number, default: 0 },
+<<<<<<< Updated upstream
   ownerId: {
     type: Schema.Types.ObjectId,
     ref: "restaurant-owner",
     required: true,
   },
+=======
+  ownerId: { type: Schema.Types.ObjectId, ref: "restaurant-owner" },
+  menuItems: { type: [Schema.Types.ObjectId], default: [], ref: "menu-items" },
+>>>>>>> Stashed changes
 });
 
 export const RestaurantModel: Model<Restaurant> =
