@@ -28,7 +28,7 @@ export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
         );
         setMenuItem(response.data.menuItem);
       } catch (error) {
-        console.log(error);
+        console.log(error); //toast bolgoh
       }
     };
     fetchData();

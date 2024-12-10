@@ -8,6 +8,7 @@ export type Restaurant = {
   info: string;
   rating: number;
   ownerId: Schema.Types.ObjectId;
+  menuItems: [Schema.Types.ObjectId];
 };
 
 const RestaurantSchema = new Schema<Restaurant>({
@@ -21,6 +22,8 @@ const RestaurantSchema = new Schema<Restaurant>({
     ref: "restaurant-owner",
     required: true,
   },
+
+  menuItems: { type: [Schema.Types.ObjectId], default: [], ref: "menu-items" },
 });
 
 export const RestaurantModel: Model<Restaurant> =
