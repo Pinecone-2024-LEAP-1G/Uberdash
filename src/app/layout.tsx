@@ -1,16 +1,26 @@
 "use client";
 
 import "./globals.css";
-import { Header } from "../components/layout/Header";
+import React, { Suspense, lazy } from "react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-import { Footer } from "@/components/Footer";
+import { Toaster } from "sonner";
+import { SessionProvider } from "next-auth/react";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
-import { SessionProvider } from "next-auth/react";
-import { Toaster } from "sonner";
-import { AuthGuard } from "./AuthGuard";
-import { Suspense } from "react";
 import { LocationProvider } from "@/Providers/LocationProvider";
+import { AuthGuard } from "./AuthGuard";
+
+const Header = lazy(() =>
+  import("../components/layout/Header").then((module) => ({
+    default: module.Header,
+  }))
+);
+
+const Footer = lazy(() =>
+  import("@/components/Footer").then((module) => ({
+    default: module.Footer,
+  }))
+);
 
 export default function RootLayout({
   children,
@@ -20,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        <Suspense>
+        <Suspense fallback={<Loading />}>
           <SessionProvider>
             <AuthGuard>
               <CartProvider>
@@ -28,7 +38,7 @@ export default function RootLayout({
                   <FoodProvider>
                     <NuqsAdapter>
                       <Header />
-                      {children}
+                      <main>{children}</main>
                       <Footer />
                       <Toaster />
                     </NuqsAdapter>
@@ -41,4 +51,8 @@ export default function RootLayout({
       </body>
     </html>
   );
+}
+
+function Loading() {
+  return <h2>🌀 Loading...</h2>;
 }
