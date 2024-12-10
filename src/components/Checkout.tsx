@@ -49,7 +49,7 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Button className="w-full" onClick={() => console.log(session)}>
+      <Button className="w-full" onClick={() => console.log(cartItems)}>
         Захиалга хийх
       </Button>
     </div>

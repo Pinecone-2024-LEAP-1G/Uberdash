@@ -10,11 +10,13 @@ import {
 import { useEffect, useState } from "react";
 import { OrderNote } from "../basket-drawer/OrderNote";
 import { ShoppingCart } from "lucide-react";
-import { Buttons } from "../basket-drawer/ButtonCard";
+import { Button } from "./Button";
 import SmallModal from "./ThreeDotSelect";
 import { useCart } from "@/Providers/CartProvider";
 import Counter from "../Counter";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 
 export const BasketDrawer: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -70,10 +72,15 @@ export const BasketDrawer: React.FC = () => {
                   className="flex gap-4 justify-between items-center border-b py-2"
                   key={cartItem._id}
                 >
-                  <img
-                    src={`${cartItem.image}`}
-                    className="w-12 h-12 rounded"
-                  />
+                  <div className="flex justify-center h-12 w-12">
+                    <Image
+                      src={`${cartItem.image}`}
+                      width={48}
+                      height={48}
+                      className="rounded"
+                      alt="img"
+                    ></Image>
+                  </div>
                   <div className="w-[260px]">
                     <p className="text-[16px] font-medium">{cartItem.name}</p>
                     <p className="text-[#656464] text-[14px]">
@@ -99,9 +106,11 @@ export const BasketDrawer: React.FC = () => {
               <p>${totalAmount}</p>
             </div>
           </div>
-          <div className="h-28">
-            <Buttons />
-          </div>
+          <Link href="/checkout">
+            <div className="h-28">
+              <Button title="захиалах" />
+            </div>
+          </Link>
         </SheetHeader>
       </SheetContent>
     </Sheet>
