@@ -13,7 +13,6 @@ const Checkout = () => {
   const { cartItems } = useCart();
   const { data: session } = useSession();
   const [order, setOrder] = useState<Order>();
-
   useEffect(() => {
     const getRestaurant = async () => {
       const { data } = await axios.get<{ restaurant: Restaurant }>(
@@ -26,7 +25,6 @@ const Checkout = () => {
     };
     getRestaurant();
   }, [cartItems[0]?.restaurantId]);
-  console.log(session);
 
   const postOrder = async () => {
     try {
@@ -39,27 +37,31 @@ const Checkout = () => {
           orderItems: [],
         }
       );
-      console.log({ newOrder });
-
-      setOrder(newOrder);
+      setOrder(newOrder.data.order);
     } catch (error) {
       console.log(error);
     }
   };
 
   const postOrderItem = async () => {
-    const orderItem = await axios.post(
-      ` ${
-        process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-      }/api/orderItem`,
-      {
-        price: 102,
-        quantity: 20,
-        orderId: order?._id,
-        restaurantId: restaurant?._id,
+    cartItems.map(async (cartItem) => {
+      try {
+        await axios.post(
+          ` ${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/orderItem`,
+          {
+            price: cartItem.price,
+            quantity: cartItem.quantity,
+            orderId: order?._id,
+            restaurantId: restaurant?._id,
+            menuItem: cartItem._id,
+          }
+        );
+      } catch (err) {
+        console.log(err);
       }
-    );
-    console.log({ orderItem });
+    });
   };
 
   const getOrder = async () => {
@@ -73,7 +75,6 @@ const Checkout = () => {
 
   const createOrder = () => {
     postOrder();
-    postOrderItem();
   };
 
   if (!restaurant) return null;
@@ -102,10 +103,17 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Button className="w-full" onClick={() => createOrder()}>
-        Захиалга хийх
-      </Button>
-      <button onClick={() => getOrder()}>124</button>
+      <div className={`${!order ? "block" : "hidden"}`}>
+        <Button className="w-full" onClick={() => createOrder()}>
+          Захиалга хийх
+        </Button>
+      </div>
+
+      <div className={`${order ? "block" : "hidden"}`}>
+        <Button className="w-full" onClick={() => postOrderItem()}>
+          Баталгаажуулах
+        </Button>
+      </div>
     </div>
   );
 };

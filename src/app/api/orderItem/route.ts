@@ -15,7 +15,8 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { price, quantity, orderId, restaurantId } = await request.json();
+  const { price, quantity, orderId, restaurantId, menuItem } =
+    await request.json();
 
   try {
     const orderItems = await OrderItemModel.create({
@@ -23,6 +24,7 @@ export const POST = async (request: NextRequest) => {
       quantity,
       orderId,
       restaurantId,
+      menuItem,
     });
 
     const { _id } = orderItems;
