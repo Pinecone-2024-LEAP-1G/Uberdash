@@ -14,11 +14,14 @@ import { Buttons } from "../basket-drawer/ButtonCard";
 import SmallModal from "./ThreeDotSelect";
 import { useCart } from "@/Providers/CartProvider";
 import Counter from "../Counter";
+import { usePathname } from "next/navigation";
 
 export const BasketDrawer: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const { cartItems } = useCart();
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -33,8 +36,14 @@ export const BasketDrawer: React.FC = () => {
     setTotalAmount(total);
   }, [cartItems]);
 
+  useEffect(() => {
+    if (pathname.includes("checkout")) {
+      setIsDrawerOpen(false);
+    }
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
       <SheetTrigger>
         <div className="relative flex items-center ml-3">
           <ShoppingCart className="w-6 h-6" />

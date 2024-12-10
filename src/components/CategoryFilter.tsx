@@ -35,7 +35,7 @@ export const CategoryFilter = () => {
   return (
     <div className="mt-6 gap-3">
       <div className="text-xl mt-2 font-bold mx-auto max-w-[1200px] mb-2">
-        Results
+        Үр дүн
       </div>
       <div className=" grid grid-cols-4 max-w-[1200px] mx-auto gap-10">
         {restaurants?.map((restaurant) => (

@@ -14,7 +14,7 @@ const Home = () => {
       <MenuCategories />
       {category && <CategoryFilter />}
       <FastFoodFilter />
-      <Restaurants />
+      <Restaurants /> 
     </div>
   );
 };
