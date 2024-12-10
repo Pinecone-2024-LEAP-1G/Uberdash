@@ -32,9 +32,6 @@ export const POST = async (req: NextRequest) => {
     const { coordinates } = location;
     const [userLongitude, userLatitude] = coordinates;
 
-    console.log(userLongitude);
-    console.log("hehe");
-
     if (!userLongitude || !userLatitude) {
       return new Response(
         JSON.stringify({ error: "Invalid coordinates provided." }),

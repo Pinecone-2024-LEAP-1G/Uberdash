@@ -1,6 +1,8 @@
 import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
+import { useLocation } from "@/Providers/LocationProvider";
+import { useContext } from "react";
 
 type Location = {
   type: "Point";
@@ -24,29 +26,30 @@ type MenuTypes = {
 };
 
 export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
-  const myLocation: Location = {
-    type: "Point",
-    coordinates: [47.918841, 106.917562],
-  };
+  const data = useLocation();
+  const { location, isLoading } = data;
   const [minDist, setMinDist] = useState<number>(0);
 
   useEffect(() => {
+    if (!location.coordinates[0]) return;
+
     const dataFetcher = async () => {
       try {
         const response = await axios.post(
           `${
             process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
           }/api/restaurant-branch/distance`,
-          { location: myLocation, restaurantId }
+          { location: location, restaurantId }
         );
 
         setMinDist(response.data.closestBranch.distance);
       } catch (error) {
-        console.log(error); // toast
+        console.log(error);
       }
     };
     dataFetcher();
-  }, []);
+  }, [location]);
+
   return (
     <div className="w-[288px] rounded-xl overflow-hidden ">
       <div
