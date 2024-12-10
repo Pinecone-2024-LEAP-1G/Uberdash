@@ -6,12 +6,13 @@ import axios from "axios";
 import { Restaurant } from "@/lib/models";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { Order } from "@/lib/models/order";
 
 const Checkout = () => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const { cartItems } = useCart();
   const { data: session } = useSession();
-  const [order, setOrder] = useState<[]>([]);
+  const [order, setOrder] = useState<Order>();
 
   useEffect(() => {
     const getRestaurant = async () => {
@@ -24,41 +25,57 @@ const Checkout = () => {
       setRestaurant(data.restaurant);
     };
     getRestaurant();
-  }, [cartItems?.[0]?.restaurantId]);
+  }, [cartItems[0]?.restaurantId]);
+  console.log(session);
 
   const postOrder = async () => {
     try {
       const newOrder = await axios.post(
         `${
           process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-        }/api/order/`,
+        }/api/order`,
         {
           userId: session?.user.id,
           orderItems: [],
         }
       );
+      console.log({ newOrder });
+
       setOrder(newOrder);
     } catch (error) {
       console.log(error);
     }
   };
+
   const postOrderItem = async () => {
-    await axios.post(
+    const orderItem = await axios.post(
       ` ${
         process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
       }/api/orderItem`,
       {
         price: 102,
         quantity: 20,
-        orderId: order._id,
+        orderId: order?._id,
         restaurantId: restaurant?._id,
       }
     );
+    console.log({ orderItem });
   };
+
+  const getOrder = async () => {
+    const orders = await axios.get(
+      `${
+        process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+      }/api/order/${order?._id}`
+    );
+    console.log(orders);
+  };
+
   const createOrder = () => {
     postOrder();
     postOrderItem();
   };
+
   if (!restaurant) return null;
 
   return (
@@ -88,6 +105,7 @@ const Checkout = () => {
       <Button className="w-full" onClick={() => createOrder()}>
         Захиалга хийх
       </Button>
+      <button onClick={() => getOrder()}>124</button>
     </div>
   );
 };
