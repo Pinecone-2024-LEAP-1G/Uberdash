@@ -5,6 +5,8 @@ import { Restaurants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { parseAsString, useQueryState } from "nuqs";
+import { Toaster } from "@/components/ui/toaster";
+import { ToastModal } from "@/components/ToastModal";
 
 const Home = () => {
   const category = useQueryState("category", parseAsString);
@@ -14,7 +16,8 @@ const Home = () => {
       <MenuCategories />
       {category && <CategoryFilter />}
       <FastFoodFilter />
-      <Restaurants /> 
+      <Restaurants />
+      <ToastModal />
     </div>
   );
 };
