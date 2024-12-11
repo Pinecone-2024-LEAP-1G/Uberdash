@@ -7,9 +7,9 @@ import { Footer } from "@/components/Footer";
 import { CartProvider } from "../Providers/CartProvider";
 import { FoodProvider } from "../Providers/MenuItem.Provider";
 import { SessionProvider } from "next-auth/react";
-import { Toaster } from "sonner";
 import { AuthGuard } from "./AuthGuard";
 import { usePathname } from "next/navigation";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootLayout({
   children,
