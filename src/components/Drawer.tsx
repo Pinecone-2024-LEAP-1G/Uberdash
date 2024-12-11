@@ -8,10 +8,12 @@ import {
 } from "@/components/ui/sheet";
 import { Menu, Heart, ShoppingBag } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
-import Image from "next/image"; // Importing Next.js Image component
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export const Drawers = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const SHEET_SIDES = ["left"] as const;
 
@@ -20,7 +22,7 @@ export const Drawers = () => {
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
           <SheetTrigger asChild>
-            <button className="p-3 bg-white rounded-full hover:bg-gray-200 focus:outline-none  transition-colors duration-200 ease-in hover:duration-150">
+            <button className="p-3 bg-white rounded-full hover:bg-gray-200 focus:outline-none transition-colors duration-200 ease-in hover:duration-150">
               <Menu className="w-8 h-8 text-gray-800" />
             </button>
           </SheetTrigger>
@@ -36,8 +38,8 @@ export const Drawers = () => {
                 <Image
                   src={session.user.image}
                   alt="User Avatar"
-                  width={40} // Set width
-                  height={40} // Set height
+                  width={40}
+                  height={40}
                   className="rounded-full"
                 />
               )}
@@ -58,7 +60,10 @@ export const Drawers = () => {
             </div>
 
             <div className="mt-4">
-              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center">
+              <button
+                onClick={() => router.push("/create-business-account")}
+                className="w-full bg-[#F3F3F3] rounded-full py-2 text-center"
+              >
                 Бизнесийн аккаунт үүсгэх
               </button>
             </div>
