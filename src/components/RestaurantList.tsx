@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import Image from "next/image";
 
 interface Restaurant {
   name: string;
@@ -46,7 +47,8 @@ export const RestaurantList: React.FC = () => {
       <div ref={scrollRef} className="flex  space-x-4">
         {restaurant.map((restaurant, index) => (
           <div key={index} className="min-w-[130px] text-center">
-            <img
+            <Image
+              alt="img"
               src={restaurant.image}
               className="w-24 h-24 mx-auto rounded-full"
             />

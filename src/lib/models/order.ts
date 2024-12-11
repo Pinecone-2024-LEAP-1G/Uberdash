@@ -42,15 +42,12 @@ const OrderSchema = new Schema<Order>({
   },
   orderItemCount: {
     type: Number,
-    required: true,
   },
   priceWithoutDiscount: {
     type: Number,
-    required: true,
   },
   priceWithDiscount: {
     type: Number,
-    required: true,
   },
   userId: {
     type: Schema.Types.ObjectId,

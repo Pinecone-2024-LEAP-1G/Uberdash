@@ -2,7 +2,6 @@ import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "@/Providers/LocationProvider";
-import { useContext } from "react";
 
 type Location = {
   type: "Point";
