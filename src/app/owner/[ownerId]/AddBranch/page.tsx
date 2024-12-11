@@ -32,12 +32,6 @@ const Info = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
   }
-
-  return (
-    <div className="w-full h-full">
-      <ReactMap />
-    </div>
-  );
   return (
     <div className="p-4 flex gap-3 w-full">
       <AdminSideBoard />
@@ -53,6 +47,9 @@ const Info = () => {
                   <FormControl>
                     <Input placeholder="" {...field} />
                   </FormControl>
+                  <div className="w-[400px] h-1">
+                    <ReactMap />
+                  </div>
                 </FormItem>
               )}
             />

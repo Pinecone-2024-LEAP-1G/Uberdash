@@ -38,7 +38,7 @@ const markers = [
 
 export function ReactMap() {
   return (
-    <MapContainer center={[48.8566, 2.3522]} zoom={13}>
+    <MapContainer center={[47.918841, 106.917579]} zoom={13}>
       {/* OPEN STREEN MAPS TILES */}
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -64,8 +64,8 @@ export function ReactMap() {
         iconCreateFunction={createClusterCustomIcon}
       >
         {/* Mapping through the markers */}
-        {markers.map((marker) => (
-          <Marker position={marker.geocode} icon={customIcon}>
+        {markers.map((marker, index) => (
+          <Marker position={marker.geocode} key={index} icon={customIcon}>
             <Popup>{marker.popUp}</Popup>
           </Marker>
         ))}
