@@ -9,35 +9,34 @@ import { FoodProvider } from "../Providers/MenuItem.Provider";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "sonner";
 import { AuthGuard } from "./AuthGuard";
-import { Suspense } from "react";
-import { LocationProvider } from "@/Providers/LocationProvider";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
+  const isSignInPage = pathname === "/sign-in";
+
   return (
     <html lang="en">
       <body className="min-h-screen">
-        <Suspense>
-          <SessionProvider>
-            <AuthGuard>
-              <CartProvider>
-                <LocationProvider>
-                  <FoodProvider>
-                    <NuqsAdapter>
-                      <Header />
-                      {children}
-                      <Footer />
-                      <Toaster />
-                    </NuqsAdapter>
-                  </FoodProvider>
-                </LocationProvider>
-              </CartProvider>
-            </AuthGuard>
-          </SessionProvider>
-        </Suspense>
+        <SessionProvider>
+          <AuthGuard>
+            <CartProvider>
+              <FoodProvider>
+                <NuqsAdapter>
+                  {!isSignInPage && <Header />}
+                  {children}
+                  <Footer />
+                  <Toaster />
+                </NuqsAdapter>
+              </FoodProvider>
+            </CartProvider>
+          </AuthGuard>
+        </SessionProvider>
       </body>
     </html>
   );

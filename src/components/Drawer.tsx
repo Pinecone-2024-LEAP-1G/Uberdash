@@ -1,12 +1,14 @@
 "use client";
+
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, Heart, ShoppingBag, HelpCircle } from "lucide-react";
+import { Menu, Heart, ShoppingBag } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image"; // Importing Next.js Image component
 
 export const Drawers = () => {
   const { data: session } = useSession();
@@ -18,7 +20,7 @@ export const Drawers = () => {
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
           <SheetTrigger asChild>
-            <button className="p-3 bg-white rounded-full hover:bg-gray-200 focus:outline-none shadow transition-colors duration-200 ease-in hover:duration-150">
+            <button className="p-3 bg-white rounded-full hover:bg-gray-200 focus:outline-none  transition-colors duration-200 ease-in hover:duration-150">
               <Menu className="w-8 h-8 text-gray-800" />
             </button>
           </SheetTrigger>
@@ -30,6 +32,15 @@ export const Drawers = () => {
             <SheetTitle></SheetTitle>
 
             <div className="flex items-center gap-2 py-3">
+              {session?.user?.image && (
+                <Image
+                  src={session.user.image}
+                  alt="User Avatar"
+                  width={40} // Set width
+                  height={40} // Set height
+                  className="rounded-full"
+                />
+              )}
               <span className="text-lg font-semibold ml-3">
                 {session?.user?.name || ""}
               </span>
@@ -38,28 +49,17 @@ export const Drawers = () => {
             <div className="flex flex-col gap-3">
               <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
                 <ShoppingBag className="w-5 h-5 text-gray-600" />
-                Orders
+                Захиалгын түүх
               </button>
               <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
                 <Heart className="w-5 h-5 text-gray-600" />
-                Favorites
-              </button>
-
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
-                <HelpCircle className="w-5 h-5 text-gray-600" />
-                Help
+                Дуртай
               </button>
             </div>
 
             <div className="mt-4">
               <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center">
-                Create a business account
-              </button>
-              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center mt-2">
-                Add your restaurant
-              </button>
-              <button className="w-full bg-[#F3F3F3] rounded-full py-2 text-center mt-2">
-                Sign up to deliver
+                Бизнесийн аккаунт үүсгэх
               </button>
             </div>
 
@@ -69,7 +69,7 @@ export const Drawers = () => {
                   onClick={() => signOut()}
                   className="w-full bg-[#F3F3F3] rounded-full py-2 text-center"
                 >
-                  Sign out
+                  Гарах
                 </button>
               </div>
             )}

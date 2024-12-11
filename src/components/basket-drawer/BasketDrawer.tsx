@@ -14,11 +14,14 @@ import { Buttons } from "../basket-drawer/ButtonCard";
 import SmallModal from "./ThreeDotSelect";
 import { useCart } from "@/Providers/CartProvider";
 import Counter from "../Counter";
+import { usePathname } from "next/navigation";
 
 export const BasketDrawer: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const { cartItems } = useCart();
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -33,8 +36,14 @@ export const BasketDrawer: React.FC = () => {
     setTotalAmount(total);
   }, [cartItems]);
 
+  useEffect(() => {
+    if (pathname.includes("checkout")) {
+      setIsDrawerOpen(false);
+    }
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
       <SheetTrigger>
         <div className="relative flex items-center ml-3">
           <ShoppingCart className="w-6 h-6" />
@@ -47,7 +56,7 @@ export const BasketDrawer: React.FC = () => {
         <SheetHeader className="gap-4 h-screen justify-between">
           <div>
             <SheetTitle className="text-[32px] font-bold leading-10 flex items-center justify-between mt-14">
-              Orders
+              Захиалгууд
               <div className="w-9 h-9 bg-[#F3F3F3] rounded-full flex items-center justify-center hover:bg-[#b1b0b0]">
                 <SmallModal />
               </div>
@@ -86,7 +95,7 @@ export const BasketDrawer: React.FC = () => {
               <OrderNote />
             </div>
             <div className="flex justify-between text-[18px] font-medium mt-4 mb-4">
-              <p>Subtotal</p>
+              <p>Дэлгэрэнгүй дүн</p>
               <p>${totalAmount}</p>
             </div>
           </div>
