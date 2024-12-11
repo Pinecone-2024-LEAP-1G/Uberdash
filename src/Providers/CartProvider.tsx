@@ -10,7 +10,7 @@ import {
   ReactNode,
 } from "react";
 
-type CartItem = MenuItemType & {
+export type CartItem = MenuItemType & {
   quantity: number;
 };
 
