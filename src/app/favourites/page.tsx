@@ -25,7 +25,7 @@ const Favourites = () => {
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4">All Stores</h2>
-      <div className=" grid grid-cols-4  mx-auto  ">
+      <div className=" grid grid-cols-4  mx-auto ">
         {restaurants.map((restaurant) => (
           <MenuItem
             key={restaurant._id}
