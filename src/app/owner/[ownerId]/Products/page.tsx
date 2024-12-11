@@ -8,24 +8,20 @@ import { MenuItemType } from "@/lib/types";
 import { OwnerMenuItem } from "@/components/OwnerMenuItem";
 
 import { CreateProduct } from "@/components/CreateProduct";
-import { Delete } from "@/components/Delete";
 
-const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
+const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
 
 const Dashboard = () => {
   const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
 
   const [isCreateProduct, setIsCreateProduct] = useState<boolean>(false);
 
-  const [isDeleteProduct, setIsDeleteProduct] = useState<boolean>(false);
-
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/api/menu-item/ownerId",
-          { ownerId: restaurantOwnerId }
-        );
+        const response = await axios.post(`/api/menu-item/ownerId`, {
+          ownerId: restaurantOwnerId,
+        });
         setMenuItems(response.data.menuItem);
       } catch (error) {
         console.log(error);
@@ -38,9 +34,6 @@ const Dashboard = () => {
     setIsCreateProduct(!isCreateProduct);
   };
 
-  const handleDelete = () => {
-    setIsDeleteProduct(!isDeleteProduct);
-  };
   return (
     <div className="p-4 flex gap-3 w-full">
       {isCreateProduct && (

@@ -7,8 +7,6 @@ import { CategoryComp } from "@/components/Category";
 import { Plus } from "lucide-react";
 import { CreateCategoryComp } from "@/components/CreateCategory";
 
-const restaurantOwnerId: String = "673e90415a6e8e222657bbb4";
-
 type DeleteType = {
   handleCreateCategory: () => void;
 };
@@ -19,7 +17,11 @@ const Categories = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/category")
+      .get(
+        `${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }api/category`
+      )
       .then(function (response) {
         setCategories(response.data.category);
       })

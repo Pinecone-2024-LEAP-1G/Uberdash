@@ -10,15 +10,20 @@ import {
 import { useEffect, useState } from "react";
 import { OrderNote } from "../basket-drawer/OrderNote";
 import { ShoppingCart } from "lucide-react";
-import { Buttons } from "../basket-drawer/ButtonCard";
+import { Button } from "./Button";
 import SmallModal from "./ThreeDotSelect";
 import { useCart } from "@/Providers/CartProvider";
 import Counter from "../Counter";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 
 export const BasketDrawer: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const { cartItems } = useCart();
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -33,21 +38,27 @@ export const BasketDrawer: React.FC = () => {
     setTotalAmount(total);
   }, [cartItems]);
 
+  useEffect(() => {
+    if (pathname.includes("checkout")) {
+      setIsDrawerOpen(false);
+    }
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
       <SheetTrigger>
-        <div className="ml-56 flex w-8">
-          <ShoppingCart className="relative" />
-          <p className="bg-green-500 text-white rounded-full absolute w-5 h-5 text-sm text-center right-[-155px] top-[20px]">
+        <div className="relative flex items-center ml-3">
+          <ShoppingCart className="w-6 h-6" />
+          <span className="bg-green-500 text-white rounded-full absolute w-5 h-5 text-xs flex items-center justify-center -top-2 -right-3">
             {count}
-          </p>
+          </span>
         </div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader className="gap-4 h-screen justify-between">
           <div>
             <SheetTitle className="text-[32px] font-bold leading-10 flex items-center justify-between mt-14">
-              Orders
+              Захиалгууд
               <div className="w-9 h-9 bg-[#F3F3F3] rounded-full flex items-center justify-center hover:bg-[#b1b0b0]">
                 <SmallModal />
               </div>
@@ -61,10 +72,15 @@ export const BasketDrawer: React.FC = () => {
                   className="flex gap-4 justify-between items-center border-b py-2"
                   key={cartItem._id}
                 >
-                  <img
-                    src={`${cartItem.image}`}
-                    className="w-12 h-12 rounded"
-                  />
+                  <div className="flex justify-center h-12 w-12">
+                    <Image
+                      src={`${cartItem.image}`}
+                      width={48}
+                      height={48}
+                      className="rounded"
+                      alt="img"
+                    ></Image>
+                  </div>
                   <div className="w-[260px]">
                     <p className="text-[16px] font-medium">{cartItem.name}</p>
                     <p className="text-[#656464] text-[14px]">
@@ -86,13 +102,15 @@ export const BasketDrawer: React.FC = () => {
               <OrderNote />
             </div>
             <div className="flex justify-between text-[18px] font-medium mt-4 mb-4">
-              <p>Subtotal</p>
+              <p>Дэлгэрэнгүй дүн</p>
               <p>${totalAmount}</p>
             </div>
           </div>
-          <div className="h-28">
-            <Buttons />
-          </div>
+          <Link href="/checkout">
+            <div className="h-28">
+              <Button title="захиалах" />
+            </div>
+          </Link>
         </SheetHeader>
       </SheetContent>
     </Sheet>

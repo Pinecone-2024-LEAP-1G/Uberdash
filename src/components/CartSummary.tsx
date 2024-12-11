@@ -6,9 +6,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useCart } from "@/Providers/CartProvider";
+import Image from "next/image";
 
 export const CartSummary = () => {
   const { cartItems } = useCart();
+  let count = 0;
+
+  cartItems.map((cartItem) => {
+    count += cartItem.quantity;
+  });
+
   return (
     <div className="container w-fit mx-auto">
       <Accordion type="single" collapsible>
@@ -18,7 +25,7 @@ export const CartSummary = () => {
               <div className="flex">
                 <ShoppingCart />
                 <p className="pl-4 font-bold"> Захиалгын хураангуй</p>
-                <p className="pl-3">(1 items)</p>
+                <p className="pl-3">({count})</p>
               </div>
             </div>
           </AccordionTrigger>
@@ -30,10 +37,13 @@ export const CartSummary = () => {
                   className="mt-5 flex  w-[400px] h-[95px] justify-between"
                 >
                   <div className="flex">
-                    <img
+                    <Image
                       src={cartItem.image}
+                      height={70}
+                      width={70}
                       className="w-[70px] h-[70px] rounded"
-                    ></img>
+                      alt={"img"}
+                    ></Image>
                     <div className="pl-3">
                       <p className="w-[210px]">{cartItem.name}</p>
                       <p className="text-gray-600">${cartItem.price}</p>

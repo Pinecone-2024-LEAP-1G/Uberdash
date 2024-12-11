@@ -1,7 +1,7 @@
 import { models, Schema, model } from "mongoose";
 
 export type Order = {
-  id: Schema.Types.ObjectId;
+  _id: Schema.Types.ObjectId;
   status:
     | "Pending"
     | "Cancelled"
@@ -42,15 +42,12 @@ const OrderSchema = new Schema<Order>({
   },
   orderItemCount: {
     type: Number,
-    required: true,
   },
   priceWithoutDiscount: {
     type: Number,
-    required: true,
   },
   priceWithDiscount: {
     type: Number,
-    required: true,
   },
   userId: {
     type: Schema.Types.ObjectId,

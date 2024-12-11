@@ -11,11 +11,13 @@ export const FastFoodFilter = () => {
   const fetchMenuItems = async () => {
     try {
       const response = await axios.get<{ menuItems: MenuItemType[] }>(
-        `${process.env.NEXT_PUBLIC_URL}/api/menu-item`
+        `
+        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
+        /api/menu-item`
       );
       setMenuItems(response.data.menuItems);
     } catch (error) {
-      console.error("Error fetching menu items:", error);
+      console.log("Error fetching menu items:", error);
     }
   };
 

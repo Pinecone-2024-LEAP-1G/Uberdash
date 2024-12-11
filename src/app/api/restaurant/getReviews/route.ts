@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { RestaurantModel, menuItemModel, ReviewModel } from "@/lib/models";
+import { RestaurantModel, ReviewModel } from "@/lib/models";
 import { connectToMongoDB } from "@/lib/db";
 
 connectToMongoDB();

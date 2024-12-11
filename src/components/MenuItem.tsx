@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
+import { useLocation } from "@/Providers/LocationProvider";
 
 type Location = {
   type: "Point";
@@ -24,33 +25,30 @@ type MenuTypes = {
 };
 
 export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
-  const myLocation: Location = {
-    type: "Point",
-    coordinates: [47.918841, 106.917562],
-  };
+  const data = useLocation();
+  const { location, isLoading } = data;
   const [minDist, setMinDist] = useState<number>(0);
-  const [branchesWithDistance, setBranchesWithDistance] = useState<
-    restaurantBranchWithDistance[]
-  >([]);
+
   useEffect(() => {
+    if (!location.coordinates[0]) return;
+
     const dataFetcher = async () => {
-      const response = await axios.post(
-        "http://localhost:3000/api/restaurant-branch/distance",
-        { location: myLocation, restaurantId }
-      );
-      setBranchesWithDistance(response.data.restaurantBranches);
+      try {
+        const response = await axios.post(
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/restaurant-branch/distance`,
+          { location: location, restaurantId }
+        );
+
+        setMinDist(response.data.closestBranch.distance);
+      } catch (error) {
+        console.log(error);
+      }
     };
     dataFetcher();
-  }, []);
-  useEffect(() => {
-    let dist: number[] = [];
-    branchesWithDistance.map((oneBranch) => {
-      dist.push(oneBranch.distance);
-    });
-    if (dist.length > 0) {
-      setMinDist(Math.min(...dist));
-    }
-  }, [branchesWithDistance]);
+  }, [location]);
+
   return (
     <div className="w-[288px] rounded-xl overflow-hidden ">
       <div

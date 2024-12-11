@@ -9,13 +9,17 @@ const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
     axios
-      .post("http://localhost:3000/api/restaurant/getReviews", {
-        ownerId: restaurantOwnerId,
-      })
+      .post(
+        `${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }api/restaurant/getReviews`,
+        {
+          ownerId: restaurantOwnerId,
+        }
+      )
       .then((response) => {
         setReviews(response.data.reviews);
       })

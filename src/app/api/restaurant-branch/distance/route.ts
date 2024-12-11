@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { RestaurantBranchModel } from "@/lib/models";
 import { connectToMongoDB } from "@/lib/db";
+import mongoose from "mongoose";
 
 const toRadians = (degree: number) => degree * (Math.PI / 180);
 
@@ -37,36 +38,41 @@ export const POST = async (req: NextRequest) => {
         { status: 400 }
       );
     }
-
+    const id = mongoose.Types.ObjectId.createFromHexString(restaurantId);
     const restaurantBranches = await RestaurantBranchModel.find({
-      restaurantId,
+      restaurantId: id,
     });
 
-    const restaurantBranchesWithDistance = restaurantBranches.map((branch) => {
-      const { location: branchLocation } = branch;
-      const [branchLongitude, branchLatitude] = branchLocation.coordinates;
-
-      const distance = haversineDistance(
-        userLatitude,
-        userLongitude,
-        branchLatitude,
-        branchLongitude
+    if (!restaurantBranches.length) {
+      return new Response(
+        JSON.stringify({ error: "No branches found for this restaurant." }),
+        { status: 404 }
       );
+    }
 
-      return {
-        ...branch.toObject(),
-        distance,
-      };
+    const closestBranch = await restaurantBranches
+      .map((branch) => {
+        const { location: branchLocation } = branch;
+        const [branchLongitude, branchLatitude] = branchLocation.coordinates;
+
+        const distance = haversineDistance(
+          userLatitude,
+          userLongitude,
+          branchLatitude,
+          branchLongitude
+        );
+
+        return {
+          ...branch.toObject(),
+          distance,
+        };
+      })
+      .sort((a, b) => a.distance - b.distance)[0];
+
+    return new Response(JSON.stringify({ closestBranch }), {
+      status: 200,
     });
-
-    return new Response(
-      JSON.stringify({ restaurantBranches: restaurantBranchesWithDistance }),
-      {
-        status: 200,
-      }
-    );
   } catch (error) {
-    console.error(error);
     return new Response(
       JSON.stringify({
         error: "An error occurred while processing your request.",

@@ -4,7 +4,7 @@ import OrderModel from "@/lib/models/order";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
-export const GET = async (_request: NextRequest) => {
+export const GET = async () => {
   try {
     const orderItems = await OrderItemModel.find();
 
@@ -15,7 +15,8 @@ export const GET = async (_request: NextRequest) => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { price, quantity, orderId, restaurantId } = await request.json();
+  const { price, quantity, orderId, restaurantId, menuItem } =
+    await request.json();
 
   try {
     const orderItems = await OrderItemModel.create({
@@ -23,6 +24,7 @@ export const POST = async (request: NextRequest) => {
       quantity,
       orderId,
       restaurantId,
+      menuItem,
     });
 
     const { _id } = orderItems;
