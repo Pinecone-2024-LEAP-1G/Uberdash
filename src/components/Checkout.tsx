@@ -7,6 +7,7 @@ import { Restaurant } from "@/lib/models";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Order } from "@/lib/models/order";
+import Link from "next/link";
 
 const Checkout = () => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
@@ -106,9 +107,11 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Button className="w-full" onClick={createOrder}>
-        Захиалга хийх
-      </Button>
+      <Link href={"/order-created"}>
+        <Button className="w-full" onClick={createOrder}>
+          Захиалга хийх
+        </Button>
+      </Link>
     </div>
   );
 };
