@@ -19,7 +19,8 @@ export default function RootLayout({
   const pathname = usePathname();
 
   const isSignInPage = pathname === "/sign-in";
-  const isCheckoutPage = pathname === "/checkout"; // Update the path if needed.
+  const isCheckoutPage = pathname === "/checkout";
+  const isBusinessAccountPage = pathname === "/create-business-account";
 
   return (
     <html lang="en">
@@ -29,9 +30,11 @@ export default function RootLayout({
             <CartProvider>
               <FoodProvider>
                 <NuqsAdapter>
-                  {!isSignInPage && <Header />}
+                  {!isSignInPage && !isBusinessAccountPage && <Header />}
                   {children}
-                  <Footer className={isCheckoutPage ? "mt-72" : ""} />
+                  {!isBusinessAccountPage && (
+                    <Footer className={isCheckoutPage ? "mt-72" : ""} />
+                  )}
                   <Toaster />
                 </NuqsAdapter>
               </FoodProvider>
