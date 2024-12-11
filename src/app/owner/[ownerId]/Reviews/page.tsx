@@ -15,7 +15,7 @@ const Reviews = () => {
       .post(
         `${
           process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-        }api/restaurant/getReviews`,
+        }/api/restaurant/getReviews`,
         {
           ownerId: restaurantOwnerId,
         }

@@ -16,20 +16,22 @@ const Categories = () => {
   const [isCreateCategory, setIsCreateCategory] = useState<boolean>(false);
 
   useEffect(() => {
-    axios
-      .get(
-        `${
-          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-        }api/category`
-      )
-      .then(function (response) {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/category`
+        );
         setCategories(response.data.category);
-      })
-      .catch(function (error) {
+      } catch (error) {
         console.log(error);
-      });
+      }
+    };
+    fetchData();
   }, []);
 
+  console.log(categories);
   const CreateCategory = () => {
     setIsCreateCategory(!isCreateCategory);
   };

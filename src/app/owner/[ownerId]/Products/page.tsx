@@ -19,9 +19,14 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.post(`/api/menu-item/ownerId`, {
-          ownerId: restaurantOwnerId,
-        });
+        const response = await axios.post(
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/menu-item/ownerId`,
+          {
+            ownerId: restaurantOwnerId,
+          }
+        );
         setMenuItems(response.data.menuItem);
       } catch (error) {
         console.log(error);
@@ -29,6 +34,8 @@ const Dashboard = () => {
     };
     fetchdata();
   }, []);
+
+  console.log(menuItems);
 
   const handleCreateProduct = () => {
     setIsCreateProduct(!isCreateProduct);

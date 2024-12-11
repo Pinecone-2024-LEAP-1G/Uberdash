@@ -26,9 +26,10 @@ export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
         ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
           /api/menu-item/${menuItemId}`
         );
+        console.log(response);
         setMenuItem(response.data.menuItem);
       } catch (error) {
-        console.log(error); //toast bolgoh
+        console.log(error);
       }
     };
     fetchData();
@@ -41,7 +42,6 @@ export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
     itemId: menuItemId,
     handleDelete: handleDelete,
   };
-
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-gray-300 items-center">
       {isdelete && <Delete {...newProps} />}

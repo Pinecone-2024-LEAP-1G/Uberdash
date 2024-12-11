@@ -4,6 +4,7 @@ import {
   Info,
   LayoutDashboard,
   MessageSquare,
+  Plus,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -12,10 +13,10 @@ const ownerId: string = "673e90415a6e8e222657bbb4";
 export const AdminSideBoard = () => {
   return (
     <div className="flex flex-col gap-2">
-      <Link href={`/owner/${ownerId}/Info`}>
+      <Link href={`/owner/${ownerId}/AddBranch`}>
         <div className="w-40 flex gap-3 bg-white px-3 hover:bg-slate-300 py-2">
-          <Info />
-          <p> Info </p>
+          <Plus />
+          <p> Add Branch </p>
         </div>
       </Link>
       <Link href={`/owner/${ownerId}/Orders`}>
