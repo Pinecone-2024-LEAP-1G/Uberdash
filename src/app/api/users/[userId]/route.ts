@@ -5,15 +5,15 @@ import { NextRequest } from "next/server";
 connectToMongoDB();
 
 export const GET = async (
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ userId: string }> }
 ) => {
   const { userId } = await params;
 
   try {
-    const users = await UserModel.find({ _id: userId }).populate("favourites");
+    const user = await UserModel.findById(userId).populate("favourites");
 
-    return Response.json({ users });
+    return Response.json({ user });
   } catch (error) {
     return Response.json({ message: error });
   }
