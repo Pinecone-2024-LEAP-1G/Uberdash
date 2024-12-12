@@ -51,6 +51,8 @@ export const RestaurantList: React.FC = () => {
               alt="img"
               src={restaurant.image}
               className="w-24 h-24 mx-auto rounded-full"
+              width={250}
+              height={250}
             />
             <h3 className="font-medium text-lg mt-2">{restaurant.name}</h3>
           </div>

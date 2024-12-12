@@ -5,7 +5,6 @@ import { Restaurants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { parseAsString, useQueryState } from "nuqs";
-import { Toaster } from "@/components/ui/toaster";
 import { ToastModal } from "@/components/ToastModal";
 
 const Home = () => {
