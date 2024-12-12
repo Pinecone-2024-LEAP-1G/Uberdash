@@ -1,18 +1,17 @@
 import { connectToMongoDB } from "@/lib/db";
-import { ReviewModel } from "@/lib/models/review.model";
+import { menuItemModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
 export const GET = async (
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ restaurantId: string }> }
 ) => {
   const restaurantId = (await params).restaurantId;
   try {
-    const reviews = await ReviewModel.find({ restaurantId: restaurantId });
-
-    return Response.json({ reviews });
+    const menuItems = await menuItemModel.find({ restaurantId: restaurantId });
+    return Response.json({ menuItems: menuItems });
   } catch (error) {
-    return Response.json({ error_message: error });
+    return Response.json({ error });
   }
 };
