@@ -19,10 +19,9 @@ const RestaurantSchema = new Schema<Restaurant>({
   rating: { type: Number, default: 0 },
   ownerId: {
     type: Schema.Types.ObjectId,
-    ref: "restaurant-owner",
+    ref: "users",
     required: true,
   },
-
   menuItems: { type: [Schema.Types.ObjectId], default: [], ref: "menu-items" },
 });
 

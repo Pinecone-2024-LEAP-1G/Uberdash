@@ -1,4 +1,30 @@
+"use client";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 const CreateBusinessAccount = () => {
+  const user = useSession();
+  const router = useRouter();
+
+  const [vatId, setVatId] = useState<string>("");
+  const [businessName, setBusinessName] = useState<string>("");
+
+  const handleClick = async () => {
+    const response = await axios.put("/api/users/create-business", {
+      _id: user.data?.user.id,
+      businessName: businessName,
+      vatId: vatId,
+    });
+    if (response.data.message == "success") {
+      //amjilttai business acc uuslee toast
+      router.push("/addRestaurant");
+    } else {
+      //amjiltgui bolson toast
+    }
+  };
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center"
@@ -11,10 +37,11 @@ const CreateBusinessAccount = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">
           Бизнесийн аккаунт үүсгэх
         </h1>
-        <form>
+        <div>
           <label className="block mb-4">
             Бизнесийн нэр:
             <input
+              onChange={(event) => setBusinessName(event.target.value)}
               type="text"
               name="businessName"
               className="block border rounded p-2 w-full mt-1"
@@ -24,6 +51,7 @@ const CreateBusinessAccount = () => {
           <label className="block mb-4">
             НӨАТ-ийн дугаар:
             <input
+              onChange={(event) => setVatId(event.target.value)}
               type="text"
               name="vatId"
               className="block border rounded p-2 w-full mt-1"
@@ -31,14 +59,17 @@ const CreateBusinessAccount = () => {
           </label>
           <button
             type="submit"
+            onClick={() => {
+              handleClick();
+            }}
             className="w-full bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600 transition"
           >
             Илгээх
           </button>
-        </form>
+        </div>
 
         <div className="mt-6 text-center">
-          <a
+          <Link
             href="/"
             className="inline-flex items-center text-blue-500 hover:underline"
           >
@@ -57,7 +88,7 @@ const CreateBusinessAccount = () => {
               />
             </svg>
             Нүүр хуудас руу буцах
-          </a>
+          </Link>
         </div>
       </div>
     </div>
