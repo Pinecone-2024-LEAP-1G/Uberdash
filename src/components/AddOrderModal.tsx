@@ -8,8 +8,9 @@ import {
 import PlusSign from "./ui/PlusSignSvg";
 import { MenuItemType } from "@/lib/types";
 import { useCart } from "@/Providers/CartProvider";
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { SelectQuantity } from "../components/basket-drawer/SelectQuantity";
+import { toast } from "@/hooks/use-toast";
 
 type MenuItem = {
   menuItem?: MenuItemType;
@@ -29,6 +30,10 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
         quantity: count,
       });
     }
+
+    toast({
+      description: "Амжилттай сагслагдлаа ✅",
+    });
   };
 
   const handleChangeCount = (value: number) => {
@@ -87,13 +92,15 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
                     </div>
                     <div>
                       <div className="mt-4">
-                        <button
-                          type="button"
-                          onClick={handleAddToCart}
-                          className="w-[492px] h-[56px] px-2 rounded-lg bg-[#000000] text-[18px] text-white mt-2 hover:bg-[#202020]"
-                        >
-                          Add 1 to order ${totalAmount}
-                        </button>
+                        <DialogTrigger>
+                          <button
+                            type="button"
+                            onClick={handleAddToCart}
+                            className="w-[492px] h-[56px] px-2 rounded-lg bg-[#000000] text-[18px] text-white mt-2 hover:bg-[#202020]"
+                          >
+                            Add 1 to order ${totalAmount}
+                          </button>
+                        </DialogTrigger>
                       </div>
                     </div>
                   </div>
