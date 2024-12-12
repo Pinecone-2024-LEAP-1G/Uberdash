@@ -104,7 +104,7 @@ export const BasketDrawer: React.FC = () => {
               <OrderNote />
             </div>
             <div className="flex justify-between text-[18px] font-medium mt-4 mb-4">
-              <p>Дэлгэрэнгүй дүн</p>
+              <p>Нийт захиалгын үнийн дүн</p>
               <p>{Number(totalAmount).toLocaleString()}₮</p>
             </div>
           </div>

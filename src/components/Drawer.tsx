@@ -10,6 +10,7 @@ import { Menu, Heart, ShoppingBag } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const Drawers = () => {
   const { data: session } = useSession();
@@ -49,13 +50,15 @@ export const Drawers = () => {
             </div>
 
             <div className="flex flex-col gap-3">
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
-                <ShoppingBag className="w-5 h-5 text-gray-600" />
-                Захиалгын түүх
-              </button>
+              <Link href={"/orders"}>
+                <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
+                  <ShoppingBag className="w-5 h-5 text-gray-600" />
+                  Захиалгын түүх
+                </button>
+              </Link>
               <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
                 <Heart className="w-5 h-5 text-gray-600" />
-                Дуртай
+                Таалагдсан хоолнууд
               </button>
             </div>
 
