@@ -75,7 +75,7 @@ export const POST = async (req: NextRequest) => {
   } catch (error) {
     return new Response(
       JSON.stringify({
-        error: "An error occurred while processing your request.",
+        error: "An error occurred while processing your request." + error,
       }),
       { status: 500 }
     );
