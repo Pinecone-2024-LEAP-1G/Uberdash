@@ -21,7 +21,6 @@ const Orders = () => {
     };
     GetOrders();
   }, [userId]);
-  console.log(orders);
 
   return (
     <div className="container mx-auto">
