@@ -50,7 +50,7 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
             <PlusSign />
           </DialogTrigger>
         </div>
-        <DialogContent className="h-[700px]">
+        <DialogContent className="h-[600px]">
           <DialogHeader>
             <DialogTitle>
               <div className="flex gap-6">
@@ -76,29 +76,28 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
                     {menuItem.name}
                   </p>
                   <p className="text-[20px] leading-5 whitespace-pre-wrap text-[#0E8345] font-bold mb-2">
-                    ${menuItem.price}
+                    {Number(menuItem.price).toLocaleString()}₮
                   </p>
                   <p className="text-[14px] overflow-hidden font-normal text-[#767575] pt-2 mb-[10px]">
                     {menuItem.description}
                   </p>
-                  <p className="w-fit bg-[#dfdddd] text-[#5E5E5E] px-2 py-1 rounded gap-1 text-[16px] font-medium leading-4 mt-7">
-                    #1 most liked
-                  </p>
+
                   <div className="border-[0.5px] w-[492px] border-[#D6D8DB] mt-[22px]"></div>
 
                   <div className="mt-[200px]">
-                    <div className="mt-7">
+                    <div className="mt-[80px]">
                       <SelectQuantity onChange={handleChangeCount} />
                     </div>
                     <div>
-                      <div className="mt-4">
+                      <div className="mt-[70px]">
                         <DialogTrigger>
                           <button
                             type="button"
                             onClick={handleAddToCart}
                             className="w-[492px] h-[56px] px-2 rounded-lg bg-[#000000] text-[18px] text-white mt-2 hover:bg-[#202020]"
                           >
-                            Add 1 to order ${totalAmount}
+                            Сагсанд нэмэх {Number(totalAmount).toLocaleString()}
+                            ₮
                           </button>
                         </DialogTrigger>
                       </div>

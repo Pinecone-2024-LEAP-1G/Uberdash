@@ -21,9 +21,11 @@ export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
           backgroundSize: "cover",
         }}
       >
-        <div className="w-[98px] h-[24px] bg-[#0e8345] text-[12px] font-medium px-3 py-1 absolute top-2 rounded-br-[12px] rounded-tr-[12px]">
-          <p className="text-white">#1 most liked</p>
-        </div>
+        <div
+          className="absolute inset-0 bg-slate-400 rounded-xl"
+          style={{ opacity: 0.2 }}
+        ></div>
+        <div className=" text-[12px] font-medium px-3 py-1 absolute top-2 rounded-br-[12px] rounded-tr-[12px]"></div>
         <div className="w-9 h-9 rounded-full bg-white flex justify-center items-center absolute bottom-2 right-2 hover:bg-slate-200">
           <div className="mt-[6px]">
             <AddOrderModal menuItem={menuItem} />

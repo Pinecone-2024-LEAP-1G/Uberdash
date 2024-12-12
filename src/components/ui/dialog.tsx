@@ -5,7 +5,6 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import DownloadIcon from "./DownloadIcon";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -51,9 +50,6 @@ const DialogContent = React.forwardRef<
 
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
-      <div className="absolute right-4 top-4 rounded-full h-12 w-12 flex justify-center items-center    transition-opacity cursor-pointer  hover:bg-slate-300 ">
-        <DownloadIcon />
-      </div>
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
