@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const Checkout = () => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
-  const { cartItems, clearCart } = useCart();
+  const { cartItems } = useCart();
   const { data: session } = useSession();
   const [order, setOrder] = useState<Order | null>(null);
 
@@ -20,7 +20,9 @@ const Checkout = () => {
       const getRestaurant = async () => {
         try {
           const { data } = await axios.get<{ restaurant: Restaurant }>(
-            `/api/restaurant/${cartItems[0]?.restaurantId}`
+            `${
+              process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+            }/api/restaurant/${cartItems[0]?.restaurantId}`
           );
           setRestaurant(data.restaurant);
         } catch (error) {
@@ -33,33 +35,36 @@ const Checkout = () => {
 
   const postOrder = async () => {
     try {
-      const { data } = await axios.post(`/api/order`, {
-        userId: session?.user.id,
-        orderItems: cartItems.map((cartItem) => ({
-          menuItem: cartItem._id,
-          quantity: cartItem.quantity,
-          price: cartItem.price,
-          restaurantId: restaurant?._id,
-          orderId: order?._id,
-        })),
-      });
+      const { data } = await axios.post(
+        `${
+          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+        }/api/order`,
+        {
+          userId: session?.user.id,
+          orderItems: [],
+        }
+      );
       setOrder(data.order);
-      console.log(order);
     } catch (error) {
-      console.log("Error creating order:", error);
+      console.error("Error creating order:", error);
     }
   };
 
   const postOrderItem = async (cartItem: CartItem) => {
     try {
       if (order && restaurant) {
-        await axios.post(`/api/orderItem`, {
-          price: cartItem.price,
-          quantity: cartItem.quantity,
-          menuItem: cartItem._id,
-          orderId: order._id,
-          restaurantId: restaurant._id,
-        });
+        await axios.post(
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/orderItem`,
+          {
+            price: cartItem.price,
+            quantity: cartItem.quantity,
+            orderId: order._id,
+            restaurantId: restaurant._id,
+            menuItem: cartItem._id,
+          }
+        );
       }
     } catch (error) {
       console.error("Error posting order item:", error);
@@ -74,10 +79,9 @@ const Checkout = () => {
     if (order) {
       await Promise.all(cartItems.map((cartItem) => postOrderItem(cartItem)));
     }
-    clearCart();
   };
 
-  if (!restaurant) return <div>No restaurant found.</div>;
+  if (!restaurant) return null;
 
   return (
     <div className="container w-fit mx-auto">
