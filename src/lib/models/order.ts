@@ -25,51 +25,54 @@ export type Order = {
   orderItems: Schema.Types.ObjectId[];
 };
 
-const OrderSchema = new Schema<Order>({
-  status: {
-    type: String,
-    required: true,
-    enum: [
-      "Pending",
-      "Cancelled",
-      "ReadyToStart",
-      "InPreparation",
-      "ReadyForPickup",
-      "OnTheWay",
-      "Delivered",
-    ],
-    default: "Pending",
+const OrderSchema = new Schema<Order>(
+  {
+    status: {
+      type: String,
+      required: true,
+      enum: [
+        "Pending",
+        "Cancelled",
+        "ReadyToStart",
+        "InPreparation",
+        "ReadyForPickup",
+        "OnTheWay",
+        "Delivered",
+      ],
+      default: "Pending",
+    },
+    orderItemCount: {
+      type: Number,
+    },
+    priceWithoutDiscount: {
+      type: Number,
+    },
+    priceWithDiscount: {
+      type: Number,
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "users",
+    },
+    cancelledTime: Date,
+    readyToStartTime: Date,
+    inPreparationTime: Date,
+    readyForPickupTime: Date,
+    onTheWayTime: Date,
+    deliveredTime: Date,
+    discountCodeId: {
+      type: Schema.Types.ObjectId,
+      ref: "discounts",
+    },
+    deliveryAddressId: {
+      type: Schema.Types.ObjectId,
+      ref: "addresses",
+    },
+    orderItems: [{ type: Schema.Types.ObjectId, ref: "order-items" }],
   },
-  orderItemCount: {
-    type: Number,
-  },
-  priceWithoutDiscount: {
-    type: Number,
-  },
-  priceWithDiscount: {
-    type: Number,
-  },
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: "users",
-  },
-  cancelledTime: Date,
-  readyToStartTime: Date,
-  inPreparationTime: Date,
-  readyForPickupTime: Date,
-  onTheWayTime: Date,
-  deliveredTime: Date,
-  discountCodeId: {
-    type: Schema.Types.ObjectId,
-    ref: "discounts",
-  },
-  deliveryAddressId: {
-    type: Schema.Types.ObjectId,
-    ref: "addresses",
-  },
-  orderItems: [{ type: Schema.Types.ObjectId, ref: "order-items" }],
-});
+  { timestamps: true }
+);
 
 const OrderModel = models.orders || model<Order>("orders", OrderSchema);
 export default OrderModel;

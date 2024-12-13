@@ -9,13 +9,20 @@ export type OrderItem = {
   menuItem: Schema.Types.ObjectId;
 };
 
-const OrderItemSchema = new Schema<OrderItem>({
-  price: { type: Number, required: true },
-  quantity: { type: Number },
-  orderId: { type: Schema.Types.ObjectId, ref: "orders" },
-  restaurantId: { type: Schema.Types.ObjectId, ref: "restaurants" },
-  menuItem: { type: Schema.Types.ObjectId, ref: "menu-items" },
-});
+const OrderItemSchema = new Schema<OrderItem>(
+  {
+    price: { type: Number, required: true },
+    quantity: { type: Number },
+    orderId: { type: Schema.Types.ObjectId, ref: "orders", required: true },
+    restaurantId: {
+      type: Schema.Types.ObjectId,
+      ref: "restaurants",
+      required: true,
+    },
+    menuItem: { type: Schema.Types.ObjectId, ref: "menu-items" },
+  },
+  { timestamps: true }
+);
 
 export const OrderItemModel =
   models["order-items"] || model<OrderItem>("order-items", OrderItemSchema);
