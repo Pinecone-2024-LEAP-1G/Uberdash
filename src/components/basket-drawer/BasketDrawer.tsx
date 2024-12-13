@@ -64,7 +64,9 @@ export const BasketDrawer: React.FC = () => {
               </div>
             </SheetTitle>
             <div className="flex justify-between border-b border-[#D6D8DB]">
-              <p className="text-[16px] font-medium mb-4">{count} items</p>
+              <p className="text-[16px] font-medium mb-4">
+                {count} Ширхэг захиалга
+              </p>
             </div>
             {cartItems.map((cartItem) => {
               return (
@@ -87,7 +89,7 @@ export const BasketDrawer: React.FC = () => {
                       {cartItem.description}
                     </p>
                     <p className="text-[#656464]">
-                      ${Number(cartItem.price) * cartItem.quantity}
+                      {Number(cartItem.price) * cartItem.quantity}₮
                     </p>
                   </div>
                   <Counter
@@ -103,7 +105,7 @@ export const BasketDrawer: React.FC = () => {
             </div>
             <div className="flex justify-between text-[18px] font-medium mt-4 mb-4">
               <p>Дэлгэрэнгүй дүн</p>
-              <p>${totalAmount}</p>
+              <p>{Number(totalAmount).toLocaleString()}₮</p>
             </div>
           </div>
           <Link href="/checkout">

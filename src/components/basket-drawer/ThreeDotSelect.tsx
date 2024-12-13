@@ -34,7 +34,7 @@ export default function SmallModal() {
                   className="block px-4 py-2 text-sm text-red-600  w-full text-left"
                   onClick={() => clearOrder()}
                 >
-                  Clear Cart
+                  Бүх Захиалгуудыг устгах
                 </button>
               </li>
             </div>
