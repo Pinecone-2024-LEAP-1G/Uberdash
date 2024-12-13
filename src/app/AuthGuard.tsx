@@ -9,9 +9,11 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
-  const [, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (status === "loading") return;
+
     if (status === "unauthenticated") {
       if (pathname === "/checkout") {
         localStorage.setItem("redirectToCheckout", "true");
@@ -30,17 +32,9 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     }
   }, [status, pathname, router]);
 
-  useEffect(() => {
-    const handleLogout = () => {
-      router.push("/");
-    };
-
-    if (status === "unauthenticated") {
-      handleLogout();
-    }
-
-    return () => {};
-  }, [status, router]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return <>{children}</>;
 }
