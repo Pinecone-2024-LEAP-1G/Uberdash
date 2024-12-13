@@ -1,5 +1,5 @@
 "use client";
-import { AdminSideBoard } from "@/components/AdminSideBoard";
+import { AdminSideBar } from "@/components/AdminSideBoard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -45,7 +45,7 @@ const Reviews = () => {
 
   return (
     <div className="p-4 flex gap-3 w-full">
-      <AdminSideBoard />
+      <AdminSideBar />
       <div style={{ flex: 1, height: 500 }}>
         <h1 className="text-xl font-bold mb-4">Reviews</h1>
         <DataGrid

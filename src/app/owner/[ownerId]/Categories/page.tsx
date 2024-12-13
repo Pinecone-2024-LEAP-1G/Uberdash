@@ -1,5 +1,5 @@
 "use client";
-import { AdminSideBoard } from "@/components/AdminSideBoard";
+import { AdminSideBar } from "@/components/AdminSideBoard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "@/lib/types";
@@ -41,7 +41,7 @@ const Categories = () => {
   return (
     <div className="p-4 flex gap-3 w-full">
       {isCreateCategory && <CreateCategoryComp {...newProps} />}
-      <AdminSideBoard />
+      <AdminSideBar />
       <div className="flex flex-col gap-4 items-start ">
         <div
           onClick={CreateCategory}
