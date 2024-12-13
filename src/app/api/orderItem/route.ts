@@ -33,7 +33,7 @@ export const POST = async (request: NextRequest) => {
       {
         _id: orderId,
       },
-      { $push: { orderItems: _id } },
+      { $push: { orderItems: _id }, $inc: { orderItemCount: quantity } },
       { new: true }
     );
 
