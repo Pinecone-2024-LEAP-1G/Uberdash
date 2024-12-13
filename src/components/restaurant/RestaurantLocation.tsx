@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp, Clock3, Copy, MapPin } from "lucide-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { ObjectId } from "mongoose";
+import Map from "./RestaurantMap";
 
 type Location = {
   type: "Point";
@@ -32,11 +33,10 @@ export const RestaurantLocation = ({ restaurantId }: resId) => {
     };
     dataFetch();
   }, []);
+
   return (
-    <div
-      className="border rounded-2xl h-[334px] flex flex-col justify-end"
-      style={{ backgroundImage: `url(/map.png)`, backgroundSize: "cover" }}
-    >
+    <div className="border rounded-2xl h-[334px] flex flex-col justify-end">
+      <Map />
       <div className={`bg-white ${openDetail ? "hidden" : "flex"}`}>
         <div className="w-20 h-16 items-center justify-center flex">
           <MapPin width={18} height={18} />
