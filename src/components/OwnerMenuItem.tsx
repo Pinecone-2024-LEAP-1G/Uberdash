@@ -15,17 +15,17 @@ type DeleteType = {
 
 export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
   const [menuItem, setMenuItem] = useState<MenuItemType>();
+  console.log(menuItemId);
 
   const [isdelete, setDelete] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `
-        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
-          /api/menu-item/${menuItemId}`
-        );
+        const response = await axios.get(`/api/menu-item/${menuItemId}`);
+
+        console.log(response);
+
         setMenuItem(response.data.menuItem);
       } catch (error) {
         console.log(error); //toast bolgoh
