@@ -21,6 +21,7 @@ export default function RootLayout({
   const isSignInPage = pathname === "/sign-in";
   const isCheckoutPage = pathname === "/checkout";
   const isBusinessAccountPage = pathname === "/create-business-account";
+  const isAddRestaurantPage = pathname === "/addRestaurant";
 
   return (
     <html lang="en">
@@ -30,7 +31,9 @@ export default function RootLayout({
             <CartProvider>
               <FoodProvider>
                 <NuqsAdapter>
-                  {!isSignInPage && !isBusinessAccountPage && <Header />}
+                  {!isSignInPage &&
+                    !isBusinessAccountPage &&
+                    !isAddRestaurantPage && <Header />}
                   {children}
                   {!isBusinessAccountPage && (
                     <Footer className={isCheckoutPage ? "mt-72" : ""} />
