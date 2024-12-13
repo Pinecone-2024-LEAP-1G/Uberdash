@@ -26,7 +26,7 @@ type MenuTypes = {
 
 export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
   const data = useLocation();
-  const { location, isLoading } = data;
+  const { location } = data;
   const [minDist, setMinDist] = useState<number>(0);
 
   useEffect(() => {

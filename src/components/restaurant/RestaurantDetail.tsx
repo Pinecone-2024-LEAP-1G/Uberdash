@@ -9,9 +9,9 @@ import { Input } from "../ui/input";
 import { RestrauntMenu } from "./RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
-import { useFood } from "../../Providers/MenuItem.Provider";
 import { Review } from "@/lib/models";
 import { Schema } from "mongoose";
+import { MenuItemType } from "@/lib/types";
 // import { useSession } from "next-auth/react";
 
 type Restaurant = {
@@ -30,19 +30,15 @@ export const RestaurantDetail = ({
 
   const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
+  const [menuItems, setMenuItems] = useState<MenuItemType[]>();
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { foodItems } = useFood();
   // const { data: session } = useSession();
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-          }/api/review`
-        );
-        setReviews(response.data.review);
+        const response = await axios.get(`/api/review/${restaurantId}`);
+        setReviews(response.data.reviews);
       } catch (err) {
         console.log("Error fetching Review:", err);
       }
@@ -54,13 +50,22 @@ export const RestaurantDetail = ({
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get(
-          `
-     ${
-       process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-     }/api/restaurant/${restaurantId}`
-        );
+        const response = await axios.get(`/api/restaurant/${restaurantId}`);
         setRestaurant(response.data.restaurant);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchdata();
+  }, []);
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const response = await axios.get(
+          `/api/menu-item/restaurant/${restaurantId}`
+        );
+        setMenuItems(response.data.menuItems);
       } catch (error) {
         console.log(error);
       }
@@ -72,10 +77,6 @@ export const RestaurantDetail = ({
     setSearch(event.target.value);
   };
 
-  const filteredReviews = reviews.filter(
-    (review) => review.restaurantId === restaurantId
-  );
-
   return (
     <div className="container mx-auto max-w-[1200px]">
       <RestaurantHero
@@ -85,10 +86,7 @@ export const RestaurantDetail = ({
       />
       <div className="flex gap-4">
         <div className="w-2/3">
-          <ReviewRating
-            reviews={filteredReviews}
-            description={restaurant?.info}
-          />
+          <ReviewRating reviews={reviews} description={restaurant?.info} />
         </div>
         <div className="w-1/3 flex flex-col gap-4">
           <DeliveryFee />
@@ -97,16 +95,8 @@ export const RestaurantDetail = ({
       </div>
       <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
       <div className="grid grid-cols-5 my-4 gap-6">
-        {foodItems.map((foodItem) => {
-          {
-            if (foodItem.restaurantId === restaurantId) {
-              return (
-                <MenuItemLastCard menuItem={foodItem} key={foodItem._id} />
-              );
-            } else {
-              return;
-            }
-          }
+        {menuItems?.map((menuItem) => {
+          return <MenuItemLastCard menuItem={menuItem} key={menuItem._id} />;
         })}
       </div>
       <div className="flex items-center justify-between">
@@ -139,22 +129,16 @@ export const RestaurantDetail = ({
         </div>
       </div>
       <div className="grid grid-cols-4 my-4 gap-6">
-        {foodItems.map((foodItem) => {
-          {
-            if (foodItem.restaurantId === restaurantId) {
-              return (
-                <div key={foodItem._id} className="col-span-2">
-                  <RestrauntMenu
-                    menuItem={foodItem}
-                    percentage="80%"
-                    like="(1100)"
-                  />
-                </div>
-              );
-            } else {
-              return;
-            }
-          }
+        {menuItems?.map((menuItem) => {
+          return (
+            <div key={menuItem._id} className="col-span-2">
+              <RestrauntMenu
+                menuItem={menuItem}
+                percentage="80%"
+                like="(1100)"
+              />
+            </div>
+          );
         })}
       </div>
     </div>

@@ -10,6 +10,7 @@ import { SessionProvider } from "next-auth/react";
 import { AuthGuard } from "./AuthGuard";
 import { usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -26,24 +27,27 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        <SessionProvider>
-          <AuthGuard>
-            <CartProvider>
-              <FoodProvider>
-                <NuqsAdapter>
-                  {!isSignInPage &&
-                    !isBusinessAccountPage &&
-                    !isAddRestaurantPage && <Header />}
-                  {children}
-                  {!isBusinessAccountPage && (
-                    <Footer className={isCheckoutPage ? "mt-72" : ""} />
-                  )}
-                  <Toaster />
-                </NuqsAdapter>
-              </FoodProvider>
-            </CartProvider>
-          </AuthGuard>
-        </SessionProvider>
+        <Suspense>
+          {" "}
+          <SessionProvider>
+            <AuthGuard>
+              <CartProvider>
+                <FoodProvider>
+                  <NuqsAdapter>
+                    {!isSignInPage &&
+                      !isBusinessAccountPage &&
+                      !isAddRestaurantPage && <Header />}
+                    {children}
+                    {!isBusinessAccountPage && (
+                      <Footer className={isCheckoutPage ? "mt-72" : ""} />
+                    )}
+                    <Toaster />
+                  </NuqsAdapter>
+                </FoodProvider>
+              </CartProvider>
+            </AuthGuard>
+          </SessionProvider>
+        </Suspense>
       </body>
     </html>
   );
