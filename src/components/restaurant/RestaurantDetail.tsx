@@ -37,9 +37,7 @@ export const RestaurantDetail = ({
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(
-          `/api/review/674695388735f0d1dadc3b7f`
-        );
+        const response = await axios.get(`/api/review/${restaurantId}`);
         setReviews(response.data.reviews);
       } catch (err) {
         console.log("Error fetching Review:", err);
