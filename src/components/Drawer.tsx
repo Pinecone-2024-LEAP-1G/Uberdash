@@ -1,22 +1,31 @@
-"use client";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Heart, ShoppingBag } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import UserDashboardButton from "@/components/UserDashboardButton";
+import { useEffect, useState } from "react";
 
 export const Drawers = () => {
   const { data: session } = useSession();
   const router = useRouter();
-
   const SHEET_SIDES = ["left"] as const;
+  const [hasOwner, setHasOwner] = useState(false);
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetch(`/api/users?id=${session.user.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.users.length > 0) {
+            const user = data.users[0];
+            setHasOwner(user.businessName !== "" || user.vatId !== "");
+          }
+        })
+        .catch((error) => console.error("Error fetching user data:", error));
+    }
+  }, [session]);
 
   return (
     <>
@@ -32,8 +41,6 @@ export const Drawers = () => {
             className="animate-slide-in-left"
             style={{ maxWidth: "335px" }}
           >
-            <SheetTitle></SheetTitle>
-
             <div className="flex items-center gap-2 py-3">
               {session?.user?.image && (
                 <Image
@@ -50,7 +57,7 @@ export const Drawers = () => {
             </div>
 
             <div className="flex flex-col gap-3">
-              <Link href={"/orders"}>
+              <Link href="/orders">
                 <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
                   <ShoppingBag className="w-5 h-5 text-gray-600" />
                   Захиалгын түүх
@@ -62,14 +69,18 @@ export const Drawers = () => {
               </button>
             </div>
 
-            <div className="mt-4">
-              <button
-                onClick={() => router.push("/create-business-account")}
-                className="w-full bg-[#F3F3F3] rounded-full py-2 text-center"
-              >
-                Бизнесийн аккаунт үүсгэх
-              </button>
-            </div>
+            {!hasOwner && (
+              <div className="mt-4">
+                <button
+                  onClick={() => router.push("/create-business-account")}
+                  className="w-full bg-[#F3F3F3] rounded-full py-2 text-center"
+                >
+                  Бизнесийн аккаунт үүсгэх
+                </button>
+              </div>
+            )}
+
+            <UserDashboardButton />
 
             {session && (
               <div className="mt-4">
