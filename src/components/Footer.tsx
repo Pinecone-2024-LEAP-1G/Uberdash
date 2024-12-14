@@ -6,7 +6,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ className = "" }) => {
   return (
-    <footer className={`py-12 mb-3 ${className}`}>
+    <footer className={`py-12 mb-3 mt-40 ${className}`}>
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-8 px-6">
         <div className="flex flex-col items-center md:items-start">
           <p className="text-3xl font-extrabold text-gray-800">Хурдан хоол</p>
