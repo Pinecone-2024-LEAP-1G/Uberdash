@@ -11,6 +11,7 @@ import { AuthGuard } from "./AuthGuard";
 import { usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
 import { Suspense } from "react";
+import LoadingWrapper from "@/components/LoadingWrapper";
 
 export default function RootLayout({
   children,
@@ -18,7 +19,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-
   const isSignInPage = pathname === "/sign-in";
   const isCheckoutPage = pathname === "/checkout";
   const isBusinessAccountPage = pathname === "/create-business-account";
@@ -28,16 +28,17 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen">
         <Suspense>
-          {" "}
           <SessionProvider>
             <AuthGuard>
               <CartProvider>
                 <FoodProvider>
                   <NuqsAdapter>
-                    {!isSignInPage &&
-                      !isBusinessAccountPage &&
-                      !isAddRestaurantPage && <Header />}
-                    {children}
+                    <LoadingWrapper>
+                      {!isSignInPage &&
+                        !isBusinessAccountPage &&
+                        !isAddRestaurantPage && <Header />}
+                      {children}
+                    </LoadingWrapper>
                     {!isBusinessAccountPage && (
                       <Footer className={isCheckoutPage ? "mt-72" : ""} />
                     )}
