@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface RestaurantFormData {
   name: string;
@@ -15,6 +16,7 @@ interface RestaurantFormData {
 
 const AddRestaurant = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [name, setName] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [banner, setBanner] = useState<string>("");
@@ -50,6 +52,7 @@ const AddRestaurant = () => {
       const data = await response.json();
       if (response.ok) {
         console.log("Рестораныг амжилттай үүсгэсэн", data.newRestaurant);
+        router.push("/");
       } else {
         console.error("Рестораныг үүсгэхэд алдаа гарлаа", data.error);
       }
