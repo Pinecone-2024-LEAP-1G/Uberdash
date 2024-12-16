@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sheet,
   SheetContent,
@@ -12,6 +14,22 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import UserDashboardButton from "@/components/UserDashboardButton";
 import { useEffect, useState } from "react";
+
+const SkeletonLoader = () => (
+  <div className="animate-pulse space-y-4">
+    <div className="flex items-center gap-2 py-3 border-b border-gray-200">
+      <div className="w-10 h-10 bg-gray-300 rounded-full" />
+      <div className="w-32 h-6 bg-gray-300 rounded-md" />
+    </div>
+    <div className="flex flex-col gap-3 mt-4">
+      <div className="w-full h-10 bg-gray-300 rounded-md" />
+      <div className="w-full h-10 bg-gray-300 rounded-md" />
+      <div className="w-full h-10 bg-gray-300 rounded-md" />
+    </div>
+    <div className="w-full h-10 bg-gray-300 rounded-md mt-4" />
+    <div className="w-full h-10 bg-gray-300 rounded-md mt-4" />
+  </div>
+);
 
 export const Drawers = () => {
   const { data: session } = useSession();
@@ -50,20 +68,24 @@ export const Drawers = () => {
               <SheetTitle className="sr-only">Menu</SheetTitle>
             </SheetHeader>
 
-            <div className="flex items-center gap-2 py-3 border-b border-gray-200">
-              {session.user.image && (
-                <Image
-                  src={session.user.image}
-                  alt="User Avatar"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-              )}
-              <span className="text-lg font-semibold ml-3">
-                {session.user.name || ""}
-              </span>
-            </div>
+            {session ? (
+              <div className="flex items-center gap-2 py-3 border-b border-gray-200">
+                {session.user.image && (
+                  <Image
+                    src={session.user.image}
+                    alt="User Avatar"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                )}
+                <span className="text-lg font-semibold ml-3">
+                  {session.user.name || ""}
+                </span>
+              </div>
+            ) : (
+              <SkeletonLoader />
+            )}
 
             <div className="flex flex-col gap-3 mt-4">
               <Link href="/orders" passHref>
