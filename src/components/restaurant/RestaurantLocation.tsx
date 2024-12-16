@@ -4,40 +4,40 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ObjectId } from "mongoose";
 import Map from "./RestaurantMap";
+import { useLocation } from "@/Providers/LocationProvider";
 
-type Location = {
+export type Location = {
   type: "Point";
   coordinates: [number, number];
 };
 
-const myLocation: Location = {
-  type: "Point",
-  coordinates: [47.918841, 106.917562],
+export type RestaurantLocationProps = {
+  restaurantId: string;
 };
-
-type RestaurantLocationProps = {
+type input = {
+  center?: number[];
+  myLocation: Location;
   restaurantId: string;
 };
 
 export const RestaurantLocation = ({
   restaurantId,
 }: RestaurantLocationProps) => {
+  const data = useLocation();
+  const { location } = data;
+
+  const mapProps: input = {
+    myLocation: {
+      type: "Point",
+      coordinates: [47.913678, 106.915995],
+    },
+    restaurantId: restaurantId,
+  };
   const [openDetail, setOpenDetail] = useState<boolean>(false);
-  useEffect(() => {
-    const dataFetch = async () => {
-      const response = await axios.post(
-        `${
-          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-        }/api/restaurant-branch/distance`,
-        { location: myLocation, restaurantId }
-      );
-    };
-    dataFetch();
-  }, []);
 
   return (
     <div className="border rounded-2xl h-[334px] flex flex-col justify-end">
-      <Map />
+      <Map {...mapProps} />
       <div className={`bg-white ${openDetail ? "hidden" : "flex"}`}>
         <div className="w-20 h-16 items-center justify-center flex">
           <MapPin width={18} height={18} />

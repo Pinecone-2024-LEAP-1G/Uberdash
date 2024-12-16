@@ -11,9 +11,11 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Location } from "./RestaurantLocation";
 
 // @ts-ignore
-
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -24,15 +26,45 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow.src,
 });
 
-interface MapProps {
+type MapProps = {
   center?: number[];
-}
+  myLocation: Location;
+  restaurantId: string;
+};
 
-const Map: React.FC<MapProps> = ({ center }) => {
+const Map: React.FC<MapProps> = ({ myLocation, restaurantId }) => {
+  const [branch, setBranch] = useState<{ location: Location } | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.post(`/api/restaurant-branch/distance`, {
+          location: myLocation,
+          restaurantId,
+        });
+
+        setBranch(data.closestBranch);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!branch) {
+    return null;
+  }
+
+  console.log(branch);
+
   return (
     <MapContainer
-      center={(center as L.LatLngExpression) || [47.913678, 106.915995]}
-      zoom={center ? 10 : 18}
+      center={
+        (branch.location.coordinates as L.LatLngExpression) || [
+          47.913678, 106.915995,
+        ]
+      }
+      zoom={(branch.location.coordinates as L.LatLngExpression) ? 10 : 18}
       scrollWheelZoom={true}
       className="h-[35vh] rounded-lg z-0"
     >
@@ -41,7 +73,11 @@ const Map: React.FC<MapProps> = ({ center }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker
-        position={(center as L.LatLngExpression) || [47.913678, 106.915995]}
+        position={
+          (branch.location.coordinates as L.LatLngExpression) || [
+            47.913678, 106.915995,
+          ]
+        }
       />
     </MapContainer>
   );
