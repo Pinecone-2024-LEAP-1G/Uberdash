@@ -4,6 +4,10 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const SkeletonLoader = () => (
+  <div className="w-full h-10 bg-gray-300 rounded-md animate-pulse" />
+);
+
 interface Restaurant {
   id: string;
   name: string;
@@ -47,7 +51,12 @@ const UserDashboardButton = () => {
   }, [session?.user?.id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mt-4">
+        <SkeletonLoader />
+        <SkeletonLoader />
+      </div>
+    );
   }
 
   if (!restaurants.length) {
