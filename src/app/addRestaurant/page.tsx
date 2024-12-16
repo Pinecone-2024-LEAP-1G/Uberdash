@@ -152,6 +152,14 @@ const AddRestaurant = () => {
           >
             Ресторан Үүсгэх
           </Button>
+
+          <Button
+            type="button"
+            onClick={() => router.push("/")}
+            className="w-full bg-gray-300 text-white py-2 px-4 rounded-md mt-4 hover:bg-gray-500"
+          >
+            Буцах
+          </Button>
         </form>
       </div>
     </div>
