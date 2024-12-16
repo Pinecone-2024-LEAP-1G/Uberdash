@@ -6,9 +6,11 @@ import { NextRequest } from "next/server";
 connectToMongoDB();
 export const GET = async () => {
   try {
-    const orderItems = await OrderItemModel.find().populate({
-      path: "menu-items",
-    });
+    const orderItems = await OrderItemModel.find()
+      .populate({
+        path: "menuItem",
+      })
+      .populate({ path: "restaurantId" });
 
     return Response.json({ orderItems });
   } catch (error) {
