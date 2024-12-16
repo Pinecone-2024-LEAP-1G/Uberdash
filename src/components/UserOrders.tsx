@@ -23,7 +23,7 @@ export const UserOrders = ({ orderItem }: { orderItem: OrderItem }) => {
         <p>{menuItem?.name}</p>
         <div className="flex justify-between">
           <p>Тоо: {orderItem.quantity}</p>
-          <p>Үнэ: {orderItem.price}</p>
+          <p>Үнэ: {orderItem.price.toLocaleString()}</p>
         </div>
       </div>
     </div>

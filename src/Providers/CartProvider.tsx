@@ -110,11 +110,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const cartItemsTotalPrice = cartItems.reduce((acc, curr) => {
-    return acc + Number(curr.price); // delivery fee $3
+    return acc + Number(curr.price); // delivery fee 5000₮
   }, 0);
 
   const deliveryFee = cartItems.reduce((acc) => {
-    return acc + 3;
+    return acc + 5000;
   }, 0);
 
   return (

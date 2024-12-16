@@ -89,7 +89,10 @@ export const BasketDrawer: React.FC = () => {
                       {cartItem.description}
                     </p>
                     <p className="text-[#656464]">
-                      {Number(cartItem.price) * cartItem.quantity}₮
+                      {(
+                        Number(cartItem.price) * cartItem.quantity
+                      ).toLocaleString()}
+                      ₮
                     </p>
                   </div>
                   <Counter

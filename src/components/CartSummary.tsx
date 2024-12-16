@@ -46,7 +46,9 @@ export const CartSummary = () => {
                     ></Image>
                     <div className="pl-3">
                       <p className="w-[210px]">{cartItem.name}</p>
-                      <p className="text-gray-600">${cartItem.price}</p>
+                      <p className="text-gray-600">
+                        {cartItem.price.toLocaleString()}₮
+                      </p>
                     </div>
                   </div>
                   <div className="bg-slate-100 w-[20px] h-[30px] text-sm rounded-sm py-[6px] px-[5px] mt-4">
