@@ -32,9 +32,5 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     }
   }, [status, pathname, router]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return <>{children}</>;
 }
