@@ -52,7 +52,6 @@ const Reviews = () => {
 
   return (
     <div className="p-4 flex gap-3 w-full">
-      <AdminSideBar />
       <div style={{ flex: 1, height: 500 }}>
         <h1 className="text-xl font-bold mb-4">Orders</h1>
         <DataGrid

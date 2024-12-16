@@ -39,7 +39,7 @@ const Dashboard = () => {
       {isCreateProduct && (
         <CreateProduct handleCreateProduct={handleCreateProduct} />
       )}
-      <AdminSideBar />
+
       <div className="flex flex-col gap-4 items-start ">
         <div
           onClick={handleCreateProduct}

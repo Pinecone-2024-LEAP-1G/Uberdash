@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Ban, X } from "lucide-react";
 
 type DeleteType = {
   itemId: string;
@@ -14,14 +15,8 @@ export const Delete: React.FC<DeleteType> = (props: DeleteType) => {
   const deleteItem = () => {
     const deleteOne = async () => {
       try {
-        const response = await axios.delete(
-          `
-        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
-          /api/menu-item/delete/${itemId}`
-        );
-        if (response.status == 200) {
-          handleDelete();
-        }
+        await axios.delete(`/api/menu-item/delete/${itemId}`);
+        handleDelete();
       } catch (error) {
         console.log(error);
       }
@@ -29,21 +24,30 @@ export const Delete: React.FC<DeleteType> = (props: DeleteType) => {
     deleteOne();
   };
   return (
-    <div className="fixed inset-0 bg-gray-100 flex items-center justify-center">
-      <div className="rounded-xl border bg-gray-400 border-gray-300 px-5 py-4 w-fit flex flex-col gap-10 items-center">
-        <p> Are You Sure To Delete </p>
-        <div className="flex gap-4 ">
-          <button
-            onClick={deleteItem}
-            className="px-3 py-2 rounded-2xl border border-white hover:bg-white"
-          >
-            YES
+    <div className="fixed inset-0 bg-gray-400 flex items-center justify-center">
+      <div className="rounded-xl bg-white px-5 pt-6 pb-10  flex flex-col gap-8 items-center w-[300px]">
+        <div className="w-full flex justify-end mb-[-20px]">
+          <button onClick={handleToggle}>
+            <X />
           </button>
+        </div>
+        <Ban size={44} color="red" />
+        <p className="text-gray-500 font-medium text-lg"> Зөвшөөрөх? </p>
+        <p className="text-center text-gray-400 font-light text-xs mb-2">
+          Та энэхүү бүтээгдэхүүнийг менюгээс хасахыг зөвшөөрч байна уу?
+        </p>
+        <div className="flex gap-8 ">
           <button
             onClick={handleToggle}
-            className="px-3 py-2 rounded-2xl border border-white hover:bg-white"
+            className="px-7  py-3 rounded-md bg-gray-400 text-white"
           >
-            NO
+            Буцах
+          </button>
+          <button
+            onClick={deleteItem}
+            className="px-7 py-3 rounded-md bg-red-500 text-white"
+          >
+            Устгах
           </button>
         </div>
       </div>

@@ -8,6 +8,7 @@ export const GET = async (
   { params }: { params: Promise<{ restaurantId: string }> }
 ) => {
   const restaurantId = (await params).restaurantId;
+  console.log("hehe");
   try {
     const reviews = await ReviewModel.find({ restaurantId: restaurantId });
 

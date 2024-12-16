@@ -34,12 +34,20 @@ export default function RootLayout({
               <CartProvider>
                 <FoodProvider>
                   <NuqsAdapter>
+<<<<<<< HEAD
                     <LoadingWrapper>
                       {!isSignInPage &&
                         !isBusinessAccountPage &&
                         !isAddRestaurantPage && <Header />}
                       {children}
                     </LoadingWrapper>
+=======
+                    {!isSignInPage &&
+                      !isBusinessAccountPage &&
+                      !isAddRestaurantPage &&
+                      !isOwnerPage && <Header />}
+                    {children}
+>>>>>>> 765da74 (neleen zaslaa)
                     {!isBusinessAccountPage && (
                       <Footer className={isCheckoutPage ? "mt-72" : ""} />
                     )}
@@ -50,22 +58,6 @@ export default function RootLayout({
             </AuthGuard>
           </SessionProvider>
         </Suspense>
-        <SessionProvider>
-          <AuthGuard>
-            <CartProvider>
-              <FoodProvider>
-                <NuqsAdapter>
-                  {!isSignInPage && !isOwnerPage && <Header />}
-                  {children}
-                  {!isOwnerPage && (
-                    <Footer className={isCheckoutPage ? "mt-72" : ""} />
-                  )}
-                  <Toaster />
-                </NuqsAdapter>
-              </FoodProvider>
-            </CartProvider>
-          </AuthGuard>
-        </SessionProvider>
       </body>
     </html>
   );

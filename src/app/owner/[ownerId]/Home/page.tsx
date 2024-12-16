@@ -7,7 +7,6 @@ import { PieChartByCategory } from "@/components/PieChartByCategory";
 const Info = () => {
   return (
     <div className="p-4 flex  w-full">
-      <AdminSideBar />
       <div>
         <AdminBarChart />
       </div>
