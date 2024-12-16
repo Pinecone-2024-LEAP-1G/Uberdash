@@ -21,3 +21,29 @@ export const HeartSvg = () => {
     </div>
   );
 };
+// import { useState } from "react";
+// const HeartSvg = () => {
+//   const [isLiked, setIsLiked] = useState(false);
+//   const toggleHeart = () => {
+//     setIsLiked((prev) => !prev);
+//   };
+//   return (
+//     <button
+//       onClick={toggleHeart}
+//       style={{
+//         background: "none",
+//         border: "none",
+//         cursor: "pointer",
+//         fontSize: "24px",
+//       }}
+//       aria-label="Like"
+//     >
+//       {isLiked ? (
+//         <span style={{ color: "red" }}>❤️</span>
+//       ) : (
+//         <span style={{ color: "gray" }}>🤍</span>
+//       )}
+//     </button>
+//   );
+// };
+// export default HeartSvg;
