@@ -7,6 +7,7 @@ export type User = {
   image: string;
   businessName: string;
   vatId: string;
+  favourites: Schema.Object.Types;
 };
 
 const userSchema = new Schema<User>({
