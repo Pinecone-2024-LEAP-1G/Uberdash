@@ -1,13 +1,12 @@
-import { RestaurantDetail } from "@/components/restaurant/RestaurantDetail";
-import { Schema } from "mongoose";
+"use client";
 
-const Store = async ({
-  params,
-}: {
-  params: Promise<{ restaurantId: Schema.Types.ObjectId }>;
-}) => {
-  const restaurantId = (await params).restaurantId;
+import { RestaurantDetail } from "@/components/restaurant/RestaurantDetail";
+
+import { useParams } from "next/navigation";
+
+const RestaurantDetailPage = () => {
+  const { restaurantId } = useParams<{ restaurantId: string }>();
 
   return <RestaurantDetail restaurantId={restaurantId} />;
 };
-export default Store;
+export default RestaurantDetailPage;

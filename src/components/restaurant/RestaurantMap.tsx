@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-
 import L from "leaflet";
 
-import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
 
@@ -30,27 +28,7 @@ interface MapProps {
   center?: number[];
 }
 
-const ClickableMap: React.FC<{
-  onLocationSelect: (location: L.LatLng) => void;
-}> = ({ onLocationSelect }) => {
-  useMapEvents({
-    click(e) {
-      onLocationSelect(e.latlng);
-    },
-  });
-
-  return null;
-};
-
 const Map: React.FC<MapProps> = ({ center }) => {
-  const [selectedLocation, setSelectedLocation] = useState<L.LatLng | null>(
-    null
-  );
-
-  const handleLocationSelect = (location: L.LatLng) => {
-    setSelectedLocation(location);
-  };
-
   return (
     <MapContainer
       center={(center as L.LatLngExpression) || [47.913678, 106.915995]}
@@ -62,9 +40,9 @@ const Map: React.FC<MapProps> = ({ center }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <ClickableMap onLocationSelect={handleLocationSelect} />
-
-      {selectedLocation && <Marker position={selectedLocation} />}
+      <Marker
+        position={(center as L.LatLngExpression) || [47.913678, 106.915995]}
+      />
     </MapContainer>
   );
 };

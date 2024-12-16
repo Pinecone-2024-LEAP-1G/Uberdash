@@ -10,9 +10,8 @@ import { RestrauntMenu } from "./RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
 import { Review } from "@/lib/models";
-import { Schema } from "mongoose";
+
 import { MenuItemType } from "@/lib/types";
-// import { useSession } from "next-auth/react";
 
 type Restaurant = {
   name: string;
@@ -24,7 +23,7 @@ type Restaurant = {
 export const RestaurantDetail = ({
   restaurantId,
 }: {
-  restaurantId: Schema.Types.ObjectId;
+  restaurantId: string;
 }) => {
   const restaurantProps = { restaurantId: restaurantId };
 
@@ -32,7 +31,6 @@ export const RestaurantDetail = ({
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const [menuItems, setMenuItems] = useState<MenuItemType[]>();
   const [reviews, setReviews] = useState<Review[]>([]);
-  // const { data: session } = useSession();
 
   useEffect(() => {
     const fetchReviews = async () => {

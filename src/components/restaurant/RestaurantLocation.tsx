@@ -15,11 +15,13 @@ const myLocation: Location = {
   coordinates: [47.918841, 106.917562],
 };
 
-type resId = {
-  restaurantId: ObjectId;
+type RestaurantLocationProps = {
+  restaurantId: string;
 };
 
-export const RestaurantLocation = ({ restaurantId }: resId) => {
+export const RestaurantLocation = ({
+  restaurantId,
+}: RestaurantLocationProps) => {
   const [openDetail, setOpenDetail] = useState<boolean>(false);
   useEffect(() => {
     const dataFetch = async () => {
@@ -29,7 +31,6 @@ export const RestaurantLocation = ({ restaurantId }: resId) => {
         }/api/restaurant-branch/distance`,
         { location: myLocation, restaurantId }
       );
-      console.log(response.data.restaurantBranches);
     };
     dataFetch();
   }, []);
