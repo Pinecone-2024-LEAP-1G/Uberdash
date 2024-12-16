@@ -87,7 +87,7 @@ export const RestaurantDetail = ({
           <ReviewRating reviews={reviews} description={restaurant?.info} />
         </div>
         <div className="w-1/3 flex flex-col gap-4">
-          <DeliveryFee />
+          <DeliveryFee restaurantId={restaurantId} />
           <RestaurantLocation {...restaurantProps} />
         </div>
       </div>

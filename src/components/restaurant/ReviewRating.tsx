@@ -4,6 +4,7 @@ import { Comment } from "./Comment";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { Review } from "../../lib/models/review.model";
+import { Stars } from "../Stars";
 
 export const ReviewRating = (props: {
   reviews: Review[];
@@ -33,8 +34,9 @@ export const ReviewRating = (props: {
       <h1 className="text-2xl font-semibold gap-4 my-3">Rating and reviews</h1>
       <div className="border rounded-2xl flex px-2 py-4">
         <div className="w-1/3 flex flex-col items-center">
-          <p className="text-4xl">{4.6}</p>
+          <p className="text-4xl">{4}</p>
           <p>RatingStar</p>
+          <Stars rating={4} />
           <p>{reviews?.length} Ratings</p>
         </div>
         <div className="w-2/3 mr-8">

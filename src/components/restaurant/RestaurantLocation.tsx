@@ -2,7 +2,6 @@
 import { ChevronDown, ChevronUp, Clock3, Copy, MapPin } from "lucide-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { ObjectId } from "mongoose";
 // import Map from "./RestaurantMap";
 
 type Location = {
@@ -23,6 +22,7 @@ export const RestaurantLocation = ({
   restaurantId,
 }: RestaurantLocationProps) => {
   const [openDetail, setOpenDetail] = useState<boolean>(false);
+
   useEffect(() => {
     const dataFetch = async () => {
       const response = await axios.post(`/api/restaurant-branch/distance`, {
