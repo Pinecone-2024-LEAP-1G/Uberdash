@@ -34,7 +34,7 @@ const Map: React.FC<MapProps> = ({ center }) => {
       center={(center as L.LatLngExpression) || [47.913678, 106.915995]}
       zoom={center ? 10 : 18}
       scrollWheelZoom={true}
-      className="h-[35vh] rounded-lg"
+      className="h-[35vh] rounded-lg z-0"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
