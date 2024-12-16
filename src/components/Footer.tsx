@@ -1,4 +1,5 @@
 import { Instagram, Facebook, Twitter } from "lucide-react";
+import Link from "next/link";
 
 interface FooterProps {
   className?: string;
@@ -16,15 +17,24 @@ export const Footer: React.FC<FooterProps> = ({ className = "" }) => {
         </div>
 
         <div className="flex flex-col gap-2 text-center md:text-left">
-          <button className="hover:text-blue-500 text-gray-700 font-medium transition">
+          <Link
+            href="/addRestaurant"
+            className="hover:text-blue-500 text-gray-700 font-medium transition"
+          >
             Ресторангаа нэмэх
-          </button>
-          <button className="hover:text-blue-500 text-gray-700 font-medium transition">
+          </Link>
+          <Link
+            href="/register-delivery"
+            className="hover:text-blue-500 text-gray-700 font-medium transition"
+          >
             Хүргэлт хийхээр бүртгүүлэх
-          </button>
-          <button className="hover:text-blue-500 text-gray-700 font-medium transition">
+          </Link>
+          <Link
+            href="/create-business-account"
+            className="hover:text-blue-500 text-gray-700 font-medium transition"
+          >
             Бизнесийн аккаунт үүсгэх
-          </button>
+          </Link>
         </div>
 
         <div className="flex gap-4">
@@ -50,6 +60,8 @@ export const Footer: React.FC<FooterProps> = ({ className = "" }) => {
       </div>
 
       <div className="mt-8 border-t border-gray-300 pt-4 text-center text-sm text-gray-500">
+        <p>Холбоо барих: contact@khurdan.com</p>
+        <p>Утас: +976 123 4567</p>
         &copy; {new Date().getFullYear()} Хурдан хоол. Бүх эрх хуулиар
         хамгаалагдсан.
       </div>

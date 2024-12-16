@@ -110,7 +110,7 @@ export const BasketDrawer: React.FC = () => {
           </div>
           <Link href="/checkout">
             <div className="h-28">
-              <Button title="захиалах" />
+              <Button title="Захиалах" />
             </div>
           </Link>
         </SheetHeader>
