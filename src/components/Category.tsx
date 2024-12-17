@@ -7,9 +7,7 @@ import { Category } from "@/lib/types";
 
 export const CategoryComp = ({ _id, image, name }: Category) => {
   const [isEdit, setIsEdit] = useQueryState<string>("edit", parseAsString);
-<<<<<<< HEAD
 
-=======
   const [myCategory, setMyCategory] = useState<Category>();
   console.log(isEdit);
   useEffect(() => {
@@ -28,7 +26,6 @@ export const CategoryComp = ({ _id, image, name }: Category) => {
         console.log(error);
       });
   }, []);
->>>>>>> a250768 (zahialgiin tuuh)
   const edit = (id: string) => {
     setIsEdit(id);
   };
