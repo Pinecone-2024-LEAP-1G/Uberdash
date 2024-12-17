@@ -17,21 +17,16 @@ export const CategoryFilter = () => {
   useEffect(() => {
     const getRestaurants = async () => {
       try {
-        const restaraunts = await axios.post(
-          `${
-            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-          }/api/restaurant/getByCategory`,
-          {
-            categoryId: category,
-          }
-        );
+        const restaraunts = await axios.post(`/api/restaurant/getByCategory`, {
+          categoryId: category[0],
+        });
         setRestaurants(restaraunts.data.restaurantIds);
       } catch (error) {
         console.log(error);
       }
     };
     getRestaurants();
-  }, [category]);
+  }, [category[0]]);
   return (
     <div className="mt-6 gap-3">
       <div className="text-xl mt-2 font-bold mx-auto max-w-[1200px] mb-2">

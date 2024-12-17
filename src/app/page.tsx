@@ -17,8 +17,6 @@ const Home = () => {
   const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
   const [allItems, setAllItems] = useState<MenuItemType[]>([]);
 
-  console.log(search[0]);
-
   useEffect(() => {
     const dataFetch = async () => {
       try {
@@ -46,8 +44,6 @@ const Home = () => {
     };
     dataFetch();
   }, [search[0]]);
-
-  console.log(menuItems);
 
   return (
     <div className="container mx-auto max-w-[1200px] space-y-6">
