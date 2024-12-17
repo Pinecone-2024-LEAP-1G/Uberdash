@@ -50,6 +50,11 @@ const UserDashboardButton = () => {
     fetchRestaurants();
   }, [session?.user?.id]);
 
+  const handleClick = (id: string) => {
+    router.push(`/owner/${id}`);
+    localStorage.setItem("restaurantId", id);
+  };
+
   if (loading) {
     return (
       <div className="mt-4">
@@ -68,7 +73,7 @@ const UserDashboardButton = () => {
       {restaurants.map((restaurant) => (
         <button
           key={restaurant._id}
-          onClick={() => router.push(`/owner/${restaurant._id}`)}
+          onClick={() => handleClick(restaurant._id)}
           className="w-full bg-[#F3F3F3] rounded-full py-2 text-center mb-2"
         >
           {restaurant.name}
