@@ -1,47 +1,51 @@
+"use client";
+
+import React from "react";
 import {
-  BadgeDollarSign,
-  ChartBarStacked,
-  Info,
-  LayoutDashboard,
-  MessageSquare,
-} from "lucide-react";
-import Link from "next/link";
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from "@/components/ui/sidebar";
+import { Home, Inbox, Calendar, Search, Settings } from "lucide-react";
 
-const ownerId: string = "673e90415a6e8e222657bbb4";
+const ownerId = "673e90415a6e8e222657bbb4";
 
-export const AdminSideBoard = () => {
+const items = [
+  { title: "Home", url: `/owner/${ownerId}/Home`, icon: Home },
+  { title: "Orders", url: `/owner/${ownerId}/Orders`, icon: Inbox },
+  { title: "Categories", url: `/owner/${ownerId}/Categories`, icon: Calendar },
+  { title: "Reviews", url: `/owner/${ownerId}/Reviews`, icon: Search },
+  { title: "Products", url: `/owner/${ownerId}/Products`, icon: Settings },
+];
+
+export function AdminSideBar() {
   return (
-    <div className="flex flex-col gap-2">
-      <Link href={`/owner/${ownerId}/Info`}>
-        <div className="w-40 flex gap-3 bg-white px-3 hover:bg-slate-300 py-2">
-          <Info />
-          <p> Info </p>
-        </div>
-      </Link>
-      <Link href={`/owner/${ownerId}/Orders`}>
-        <div className="w-40 flex gap-3 bg-white px-3 hover:bg-slate-300 py-2">
-          <BadgeDollarSign />
-          <p> Orders </p>
-        </div>
-      </Link>
-      <Link href={`/owner/${ownerId}/Categories`}>
-        <div className="w-40 flex gap-3 bg-white px-3 hover:bg-slate-300 py-2">
-          <ChartBarStacked />
-          <p>Categories</p>
-        </div>
-      </Link>
-      <Link href={`/owner/${ownerId}/Reviews`}>
-        <div className="w-40 flex gap-3 bg-white px-3 hover:bg-slate-300 py-2">
-          <MessageSquare />
-          <p> Reviews </p>
-        </div>
-      </Link>
-      <Link href={`/owner/${ownerId}/Products`}>
-        <div className="w-40 flex gap-3 bg-white px-3 hover:bg-slate-300 py-2">
-          <LayoutDashboard />
-          <p> Products </p>
-        </div>
-      </Link>
-    </div>
+    <Sidebar>
+      <SidebarContent>
+        <SidebarGroup>
+          {/* Sidebar Header */}
+          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url} className="flex items-center gap-2">
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
   );
-};
+}

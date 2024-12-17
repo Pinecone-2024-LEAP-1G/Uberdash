@@ -1,14 +1,6 @@
 "use client";
-import { Ellipsis, Heart, Info, UserPlus } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "../ui/button";
 
 export const RestaurantHero = (props: {
   name: string | undefined;
@@ -38,38 +30,6 @@ export const RestaurantHero = (props: {
               fill={`${isClicked ? "black" : "white"}`}
             />
           </button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="bg-white p-2 rounded-full">
-                <Ellipsis style={{ width: 16, height: 16 }} />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuCheckboxItem>
-                <div className="flex gap-2">
-                  <UserPlus />
-                  Start group order
-                </div>
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem>
-                <div
-                  className="flex gap-2"
-                  onClick={() => setIsClicked(!isClicked)}
-                >
-                  <Heart fill={`${!isClicked ? "white" : "black"}`} />
-                  Add favorites
-                </div>
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem>
-                <div className="flex gap-2">
-                  <Info fill="black" color="white" />
-                  Store info
-                </div>
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
         <img
           src={image}
@@ -78,12 +38,6 @@ export const RestaurantHero = (props: {
       </div>
       <div className="mt-12 mx-2 flex justify-between w-full">
         <h1 className="text-3xl font-semibold mb-4">{name}</h1>
-        <div className="flex gap-4">
-          <Button className="text-black bg-[#f3f3f3] hover:bg-gray-200 rounded-3xl">
-            <UserPlus fill="black" />
-            Group order
-          </Button>
-        </div>
       </div>
     </div>
   );

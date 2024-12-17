@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { ObjectId } from "mongoose";
 import Map from "./RestaurantMap";
 import { useLocation } from "@/Providers/LocationProvider";
+// import Map from "./RestaurantMap";
 
 export type Location = {
   type: "Point";

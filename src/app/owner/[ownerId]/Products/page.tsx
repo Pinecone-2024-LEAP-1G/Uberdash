@@ -1,7 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { AdminSideBoard } from "@/components/AdminSideBoard";
+import { AdminSideBar } from "@/components/AdminSideBoard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MenuItemType } from "@/lib/types";
@@ -39,7 +39,7 @@ const Dashboard = () => {
       {isCreateProduct && (
         <CreateProduct handleCreateProduct={handleCreateProduct} />
       )}
-      <AdminSideBoard />
+
       <div className="flex flex-col gap-4 items-start ">
         <div
           onClick={handleCreateProduct}

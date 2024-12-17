@@ -1,5 +1,5 @@
 import { DataGridView } from "@/components/DataGridView";
-import { AdminSideBoard } from "@/components/AdminSideBoard";
+import { AdminSideBar } from "@/components/AdminSideBoard";
 
 export default async function Page({
   params,
@@ -10,7 +10,7 @@ export default async function Page({
 
   return (
     <div className="flex gap-4">
-      <AdminSideBoard />
+      <AdminSideBar />
       <DataGridView restaurantOwnerId={restaurantOwnerId} />
     </div>
   );

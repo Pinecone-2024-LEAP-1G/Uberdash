@@ -44,7 +44,6 @@ const Checkout = () => {
         })),
       });
       setOrder(data.order);
-      console.log(order);
     } catch (error) {
       console.log("Error creating order:", error);
     }
@@ -62,7 +61,7 @@ const Checkout = () => {
         });
       }
     } catch (error) {
-      console.error("Error posting order item:", error);
+      console.log("Error posting order item:", error);
     }
   };
 
@@ -103,7 +102,7 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Link href={"/order-created"}>
+      <Link href={"/orders"}>
         <Button className="w-full" onClick={createOrder}>
           Захиалга хийх
         </Button>
