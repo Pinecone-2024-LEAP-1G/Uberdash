@@ -30,18 +30,21 @@ const Checkout = () => {
       getRestaurant();
     }
   }, [cartItems]);
+  console.log(cartItems);
 
   const postOrder = async () => {
     try {
       const { data } = await axios.post(`/api/order`, {
         userId: session?.user.id,
-        orderItems: cartItems.map((cartItem) => ({
-          menuItem: cartItem._id,
-          quantity: cartItem.quantity,
-          price: cartItem.price,
-          restaurantId: restaurant?._id,
-          orderId: order?._id,
-        })),
+        orderItems: [
+          // cartItems.map((cartItem) => ({
+          //   price: cartItem.price,
+          //   quantity: cartItem.quantity,
+          //   menuItem: cartItem._id,
+          //   orderId: order?._id,
+          //   restaurantId: cartItem.restaurantId,
+          // })),
+        ],
       });
       setOrder(data.order);
     } catch (error) {
@@ -49,6 +52,7 @@ const Checkout = () => {
     }
   };
 
+  // useEffect(() => {
   const postOrderItem = async (cartItem: CartItem) => {
     try {
       if (order && restaurant) {
@@ -64,6 +68,8 @@ const Checkout = () => {
       console.log("Error posting order item:", error);
     }
   };
+  // cartItems.map((cartItem) => postOrderItem(cartItem));
+  // }, [order]);
 
   const createOrder = async () => {
     if (!cartItems.length || !session) return;
@@ -73,7 +79,7 @@ const Checkout = () => {
     if (order) {
       await Promise.all(cartItems.map((cartItem) => postOrderItem(cartItem)));
     }
-    clearCart();
+    // clearCart();
   };
 
   if (!restaurant) return <div>No restaurant found.</div>;

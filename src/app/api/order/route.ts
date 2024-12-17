@@ -21,43 +21,29 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const {
-    priceWithoutDiscount,
-    priceWithDiscount,
-    userId,
-    cancelledTime,
-    readyToStartTime,
-    inPreparationTime,
-    readyForPickupTime,
-    onTheWayTime,
-    deliveredTime,
-    discountCodeId,
-    deliveryAddressId,
-    orderItems,
-  } = (await request.json()) as CreateOrderRequsetBody;
+  const { userId, deliveryAddressId, orderItems } =
+    (await request.json()) as CreateOrderRequsetBody;
 
-  const newOrders = await OrderItemModel.insertMany<OrderItem>(orderItems);
+  const newOrders = await OrderItemModel.insertMany(orderItems);
 
   const newOrderIds = newOrders.map((newOrder) => newOrder._id);
+
   const orderItemCount = newOrders.reduce(
     (total, orderItem) => total + orderItem.quantity,
+    0
+  );
+
+  const totalPrice = newOrders.reduce(
+    (total, orderItem) => (total + orderItem.quantity) * orderItem.price,
     0
   );
 
   try {
     const order = await OrderModel.create({
       orderItemCount,
-      priceWithoutDiscount,
-      priceWithDiscount,
       userId,
-      cancelledTime,
-      readyToStartTime,
-      inPreparationTime,
-      readyForPickupTime,
-      onTheWayTime,
-      deliveredTime,
-      discountCodeId,
       deliveryAddressId,
+      totalPrice: totalPrice,
       orderItems: newOrderIds,
     });
 

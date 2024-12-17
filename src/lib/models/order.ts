@@ -13,6 +13,7 @@ export type Order = {
   orderItemCount: number;
   priceWithoutDiscount: number;
   priceWithDiscount: number;
+  totalPrice: number;
   userId: Schema.Types.ObjectId;
   cancelledTime?: Date;
   readyToStartTime?: Date;
@@ -55,6 +56,7 @@ const OrderSchema = new Schema<Order>(
       required: true,
       ref: "users",
     },
+    totalPrice: { type: Number },
     cancelledTime: Date,
     readyToStartTime: Date,
     inPreparationTime: Date,
