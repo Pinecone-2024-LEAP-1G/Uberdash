@@ -41,6 +41,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
       console.log(error);
     }
   };
+
   const uploadImageToCloudinary = async (imageFile: File) => {
     try {
       const response = await axios.post(
@@ -68,7 +69,8 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
         console.log(error);
       }
     };
-    const fetchdata = async () => {
+
+    const fetchCategories = async () => {
       try {
         const response = await axios.get(
           `${
@@ -80,110 +82,102 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
         console.log(error);
       }
     };
-    fetchdata();
+
+    fetchCategories();
     fetchRestaurant();
   }, []);
-
-  const handleToggle = () => {
-    handleCreateProduct();
-  };
 
   return (
     <div className="fixed inset-0 bg-gray-100 flex items-center justify-center">
       <div
-        onClick={handleToggle}
-        className="relative left-[580px] top-[-250px] flex justify-center items-center rounded-full border border-gray-600"
+        onClick={handleCreateProduct}
+        className="absolute top-10 right-10 flex justify-center items-center rounded-full border border-gray-600 cursor-pointer"
       >
         <X className="m-3" />
       </div>
 
-      <div className="rounded-xl border bg-gray-400 border-gray-300 px-5 py-4 w-fit flex flex-col gap-10 items-center">
+      <div className="rounded-xl bg-white p-6 w-full max-w-4xl flex flex-col gap-8 shadow-lg">
         <div className="flex gap-10">
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1">
-              <p> Name </p>
+          <div className="flex flex-col gap-6 w-full sm:w-1/2">
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-800">Нэр</p>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Product Name"
-                className="py-2 px-3 rounded-xl border border-gray-200"
+                placeholder="Бүтээгдэхүүний нэр"
+                className="py-2 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <p> Price($) </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-800">Үнэ (₮)</p>
               <input
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
                 type="number"
-                placeholder="Price"
-                className="py-2 px-3 rounded-xl border border-gray-200"
+                placeholder="Үнэ"
+                className="py-2 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <p> Image </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-800">Зураг</p>
               <input
                 type="file"
-                value={image}
                 onChange={(event) => {
-                  setImage(event.target.value);
                   const file = event?.target?.files?.[0];
                   if (!file) return;
                   uploadImageToCloudinary(file);
                 }}
-                placeholder="Image URL"
-                className="py-2 px-3 rounded-xl border border-gray-200"
+                className="py-2 px-4 rounded-xl border border-gray-300 focus:outline-none"
               />
             </div>
-            <div className="flex flex-col gap-1">
-              <p> Size </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-800">Хэмжээ</p>
               <select
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
-                className="py-2 px-3 rounded-xl border border-gray-200"
+                className="py-2 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                <option disabled>Choose Size</option>
-                <option> 2XL </option>
-                <option> XL </option>
-                <option> L </option>
-                <option> M </option>
-                <option> S </option>
+                <option value="">Хэмжээг сонгоно уу</option>
+                <option value="2XL">2XL</option>
+                <option value="XL">XL</option>
+                <option value="L">L</option>
+                <option value="M">M</option>
+                <option value="S">S</option>
               </select>
             </div>
-            <div className="flex flex-col gap-1">
-              <p> Category </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-800">Төрөл</p>
               <select
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
-                className="py-2 px-3 rounded-xl border border-gray-200"
+                className="py-2 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                <option selected disabled>
-                  Choose Category
-                </option>
-                {categories.map((category, index) => {
-                  return (
-                    <option value={category._id} key={index}>
-                      {category.name}
-                    </option>
-                  );
-                })}
+                <option value="">Төрлийг сонгоно уу</option>
+                {categories.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <p> Description </p>
+          <div className="flex flex-col gap-4 w-full sm:w-1/2">
+            <p className="text-gray-800">Тайлбар</p>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="border w-64 h-48 border-gray-200 py-1 px-2.5 rounded-xl"
+              className="border w-full h-48 border-gray-300 py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Бүтээгдэхүүний тайлбарыг оруулна уу"
             ></textarea>
           </div>
         </div>
+
         <div
-          onClick={() => CreateProduct()}
-          className="flex gap-2 px-3 py-2 rounded-xl border border-gray-200 hover:bg-slate-300 bg-white"
+          onClick={CreateProduct}
+          className="flex gap-3 px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold cursor-pointer"
         >
           <Plus />
-          <button> Create Product </button>
+          <button>Хоолны цэс үүсгэх</button>
         </div>
       </div>
     </div>
