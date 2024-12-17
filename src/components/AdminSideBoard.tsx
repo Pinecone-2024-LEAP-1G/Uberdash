@@ -13,14 +13,18 @@ import {
 } from "@/components/ui/sidebar";
 import { Home, Inbox, Calendar, Search, Settings } from "lucide-react";
 
-const ownerId = "673e90415a6e8e222657bbb4";
+const restaurantId = localStorage.getItem("restaurantId");
 
 const items = [
-  { title: "Home", url: `/owner/${ownerId}/Home`, icon: Home },
-  { title: "Orders", url: `/owner/${ownerId}/Orders`, icon: Inbox },
-  { title: "Categories", url: `/owner/${ownerId}/Categories`, icon: Calendar },
-  { title: "Reviews", url: `/owner/${ownerId}/Reviews`, icon: Search },
-  { title: "Products", url: `/owner/${ownerId}/Products`, icon: Settings },
+  { title: "Home", url: `/owner/${restaurantId}/Home`, icon: Home },
+  { title: "Orders", url: `/owner/${restaurantId}/Orders`, icon: Inbox },
+  {
+    title: "Categories",
+    url: `/owner/${restaurantId}/Categories`,
+    icon: Calendar,
+  },
+  { title: "Reviews", url: `/owner/${restaurantId}/Reviews`, icon: Search },
+  { title: "Products", url: `/owner/${restaurantId}/Products`, icon: Settings },
 ];
 
 export function AdminSideBar() {

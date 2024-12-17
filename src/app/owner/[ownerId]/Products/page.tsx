@@ -1,7 +1,6 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { AdminSideBar } from "@/components/AdminSideBoard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MenuItemType } from "@/lib/types";
@@ -9,18 +8,17 @@ import { OwnerMenuItem } from "@/components/OwnerMenuItem";
 
 import { CreateProduct } from "@/components/CreateProduct";
 
-const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
-
 const Dashboard = () => {
   const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
 
   const [isCreateProduct, setIsCreateProduct] = useState<boolean>(false);
 
   useEffect(() => {
+    const restaurantId = localStorage.getItem("restaurantId");
     const fetchdata = async () => {
       try {
         const response = await axios.post(`/api/menu-item/ownerId`, {
-          ownerId: restaurantOwnerId,
+          ownerId: restaurantId,
         });
         setMenuItems(response.data.menuItem);
       } catch (error) {
