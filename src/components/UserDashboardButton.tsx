@@ -60,7 +60,7 @@ const UserDashboardButton = () => {
   }
 
   if (!restaurants.length) {
-    return <div>No restaurants found</div>;
+    return <div></div>;
   }
 
   return (

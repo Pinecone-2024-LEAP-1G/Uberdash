@@ -34,7 +34,7 @@ const SignIn = () => {
           </button>
 
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push("/")}
             className="flex items-center justify-center gap-3 w-full bg-gradient-to-r from-gray-300 to-gray-400 text-black p-3 rounded-full shadow-lg hover:from-gray-400 hover:to-gray-500 transition-all"
           >
             <ArrowLeft size={20} />
