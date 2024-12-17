@@ -25,7 +25,6 @@ const Reviews = () => {
             restaurantId: response.data.restaurant._id,
           }
         );
-        console.log(result.data.orders);
         setOrders(result.data.orders);
       } catch (error) {
         console.log(error);
@@ -33,7 +32,6 @@ const Reviews = () => {
     };
     dataFetch();
   }, []);
-  console.log(orders);
 
   const rows = orders.map((order) => ({
     id: order._id,

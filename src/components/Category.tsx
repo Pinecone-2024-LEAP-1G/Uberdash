@@ -7,7 +7,6 @@ import { Category } from "@/lib/types";
 
 export const CategoryComp = ({ _id, image, name }: Category) => {
   const [isEdit, setIsEdit] = useQueryState<string>("edit", parseAsString);
-  console.log(isEdit);
 
   const edit = (id: string) => {
     setIsEdit(id);

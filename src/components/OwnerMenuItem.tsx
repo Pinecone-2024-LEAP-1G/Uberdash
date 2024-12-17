@@ -85,7 +85,7 @@ export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
         </div>
         <div
           className="flex gap-2 items-center px-2 py-1.5 hover:bg-slate-200 rounded-2xl cursor-pointer"
-          onClick={() => console.log("sajhd")}
+          onClick={() => {}}
         >
           <Pen size={16} />
           <button onClick={handleDetail} className="text-sm">

@@ -15,15 +15,12 @@ export const MenuItemDetail: React.FC<DetailType> = (props: DetailType) => {
   const [numberOfOrder, setNumberOfOrder] = useState<number>(0);
   const [numberOfQuantity, setNumberOfQuantity] = useState<number>(0);
 
-  console.log(image);
-
   useEffect(() => {
     const dataFetch = async () => {
       try {
         const response = await axios.post(`/api/menu-item/numberOfSales`, {
           menuItemId: itemId,
         });
-        console.log();
         setNumberOfOrder(response.data.numberofOrders);
         setNumberOfQuantity(response.data.sumOfQuantity);
       } catch (error) {

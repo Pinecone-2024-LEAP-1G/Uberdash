@@ -44,7 +44,6 @@ const Checkout = () => {
         })),
       });
       setOrder(data.order);
-      console.log(order);
     } catch (error) {
       console.log("Error creating order:", error);
     }

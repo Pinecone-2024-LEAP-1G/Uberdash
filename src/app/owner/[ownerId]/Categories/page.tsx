@@ -22,8 +22,6 @@ const Categories = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/category`);
-        console.log("API Response:", response.data.category);
-
         if (isMounted) {
           setCategories(response.data.category);
         }
@@ -62,7 +60,6 @@ const Categories = () => {
 
         <div className="grid gap-y-6 gap-x-5 grid-cols-6">
           {categories?.map((oneCategory, index) => {
-            console.log("Rendering Category:", oneCategory);
             return <CategoryComp key={index} {...oneCategory} />;
           })}
         </div>
