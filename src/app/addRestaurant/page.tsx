@@ -51,7 +51,7 @@ const AddRestaurant = () => {
 
       const data = await response.json();
       if (response.ok) {
-        console.log("Рестораныг амжилттай үүсгэсэн", data.newRestaurant);
+        console.log("Рестораныг амжилттай үүсгэсэн", data.newRestaurant); //toast r ajilluulah
         router.push("/");
       } else {
         console.error("Рестораныг үүсгэхэд алдаа гарлаа", data.error);

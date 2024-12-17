@@ -101,10 +101,12 @@ export const Drawers = () => {
                   Захиалгын түүх
                 </button>
               </Link>
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
-                <Heart className="w-5 h-5 text-gray-600" />
-                Таалагдсан хоолнууд
-              </button>
+              <Link href="/favourites">
+                <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md">
+                  <Heart className="w-5 h-5 text-gray-600" />
+                  Таалагдсан хоолнууд
+                </button>
+              </Link>
             </div>
             {hasOwner && (
               <Link href="/addRestaurant">
