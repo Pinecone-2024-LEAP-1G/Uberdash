@@ -2,6 +2,7 @@ import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "@/Providers/LocationProvider";
+import { useSession } from "next-auth/react";
 
 type Location = {
   type: "Point";
@@ -34,12 +35,10 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
 
     const dataFetcher = async () => {
       try {
-        const response = await axios.post(
-          `${
-            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-          }/api/restaurant-branch/distance`,
-          { location: location, restaurantId }
-        );
+        const response = await axios.post(`/api/restaurant-branch/distance`, {
+          location: location,
+          restaurantId,
+        });
 
         setMinDist(response.data.closestBranch.distance);
       } catch (error) {

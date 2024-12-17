@@ -5,35 +5,25 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { MenuItem } from "@/components";
 
-const userId: string = "674fc7ab07515adf7b3a0428";
+const userId: string = "675b9a0263daa5088eb0f57a";
 const Favourites = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState<
     Restaurant[]
   >([]);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-  const getFavourites = async () => {
-    try {
-      const { data } = await axios.get(`/api/users/${userId}`);
-      setRestaurants(data.user.favourites);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   useEffect(() => {
-    const datafetch = async () => {
+    const getFavourites = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/users/${userId}`
-        );
-        setFavouriteRestaurants(response.data.users[0].favourites);
+        const { data } = await axios.get(`/api/users/favourites`);
+        setRestaurants(data.users[0].favourites);
       } catch (error) {
         console.log(error);
       }
     };
-    datafetch();
     getFavourites();
   }, []);
-  console.log(favouriteRestaurants);
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4">All Stores</h2>
