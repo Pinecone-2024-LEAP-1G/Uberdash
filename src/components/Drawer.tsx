@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import UserDashboardButton from "@/components/UserDashboardButton";
 import { useEffect, useState } from "react";
+import { User } from "@/lib/models/users.model";
 
 const SkeletonLoader = () => (
   <div className="animate-pulse space-y-4">
@@ -44,9 +45,8 @@ export const Drawers = () => {
         .then((data) => {
           if (data.users.length > 0) {
             const user = data.users.filter(
-              (user) => user._id === session.user.id
+              (user: User) => String(user._id) === session.user.id
             );
-            // const user = data.users[0];
 
             setHasOwner(!(!user[0].businessName && !user[0].vatId));
           }
