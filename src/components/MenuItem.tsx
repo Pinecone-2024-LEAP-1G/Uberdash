@@ -24,7 +24,7 @@ type MenuTypes = {
   restaurantId: string;
 };
 
-export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
+export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
   const data = useLocation();
   const { location } = data;
   const [minDist, setMinDist] = useState<number>(0);
@@ -72,9 +72,6 @@ export const MenuItem = ({ image, name, points, restaurantId }: MenuTypes) => {
           <p className="text-[14px] text-[#706f6f] font-thin ">
             {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} min
           </p>
-        </div>
-        <div className="rounded-[50%] w-[28px] flex items-center justify-center text-[12px] bg-slate-200 h-[28px]">
-          {points}
         </div>
       </div>
     </div>
