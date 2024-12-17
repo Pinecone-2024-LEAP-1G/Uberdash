@@ -1,31 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Pen } from "lucide-react";
 import { BookImage } from "lucide-react";
 import { parseAsString, useQueryState } from "nuqs";
 import { Category } from "@/lib/types";
 
 export const CategoryComp = ({ _id, image, name }: Category) => {
-  const [isEdit, setIsEdit] = useQueryState<string>("edit", parseAsString);
-
-  const [myCategory, setMyCategory] = useState<Category>();
-  console.log(isEdit);
-  useEffect(() => {
-    axios
-      .post(
-        `
-        /api/category/categoryId`,
-        {
-          categoryId,
-        }
-      )
-      .then(function (response) {
-        setMyCategory(response.data.category);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+  const [, setIsEdit] = useQueryState<string>("edit", parseAsString);
   const edit = (id: string) => {
     setIsEdit(id);
   };
