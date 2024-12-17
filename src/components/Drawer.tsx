@@ -43,8 +43,12 @@ export const Drawers = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.users.length > 0) {
-            const user = data.users[0];
-            setHasOwner(user.businessName !== "" || user.vatId !== "");
+            const user = data.users.filter(
+              (user) => user._id === session.user.id
+            );
+            // const user = data.users[0];
+
+            setHasOwner(!(!user[0].businessName && !user[0].vatId));
           }
         })
         .catch((error) => console.error("Error fetching user data:", error));
@@ -57,7 +61,7 @@ export const Drawers = () => {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <button className="p-3 bg-white rounded-full hover:bg-gray-200 focus:outline-none transition">
-              <Menu className="w-8 h-8 text-gray-800" />
+              <Menu className="w-7 h-7 text-gray-800" />
             </button>
           </SheetTrigger>
           <SheetContent
@@ -102,16 +106,18 @@ export const Drawers = () => {
                 Таалагдсан хоолнууд
               </button>
             </div>
+            {hasOwner && (
+              <Link href="/addRestaurant">
+                <button
+                  className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md mt-4"
+                  onClick={() => setOpen(false)}
+                >
+                  <Plus className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600">Шинэ ресторан нэмэх</span>
+                </button>
+              </Link>
+            )}
 
-            <Link href="/addRestaurant">
-              <button
-                className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md mt-4"
-                onClick={() => setOpen(false)}
-              >
-                <Plus className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-600">Шинэ ресторан нэмэх</span>
-              </button>
-            </Link>
             {!hasOwner && (
               <div className="mt-4">
                 <button
@@ -138,10 +144,10 @@ export const Drawers = () => {
       ) : (
         <button
           disabled
-          className="p-3 bg-gray-300 rounded-full cursor-not-allowed"
+          className="p-3 rounded-full cursor-not-allowed"
           title="Нэвтэрсэн хэрэглэгчдэд л боломжтой"
         >
-          <Menu className="w-8 h-8 text-gray-400" />
+          <Menu className="w-7 h-7 text-black-400" />
         </button>
       )}
     </>
