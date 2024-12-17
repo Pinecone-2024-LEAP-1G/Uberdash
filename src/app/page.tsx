@@ -5,7 +5,6 @@ import { Restaurants } from "@/components/Restuarants";
 import { MenuCategories } from "@/components/MenuCategories";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { parseAsString, useQueryState } from "nuqs";
-import { Search } from "@/components/Search";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { RestrauntMenu } from "@/components";
@@ -36,7 +35,7 @@ const Home = () => {
   useEffect(() => {
     const dataFetch = () => {
       try {
-        const filteredItems = allItems.filter((item: MenuItem) => {
+        const filteredItems = allItems.filter((item: MenuItemType) => {
           const searchValue = search[0]?.toLowerCase() || "";
           return item.name.toLowerCase().includes(searchValue);
         });
