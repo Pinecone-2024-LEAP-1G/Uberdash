@@ -1,5 +1,5 @@
 "use client";
-import { AdminSideBar } from "@/components/AdminSideBoard";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ReviewType } from "@/lib/types";
@@ -11,7 +11,7 @@ const Reviews = () => {
   useEffect(() => {
     const dataFetch = async () => {
       try {
-        const restaurantId: string = "674695388735f0d1dadc3b7f";
+        const restaurantId = localStorage.getItem("restaurantId");
         const response = await axios.get(`/api/review/${restaurantId}`);
         setReviews(response.data.reviews);
       } catch (error) {

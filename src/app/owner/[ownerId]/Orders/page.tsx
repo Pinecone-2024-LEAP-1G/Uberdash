@@ -5,26 +5,19 @@ import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Order } from "@/lib/models";
 
-const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
-
 const Reviews = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const restaurantId = localStorage.getItem("restaurantId");
 
   useEffect(() => {
     const dataFetch = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:3000/api/restaurant/getByOwnerId",
-          {
-            ownerId: restaurantOwnerId,
-          }
-        );
-        const result = await axios.post(
-          `http://localhost:3000/api/order/restaurant/`,
-          {
-            restaurantId: response.data.restaurant._id,
-          }
-        );
+        const response = await axios.post("/api/restaurant/getByOwnerId", {
+          ownerId: restaurantId,
+        });
+        const result = await axios.post(`/api/order/restaurant/`, {
+          restaurantId: response.data.restaurant._id,
+        });
         setOrders(result.data.orders);
       } catch (error) {
         console.log(error);
