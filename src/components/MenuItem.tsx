@@ -35,6 +35,24 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
   const data = useLocation();
   const { location } = data;
   const [minDist, setMinDist] = useState<number>(0);
+  const [rating, setRating] = useState<string>("");
+
+  useEffect(() => {
+    const ratingFetcher = async () => {
+      try {
+        const response = await axios.post("/api/restaurant/calculateRating", {
+          restaurantId,
+        });
+        if (response.data.message === "No reviews") {
+        } else {
+          setRating(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    ratingFetcher();
+  }, []);
 
   useEffect(() => {
     if (!location.coordinates[0]) return;
@@ -51,6 +69,7 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
         console.log(error);
       }
     };
+
     dataFetcher();
   }, [location]);
 
@@ -71,13 +90,18 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
         </div>
       </div>
 
-      <div className="mt-3 gap-1 flex w-full justify-between px-3">
+      <div className="mt-3 gap-1 flex w-full justify-between items-center px-3">
         <div>
           <p className="text-[18px] font-medium text-ellipsis">{name}</p>
           <p className="text-[14px] text-[#706f6f] font-thin ">
             {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} min
           </p>
         </div>
+        {rating && (
+          <div className="flex justify-center items-center w-8 h-8 border rounded-full bg-gray-300">
+            <p className="text-sm font-light">{rating}</p>
+          </div>
+        )}
       </div>
     </div>
   );
