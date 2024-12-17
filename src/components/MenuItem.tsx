@@ -24,8 +24,14 @@ type MenuTypes = {
   bonus: string;
   restaurantId: string;
 };
+type Heart = {
+  restaurantId: string;
+};
 
 export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
+  const myProps: Heart = {
+    restaurantId: restaurantId,
+  };
   const data = useLocation();
   const { location } = data;
   const [minDist, setMinDist] = useState<number>(0);
@@ -61,7 +67,7 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
       >
         <div className="flex justify-between items-center pt-2 px-3 ">
           <p className="text-[#ffffff] bg-[#0e8345] text-ellipsis p-1 whitespace-nowrap rounded-sm text-[14px] "></p>
-          <HeartSvg />
+          <HeartSvg {...myProps} />
         </div>
       </div>
 

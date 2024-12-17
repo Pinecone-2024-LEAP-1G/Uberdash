@@ -16,7 +16,7 @@ const userSchema = new Schema<User>({
   image: { type: String },
   businessName: { type: String, default: "" },
   vatId: { type: String, default: "" },
-  favourites: [{ type: Schema.Types.ObjectId }],
+  favourites: [{ type: Schema.Types.ObjectId, ref: "restaurants" }],
 });
 
 export const UserModel: Model<User> =
