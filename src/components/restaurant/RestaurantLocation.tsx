@@ -2,8 +2,7 @@
 import { ChevronDown, ChevronUp, Clock3, Copy, MapPin } from "lucide-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { ObjectId } from "mongoose";
-import Map from "./RestaurantMap";
+// import Map from "./RestaurantMap";
 
 type Location = {
   type: "Point";
@@ -12,7 +11,7 @@ type Location = {
 
 const myLocation: Location = {
   type: "Point",
-  coordinates: [47.918841, 106.917562],
+  coordinates: [47.918842, 106.917562],
 };
 
 type RestaurantLocationProps = {
@@ -23,21 +22,21 @@ export const RestaurantLocation = ({
   restaurantId,
 }: RestaurantLocationProps) => {
   const [openDetail, setOpenDetail] = useState<boolean>(false);
+
   useEffect(() => {
     const dataFetch = async () => {
-      const response = await axios.post(
-        `${
-          process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-        }/api/restaurant-branch/distance`,
-        { location: myLocation, restaurantId }
-      );
+      const response = await axios.post(`/api/restaurant-branch/distance`, {
+        location: myLocation,
+        restaurantId,
+      });
+      console.log(response.data.restaurantBranches);
     };
     dataFetch();
   }, []);
 
   return (
     <div className="border rounded-2xl h-[334px] flex flex-col justify-end">
-      <Map />
+      {/* <Map /> */}
       <div className={`bg-white ${openDetail ? "hidden" : "flex"}`}>
         <div className="w-20 h-16 items-center justify-center flex">
           <MapPin width={18} height={18} />

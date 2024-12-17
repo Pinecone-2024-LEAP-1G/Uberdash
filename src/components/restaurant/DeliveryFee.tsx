@@ -1,3 +1,4 @@
+"use Client";
 import { Info } from "lucide-react";
 import {
   Dialog,
@@ -8,8 +9,34 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@mui/material";
+import { useLocation } from "@/Providers/LocationProvider";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export const DeliveryFee = () => {
+export const DeliveryFee = (restaurantId: string) => {
+  const data = useLocation();
+  const { location } = data;
+  const [minDist, setMinDist] = useState<number>(0);
+
+  useEffect(() => {
+    if (!location.coordinates[0]) return;
+
+    const dataFetcher = async () => {
+      try {
+        const response = await axios.post(
+          `${
+            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
+          }/api/restaurant-branch/distance`,
+          { location: location, restaurantId }
+        );
+
+        setMinDist(response.data.closestBranch.distance);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    dataFetcher();
+  }, [location]);
   return (
     <div className="border rounded-2xl text-[12px] flex h-16 py-4">
       <div className="flex flex-col items-center justify-center w-1/2 border-r">
@@ -66,7 +93,9 @@ export const DeliveryFee = () => {
         </Dialog>
       </div>
       <div className="flex flex-col items-center justify-center w-1/2">
-        <p>10-30 min</p>
+        <p>
+          {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} min
+        </p>
         <p className="text-[#5E5E5E]">Delivery Time</p>
       </div>
     </div>

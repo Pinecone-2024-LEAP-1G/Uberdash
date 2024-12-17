@@ -1,13 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Pen } from "lucide-react";
 import { BookImage } from "lucide-react";
 import { parseAsString, useQueryState } from "nuqs";
 import { Category } from "@/lib/types";
 
 export const CategoryComp = ({ _id, image, name }: Category) => {
-  const [isEdit, setIsEdit] = useQueryState<string>("edit", parseAsString);
-
+  const [, setIsEdit] = useQueryState<string>("edit", parseAsString);
   const edit = (id: string) => {
     setIsEdit(id);
   };
