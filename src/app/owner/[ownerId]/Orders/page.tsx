@@ -1,5 +1,5 @@
 "use client";
-import { AdminSideBoard } from "@/components/AdminSideBoard";
+import { AdminSideBar } from "@/components/AdminSideBoard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -25,7 +25,6 @@ const Reviews = () => {
             restaurantId: response.data.restaurant._id,
           }
         );
-        console.log(result.data.orders);
         setOrders(result.data.orders);
       } catch (error) {
         console.log(error);
@@ -33,7 +32,6 @@ const Reviews = () => {
     };
     dataFetch();
   }, []);
-  console.log(orders);
 
   const rows = orders.map((order) => ({
     id: order._id,
@@ -52,7 +50,6 @@ const Reviews = () => {
 
   return (
     <div className="p-4 flex gap-3 w-full">
-      <AdminSideBoard />
       <div style={{ flex: 1, height: 500 }}>
         <h1 className="text-xl font-bold mb-4">Orders</h1>
         <DataGrid

@@ -43,7 +43,6 @@ type DataGridViewProps = {
 export function DataGridView({ restaurantOwnerId }: DataGridViewProps) {
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const [menuItems, setMenuItems] = useState<MenuItem>();
-  console.log(restaurant, menuItems);
 
   useEffect(() => {
     axios

@@ -25,25 +25,33 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
 
   const CreateProduct = async () => {
     try {
+      await axios.post(`/api/menu-item`, {
+        name,
+        description,
+        size,
+        price,
+        available: true,
+        categoryId,
+        restaurantId,
+        image,
+      });
+
+      handleCreateProduct();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const uploadImageToCloudinary = async (imageFile: File) => {
+    try {
       const response = await axios.post(
-        `
-        ${process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD}
-        /api/menu-item`,
+        `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
         {
-          name,
-          description,
-          size,
-          price,
-          available: true,
-          categoryId,
-          restaurantId,
-          image,
+          file: imageFile,
+          upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
         }
       );
-      if (response) {
-        console.log(response);
-        handleCreateProduct();
-      }
+
+      setImage(response?.data?.secure_url);
     } catch (error) {
       console.log(error);
     }
@@ -52,12 +60,9 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const response = await axios.post(
-          `${
-            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-          }/api/restaurant/getByOwnerId`,
-          { ownerId: restaurantOwnerId }
-        );
+        const response = await axios.post(`/api/restaurant/getByOwnerId`, {
+          ownerId: restaurantOwnerId,
+        });
         setRestaurantId(response.data.restaurant._id);
       } catch (error) {
         console.log(error);
@@ -117,8 +122,14 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
             <div className="flex flex-col gap-1">
               <p> Image </p>
               <input
+                type="file"
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={(event) => {
+                  setImage(event.target.value);
+                  const file = event?.target?.files?.[0];
+                  if (!file) return;
+                  uploadImageToCloudinary(file);
+                }}
                 placeholder="Image URL"
                 className="py-2 px-3 rounded-xl border border-gray-200"
               />

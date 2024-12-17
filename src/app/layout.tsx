@@ -23,6 +23,7 @@ export default function RootLayout({
   const isCheckoutPage = pathname === "/checkout";
   const isBusinessAccountPage = pathname === "/create-business-account";
   const isAddRestaurantPage = pathname === "/addRestaurant";
+  const isOwnerPage = pathname.startsWith("/owner/");
 
   return (
     <html lang="en">
@@ -36,12 +37,13 @@ export default function RootLayout({
                     <LoadingWrapper>
                       {!isSignInPage &&
                         !isBusinessAccountPage &&
-                        !isAddRestaurantPage && <Header />}
+                        !isAddRestaurantPage &&
+                        !isOwnerPage && <Header />}
                       {children}
+                      {!isBusinessAccountPage && (
+                        <Footer className={isCheckoutPage ? "mt-72" : ""} />
+                      )}
                     </LoadingWrapper>
-                    {!isBusinessAccountPage && (
-                      <Footer className={isCheckoutPage ? "mt-72" : ""} />
-                    )}
                     <Toaster />
                   </NuqsAdapter>
                 </FoodProvider>

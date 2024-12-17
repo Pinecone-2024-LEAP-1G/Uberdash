@@ -9,7 +9,6 @@ export const DELETE = async (
   { params }: { params: Promise<{ itemId: string }> }
 ) => {
   const itemId = (await params).itemId;
-  console.log(itemId);
   try {
     const menuItem = await menuItemModel.findByIdAndDelete({ _id: itemId });
     return Response.json({ menuItem });
