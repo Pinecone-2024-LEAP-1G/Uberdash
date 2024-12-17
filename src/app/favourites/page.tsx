@@ -5,11 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { MenuItem } from "@/components";
 
-const userId: string = "675b9a0263daa5088eb0f57a";
 const Favourites = () => {
-  const [favouriteRestaurants, setFavouriteRestaurants] = useState<
-    Restaurant[]
-  >([]);
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
   useEffect(() => {
@@ -23,6 +19,7 @@ const Favourites = () => {
     };
     getFavourites();
   }, []);
+  console.log(restaurants);
 
   return (
     <div className="container mx-auto p-4">

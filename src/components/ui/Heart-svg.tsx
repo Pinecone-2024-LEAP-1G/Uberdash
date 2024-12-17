@@ -3,17 +3,10 @@ import React, { useEffect, useState } from "react";
 export const HeartSvg = ({}) => {
   const [isClicked, setIsClicked] = useState(false);
 
-  useEffect(() => {
-    const savedState = localStorage.getItem("heartClicked");
-    if (savedState === "true") {
-      setIsClicked(true);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   const handleClick = () => {
-    const newState = !isClicked;
-    setIsClicked(newState);
-    localStorage.setItem("heartClicked", newState.toString());
+    console.log("hehe");
   };
 
   return (
