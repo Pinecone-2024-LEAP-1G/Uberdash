@@ -51,7 +51,7 @@ const UserDashboardButton = () => {
   }, [session?.user?.id]);
 
   const handleClick = (id: string) => {
-    router.push(`/owner/${id}`);
+    router.push(`/owner/${id}/Home`);
     localStorage.setItem("restaurantId", id);
   };
 

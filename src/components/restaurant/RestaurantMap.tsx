@@ -55,8 +55,6 @@ const Map: React.FC<MapProps> = ({ myLocation, restaurantId }) => {
     return null;
   }
 
-  console.log(branch);
-
   return (
     <MapContainer
       center={
