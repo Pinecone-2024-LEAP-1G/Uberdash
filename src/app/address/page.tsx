@@ -1,9 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Order } from "@/lib/models";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Address = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -11,7 +13,7 @@ const Address = () => {
   const [houseNumber, setHouseNumber] = useState<string>("");
   const [entranceNumber, setEntranceNumber] = useState<string>("");
   const [appartmentNumber, setAppartmentNumber] = useState<string>("");
-  //   const [userAddress, setUserAddress] = useState();
+  const [order, setOrder] = useState<Order>();
 
   const handlePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -37,9 +39,17 @@ const Address = () => {
   const userId = session?.user.id;
   const userName = session?.user.name;
 
-  const GetAddress = async () => {
+  useEffect(() => {
+    const getOrder = async () => {
+      const order = await axios.get("/api/order");
+      setOrder(order.data.order[order.data.order.length - 1]);
+    };
+    getOrder();
+  }, []);
+
+  const PostAddress = async () => {
     const address = {
-      userId,
+      orderId: order?._id,
       userName,
       phoneNumber,
       street,
@@ -52,7 +62,7 @@ const Address = () => {
   };
 
   return (
-    <div className="container w-[700px] mx-auto rounded-2xl border shadow-lg p-4">
+    <div className="container w-[700px] mx-auto rounded-2xl border shadow-lg p-4 flex flex-col gap-6">
       <p className="text-lg font-semibold">Хүргэлт хийх хаяг</p>
       <div className="grid grid-cols-2 gap-2">
         <div className="flex flex-col gap-2">
@@ -103,7 +113,9 @@ const Address = () => {
           ></input>
         </div>
       </div>
-      <Button onClick={() => GetAddress()}>Хаяг баталгаажуулах</Button>
+      <Link href="/orders">
+        <Button onClick={() => PostAddress()}>Хаяг баталгаажуулах</Button>
+      </Link>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { menuItemModel } from "@/lib/models";
 import { connectToMongoDB } from "@/lib/db";
 
 connectToMongoDB();
+
 export const GET = async (
   _req: NextRequest,
   { params }: { params: Promise<{ menuItemId: string }> }
