@@ -2,7 +2,6 @@ import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "@/Providers/LocationProvider";
-import { useSession } from "next-auth/react";
 
 type Location = {
   type: "Point";
@@ -34,6 +33,7 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
   };
   const data = useLocation();
   const { location } = data;
+  console.log(location);
   const [minDist, setMinDist] = useState<number>(0);
   const [rating, setRating] = useState<string>("");
 
@@ -55,7 +55,10 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
   }, []);
 
   useEffect(() => {
-    if (!location.coordinates[0]) return;
+    // if (!location.coordinates[0]) {
+    //   console.log("hehe");
+    //   return;
+    // }
 
     const dataFetcher = async () => {
       try {
@@ -63,7 +66,7 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
           location: location,
           restaurantId,
         });
-
+        console.log(response);
         setMinDist(response.data.closestBranch.distance);
       } catch (error) {
         console.log(error);
@@ -71,7 +74,7 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
     };
 
     dataFetcher();
-  }, [location]);
+  }, []);
 
   return (
     <div className="w-[288px] rounded-xl overflow-hidden ">

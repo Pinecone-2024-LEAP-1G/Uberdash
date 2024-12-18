@@ -11,12 +11,14 @@ import { Location } from "@/lib/models";
 export const LocationContext = createContext<{
   location: Location;
   isLoading: boolean;
+  error: string | null;
 }>({
   location: {
     type: "Point",
     coordinates: [0, 0],
   },
   isLoading: false,
+  error: null,
 });
 
 const useLocation = () => useContext(LocationContext);
@@ -31,6 +33,7 @@ const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
     type: "Point",
     coordinates: [0, 0],
   });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,9 +51,13 @@ const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
             setIsLoading(false);
           },
           (err) => {
-            console.log(err);
+            setError(err.message || "Failed to retrieve location");
+            setIsLoading(false);
           }
         );
+      } else {
+        setError("Geolocation is not supported by this browser");
+        setIsLoading(false);
       }
     };
 
@@ -58,7 +65,7 @@ const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <LocationContext.Provider value={{ location, isLoading }}>
+    <LocationContext.Provider value={{ location, isLoading, error }}>
       {children}
     </LocationContext.Provider>
   );
