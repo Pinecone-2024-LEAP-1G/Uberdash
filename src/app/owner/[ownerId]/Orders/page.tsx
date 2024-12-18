@@ -1,5 +1,4 @@
 "use client";
-import { AdminSideBar } from "@/components/AdminSideBoard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -24,7 +23,7 @@ const Reviews = () => {
       }
     };
     dataFetch();
-  }, []);
+  }, [restaurantId]);
 
   const rows = orders.map((order) => ({
     id: order._id,
@@ -35,16 +34,16 @@ const Reviews = () => {
   }));
 
   const columns: GridColDef[] = [
-    { field: "date", headerName: "Date", width: 250 },
-    { field: "customer", headerName: "Customer", width: 300 },
-    { field: "TotalPrice", headerName: "Total Price $", width: 150 },
-    { field: "status", headerName: "Status", width: 200 },
+    { field: "date", headerName: "Огноо", width: 250 },
+    { field: "customer", headerName: "Үйлчлүүлэгч", width: 300 },
+    { field: "TotalPrice", headerName: "Нийт төлбөр ₮", width: 150 },
+    { field: "status", headerName: "Захиалгын төлөв", width: 200 },
   ];
 
   return (
-    <div className="p-4 flex gap-3 w-full">
+    <div className=" flex justify-center items-center gap-10 mx-[250px] my-[150px]">
       <div style={{ flex: 1, height: 500 }}>
-        <h1 className="text-xl font-bold mb-4">Orders</h1>
+        <h1 className="text-xl font-bold mb-4">Захиалгууд</h1>
         <DataGrid
           rows={rows}
           columns={columns}

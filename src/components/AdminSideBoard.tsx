@@ -10,6 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import {
   FaHome,
@@ -67,7 +68,7 @@ export function AdminSideBar() {
                   <SidebarMenuButton asChild>
                     <a
                       href={item.url}
-                      className="flex items-center gap-3 px-6 py-6 rounded-md hover:bg-blue-50 hover:scale-105 hover:shadow-lg transition-all duration-300 ease-in-out group mt-4"
+                      className="flex items-center gap-6 px-6 py-6 rounded-md hover:bg-blue-50 hover:scale-105 hover:shadow-lg transition-all duration-300 ease-in-out group mt-4"
                     >
                       <item.icon className={`${item.size} text-gray-500`} />
                       <span className="text-xl font-semibold text-gray-700">
@@ -81,6 +82,7 @@ export function AdminSideBar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarTrigger className="fixed top-4 left-4 z-20 w-10 ml-4 h-10 rounded-full flex justify-center items-center shadow-lg " />
     </Sidebar>
   );
 }
