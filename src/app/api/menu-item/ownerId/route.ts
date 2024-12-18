@@ -5,11 +5,11 @@ import { connectToMongoDB } from "@/lib/db";
 
 connectToMongoDB();
 export const POST = async (request: NextRequest) => {
-  const { ownerId } = await request.json();
+  const { restaurantId } = await request.json();
+  console.log(restaurantId);
   try {
-    const restaurant = await RestaurantModel.findOne({ ownerId: ownerId });
     const menuItem = await menuItemModel.find({
-      restaurantId: restaurant?._id,
+      restaurantId: restaurantId,
     });
     return Response.json({ message: "success", menuItem });
   } catch (error) {
