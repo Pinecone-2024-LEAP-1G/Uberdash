@@ -6,9 +6,31 @@ import { BasketDrawer } from "../basket-drawer/BasketDrawer";
 import { parseAsString, useQueryState } from "nuqs";
 import { SearchBar } from "../SearchBar";
 import { SignInButton } from "../SignInButton";
+import { MapPin, ChevronDown } from "lucide-react";
+import Map from "../Map";
+import { Button } from "@/components/ui/button";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 export const Header = () => {
   const [searchTerm, setSearchTerm] = useQueryState("search", parseAsString);
+
+  const handleDone = () => {
+    if (localStorage.getItem("location")) {
+      //amjilttai location avlaa
+    } else {
+      console.log("Location songono uu"); // location songono uu gdg toaster oruul
+    }
+  };
 
   const suggestions = ["Pizza", "Burger", "Pasta", "Salad", "Sushi"];
 
@@ -25,6 +47,42 @@ export const Header = () => {
             </div>
           </Link>
         </div>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              variant="outline"
+              className="flex items-center justify-center gap-3 mr-10"
+            >
+              <div className="flex items-center justify-center gap-1">
+                <MapPin />
+                <p className="font-semibold text-lg"> Улаанбаатар </p>
+              </div>
+              <ChevronDown />
+            </Button>
+          </DialogTrigger>
+
+          <DialogContent className="w-fit px-7 py-6">
+            <DialogHeader>
+              <DialogTitle>Байршилаа сонгох</DialogTitle>
+              <DialogDescription>
+                Та байршилаа сонгосноор өөрт ойр ресторануудаа харах боломжтой
+                юм.
+              </DialogDescription>
+            </DialogHeader>
+            <div>
+              <Map />
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="submit" onClick={handleDone}>
+                  Болсон
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
         <SearchBar
           searchTerm={searchTerm || ""}
           setSearchTerm={setSearchTerm}

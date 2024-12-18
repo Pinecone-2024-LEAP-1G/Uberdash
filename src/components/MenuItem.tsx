@@ -2,7 +2,6 @@ import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "@/Providers/LocationProvider";
-import { useSession } from "next-auth/react";
 
 type Location = {
   type: "Point";
@@ -20,8 +19,7 @@ export type restaurantBranchWithDistance = {
 type MenuTypes = {
   image: string;
   name: string;
-  points: number;
-  bonus: string;
+
   restaurantId: string;
 };
 type Heart = {
@@ -29,11 +27,19 @@ type Heart = {
 };
 
 export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
+  const location = useLocation();
+
+  const myLocation: Location = {
+    type: "Point",
+    coordinates: location.location
+      ? (location.location as [number, number])
+      : [0, 0],
+  };
+
   const myProps: Heart = {
     restaurantId: restaurantId,
   };
-  const data = useLocation();
-  const { location } = data;
+
   const [minDist, setMinDist] = useState<number>(0);
   const [rating, setRating] = useState<string>("");
 
@@ -55,22 +61,20 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
   }, []);
 
   useEffect(() => {
-    if (!location.coordinates[0]) return;
-
     const dataFetcher = async () => {
       try {
         const response = await axios.post(`/api/restaurant-branch/distance`, {
-          location: location,
+          location: myLocation,
           restaurantId,
         });
-
         setMinDist(response.data.closestBranch.distance);
       } catch (error) {
         console.log(error);
       }
     };
-
-    dataFetcher();
+    if (location.location[0] !== 0) {
+      dataFetcher();
+    }
   }, [location]);
 
   return (
@@ -93,9 +97,11 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
       <div className="mt-3 gap-1 flex w-full justify-between items-center px-3">
         <div>
           <p className="text-[18px] font-medium text-ellipsis">{name}</p>
-          <p className="text-[14px] text-[#706f6f] font-thin ">
-            {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} min
-          </p>
+          {location && minDist !== 0 && (
+            <p className="text-[14px] text-[#706f6f] font-thin ">
+              {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} min
+            </p>
+          )}
         </div>
         {rating && (
           <div className="flex justify-center items-center w-8 h-8 border rounded-full bg-gray-300">

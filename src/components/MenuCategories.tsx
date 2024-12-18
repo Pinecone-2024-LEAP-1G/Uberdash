@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "@/components/ui/skeleton"; // Import Skeleton
+import { Skeleton } from "@/components/ui/skeleton";
 import { MenuCategory } from "./MenuCategory";
 import {
   Carousel,
@@ -20,11 +20,7 @@ export const MenuCategories = () => {
   useEffect(() => {
     const dataFetch = async () => {
       try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-          }/api/category`
-        );
+        const response = await axios.get(`/api/category`);
         setCategories(response.data.category);
         setLoading(false);
       } catch (error) {
