@@ -34,10 +34,15 @@ export const RestaurantReview: React.FC<RestaurantReviewProps> = ({
       <div className="w-full h-full grid grid-cols-2 gap-3 ">
         {reviews.map((review) => (
           <div key={review._id}>
-            <div className=" bg-slate-50 rounded-2xl p-4 mt-4 border">
-              <p className="font-bold">{review.userId.name}</p>
-              <div className="flex">{renderRatingStars(review.rating)}</div>
-              <p>{review.comment}</p>
+            <div className="  rounded-2xl p-4 mt-4 border">
+              <p className="text-[16px] font-medium leading-5 mb-1">
+                {review.userId.name}
+              </p>
+              <div className="flex text-[14px] font-normal mt-1 text-[#5e5e5e] gap-2">
+                {renderRatingStars(review.rating)}
+                {new Date(review.createdAt).toLocaleDateString()}
+              </div>
+              <p className="mt-1">{review.comment}</p>
             </div>
           </div>
         ))}
