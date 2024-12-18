@@ -20,10 +20,11 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   const [size, setSize] = useState<string>("");
   const [categoryId, setCategoryId] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [uploading, setUploading] = useState(false);
 
   const CreateProduct = async () => {
     try {
-      await axios.post(`/api/menu-item`, {
+      const response = await axios.post(`/api/menu-item`, {
         name,
         description,
         size,
@@ -33,7 +34,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
         restaurantId,
         image,
       });
-
+      //amjilttai food uuslee gdg toast
       handleCreateProduct();
     } catch (error) {
       console.log(error);
@@ -41,29 +42,33 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   };
 
   const uploadImageToCloudinary = async (imageFile: File) => {
+    setUploading(true);
     try {
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      formData.append(
+        "upload_preset",
+        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || ""
+      );
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
-        {
-          file: imageFile,
-          upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
-        }
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        formData
       );
 
       setImage(response?.data?.secure_url);
+      alert("Зураг амжилттай байршлаа.");
     } catch (error) {
-      console.log(error);
+      console.error("Зураг байршуулахад алдаа гарлаа.", error);
+      alert("Зураг байршуулахад алдаа гарлаа.");
+    } finally {
+      setUploading(false);
     }
   };
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          `${
-            process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_URL_PROD
-          }/api/category`
-        );
+        const response = await axios.get(`/api/category`);
         setCategories(response.data.category);
       } catch (error) {
         console.log(error);
@@ -110,11 +115,22 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
                 type="file"
                 onChange={(event) => {
                   const file = event?.target?.files?.[0];
-                  if (!file) return;
-                  uploadImageToCloudinary(file);
+                  if (file) uploadImageToCloudinary(file);
                 }}
                 className="py-2 px-4 rounded-xl border border-gray-300 focus:outline-none"
               />
+              {uploading && (
+                <p className="text-sm text-indigo-500">
+                  Зураг байршиж байна...
+                </p>
+              )}
+              {image && (
+                <img
+                  src={image}
+                  alt="Uploaded"
+                  className="mt-2 h-32 w-32 object-cover rounded-lg border"
+                />
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-gray-800">Хэмжээ</p>

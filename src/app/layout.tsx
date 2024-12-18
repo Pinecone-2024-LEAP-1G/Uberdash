@@ -41,6 +41,7 @@ export default function RootLayout({
                           !isBusinessAccountPage &&
                           !isAddRestaurantPage &&
                           !isOwnerPage && <Header />}
+
                         {children}
                         {!isBusinessAccountPage && (
                           <Footer className={isCheckoutPage ? "mt-72" : ""} />
