@@ -99,7 +99,8 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
           <p className="text-[18px] font-medium text-ellipsis">{name}</p>
           {location && minDist !== 0 && (
             <p className="text-[14px] text-[#706f6f] font-thin ">
-              {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} min
+              Очих хугацаа : {Math.ceil(minDist * 3)} -{" "}
+              {Math.ceil(minDist * 3) + 5} min
             </p>
           )}
         </div>
