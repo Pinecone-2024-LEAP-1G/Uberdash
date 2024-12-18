@@ -16,18 +16,28 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 const DialogClose = DialogPrimitive.Close;
 
+type Location = {
+  type: "Point";
+  coordinates: [number, number];
+};
+
 export const DeliveryFee = (restaurantId: string) => {
   const data = useLocation();
   const { location } = data;
+
+  const myLocation: Location = {
+    type: "Point",
+    coordinates: location ? (location as [number, number]) : [0, 0],
+  };
   const [minDist, setMinDist] = useState<number>(0);
 
   useEffect(() => {
-    if (!location.coordinates[0]) return;
+    if (!location[0]) return;
 
     const dataFetcher = async () => {
       try {
         const response = await axios.post(`/api/restaurant-branch/distance`, {
-          location: location,
+          location: myLocation,
           restaurantId,
         });
 
@@ -57,19 +67,20 @@ export const DeliveryFee = (restaurantId: string) => {
                 </p>
               </DialogDescription>
               <DialogClose>
-                {" "}
                 <Button className="w-full text-xl h-14">болсон</Button>
               </DialogClose>
             </DialogHeader>
           </DialogContent>
         </Dialog>
       </div>
-      <div className="flex flex-col items-center justify-center w-1/2">
-        <p>
-          {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} минут
-        </p>
-        <p className="text-[#5E5E5E]">Хүргэлт хийх хугацаа /минут/</p>
-      </div>
+      {location[0] && (
+        <div className="flex flex-col items-center justify-center w-1/2">
+          <p>
+            {Math.ceil(minDist * 3)} - {Math.ceil(minDist * 3) + 5} минут
+          </p>
+          <p className="text-[#5E5E5E]">Хүргэлт хийх хугацаа /минут/</p>
+        </div>
+      )}
     </div>
   );
 };
