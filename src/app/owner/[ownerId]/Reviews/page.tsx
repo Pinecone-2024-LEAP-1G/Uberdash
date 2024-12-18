@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ReviewType } from "@/lib/types";
@@ -22,8 +21,10 @@ const Reviews = () => {
   }, []);
 
   return (
-    <div className="flex p-4 w-full justify-center items-center">
-      <ReviewTable reviews={reviews} />
+    <div className="flex p-10">
+      <div className="w-[1200px] max-w-4xl p-6 bg-white rounded-lg shadow-lg">
+        <ReviewTable reviews={reviews} />
+      </div>
     </div>
   );
 };

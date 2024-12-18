@@ -8,11 +8,10 @@ type CreateProductProps = {
   handleCreateProduct: () => void;
 };
 
-const restaurantOwnerId: string = "673e90415a6e8e222657bbb4";
-
 export const CreateProduct: React.FC<CreateProductProps> = ({
   handleCreateProduct,
 }) => {
+  const restaurantId: string | null = localStorage.getItem("restaurantId");
   const [categories, setCategories] = useState<Category[]>([]);
 
   const [name, setName] = useState<string>("");
@@ -21,7 +20,6 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   const [size, setSize] = useState<string>("");
   const [categoryId, setCategoryId] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [restaurantId, setRestaurantId] = useState<string>("");
 
   const CreateProduct = async () => {
     try {
@@ -59,17 +57,6 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
   };
 
   useEffect(() => {
-    const fetchRestaurant = async () => {
-      try {
-        const response = await axios.post(`/api/restaurant/getByOwnerId`, {
-          ownerId: restaurantOwnerId,
-        });
-        setRestaurantId(response.data.restaurant._id);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
@@ -84,7 +71,6 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
     };
 
     fetchCategories();
-    fetchRestaurant();
   }, []);
 
   return (
