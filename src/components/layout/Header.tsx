@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Drawers } from "../Drawer";
 import { BasketDrawer } from "../basket-drawer/BasketDrawer";
 import { parseAsString, useQueryState } from "nuqs";
-import { SignInButton } from "../SignInButton";
 import { SearchBar } from "../SearchBar";
+import { SignInButton } from "../SignInButton";
 
 export const Header = () => {
   const [searchTerm, setSearchTerm] = useQueryState("search", parseAsString);
