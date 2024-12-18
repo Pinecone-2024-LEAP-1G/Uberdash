@@ -24,7 +24,11 @@ const items = [
     icon: Calendar,
   },
   { title: "Reviews", url: `/owner/${restaurantId}/Reviews`, icon: Search },
-  { title: "Products", url: `/owner/${restaurantId}/Products`, icon: Settings },
+  {
+    title: "Хоолны цэс",
+    url: `/owner/${restaurantId}/Products`,
+    icon: Settings,
+  },
 ];
 
 export function AdminSideBar() {
