@@ -1,6 +1,5 @@
 "use client";
 
-import { AdminSideBar } from "@/components/AdminSideBoard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category } from "@/lib/types";
@@ -33,7 +32,7 @@ const Categories = () => {
     fetchData();
 
     return () => {
-      isMounted = false; // Clean up for Strict Mode
+      isMounted = false;
     };
   }, []);
 
