@@ -1,8 +1,9 @@
 import { Schema, model, Model, models } from "mongoose";
+import { User } from "./users.model";
 
 export type Review = {
   _id: Schema.Types.ObjectId;
-  userId: Schema.Types.ObjectId;
+  userId: User;
   restaurantId: Schema.Types.ObjectId;
   comment: string;
   rating: number;

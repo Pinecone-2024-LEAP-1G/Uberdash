@@ -10,8 +10,9 @@ import { RestrauntMenu } from "./RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
 import { Review } from "@/lib/models";
-
 import { MenuItemType } from "@/lib/types";
+import { RestaurantReview } from "@/components/restaurant/RestaurantReviev";
+import { RestaurantRating } from "@/app/owner/[ownerId]/Reviews/restaurantReview";
 
 type Restaurant = {
   name: string;
@@ -138,6 +139,9 @@ export const RestaurantDetail = ({
             </div>
           );
         })}
+      </div>
+      <div>
+        <RestaurantRating />
       </div>
     </div>
   );
