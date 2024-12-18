@@ -1,20 +1,18 @@
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/Providers/CartProvider";
+import { CartItem, useCart } from "@/Providers/CartProvider";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Restaurant } from "@/lib/models";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { Order } from "@/lib/models/order";
 import Link from "next/link";
-// import { ObjectId } from "mongoose";
+import { ObjectId } from "mongoose";
 
 const Checkout = () => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const { cartItems, clearCart } = useCart();
   const { data: session } = useSession();
-  const [order, setOrder] = useState<Order | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -36,50 +34,53 @@ const Checkout = () => {
   const postOrder = async () => {
     const orderData = {
       userId: session?.user.id,
-      orderItems: [
-        cartItems.map((cartItem) => ({
-          price: cartItem.price,
-          quantity: cartItem.quantity,
-          orderId: order?._id,
-          restaurantId: cartItem.restaurantId,
-          menuItem: cartItem._id,
-        })),
-      ],
+      orderItems: [],
     };
     try {
       const { data } = await axios.post(`/api/order`, orderData);
-      setOrder(data.order);
+      return data.order;
     } catch (error) {
       console.log("Error creating order:", error);
       return null;
     }
   };
 
-  // const postOrderItem = async (
-  //   cartItem: CartItem,
-  //   orderId: ObjectId | undefined
-  // ) => {
-  //   try {
-  //     if (order && restaurant) {
-  //       await axios.post(`/api/orderItem`, {
-  //         price: cartItem.price,
-  //         quantity: cartItem.quantity,
-  //         orderId,
-  //         restaurantId: cartItem.restaurantId,
-  //         menuItem: cartItem._id,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log("Error posting order item:", error);
-  //   }
-  // };
-  // cartItems.forEach((cartItem) => postOrderItem(cartItem, order?._id));
+  const postOrderItem = async (
+    cartItem: CartItem,
+    orderId: ObjectId | undefined
+  ) => {
+    try {
+      const orderItem = {
+        price: cartItem.price,
+        quantity: cartItem.quantity,
+        orderId,
+        restaurantId: cartItem.restaurantId,
+        menuItem: cartItem._id,
+      };
+      await axios.post(`/api/orderItem`, orderItem);
+    } catch (error) {
+      console.log("Error posting order item:", error);
+    }
+  };
 
   const createOrder = async () => {
-    setIsLoading(true);
-    await postOrder();
+    if (!session?.user.id || cartItems.length === 0) return;
 
-    setIsLoading(false);
+    setIsLoading(true);
+
+    try {
+      const order = await postOrder();
+      if (order && order._id) {
+        for (const cartItem of cartItems) {
+          await postOrderItem(cartItem, order._id);
+        }
+        clearCart();
+      }
+    } catch (error) {
+      console.log("Error during order creation:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!restaurant) return <div>No restaurant found.</div>;
@@ -108,7 +109,7 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Link href={"/orders"}>
+      <Link href="/orders">
         <Button className="w-full" onClick={createOrder} disabled={isLoading}>
           {isLoading ? "Processing..." : "Захиалга хийх"}
         </Button>

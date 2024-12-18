@@ -1,6 +1,3 @@
-"use client";
-import { ChevronDown, ChevronUp, Clock3, Copy, MapPin } from "lucide-react";
-import { useState } from "react";
 import Map from "./RestaurantMap";
 import { useLocation } from "@/Providers/LocationProvider";
 
