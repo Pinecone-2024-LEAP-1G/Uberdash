@@ -31,13 +31,15 @@ export const ReviewRating = (props: {
           {`${!more ? "More" : "Less"}`}
         </span>
       </div>
-      <h1 className="text-2xl font-semibold gap-4 my-3">Rating and reviews</h1>
+      <h1 className="text-2xl font-semibold gap-4 my-3">
+        Үнэлгээ ба сэтгэгдэл
+      </h1>
       <div className="border rounded-2xl flex px-2 py-4">
         <div className="w-1/3 flex flex-col items-center">
           <p className="text-4xl">{4}</p>
-          <p>RatingStar</p>
+          <p>Үнэлгээний од</p>
           <Stars rating={4} />
-          <p>{reviews?.length} Ratings</p>
+          <p>{reviews?.length} Үнэлгээ</p>
         </div>
         <div className="w-2/3 mr-8">
           {reviews?.map((review, index) => (
@@ -53,7 +55,7 @@ export const ReviewRating = (props: {
           ))}
           <Button className="bg-[#f3f3f3] text-black rounded-3xl hover:bg-gray-300">
             <ArrowDownWideNarrow />
-            Show more
+            Илүү ихийг харах
           </Button>
         </div>
       </div>

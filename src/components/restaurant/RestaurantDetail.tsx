@@ -92,7 +92,7 @@ export const RestaurantDetail = ({
           <RestaurantLocation {...restaurantProps} />
         </div>
       </div>
-      <h1 className="text-2xl font-semibold my-4">Featured Items</h1>
+      <h1 className="text-2xl font-semibold my-4">Онцлох бүтээгдэхүүнүүд</h1>
       <div className="grid grid-cols-5 my-4 gap-6">
         {menuItems?.map((menuItem) => {
           return <MenuItemLastCard menuItem={menuItem} key={menuItem._id} />;

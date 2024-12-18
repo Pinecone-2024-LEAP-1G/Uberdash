@@ -46,7 +46,7 @@ export const FastFoodFilter = () => {
       {Object.entries(groupedItems).map(([categoryId, items]) => (
         <div key={categoryId}>
           <h3>Category: {items[0]?.name || "Unnamed Category"}</h3>
-          <MenuItemSlider categoryItems={items} name="Featured Fast Food" />
+          <MenuItemSlider categoryItems={items} name=" Fast Food" />
         </div>
       ))}
     </div>
