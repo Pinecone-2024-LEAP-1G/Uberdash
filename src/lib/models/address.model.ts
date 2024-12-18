@@ -1,8 +1,8 @@
-import { Model, Schema, models, model } from "mongoose";
+import { Model, Schema, models, model, ObjectId } from "mongoose";
 
 export type Address = {
-  firstName: string;
-  lastName: string;
+  orderId: ObjectId;
+  userName: string;
   phoneNumber: string;
   street: string;
   houseNumber: string;
@@ -11,8 +11,8 @@ export type Address = {
 };
 
 const AddressmeSchema = new Schema<Address>({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  orderId: { type: Schema.Types.ObjectId, ref: "orders", required: true },
+  userName: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   street: { type: String, required: true },
   houseNumber: { type: String, required: true },

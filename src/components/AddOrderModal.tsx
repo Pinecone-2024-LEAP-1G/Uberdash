@@ -5,12 +5,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import PlusSign from "./ui/PlusSignSvg";
 import { MenuItemType } from "@/lib/types";
 import { useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
 import { SelectQuantity } from "../components/basket-drawer/SelectQuantity";
 import { toast } from "@/hooks/use-toast";
+import { Button } from "./ui/button";
+import { FaPlus } from "react-icons/fa";
 
 type MenuItem = {
   menuItem?: MenuItemType;
@@ -47,7 +48,7 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
       <Dialog>
         <div>
           <DialogTrigger>
-            <PlusSign />
+            <FaPlus fill="black" />
           </DialogTrigger>
         </div>
         <DialogContent className="h-[600px]">
@@ -91,14 +92,14 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
                     <div>
                       <div className="mt-[70px]">
                         <DialogTrigger>
-                          <button
+                          <Button
                             type="button"
                             onClick={handleAddToCart}
                             className="w-[492px] h-[56px] px-2 rounded-lg bg-[#000000] text-[18px] text-white mt-2 hover:bg-[#202020]"
                           >
                             Сагсанд нэмэх {Number(totalAmount).toLocaleString()}
                             ₮
-                          </button>
+                          </Button>
                         </DialogTrigger>
                       </div>
                     </div>

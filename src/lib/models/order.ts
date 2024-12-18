@@ -3,13 +3,13 @@ import { models, Schema, model } from "mongoose";
 export type Order = {
   _id: Schema.Types.ObjectId;
   status:
-    | "Pending"
-    | "Cancelled"
-    | "ReadyToStart"
-    | "InPreparation"
-    | "ReadyForPickup"
-    | "OnTheWay"
-    | "Delivered";
+    | "Хүлээгдэж байна"
+    | "Цуцалсан"
+    | "Хийж эхлэж байна"
+    | "Хийгдэж дууссан"
+    | "Хүргэлтэнд гархаар хүлээгдэж байна"
+    | "Хүргэлтэнд явж байна"
+    | "Хүргэгдсэн";
   orderItemCount: number;
   priceWithoutDiscount: number;
   priceWithDiscount: number;
@@ -32,15 +32,15 @@ const OrderSchema = new Schema<Order>(
       type: String,
       required: true,
       enum: [
-        "Pending",
-        "Cancelled",
-        "ReadyToStart",
-        "InPreparation",
-        "ReadyForPickup",
-        "OnTheWay",
-        "Delivered",
+        "Хүлээгдэж байна",
+        "Цуцалсан",
+        "Хийж эхлэж байна",
+        "Хийгдэж дууссан",
+        "Хүргэлтэнд гархаар хүлээгдэж байна",
+        "Хүргэлтэнд явж байна",
+        "Хүргэгдсэн",
       ],
-      default: "Pending",
+      default: "Хүлээгдэж байна",
     },
     orderItemCount: {
       type: Number,

@@ -8,7 +8,7 @@ import { AuthGuard } from "../AuthGuard";
 const CheckoutPage = () => {
   return (
     <AuthGuard>
-      <div className="container mx-auto w-fit">
+      <div className="container mx-auto w-fit border shadow-lg rounded-xl p-4">
         <Checkout />
         <CartSummary />
         <OrderTotal />

@@ -109,7 +109,7 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Link href="/orders">
+      <Link href="/address">
         <Button className="w-full" onClick={createOrder} disabled={isLoading}>
           {isLoading ? "Processing..." : "Захиалга хийх"}
         </Button>
