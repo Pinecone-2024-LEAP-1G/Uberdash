@@ -14,7 +14,6 @@ export const RestaurantRating = () => {
     const dataFetch = async () => {
       try {
         const response = await axios.get(`/api/review/${restaurantId}`);
-        console.log(response);
 
         setReviews(response.data.reviews);
       } catch (error) {

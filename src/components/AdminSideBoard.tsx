@@ -18,6 +18,7 @@ import {
   FaCalendarAlt,
   FaSearch,
   FaCogs,
+  FaCodeBranch,
 } from "react-icons/fa";
 
 const restaurantId = localStorage.getItem("restaurantId");
@@ -27,6 +28,12 @@ const items = [
     title: "Нүүр",
     url: `/owner/${restaurantId}/Home`,
     icon: FaHome,
+    size: "w-6 h-6",
+  },
+  {
+    title: "Салбарууд",
+    url: `/owner/${restaurantId}/Branches`,
+    icon: FaCodeBranch,
     size: "w-6 h-6",
   },
   {

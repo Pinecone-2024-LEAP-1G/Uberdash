@@ -28,7 +28,7 @@ export const Header = () => {
     if (localStorage.getItem("location")) {
       //amjilttai location avlaa
     } else {
-      console.log("Location songono uu"); // location songono uu gdg toaster oruul
+      // location songono uu gdg toaster oruul
     }
   };
 
