@@ -9,7 +9,9 @@ export const GET = async (
 ) => {
   const restaurantId = (await params).restaurantId;
   try {
-    const reviews = await ReviewModel.find({ restaurantId: restaurantId });
+    const reviews = await ReviewModel.find({
+      restaurantId: restaurantId,
+    }).populate("userId");
 
     return Response.json({ reviews });
   } catch (error) {
