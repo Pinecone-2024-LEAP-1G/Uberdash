@@ -6,19 +6,21 @@ import {
   useContext,
   ReactNode,
 } from "react";
-import { Location } from "@/lib/models";
+
+export type locationCoordinates = number[];
 
 export const LocationContext = createContext<{
-  location: Location;
+  location: locationCoordinates;
   isLoading: boolean;
   error: string | null;
+  setLocation: (location: locationCoordinates) => void;
+  selectLocation: (newLocation: locationCoordinates) => void;
 }>({
-  location: {
-    type: "Point",
-    coordinates: [0, 0],
-  },
-  isLoading: false,
+  location: [0, 0],
+  isLoading: true,
   error: null,
+  setLocation: () => {},
+  selectLocation: () => {},
 });
 
 const useLocation = () => useContext(LocationContext);
@@ -29,44 +31,45 @@ interface LocationProviderProps {
 
 const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [location, setLocation] = useState<Location>({
-    type: "Point",
-    coordinates: [0, 0],
-  });
+  const [location, setLocation] = useState<locationCoordinates>([0, 0]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (typeof window !== "undefined" && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const newLocation: Location = {
-              type: "Point",
-              coordinates: [
-                position.coords.latitude,
-                position.coords.longitude,
-              ],
-            };
-            setLocation(newLocation);
-            setIsLoading(false);
-          },
-          (err) => {
-            setError(err.message || "Failed to retrieve location");
-            setIsLoading(false);
-          }
-        );
-      } else {
-        setError("Geolocation is not supported by this browser");
-        setIsLoading(false);
+    const savedLocation = localStorage.getItem("location");
+    if (savedLocation) {
+      try {
+        const parsedLocation = JSON.parse(savedLocation);
+        if (Array.isArray(parsedLocation) && parsedLocation.length === 2) {
+          setLocation(parsedLocation);
+        }
+      } catch (e) {
+        setError("Failed to parse location from localStorage");
       }
-    };
-
-    fetchData();
+    }
+    setIsLoading(false);
   }, []);
 
+  useEffect(() => {
+    if (location && location.length === 2) {
+      localStorage.setItem("location", JSON.stringify(location));
+    }
+  }, [location]);
+
+  const selectLocation = (newLocation: locationCoordinates) => {
+    setLocation(newLocation);
+  };
+
   return (
-    <LocationContext.Provider value={{ location, isLoading, error }}>
-      {children}
+    <LocationContext.Provider
+      value={{
+        location,
+        isLoading,
+        error,
+        setLocation,
+        selectLocation,
+      }}
+    >
+      {!isLoading ? children : null}{" "}
     </LocationContext.Provider>
   );
 };

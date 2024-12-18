@@ -43,8 +43,6 @@ export const Restaurants = () => {
                   restaurantId={restaurant._id}
                   image={restaurant.banner}
                   name={restaurant.name}
-                  points={4}
-                  bonus={""}
                 />
               </Link>
             ))}

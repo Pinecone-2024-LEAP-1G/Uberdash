@@ -1,10 +1,9 @@
-"use client";
-
 import React, { useState } from "react";
 import L from "leaflet";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
-
 import "leaflet/dist/leaflet.css";
+import { useLocation } from "@/Providers/LocationProvider";
+
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -38,11 +37,11 @@ const Map: React.FC<MapProps> = ({ center }) => {
     null
   );
 
-  console.log(selectedLocation);
+  const { selectLocation } = useLocation();
 
   const handleLocationSelect = (location: L.LatLng) => {
     setSelectedLocation(location);
-    localStorage.setItem("location", location.toString());
+    selectLocation([location.lat, location.lng]);
   };
 
   return (

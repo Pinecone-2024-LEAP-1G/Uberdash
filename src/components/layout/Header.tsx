@@ -62,7 +62,7 @@ export const Header = () => {
             </Button>
           </DialogTrigger>
 
-          <DialogContent className="w-fit">
+          <DialogContent className="w-fit px-7 py-6">
             <DialogHeader>
               <DialogTitle>Байршилаа сонгох</DialogTitle>
               <DialogDescription>

@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/toaster";
 import { Suspense } from "react";
 import LoadingWrapper from "@/components/LoadingWrapper";
+import { LocationProvider } from "@/Providers/LocationProvider";
 
 export default function RootLayout({
   children,
@@ -35,14 +36,16 @@ export default function RootLayout({
                 <FoodProvider>
                   <NuqsAdapter>
                     <LoadingWrapper>
-                      {!isSignInPage &&
-                        !isBusinessAccountPage &&
-                        !isAddRestaurantPage &&
-                        !isOwnerPage && <Header />}
-                      {children}
-                      {!isBusinessAccountPage && (
-                        <Footer className={isCheckoutPage ? "mt-72" : ""} />
-                      )}
+                      <LocationProvider>
+                        {!isSignInPage &&
+                          !isBusinessAccountPage &&
+                          !isAddRestaurantPage &&
+                          !isOwnerPage && <Header />}
+                        {children}
+                        {!isBusinessAccountPage && (
+                          <Footer className={isCheckoutPage ? "mt-72" : ""} />
+                        )}
+                      </LocationProvider>
                     </LoadingWrapper>
                     <Toaster />
                   </NuqsAdapter>
