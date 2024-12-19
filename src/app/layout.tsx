@@ -9,10 +9,11 @@ import { FoodProvider } from "../Providers/MenuItem.Provider";
 import { SessionProvider } from "next-auth/react";
 import { AuthGuard } from "./AuthGuard";
 import { usePathname } from "next/navigation";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from 'sonner'
 import { Suspense } from "react";
 import LoadingWrapper from "@/components/LoadingWrapper";
 import { LocationProvider } from "@/Providers/LocationProvider";
+
 
 export default function RootLayout({
   children,
@@ -48,7 +49,7 @@ export default function RootLayout({
                         )}
                       </LocationProvider>
                     </LoadingWrapper>
-                    <Toaster />
+                    <Toaster position="bottom-left" />
                   </NuqsAdapter>
                 </FoodProvider>
               </CartProvider>
