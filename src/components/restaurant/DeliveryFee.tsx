@@ -62,12 +62,12 @@ export const DeliveryFee = (restaurantId: string) => {
               <DialogTitle className="text-4xl">Хүргэлтийн төлбөр</DialogTitle>
               <DialogDescription className="flex flex-col gap-2 text-base overflow-scroll ">
                 <p>
-                  олон ресторанаас захиалга хийхэд 1 ресторан тутамд 5000₮
+                  Олон ресторанаас захиалга хийхэд 1 ресторан тутамд 5000₮
                   бодогдох болно.
                 </p>
               </DialogDescription>
               <DialogClose>
-                <Button className="w-full text-xl h-14">болсон</Button>
+                <Button className="w-full text-xl h-14">Болсон</Button>
               </DialogClose>
             </DialogHeader>
           </DialogContent>
