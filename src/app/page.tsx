@@ -10,6 +10,7 @@ import axios from "axios";
 import { RestrauntMenu } from "@/components";
 import { MenuItemType } from "@/lib/types";
 import { MostSaledFoods } from "@/components/MostSaledFoods";
+import { MostRatedRestaurants } from "@/components/MostRatedRestaurants";
 
 const Home = () => {
   const category = useQueryState("category", parseAsString);
@@ -49,7 +50,6 @@ const Home = () => {
   return (
     <div className="container mx-auto max-w-[1200px] space-y-6">
       <MenuCategories />
-      {category[0] && <CategoryFilter />}
 
       {search[0] && (
         <div className="grid grid-cols-4 my-4 gap-6">
@@ -66,8 +66,10 @@ const Home = () => {
           })}
         </div>
       )}
+      {category[0] && <CategoryFilter />}
       <MostSaledFoods />
       <FastFoodFilter />
+      <MostRatedRestaurants />
       <Restaurants />
     </div>
   );
