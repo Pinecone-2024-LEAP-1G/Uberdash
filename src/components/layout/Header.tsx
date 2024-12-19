@@ -57,7 +57,7 @@ export const Header = () => {
           <DialogTrigger asChild>
             <Button
               variant="outline"
-              className="flex items-center justify-center gap-3 mr-10"
+              className="flex items-center justify-center gap-3 mr-10 ml-5 mt-1"
             >
               <div className="flex items-center justify-center gap-1">
                 <MapPin />
