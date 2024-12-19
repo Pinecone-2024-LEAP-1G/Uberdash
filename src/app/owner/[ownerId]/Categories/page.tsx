@@ -46,16 +46,13 @@ const Categories = () => {
 
   return (
     <div className="flex h-screen w-full bg-gray-50">
-      {/* Sidebar Placeholder */}
       <aside className="w-[250px] lg:w-[300px] bg-white shadow-md"></aside>
 
-      {/* Main Content */}
       <div className="flex-grow p-6">
         <div className="bg-white rounded-lg shadow-lg p-6 h-full">
           {isCreateCategory && <CreateCategoryComp {...newProps} />}
 
           <div className="flex flex-col gap-6">
-            {/* Header Section */}
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-semibold text-gray-800">
                 Categories
@@ -69,7 +66,6 @@ const Categories = () => {
               </div>
             </div>
 
-            {/* Categories Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
               {categories?.map((oneCategory, index) => (
                 <CategoryComp key={index} {...oneCategory} />
