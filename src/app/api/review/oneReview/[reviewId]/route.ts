@@ -9,7 +9,7 @@ export const GET = async (
 ) => {
   const reviewId = (await params).reviewId;
   try {
-    const review = await ReviewModel.findById(reviewId);
+    const review = await ReviewModel.findOne({ orderId: reviewId });
     return Response.json({ review });
   } catch (error) {
     return Response.json({ error });

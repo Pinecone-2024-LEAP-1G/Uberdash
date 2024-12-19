@@ -10,7 +10,6 @@ const PostReview = ({ order }: { order: Order }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState<Review | null>(null);
   const [comment, setComment] = useState<string>("");
-  const [reviewId, setReviewId] = useState<string | null>(null);
   const stars = [1, 2, 3, 4, 5];
 
   const handleChangeRating = (newRating: number) => {
@@ -22,8 +21,6 @@ const PostReview = ({ order }: { order: Order }) => {
   };
 
   const postFeedPack = async () => {
-    console.log(order._id);
-
     try {
       const postReview = await axios.post(`/api/review`, {
         comment,
@@ -39,27 +36,18 @@ const PostReview = ({ order }: { order: Order }) => {
   };
 
   useEffect(() => {
-    if (reviewId) {
-      const getReview = async () => {
-        try {
-          const fetchReview = await axios.get(
-            `/api/review/oneReview/${reviewId}`
-          );
-          setReview(fetchReview.data);
-        } catch (error) {
-          console.error("Error fetching review:", error);
-        }
-      };
-      getReview();
-    }
+    const getReview = async () => {
+      try {
+        const fetchReview = await axios.get(
+          `/api/review/oneReview/${order._id}`
+        );
+        setReview(fetchReview.data.review);
+      } catch (error) {
+        console.error("Error fetching review:", error);
+      }
+    };
+    getReview();
   }, []);
-  useEffect(() => {
-    if (review) {
-      setReviewId(review._id);
-    }
-  }, [review]);
-  console.log(review);
-  console.log(order._id);
 
   return (
     <div
