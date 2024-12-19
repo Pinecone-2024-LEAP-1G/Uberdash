@@ -92,8 +92,7 @@ const UserAddress = () => {
     };
 
     try {
-      const response = await axios.post("/api/address", address);
-      console.log("Address saved:", response.data);
+      await axios.post("/api/address", address);
       router.push("/orders");
     } catch (error) {
       console.error("Failed to post address:", error);
