@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Address = () => {
+const UserAddress = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [street, setStreet] = useState<string>("");
   const [houseNumber, setHouseNumber] = useState<string>("");
@@ -120,4 +120,4 @@ const Address = () => {
     </div>
   );
 };
-export default Address;
+export default UserAddress;

@@ -74,7 +74,7 @@ const Checkout = () => {
         for (const cartItem of cartItems) {
           await postOrderItem(cartItem, order._id);
         }
-        clearCart();
+        // clearCart();
       }
     } catch (error) {
       console.log("Error during order creation:", error);
@@ -109,11 +109,11 @@ const Checkout = () => {
         </div>
         <ChevronRight />
       </div>
-      <Link href="/address">
-        <Button className="w-full" onClick={createOrder} disabled={isLoading}>
-          {isLoading ? "Processing..." : "Захиалга хийх"}
-        </Button>
-      </Link>
+      {/* <Link href="/address"> */}
+      <Button className="w-full" onClick={createOrder} disabled={isLoading}>
+        {isLoading ? "Processing..." : "Захиалга хийх"}
+      </Button>
+      {/* </Link> */}
     </div>
   );
 };
