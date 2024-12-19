@@ -12,7 +12,6 @@ export const GET = async () => {
     const order = await OrderModel.find()
       .populate({ path: "userId" })
       .populate({ path: "orderItems" })
-      .populate({ path: "discountCodeId" })
       .populate({ path: "deliveryAddressId" });
 
     return Response.json({ order });

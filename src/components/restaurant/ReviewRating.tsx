@@ -12,7 +12,6 @@ export const ReviewRating = (props: {
   description: string | undefined;
 }) => {
   const { reviews, description } = props;
-  console.log(reviews);
   const [more, setMore] = useState<boolean>(false);
 
   const [rating, setRating] = useState<string>("");
