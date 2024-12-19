@@ -2,6 +2,8 @@ import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "@/Providers/LocationProvider";
+import { Restaurant } from "@/lib/models";
+import Link from "next/link";
 
 type Location = {
   type: "Point";
@@ -19,14 +21,20 @@ export type restaurantBranchWithDistance = {
 type MenuTypes = {
   image: string;
   name: string;
-
+  favourites: Restaurant[];
   restaurantId: string;
 };
 type Heart = {
+  favourites: Restaurant[];
   restaurantId: string;
 };
 
-export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
+export const MenuItem = ({
+  image,
+  name,
+  restaurantId,
+  favourites,
+}: MenuTypes) => {
   const location = useLocation();
 
   const myLocation: Location = {
@@ -37,6 +45,7 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
   };
 
   const myProps: Heart = {
+    favourites: favourites,
     restaurantId: restaurantId,
   };
 
@@ -78,24 +87,28 @@ export const MenuItem = ({ image, name, restaurantId }: MenuTypes) => {
   }, [location]);
 
   return (
-    <div className="w-[288px] rounded-xl overflow-hidden ">
-      <div
-        className="w-full h-[130px] rounded-xl"
-        style={{
-          backgroundImage: `url(${image})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-      >
-        <div className="flex justify-between items-center pt-2 px-3 ">
-          <p className="text-[#ffffff] bg-[#0e8345] text-ellipsis p-1 whitespace-nowrap rounded-sm text-[14px] "></p>
-          <HeartSvg {...myProps} />
+    <div className="w-[288px] rounded-xl overflow-hidden relative">
+      <Link href={`/restaurant/${restaurantId}`} key={restaurantId}>
+        <div
+          className="w-full h-[130px] rounded-xl"
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="flex justify-between items-center pt-2 px-3 ">
+            <p className="text-[#ffffff] bg-[#0e8345] text-ellipsis p-1 whitespace-nowrap rounded-sm text-[14px] "></p>
+          </div>
         </div>
+      </Link>
+      <div className="absolute top-2 right-2 z-10">
+        <HeartSvg {...myProps} />
       </div>
 
-      <div className="mt-3 gap-1 flex w-full justify-between items-center px-3">
-        <div>
+      <div className="flex justify-between items-center px-3 mt-3">
+        <div className="flex flex-col">
           <p className="text-[18px] font-medium text-ellipsis">{name}</p>
           {location && minDist !== 0 && (
             <p className="text-[14px] text-[#706f6f] font-thin ">

@@ -59,7 +59,6 @@ const Address = () => {
       appartmentNumber,
     };
     const newAddress = await axios.post("/api/address", address);
-    console.log(newAddress);
   };
 
   return (
