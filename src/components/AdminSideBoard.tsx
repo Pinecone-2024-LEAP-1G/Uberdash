@@ -10,7 +10,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import {
   FaHome,
@@ -20,6 +19,7 @@ import {
   FaCogs,
   FaCodeBranch,
 } from "react-icons/fa";
+import Link from "next/link";
 
 const restaurantId = localStorage.getItem("restaurantId");
 
@@ -67,9 +67,19 @@ export function AdminSideBar() {
     <Sidebar className="w-72 bg-gray-50 shadow-md h-screen">
       <SidebarContent className="flex flex-col justify-start">
         <SidebarGroup>
-          <SidebarGroupLabel className="mt-48"></SidebarGroupLabel>
+          <Link href={"/"} className="flex items-center justify-center">
+            <div className="text-3xl font-extrabold leading-none tracking-tight text-white-300 mt-12">
+              <div className="flex items-center justify-center">
+                <span>Хоол</span>
+                <mark className="px-2 text-white bg-green-500 rounded ">
+                  Hub
+                </mark>
+              </div>
+            </div>
+          </Link>
+          <SidebarGroupLabel className="mt-34"></SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="border-gray-200 my-20">
+            <SidebarMenu className="border-gray-200 my-13">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -89,7 +99,6 @@ export function AdminSideBar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarTrigger className="fixed top-4 left-4 z-20 w-10 ml-4 h-10 rounded-full flex justify-center items-center shadow-lg " />
     </Sidebar>
   );
 }
