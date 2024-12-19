@@ -8,7 +8,7 @@ import { Schema } from "mongoose";
 import { Address, OrderItem } from "@/lib/models";
 import moment from "moment";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import AddressDialog from "@/components/AddressDialog";
 
 export type Order = {
   _id: Schema.Types.ObjectId;
@@ -22,7 +22,6 @@ export type Order = {
     | "Хүргэгдсэн";
   orderItemCount: number;
   deliveryAddressId: Schema.Types.ObjectId;
-
   totalPrice: number;
   userId: Schema.Types.ObjectId;
   orderItems: OrderItem[];
@@ -47,7 +46,6 @@ const Orders = () => {
         );
 
         setOrders(sortedOrders);
-        setAddress(sortedOrders);
       } catch (error) {
         console.log(error);
       }
@@ -60,13 +58,8 @@ const Orders = () => {
       const fetchAddress = await axios.get(
         `/api/order/address/${order.deliveryAddressId}`
       );
-
-      const address = fetchAddress.data.address;
-
-      console.log(order.deliveryAddressId);
-      console.log(fetchAddress);
-      console.log(address);
-
+      const address = fetchAddress.data.order.deliveryAddressId;
+      setAddress(address);
       return address;
     } catch (error) {
       console.error("Error fetching address:", error);
@@ -85,7 +78,7 @@ const Orders = () => {
             <div className="flex justify-between items-center mb-2">
               <div className="flex flex-col justify-between">
                 <p className="text-xl font-semibold">
-                  Order #{orders.length - index}
+                  Захиалга #{orders.length - index}
                 </p>
                 <div className="text-sm text-gray-500">
                   {moment(order.createdAt).format("LLL")}
@@ -110,18 +103,22 @@ const Orders = () => {
                 </div>
               ))}
             </div>
-            <div className="flex flex-col py-2">
-              <div className="flex gap-2">
-                <p>Нийт бүтээгдэхүүний тоо:</p>
-                <p>{order.orderItemCount}</p>
+            <div className="flex justify-between items-center">
+              <div className="flex flex-col py-2">
+                <div className="flex gap-2">
+                  <p>Нийт бүтээгдэхүүний тоо:</p>
+                  <p>{order.orderItemCount}</p>
+                </div>
+                <div className="flex gap-2">
+                  <p>Нийт захиалгын төлбөр:</p>
+                  <p>{Number(order.totalPrice).toLocaleString()}₮</p>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <p>Нийт захиалгын төлбөр:</p>
-                <p>{Number(order.totalPrice).toLocaleString()}₮</p>
-              </div>
-            </div>
-            <div>
-              <Button onClick={() => GetAddress(order)}>hayg harah</Button>
+              <AddressDialog
+                getAddress={GetAddress}
+                order={order}
+                address={address}
+              />
             </div>
           </div>
         );

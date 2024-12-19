@@ -3,14 +3,15 @@ import { NextRequest } from "next/server";
 
 export const GET = async (
   _req: NextRequest,
-  { params }: { params: Promise<{ deliveryId: string }> }
+  { params }: { params: Promise<{ addressId: string }> }
 ) => {
-  const deliveryAddressId = (await params).deliveryId;
+  const deliveryAddressId = (await params).addressId;
+  console.log(deliveryAddressId);
+
   try {
     const order = await OrderModel.findOne({
       deliveryAddressId: deliveryAddressId,
-    });
-
+    }).populate({ path: "deliveryAddressId" });
     if (!order) {
       return new Response(JSON.stringify({ error: "Order not found" }), {
         status: 404,

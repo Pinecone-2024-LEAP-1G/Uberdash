@@ -19,8 +19,8 @@ const OrderAddress = ({
   setOrderAddress,
   orderAddress,
 }: {
-  setOrderAddress: Address;
-  orderAddress: Address;
+  setOrderAddress: (address: Address) => void;
+  orderAddress?: Address;
 }) => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [street, setStreet] = useState<string>("");
@@ -81,8 +81,6 @@ const OrderAddress = ({
 
     try {
       const response = await axios.post("/api/address", address);
-      console.log(response.data.address);
-
       setOrderAddress(response.data.address);
     } catch (error) {
       console.error("Failed to post address:", error);
@@ -119,7 +117,7 @@ const OrderAddress = ({
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-sm">Дүүрэг,хороо</p>
-              <input
+              <Input
                 onChange={handleStreet}
                 value={street}
                 className="rounded-lg px-4 py-2 bg-gray-100"
@@ -129,7 +127,7 @@ const OrderAddress = ({
 
             <div className="flex flex-col gap-2">
               <p className="text-sm">Байрны дугаар</p>
-              <input
+              <Input
                 onChange={handleAppartmentNumber}
                 value={appartmentNumber}
                 className="rounded-lg px-4 py-2 bg-gray-100"
@@ -138,7 +136,7 @@ const OrderAddress = ({
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-sm">Орцны код</p>
-              <input
+              <Input
                 onChange={handleEntranceNumber}
                 value={entranceNumber}
                 className="rounded-lg px-4 py-2 bg-gray-100"
@@ -147,7 +145,7 @@ const OrderAddress = ({
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-sm">Тоот</p>
-              <input
+              <Input
                 onChange={handleHouseNumber}
                 value={houseNumber}
                 className="rounded-lg px-4 py-2 bg-gray-100"
