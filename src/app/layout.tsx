@@ -25,6 +25,7 @@ export default function RootLayout({
   const isBusinessAccountPage = pathname === "/create-business-account";
   const isAddRestaurantPage = pathname === "/addRestaurant";
   const isOwnerPage = pathname.startsWith("/owner/");
+  const isDashboardPage = pathname.startsWith("/owner");
 
   return (
     <html lang="en">
@@ -43,7 +44,7 @@ export default function RootLayout({
                           !isOwnerPage && <Header />}
 
                         {children}
-                        {!isBusinessAccountPage && (
+                        {!isBusinessAccountPage && !isDashboardPage && (
                           <Footer className={isCheckoutPage ? "mt-72" : ""} />
                         )}
                       </LocationProvider>

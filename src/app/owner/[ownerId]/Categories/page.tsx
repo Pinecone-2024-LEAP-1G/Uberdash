@@ -45,22 +45,37 @@ const Categories = () => {
   };
 
   return (
-    <div className="p-4 flex w-full">
-      {isCreateCategory && <CreateCategoryComp {...newProps} />}
+    <div className="flex h-screen w-full bg-gray-50">
+      {/* Sidebar Placeholder */}
+      <aside className="w-[250px] lg:w-[300px] bg-white shadow-md"></aside>
 
-      <div className="flex flex-col gap-4 items-start">
-        <div
-          onClick={toggleCreateCategory}
-          className="flex gap-2 px-3 py-2 rounded-xl border border-gray-200 hover:bg-slate-300"
-        >
-          <Plus />
-          <button>Create Category</button>
-        </div>
+      {/* Main Content */}
+      <div className="flex-grow p-6">
+        <div className="bg-white rounded-lg shadow-lg p-6 h-full">
+          {isCreateCategory && <CreateCategoryComp {...newProps} />}
 
-        <div className="grid gap-y-6 gap-x-5 grid-cols-6">
-          {categories?.map((oneCategory, index) => {
-            return <CategoryComp key={index} {...oneCategory} />;
-          })}
+          <div className="flex flex-col gap-6">
+            {/* Header Section */}
+            <div className="flex justify-between items-center">
+              <h1 className="text-2xl font-semibold text-gray-800">
+                Categories
+              </h1>
+              <div
+                onClick={toggleCreateCategory}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 cursor-pointer"
+              >
+                <Plus size={16} />
+                <button>Create Category</button>
+              </div>
+            </div>
+
+            {/* Categories Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
+              {categories?.map((oneCategory, index) => (
+                <CategoryComp key={index} {...oneCategory} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
