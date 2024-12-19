@@ -21,6 +21,8 @@ export type Order = {
     | "Хүргэлтэнд явж байна"
     | "Хүргэгдсэн";
   orderItemCount: number;
+  deliveryAddressId: Schema.Types.ObjectId;
+
   totalPrice: number;
   userId: Schema.Types.ObjectId;
   orderItems: OrderItem[];
@@ -45,6 +47,7 @@ const Orders = () => {
         );
 
         setOrders(sortedOrders);
+        setAddress(sortedOrders);
       } catch (error) {
         console.log(error);
       }
@@ -53,9 +56,13 @@ const Orders = () => {
   }, [userId, status]);
 
   const GetAddress = async (order: Order) => {
-    const fetchAddress = await axios.get(`api/address/${order._id}`);
-    setAddress(fetchAddress.data.address);
-    console.log(address);
+    const fetchAddress = await axios.get(
+      `api/order/${order.deliveryAddressId}`
+    );
+    // setAddress(fetchAddress.data.address);
+    console.log(order.deliveryAddressId);
+
+    console.log(fetchAddress);
   };
 
   return (

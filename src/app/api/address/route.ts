@@ -17,7 +17,6 @@ export const GET = async () => {
 export const POST = async (request: NextRequest) => {
   const {
     userId,
-    orderId,
     userName,
     phoneNumber,
     street,
@@ -29,7 +28,6 @@ export const POST = async (request: NextRequest) => {
   try {
     const address = await AddressModel.create({
       userId,
-      orderId,
       userName,
       phoneNumber,
       street,

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Order } from "@/lib/models";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const UserAddress = () => {
@@ -13,43 +13,75 @@ const UserAddress = () => {
   const [houseNumber, setHouseNumber] = useState<string>("");
   const [entranceNumber, setEntranceNumber] = useState<string>("");
   const [appartmentNumber, setAppartmentNumber] = useState<string>("");
-  const [order, setOrder] = useState<Order>();
+  const [order, setOrder] = useState<Order | null>(null);
+
+  const { data: session } = useSession();
+  const userId = session?.user.id;
+  const userName = session?.user.name;
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const getOrder = async () => {
+      try {
+        const response = await axios.get("/api/order");
+        const orders = response.data.order;
+        if (orders.length > 0) {
+          setOrder(orders[orders.length - 1]);
+        } else {
+          console.error("No orders found");
+        }
+      } catch (error) {
+        console.error("Failed to fetch order:", error);
+      }
+    };
+    getOrder();
+  }, []);
 
   const handlePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPhoneNumber(value);
   };
+
   const handleHouseNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setHouseNumber(value);
   };
+
   const handleEntranceNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEntranceNumber(value);
   };
+
   const handleAppartmentNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setAppartmentNumber(value);
   };
+
   const handleStreet = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setStreet(value);
   };
-  const { data: session } = useSession();
-  const userId = session?.user.id;
-  const userName = session?.user.name;
-
-  useEffect(() => {
-    const getOrder = async () => {
-      const order = await axios.get("/api/order");
-      setOrder(order.data.order[order.data.order.length - 1]);
-    };
-    getOrder();
-  }, []);
 
   const PostAddress = async () => {
+    if (
+      !phoneNumber ||
+      !street ||
+      !houseNumber ||
+      !entranceNumber ||
+      !appartmentNumber
+    ) {
+      alert("Бүх талбарыг бөглөнө үү!");
+      return;
+    }
+
+    if (!order) {
+      alert("Таны захиалга олдсонгүй. Дахин оролдоно уу.");
+      return;
+    }
+
     const address = {
-      orderId: order?._id,
+      orderId: order._id,
       userId,
       userName,
       phoneNumber,
@@ -58,8 +90,15 @@ const UserAddress = () => {
       entranceNumber,
       appartmentNumber,
     };
-    const newAddress = await axios.post("/api/address", address);
-    console.log(newAddress);
+
+    try {
+      const response = await axios.post("/api/address", address);
+      console.log("Address saved:", response.data);
+      router.push("/orders");
+    } catch (error) {
+      console.error("Failed to post address:", error);
+      alert("Хаяг хадгалахад алдаа гарлаа. Дахин оролдоно уу.");
+    }
   };
 
   return (
@@ -83,7 +122,7 @@ const UserAddress = () => {
             value={street}
             className="rounded-lg px-4 py-2 bg-gray-100"
             placeholder="Дүүрэг,хороо"
-          ></input>
+          />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -93,7 +132,7 @@ const UserAddress = () => {
             value={appartmentNumber}
             className="rounded-lg px-4 py-2 bg-gray-100"
             placeholder="Байрны дугаар"
-          ></input>
+          />
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-sm">Орцны код</p>
@@ -102,7 +141,7 @@ const UserAddress = () => {
             value={entranceNumber}
             className="rounded-lg px-4 py-2 bg-gray-100"
             placeholder="Орцны код"
-          ></input>
+          />
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-sm">Тоот</p>
@@ -111,13 +150,12 @@ const UserAddress = () => {
             value={houseNumber}
             className="rounded-lg px-4 py-2 bg-gray-100"
             placeholder="Тоот"
-          ></input>
+          />
         </div>
       </div>
-      <Link href="/orders">
-        <Button onClick={() => PostAddress()}>Хаяг баталгаажуулах</Button>
-      </Link>
+      <Button onClick={PostAddress}>Хаяг баталгаажуулах</Button>
     </div>
   );
 };
+
 export default UserAddress;
