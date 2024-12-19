@@ -24,10 +24,37 @@ export const POST = async (req: NextRequest) => {
           "orderItemsDetails.restaurantId": id,
         },
       },
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "userDetails",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          orderItemsDetails: 1,
+          userDetails: 1,
+          status: 1,
+          createdAt: 1,
+          totalPrice: 1,
+        },
+      },
     ]);
 
-    return Response.json({ orders });
+    console.log(orders);
+
+    if (!orders || orders.length === 0) {
+      console.log("No orders found or no matching user details.");
+    } else {
+      console.log("Orders with user details:", JSON.stringify(orders, null, 2));
+    }
+
+    return Response.json(orders);
   } catch (error) {
-    return Response.json({ error });
+    console.error("Error fetching orders:", error);
+    return Response.json({ error: "An error occurred while fetching orders." });
   }
 };

@@ -36,6 +36,7 @@ const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const savedLocation = localStorage.getItem("location");
+
     if (savedLocation) {
       try {
         const parsedLocation = JSON.parse(savedLocation);
@@ -50,7 +51,7 @@ const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (location && location.length === 2) {
+    if (location[0]) {
       localStorage.setItem("location", JSON.stringify(location));
     }
   }, [location]);
@@ -69,7 +70,7 @@ const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
         selectLocation,
       }}
     >
-      {!isLoading ? children : null}{" "}
+      {!isLoading ? children : null}
     </LocationContext.Provider>
   );
 };
