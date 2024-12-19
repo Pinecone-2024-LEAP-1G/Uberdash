@@ -136,7 +136,7 @@ export const Drawers = () => {
             <div className="mt-20">
               <button
                 onClick={() => signOut()}
-                className="w-full bg-black text-white rounded-md py-2 text-center font-medium hover:bg-gray-800"
+                className="w-full bg-green-400 text-white rounded-md py-2 text-center font-medium"
               >
                 Гарах
               </button>
