@@ -1,6 +1,8 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { Button } from "./button";
 
 type Heart = {
   restaurantId: string;
@@ -18,12 +20,12 @@ export const HeartSvg = ({ restaurantId }: Heart) => {
           restaurantId,
         });
         if (response.data.message === "in") {
-          //amjilttai durtai restaurant heseg ruu nemlee gdg toast
+          toast.success("Амжилттай дуртай ресторан хэсэг рүү нэмлээ");
         } else {
-          //amjilttai durtai hesgees haslaa gdg button
+          toast.error("Амжилттай дуртай хэсгээс хаслаа");
         }
       } catch (error) {
-        console.log(error); //error toast
+        toast.error("error");
       }
     }
   };
