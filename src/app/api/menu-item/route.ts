@@ -23,16 +23,7 @@ export const POST = async (req: NextRequest) => {
     restaurantId,
     image,
   } = await req.json();
-  console.log(
-    name,
-    description,
-    size,
-    price,
-    available,
-    categoryId,
-    restaurantId,
-    image
-  );
+
   try {
     const newMenuItem = await menuItemModel.create({
       name,

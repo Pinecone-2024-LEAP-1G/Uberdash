@@ -4,14 +4,11 @@ import { useEffect, useState } from "react";
 import { RestaurantHero } from "./RestaurantHero";
 import { ReviewRating } from "./ReviewRating";
 import { MenuItemLastCard } from "./MenuItemLastCard";
-import { CircleX, Search } from "lucide-react";
-import { Input } from "../ui/input";
 import { RestrauntMenu } from "./RestrauntMenu";
 import { RestaurantLocation } from "./RestaurantLocation";
 import { DeliveryFee } from "./DeliveryFee";
 import { Review } from "@/lib/models";
 import { MenuItemType } from "@/lib/types";
-import { RestaurantReview } from "@/components/restaurant/RestaurantReviev";
 import { RestaurantRating } from "@/app/owner/[ownerId]/Reviews/restaurantReview";
 
 type Restaurant = {
@@ -28,7 +25,6 @@ export const RestaurantDetail = ({
 }) => {
   const restaurantProps = { restaurantId: restaurantId };
 
-  const [search, setSearch] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const [menuItems, setMenuItems] = useState<MenuItemType[]>();
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -71,10 +67,6 @@ export const RestaurantDetail = ({
     };
     fetchdata();
   }, []);
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
 
   return (
     <div className="container mx-auto max-w-[1200px]">

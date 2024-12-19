@@ -6,7 +6,6 @@ export const GET = async (
   { params }: { params: Promise<{ addressId: string }> }
 ) => {
   const deliveryAddressId = (await params).addressId;
-  console.log(deliveryAddressId);
 
   try {
     const order = await OrderModel.findOne({
@@ -17,7 +16,6 @@ export const GET = async (
         status: 404,
       });
     }
-    console.log(order);
 
     return Response.json({ order });
   } catch (err) {

@@ -8,6 +8,7 @@ export type Review = {
   comment: string;
   rating: number;
   createdAt: Date;
+  orderId: Schema.Types.ObjectId;
 };
 const ReviewSchema = new Schema<Review>(
   {
@@ -20,6 +21,7 @@ const ReviewSchema = new Schema<Review>(
       ref: "restaurants",
     },
     createdAt: { type: Date, default: Date.now() },
+    orderId: { type: Schema.Types.ObjectId, required: true, ref: "orders" },
   },
   {
     timestamps: true,
