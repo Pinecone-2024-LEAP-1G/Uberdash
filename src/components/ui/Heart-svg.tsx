@@ -1,19 +1,36 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { toast } from "sonner";
 import { Button } from "./button";
+=======
+import { Restaurant } from "@/lib/models";
+>>>>>>> 404a57d (za hehe)
 
 type Heart = {
+  favourites: Restaurant[];
   restaurantId: string;
 };
 
-export const HeartSvg = ({ restaurantId }: Heart) => {
+export const HeartSvg = ({ restaurantId, favourites }: Heart) => {
   const [isClicked, setIsClicked] = useState(false);
 
-  useEffect(() => {}, []);
+  const dataFetch = () => {
+    favourites.map((fav) => {
+      if (fav._id === restaurantId) {
+        setIsClicked(true);
+        return;
+      }
+    });
+  };
+
+  useEffect(() => {
+    dataFetch();
+  }, [favourites]);
 
   const handleClick = async () => {
+<<<<<<< HEAD
     if (!isClicked) {
       try {
         const response = await axios.put("api/users/favourites", {
@@ -26,7 +43,22 @@ export const HeartSvg = ({ restaurantId }: Heart) => {
         }
       } catch (error) {
         toast.error("error");
+=======
+    try {
+      const response = await axios.put("api/users/favourites", {
+        restaurantId,
+      });
+
+      if (response.data.message === "in") {
+        setIsClicked(true);
+        //amjilttai durtai restaurant heseg ruu nemlee gdg toast
+      } else {
+        setIsClicked(false);
+        //amjilttai durtai hesgees haslaa gdg toast
+>>>>>>> 404a57d (za hehe)
       }
+    } catch (error) {
+      console.log(error); //error toast
     }
   };
 

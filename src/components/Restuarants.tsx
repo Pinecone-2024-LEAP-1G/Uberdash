@@ -10,6 +10,7 @@ import { SkeletonCard } from "@/components/SkeletonCard";
 export const Restaurants = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
+  const [favouriteRestaurants, setFavourites] = useState<Restaurant[]>([]);
 
   useEffect(() => {
     const getRestaurants = async () => {
@@ -27,6 +28,18 @@ export const Restaurants = () => {
     getRestaurants();
   }, []);
 
+  useEffect(() => {
+    const dataFetch = async () => {
+      try {
+        const response = await axios.get("/api/users/favourites");
+        setFavourites(response.data.users.favourites);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    dataFetch();
+  }, []);
+
   return (
     <div className="m-6 gap-3">
       <div className="text-4xl mt-2 font-bold mx-auto max-w-[1200px] m-6">
@@ -34,17 +47,17 @@ export const Restaurants = () => {
       </div>
       <div className="grid grid-cols-4 max-w-[1200px] mx-auto gap-10">
         {loading
-          ? Array(14)
+          ? Array(restaurants.length)
               .fill(null)
               .map((_, index) => <SkeletonCard key={index} />)
-          : restaurants.map((restaurant) => (
-              <Link href={`/restaurant/${restaurant._id}`} key={restaurant._id}>
-                <MenuItem
-                  restaurantId={restaurant._id}
-                  image={restaurant.banner}
-                  name={restaurant.name}
-                />
-              </Link>
+          : restaurants.map((restaurant, index) => (
+              <MenuItem
+                key={index}
+                favourites={favouriteRestaurants}
+                restaurantId={restaurant._id}
+                image={restaurant.banner}
+                name={restaurant.name}
+              />
             ))}
       </div>
     </div>
