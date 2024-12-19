@@ -1,6 +1,7 @@
 import { connectToMongoDB } from "@/lib/db";
 import { OrderItem, OrderItemModel } from "@/lib/models";
 import OrderModel, { Order } from "@/lib/models/order";
+import mongoose from "mongoose";
 import { NextRequest } from "next/server";
 
 connectToMongoDB();
@@ -17,6 +18,25 @@ export const GET = async () => {
     return Response.json({ order });
   } catch (error) {
     return Response.json({ error });
+  }
+};
+
+export const PUT = async (req: NextRequest) => {
+  const { _id, status } = await req.json();
+
+  console.log(_id, status);
+
+  const id = mongoose.Types.ObjectId.createFromHexString(_id);
+  try {
+    const response = await OrderModel.findOneAndUpdate(
+      { _id: id },
+      { status: status },
+      { new: true }
+    );
+
+    return Response.json(response);
+  } catch (error) {
+    return Response.json(error);
   }
 };
 

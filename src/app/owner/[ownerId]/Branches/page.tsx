@@ -29,27 +29,14 @@ type location = {
 
 const Branches = () => {
   const [branches, setBranches] = useState<RestaurantBranchType[]>([]);
+
+  const [branchName, setBranchName] = useState<string>("");
   const restaurantId = localStorage.getItem("restaurantId");
   const location = useLocation();
 
   const myLocation: location = {
     type: "Point",
     coordinates: location.location,
-  };
-
-  const [branchName, setBranchName] = useState<string>("");
-
-  const handleSubmit = async () => {
-    try {
-      await axios.post("/api/restaurant-branch", {
-        restaurantId,
-        branchName,
-        location: myLocation,
-      });
-      dataFetch();
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const dataFetch = async () => {
@@ -60,9 +47,19 @@ const Branches = () => {
     setBranches(response.data.branches);
   };
 
-  useEffect(() => {
-    dataFetch();
-  }, [restaurantId]);
+  const handleSubmit = async () => {
+    try {
+      await axios.post("/api/restaurant-branch", {
+        restaurantId,
+        branchName,
+        location: myLocation,
+      });
+      dataFetch();
+      //amjilttai salbar nemegdlee gdg toast
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-7 w-full">
