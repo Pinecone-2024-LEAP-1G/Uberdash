@@ -1,12 +1,9 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { toast } from "sonner";
 import { Button } from "./button";
-=======
 import { Restaurant } from "@/lib/models";
->>>>>>> 404a57d (za hehe)
 
 type Heart = {
   favourites: Restaurant[];
@@ -30,20 +27,6 @@ export const HeartSvg = ({ restaurantId, favourites }: Heart) => {
   }, [favourites]);
 
   const handleClick = async () => {
-<<<<<<< HEAD
-    if (!isClicked) {
-      try {
-        const response = await axios.put("api/users/favourites", {
-          restaurantId,
-        });
-        if (response.data.message === "in") {
-          toast.success("Амжилттай дуртай ресторан хэсэг рүү нэмлээ");
-        } else {
-          toast.error("Амжилттай дуртай хэсгээс хаслаа");
-        }
-      } catch (error) {
-        toast.error("error");
-=======
     try {
       const response = await axios.put("api/users/favourites", {
         restaurantId,
@@ -55,7 +38,6 @@ export const HeartSvg = ({ restaurantId, favourites }: Heart) => {
       } else {
         setIsClicked(false);
         //amjilttai durtai hesgees haslaa gdg toast
->>>>>>> 404a57d (za hehe)
       }
     } catch (error) {
       console.log(error); //error toast

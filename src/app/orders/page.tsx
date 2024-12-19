@@ -8,6 +8,7 @@ import { Schema } from "mongoose";
 import { Address, OrderItem } from "@/lib/models";
 import moment from "moment";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import AddressDialog from "@/components/AddressDialog";
 
 export type Order = {
