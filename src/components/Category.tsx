@@ -1,30 +1,54 @@
-import { Pen } from "lucide-react";
-import { BookImage } from "lucide-react";
+import { Pen, BookOpen } from "lucide-react";
 import { parseAsString, useQueryState } from "nuqs";
 import { Category } from "@/lib/types";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export const CategoryComp = ({ _id, image, name }: Category) => {
   const [, setIsEdit] = useQueryState<string>("edit", parseAsString);
+
   const edit = (id: string) => {
     setIsEdit(id);
   };
+
   return (
-    <div className="flex flex-col gap-5 rounded-lg border border-gray-300 items-center">
-      <img src={image} className="w-48 h-36 rounded-lg  " />
-      <p className="font-semibold text-xl mb-2"> {name} </p>
-      <div className="flex gap-3 px-2 w-full pb-2 justify-between">
-        <div className="flex gap-2 items-center px-2 py-1.5 hover:bg-slate-200 rounded-2xl">
-          <BookImage size={16} />
-          <button className="text-sm">Detail</button>
-        </div>
-        <div
+    <Card className="w-64">
+      <CardHeader className="p-0">
+        <Image
+          alt="Category Image"
+          src={image}
+          width={256}
+          height={144}
+          className="w-full h-36 object-cover rounded-t-lg"
+        />
+      </CardHeader>
+
+      <CardContent className="text-center">
+        <CardTitle className="text-xl font-semibold">{name}</CardTitle>
+      </CardContent>
+
+      <CardFooter className="flex justify-between px-4 py-3">
+        <Button variant="outline" className="flex gap-2 items-center">
+          <BookOpen size={16} />
+          Detail
+        </Button>
+
+        <Button
+          variant="secondary"
+          className="flex gap-2 items-center"
           onClick={() => _id && edit(_id)}
-          className="flex gap-2 items-center px-2 py-1.5 hover:bg-slate-200 rounded-2xl"
         >
           <Pen size={16} />
-          <button>Edit</button>
-        </div>
-      </div>
-    </div>
+          Edit
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
