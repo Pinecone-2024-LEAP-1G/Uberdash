@@ -9,7 +9,8 @@ export type MenuItemType = Omit<MenuItem, "_id"> & { _id: string };
 export type RestaurantReviewProps = Omit<Review, "_id"> & { _id: string };
 
 type tempRestaurantBranchType = Omit<RestaurantBranch, "_id"> & { _id: string };
-export type restaurantBranchType = Omit<
+
+export type RestaurantBranchType = Omit<
   tempRestaurantBranchType,
   "restaurantId"
 > & { restaurantId: string };

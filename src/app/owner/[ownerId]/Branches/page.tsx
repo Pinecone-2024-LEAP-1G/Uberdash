@@ -1,6 +1,6 @@
 "use client";
 
-import { restaurantBranchType } from "@/lib/types";
+import { RestaurantBranchType } from "@/lib/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLocation } from "@/Providers/LocationProvider";
+import { OwnerRestaurantMap } from "@/components/owner/OwnerRestaurantMap";
 
 type location = {
   type: "Point";
@@ -27,7 +28,7 @@ type location = {
 };
 
 const Branches = () => {
-  const [branches, setBranches] = useState<restaurantBranchType[]>([]);
+  const [branches, setBranches] = useState<RestaurantBranchType[]>([]);
   const restaurantId = localStorage.getItem("restaurantId");
   const location = useLocation();
 
@@ -45,34 +46,32 @@ const Branches = () => {
         branchName,
         location: myLocation,
       });
-      //amjilttai salbar nemegdlee gdg toast
+      dataFetch();
     } catch (error) {
       console.log(error);
     }
   };
 
+  const dataFetch = async () => {
+    const response = await axios.post(
+      "/api/restaurant-branch/branchesByRestaurantId",
+      { restaurantId }
+    );
+    setBranches(response.data.branches);
+  };
+
   useEffect(() => {
-    const dataFetch = async () => {
-      const response = await axios.post(
-        "/api/restaurant-branch/branchesByRestaurantId",
-        { restaurantId }
-      );
-      setBranches(response.data.branches);
-    };
     dataFetch();
   }, [restaurantId]);
 
   return (
-    <div className="flex flex-col gap-7 items-center">
+    <div className="flex flex-col gap-7 w-full">
       <Dialog>
         <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            className="flex items-center justify-center gap-3 mr-10"
-          >
+          <Button className="flex gap-3 mr-10 w-fit">
             <div className="flex items-center justify-center gap-1">
               <MapPin />
-              <p className="font-semibold text-lg"> Шинэ Салбар Нэмэх </p>
+              <p className="font-semibold text-lg">Салбар Нэмэх</p>
             </div>
             <Plus />
           </Button>
@@ -110,10 +109,9 @@ const Branches = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      {branches.map((branch, index) => {
-        return <div key={index}>{branch.branchName}</div>;
-      })}
+      <OwnerRestaurantMap restauranBranches={branches} />
     </div>
   );
 };
+
 export default Branches;
