@@ -23,8 +23,6 @@ export const GET = async () => {
 export const PUT = async (req: NextRequest) => {
   const { _id, status } = await req.json();
 
-  console.log(_id, status);
-
   const id = mongoose.Types.ObjectId.createFromHexString(_id);
   try {
     const response = await OrderModel.findOneAndUpdate(

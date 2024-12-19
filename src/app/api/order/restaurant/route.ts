@@ -44,12 +44,10 @@ export const POST = async (req: NextRequest) => {
       },
     ]);
 
-    console.log(orders);
-
     if (!orders || orders.length === 0) {
       console.log("No orders found or no matching user details.");
     } else {
-      console.log("Orders with user details:", JSON.stringify(orders, null, 2));
+      console.log("Orders with user details:");
     }
 
     return Response.json(orders);

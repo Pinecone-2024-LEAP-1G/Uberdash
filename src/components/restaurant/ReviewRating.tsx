@@ -46,7 +46,9 @@ export const ReviewRating = (props: {
       </h1>
       <div className="border rounded-2xl flex px-2 py-4">
         <div className="w-1/3 flex flex-col items-center">
-          <p className="text-4xl">{rating}</p>
+          <div className={`${rating === "NaN" ? "hidden" : "block"}`}>
+            <p className="text-4xl">{rating}</p>{" "}
+          </div>
           <p>Үнэлгээний од</p>
           <Stars rating={Number(rating)} />
           <p>{reviews?.length} Үнэлгээ</p>

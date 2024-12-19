@@ -52,11 +52,10 @@ const Reviews = () => {
         )
       );
 
-      const response = await axios.put(`/api/order`, {
+      await axios.put(`/api/order`, {
         _id: id,
         status: newStatus,
       });
-      console.log(response);
     } catch (error) {
       console.log("Error updating status:", error);
     }

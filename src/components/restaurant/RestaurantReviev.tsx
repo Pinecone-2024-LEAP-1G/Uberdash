@@ -1,6 +1,5 @@
 import React from "react";
 import { ReviewType } from "@/lib/types";
-import { User } from "@/lib/models";
 
 interface RestaurantReviewProps {
   reviews: ReviewType[];

@@ -10,6 +10,7 @@ import moment from "moment";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import AddressDialog from "@/components/AddressDialog";
+import PostReview from "@/components/PostReview";
 
 export type Order = {
   _id: Schema.Types.ObjectId;
@@ -35,6 +36,7 @@ const Orders = () => {
   const [address, setAddress] = useState<Address>();
   const userId = session?.user?.id;
   const userImg = session?.user.image || "/default-avatar.png";
+
   useEffect(() => {
     if (status === "loading" || !userId) return;
 
@@ -117,6 +119,7 @@ const Orders = () => {
             <div>
               <Button onClick={() => GetAddress(order)}>Хаяг харах</Button>
             </div>
+            <PostReview order={order} />
           </div>
         );
       })}

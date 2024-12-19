@@ -4,7 +4,8 @@ import { NextRequest } from "next/server";
 
 connectToMongoDB();
 export const POST = async (request: NextRequest) => {
-  const { comment, rating, userId, restaurantId } = await request.json();
+  const { comment, rating, userId, restaurantId, orderId } =
+    await request.json();
 
   try {
     const reviews = await ReviewModel.create({
@@ -12,6 +13,7 @@ export const POST = async (request: NextRequest) => {
       rating,
       userId,
       restaurantId,
+      orderId,
     });
 
     return Response.json({
