@@ -50,7 +50,7 @@ const Home = () => {
     <div className="container mx-auto max-w-[1200px] space-y-6">
       <MenuCategories />
       {category[0] && <CategoryFilter />}
-      <MostSaledFoods />
+
       {search[0] && (
         <div className="grid grid-cols-4 my-4 gap-6">
           {menuItems?.map((menuItem, index) => {
@@ -66,6 +66,7 @@ const Home = () => {
           })}
         </div>
       )}
+      <MostSaledFoods />
       <FastFoodFilter />
       <Restaurants />
     </div>
