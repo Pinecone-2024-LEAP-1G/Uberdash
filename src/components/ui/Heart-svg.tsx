@@ -26,19 +26,19 @@ export const HeartSvg = ({ restaurantId, favourites }: Heart) => {
   }, [favourites]);
 
   const handleClick = async () => {
-    if (!isClicked) {
-      try {
-        const response = await axios.put("api/users/favourites", {
-          restaurantId,
-        });
-        if (response.data.message === "in") {
-          toast.success("Амжилттай дуртай ресторан хэсэг рүү нэмлээ");
-        } else {
-          toast.error("Амжилттай дуртай хэсгээс хаслаа");
-        }
-      } catch (error) {
-        toast.error("error");
+    try {
+      const response = await axios.put("api/users/favourites", {
+        restaurantId,
+      });
+      if (response.data.message === "in") {
+        toast.success("Амжилттай дуртай ресторан хэсэг рүү нэмлээ");
+        setIsClicked(!isClicked);
+      } else {
+        toast.error("Амжилттай дуртай хэсгээс хаслаа");
+        setIsClicked(!isClicked);
       }
+    } catch (error) {
+      toast.error("error");
     }
   };
 
