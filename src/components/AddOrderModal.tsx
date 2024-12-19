@@ -9,9 +9,9 @@ import { MenuItemType } from "@/lib/types";
 import { useCart } from "@/Providers/CartProvider";
 import { useState } from "react";
 import { SelectQuantity } from "../components/basket-drawer/SelectQuantity";
-import { toast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
 import { FaPlus } from "react-icons/fa";
+import { toast } from 'sonner'
 
 type MenuItem = {
   menuItem?: MenuItemType;
@@ -32,9 +32,9 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
       });
     }
 
-    toast({
-      description: "Амжилттай сагслагдлаа ✅",
-    });
+    console.log('hah');
+
+    toast("Амжилттай сагслагдлаа ✅");
   };
 
   const handleChangeCount = (value: number) => {
@@ -60,9 +60,8 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
                     <div
                       className="absolute inset-0 bg-cover bg-center"
                       style={{
-                        backgroundImage: `url(${
-                          menuItem.image || "/fallback-image.png"
-                        })`,
+                        backgroundImage: `url(${menuItem.image || "/fallback-image.png"
+                          })`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         backgroundSize: "cover",
