@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface RestaurantFormData {
   name: string;
@@ -51,13 +52,13 @@ const AddRestaurant = () => {
 
       const data = await response.json();
       if (response.ok) {
-        console.log("Рестораныг амжилттай үүсгэсэн", data.newRestaurant); //toast r ajilluulah
+        toast.success("Рестораныг амжилттай үүсгэсэн"); //toast r ajilluulah
         router.push("/");
       } else {
-        console.error("Рестораныг үүсгэхэд алдаа гарлаа", data.error);
+        toast.error(`Рестораныг үүсгэхэд алдаа гарлаа: ${data.error}`);
       }
     } catch (error) {
-      console.error("Сүлжээний алдаа", error);
+      toast.error("Сүлжээний алдаа");
     }
   };
 

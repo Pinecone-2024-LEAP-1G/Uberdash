@@ -20,15 +20,16 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 export const Header = () => {
   const [searchTerm, setSearchTerm] = useQueryState("search", parseAsString);
 
   const handleDone = () => {
     if (localStorage.getItem("location")) {
-      //amjilttai location avlaa
+      toast.success("Амжилттай байршил сонголоо");
     } else {
-      // location songono uu gdg toaster oruul
+      toast.error("Байршлаа сонгоно уу!");
     }
   };
 

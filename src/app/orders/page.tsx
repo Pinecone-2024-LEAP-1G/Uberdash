@@ -106,7 +106,7 @@ const Orders = () => {
               </div>
             </div>
             <div>
-              <Button onClick={() => GetAddress(order)}>hayg harah</Button>
+              <Button onClick={() => GetAddress(order)}>Хаяг харах</Button>
             </div>
           </div>
         );
