@@ -34,6 +34,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
         restaurantId,
         image,
       });
+
       //amjilttai food uuslee gdg toast
       handleCreateProduct();
     } catch (error) {

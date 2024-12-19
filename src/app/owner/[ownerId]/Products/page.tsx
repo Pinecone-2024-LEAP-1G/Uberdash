@@ -10,23 +10,24 @@ import { Plus } from "lucide-react";
 const Dashboard = () => {
   const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
   const [isCreateProduct, setIsCreateProduct] = useState<boolean>(false);
+  const restaurantId = localStorage.getItem("restaurantId");
+  const fetchdata = async () => {
+    try {
+      const response = await axios.post(`/api/menu-item/ownerId`, {
+        restaurantId,
+      });
+      setMenuItems(response.data.menuItem);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const restaurantId = localStorage.getItem("restaurantId");
-    const fetchdata = async () => {
-      try {
-        const response = await axios.post(`/api/menu-item/ownerId`, {
-          restaurantId,
-        });
-        setMenuItems(response.data.menuItem);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchdata();
   }, []);
 
   const handleCreateProduct = () => {
+    fetchdata();
     setIsCreateProduct(!isCreateProduct);
   };
 
@@ -51,7 +52,11 @@ const Dashboard = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
               {menuItems?.map((oneItem, index) => (
-                <OwnerMenuItem key={index} menuItemId={oneItem._id} />
+                <OwnerMenuItem
+                  key={index}
+                  menuItemId={oneItem._id}
+                  fetchdata={fetchdata}
+                />
               ))}
             </div>
           </div>

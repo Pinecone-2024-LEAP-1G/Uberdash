@@ -19,6 +19,7 @@ import { toast } from "sonner";
 
 type OwnerMenuItemProps = {
   menuItemId: string;
+  fetchdata: () => void;
 };
 
 type DetailType = {
@@ -33,24 +34,28 @@ type DeleteType = {
   handleDelete: () => void;
 };
 
-export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
+export const OwnerMenuItem = ({
+  menuItemId,
+  fetchdata,
+}: OwnerMenuItemProps) => {
   const [menuItem, setMenuItem] = useState<MenuItemType>();
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const [isDelete, setDelete] = useState<boolean>(false);
-
+  const fetch = async () => {
+    try {
+      const response = await axios.get(`/api/menu-item/${menuItemId}`);
+      setMenuItem(response.data.menuItem);
+    } catch (error) {
+      toast.error("error"); // toast notification
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/menu-item/${menuItemId}`);
-        setMenuItem(response.data.menuItem);
-      } catch (error) {
-        toast.error("error"); // toast notification
-      }
-    };
-    fetchData();
+    fetch();
   }, [menuItemId]);
 
   const handleDelete = () => {
+    fetchdata();
+    fetch();
     setDelete(!isDelete);
   };
 
