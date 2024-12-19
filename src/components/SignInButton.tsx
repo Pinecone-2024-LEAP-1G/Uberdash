@@ -10,7 +10,7 @@ export const SignInButton: React.FC = () => {
   return (
     <button
       onClick={() => signIn("google")}
-      className="w-[200px] bg-[#F3F3F3] rounded-full ml-8 py-3 text-lg font-semibold tracking-wide text-gray-600 hover:bg-gray-200"
+      className="w-[200px] bg-green-400 rounded-full ml-8 py-3 text-lg font-semibold tracking-wide text-white hover:bg-green-600"
     >
       Нэвтрэх
     </button>

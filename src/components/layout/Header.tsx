@@ -51,9 +51,6 @@ export const Header = () => {
               </div>
             </div>
           </Link>
-          <div className="flex items-center ml-8">
-            <SignInButton />
-          </div>
         </div>
 
         <Dialog>
@@ -96,6 +93,9 @@ export const Header = () => {
           setSearchTerm={setSearchTerm}
           suggestions={suggestions}
         />
+        <div className="flex items-center ml-8">
+          <SignInButton />
+        </div>
         <BasketDrawer />
       </div>
     </div>
