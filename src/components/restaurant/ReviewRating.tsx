@@ -15,7 +15,7 @@ export const ReviewRating = (props: {
   console.log(reviews);
   const [more, setMore] = useState<boolean>(false);
 
-  const [rating, setRating] = useState<string>("");
+  const [rating, setRating] = useState<string>();
   useEffect(() => {
     let sum: number = 0;
     reviews.map((review) => {
@@ -23,6 +23,8 @@ export const ReviewRating = (props: {
     });
     setRating((sum / reviews.length).toFixed(1).toString());
   }, [reviews]);
+
+  console.log(typeof rating);
 
   return (
     <div>
@@ -42,13 +44,18 @@ export const ReviewRating = (props: {
           {`${!more ? "More" : "Less"}`}
         </span>
       </div>
-      <h1 className="text-2xl font-semibold gap-4 my-3">Rating and reviews</h1>
+      <h1 className="text-2xl font-semibold gap-4 my-3">
+        Үнэлгээ ба сэтгэгдэл
+      </h1>
       <div className="border rounded-2xl flex px-2 py-4">
         <div className="w-1/3 flex flex-col items-center">
-          <p className="text-4xl">{rating}</p>
-          <p>RatingStar</p>
+          <div className="flex flex-col items-center">
+            <p className="text-4xl">{rating}</p>
+            <p>Үнэлгээний од</p>
+          </div>
+
           <Stars rating={Number(rating)} />
-          <p>{reviews?.length} Ratings</p>
+          <p>{reviews?.length} Үнэлгээ</p>
         </div>
         <div className="w-2/3 mr-8">
           {reviews?.map((review, index) => (
