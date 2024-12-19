@@ -56,13 +56,21 @@ const Orders = () => {
   }, [userId, status]);
 
   const GetAddress = async (order: Order) => {
-    const fetchAddress = await axios.get(
-      `api/order/${order.deliveryAddressId}`
-    );
-    // setAddress(fetchAddress.data.address);
-    console.log(order.deliveryAddressId);
+    try {
+      const fetchAddress = await axios.get(
+        `/api/order/address/${order.deliveryAddressId}`
+      );
 
-    console.log(fetchAddress);
+      const address = fetchAddress.data.address;
+
+      console.log(order.deliveryAddressId);
+      console.log(fetchAddress);
+      console.log(address);
+
+      return address;
+    } catch (error) {
+      console.error("Error fetching address:", error);
+    }
   };
 
   return (
