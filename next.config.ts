@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
     AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET ?? "",
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL ?? "",
     NEXT_PUBLIC_URL_PROD: process.env.NEXT_PUBLIC_URL_PROD ?? "",
+    CLOUDINARY_URL: process.env.CLOUDINARY_URL ?? "",
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? "",
+    NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET:
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET ?? "",
   },
 };
 
