@@ -36,16 +36,24 @@ export const Header = () => {
 
   return (
     <div className="flex container justify-center h-20 mx-auto mb-12 w-full">
-      <div className="flex container justify-center fixed z-10 py-4 w-full bg-white">
-        <div className="flex justify-between items-center gap-4">
+      <div className="flex justify-center fixed z-10 py-4 w-full bg-white">
+        <div className="flex justify-between items-center gap-10 ">
           <div className="w-[48px] h-[48px] flex items-center">
             <Drawers />
           </div>
-          <Link href={"/"}>
-            <div className="flex items-center w-96 font-extrabold text-3xl text-gray-800 tracking-tight">
-              Хурдан хоол
+          <Link href={"/"} className="flex items-center justify-center">
+            <div className="text-3xl font-extrabold leading-none tracking-tight text-white-300 ">
+              <div className="flex items-center justify-center">
+                <span>Хоол</span>
+                <mark className="px-2 text-white bg-green-500 rounded ">
+                  Hub
+                </mark>
+              </div>
             </div>
           </Link>
+          <div className="flex items-center ml-8">
+            <SignInButton />
+          </div>
         </div>
 
         <Dialog>
@@ -56,7 +64,7 @@ export const Header = () => {
             >
               <div className="flex items-center justify-center gap-1">
                 <MapPin />
-                <p className="font-semibold text-lg"> Улаанбаатар </p>
+                <p className="font-semibold text-lg">Улаанбаатар</p>
               </div>
               <ChevronDown />
             </Button>
@@ -88,9 +96,6 @@ export const Header = () => {
           setSearchTerm={setSearchTerm}
           suggestions={suggestions}
         />
-        <div className="flex items-center ml-8">
-          <SignInButton />
-        </div>
         <BasketDrawer />
       </div>
     </div>
