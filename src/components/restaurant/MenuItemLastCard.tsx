@@ -36,10 +36,6 @@ export const MenuItemLastCard: React.FC<MenuItemProps> = ({ menuItem }) => {
         <p>{menuItem.name}</p>
         <div className="flex items-center gap-1 text-[14px] font-normal">
           <p>{menuItem.price.toLocaleString()}₮</p>
-          <div className="w-[3px] h-[3px] bg-[black] rounded-full"></div>
-          <LikeSvg />
-
-          <p>({1064})</p>
         </div>
       </div>
     </div>

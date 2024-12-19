@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { RestrauntMenu } from "@/components";
 import { MenuItemType } from "@/lib/types";
+import { MostSaledFoods } from "@/components/MostSaledFoods";
 
 const Home = () => {
   const category = useQueryState("category", parseAsString);
@@ -49,6 +50,7 @@ const Home = () => {
     <div className="container mx-auto max-w-[1200px] space-y-6">
       <MenuCategories />
       {category[0] && <CategoryFilter />}
+      <MostSaledFoods />
       {search[0] && (
         <div className="grid grid-cols-4 my-4 gap-6">
           {menuItems?.map((menuItem, index) => {
