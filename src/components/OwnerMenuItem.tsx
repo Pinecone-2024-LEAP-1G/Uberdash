@@ -15,6 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { toast } from "sonner";
 
 type OwnerMenuItemProps = {
   menuItemId: string;
@@ -43,7 +44,7 @@ export const OwnerMenuItem = ({ menuItemId }: OwnerMenuItemProps) => {
         const response = await axios.get(`/api/menu-item/${menuItemId}`);
         setMenuItem(response.data.menuItem);
       } catch (error) {
-        console.log(error); // toast notification
+        toast.error("error"); // toast notification
       }
     };
     fetchData();

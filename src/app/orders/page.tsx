@@ -103,22 +103,18 @@ const Orders = () => {
                 </div>
               ))}
             </div>
-            <div className="flex justify-between items-center">
-              <div className="flex flex-col py-2">
-                <div className="flex gap-2">
-                  <p>Нийт бүтээгдэхүүний тоо:</p>
-                  <p>{order.orderItemCount}</p>
-                </div>
-                <div className="flex gap-2">
-                  <p>Нийт захиалгын төлбөр:</p>
-                  <p>{Number(order.totalPrice).toLocaleString()}₮</p>
-                </div>
+            <div className="flex flex-col py-2">
+              <div className="flex gap-2">
+                <p>Нийт бүтээгдэхүүний тоо:</p>
+                <p>{order.orderItemCount}</p>
               </div>
-              <AddressDialog
-                getAddress={GetAddress}
-                order={order}
-                address={address}
-              />
+              <div className="flex gap-2">
+                <p>Нийт захиалгын төлбөр:</p>
+                <p>{Number(order.totalPrice).toLocaleString()}₮</p>
+              </div>
+            </div>
+            <div>
+              <Button onClick={() => GetAddress(order)}>Хаяг харах</Button>
             </div>
           </div>
         );

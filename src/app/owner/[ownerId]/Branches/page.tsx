@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLocation } from "@/Providers/LocationProvider";
 import { OwnerRestaurantMap } from "@/components/owner/OwnerRestaurantMap";
+import { toast } from "sonner";
 
 type location = {
   type: "Point";
@@ -55,9 +56,10 @@ const Branches = () => {
         location: myLocation,
       });
       dataFetch();
+      toast.success("Салбар амжилттай нэмэгдлээ!");
       //amjilttai salbar nemegdlee gdg toast
     } catch (error) {
-      console.log(error);
+      toast.error("Салбар нэмэхэд алдаа гарлаа. Дахин оролдоно уу.");
     }
   };
 
