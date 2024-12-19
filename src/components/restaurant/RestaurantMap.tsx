@@ -62,7 +62,7 @@ const Map: React.FC<MapProps> = ({ myLocation, restaurantId }) => {
           47.913678, 106.915995,
         ]
       }
-      zoom={(branch.location.coordinates as L.LatLngExpression) ? 10 : 18}
+      zoom={(branch.location.coordinates as L.LatLngExpression) ? 17 : 18}
       scrollWheelZoom={true}
       className="h-[35vh] rounded-lg z-0"
     >
