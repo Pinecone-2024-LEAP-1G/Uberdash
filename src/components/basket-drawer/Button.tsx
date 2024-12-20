@@ -1,3 +1,4 @@
+"use client";
 export const Button = ({ title }: { title: string }) => {
   return (
     <button

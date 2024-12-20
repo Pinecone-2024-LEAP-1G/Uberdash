@@ -1,3 +1,4 @@
+"use client";
 import {
   Carousel,
   CarouselContent,
@@ -30,19 +31,13 @@ export const MenuItemSlider = (props: {
           </div>
         </div>
         <CarouselContent className="-ml-1">
-          {categoryItems.map((categoryItem, index) => (
+          {categoryItems?.map((categoryItem, index) => (
             <CarouselItem
               key={index}
               className="pl-1 md:basis-1/3 lg:basis-1/4"
             >
               <div className="p-1 w-[300px]">
-                <MenuItem
-                  name={categoryItem.name}
-                  image={categoryItem.image}
-                  points={4}
-                  bonus="Buy 1,Get 1 Free"
-                  restaurantId=""
-                />
+                <MenuItem name={categoryItem.name} image={categoryItem.image} />
               </div>
             </CarouselItem>
           ))}

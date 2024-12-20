@@ -1,8 +1,14 @@
+"use client";
 import { RatingStar } from "../RatingStar";
-import { Review } from "../../lib/models/review.model";
 import { format } from "date-fns";
 
-export const Comment = (props: Review) => {
+type commentType = {
+  comment: string;
+  rating: number;
+  createdAt: Date;
+};
+
+export const Comment = (props: commentType) => {
   const { comment, rating, createdAt } = props;
 
   const formattedDate = format(new Date(createdAt), "yyyy/MM/dd");

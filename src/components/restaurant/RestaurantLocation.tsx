@@ -1,5 +1,5 @@
+"use client";
 import Map from "./RestaurantMap";
-import { useLocation } from "@/Providers/LocationProvider";
 
 export type Location = {
   type: "Point";
@@ -18,9 +18,6 @@ type input = {
 export const RestaurantLocation = ({
   restaurantId,
 }: RestaurantLocationProps) => {
-  const data = useLocation();
-  const { location } = data;
-
   const mapProps: input = {
     myLocation: {
       type: "Point",

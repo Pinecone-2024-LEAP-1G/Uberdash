@@ -1,3 +1,4 @@
+"use client";
 import { Plus } from "lucide-react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -24,7 +25,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
 
   const CreateProduct = async () => {
     try {
-      const response = await axios.post(`/api/menu-item`, {
+      await axios.post(`/api/menu-item`, {
         name,
         description,
         size,
@@ -156,7 +157,7 @@ export const CreateProduct: React.FC<CreateProductProps> = ({
                 className="py-2 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="">Төрлийг сонгоно уу</option>
-                {categories.map((category) => (
+                {categories?.map((category) => (
                   <option key={category._id} value={category._id}>
                     {category.name}
                   </option>

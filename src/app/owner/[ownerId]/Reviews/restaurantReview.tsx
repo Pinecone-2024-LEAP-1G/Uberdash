@@ -21,7 +21,7 @@ export const RestaurantRating = () => {
       }
     };
     dataFetch();
-  }, []);
+  }, [restaurantId]);
 
   return (
     <div className="flex p-4 w-full justify-center items-center">

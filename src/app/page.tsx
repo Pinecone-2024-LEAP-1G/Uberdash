@@ -11,7 +11,6 @@ import { RestrauntMenu } from "@/components";
 import { MenuItemType } from "@/lib/types";
 import { MostSaledFoods } from "@/components/MostSaledFoods";
 import { MostRatedRestaurants } from "@/components/MostRatedRestaurants";
-import { Restaurant } from "@/lib/models";
 
 const Home = () => {
   const category = useQueryState("category", parseAsString);

@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEventHandler } from "react";
 import DownArrow from "../ui/DownArrow";
 

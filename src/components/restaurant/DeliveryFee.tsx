@@ -1,4 +1,4 @@
-"use Client";
+"use client";
 import { Info } from "lucide-react";
 import {
   Dialog,
@@ -20,8 +20,11 @@ type Location = {
   type: "Point";
   coordinates: [number, number];
 };
+type DeliveryFeeProps = {
+  restaurantId: string;
+};
 
-export const DeliveryFee = (restaurantId: string) => {
+export const DeliveryFee = ({ restaurantId }: DeliveryFeeProps) => {
   const data = useLocation();
   const { location } = data;
 

@@ -70,7 +70,7 @@ const UserDashboardButton = () => {
 
   return (
     <div className="mt-4">
-      {restaurants.map((restaurant) => (
+      {restaurants?.map((restaurant) => (
         <button
           key={restaurant._id}
           onClick={() => handleClick(restaurant._id)}

@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Order } from "@/lib/models";
 import { User } from "@/lib/models";
 import { OrderItem } from "@/lib/models";
 import moment from "moment";
@@ -47,7 +46,7 @@ const Reviews = () => {
   const handleStatusChange = async (id: string, newStatus: Status) => {
     try {
       setOrders((prev) =>
-        prev.map((order) =>
+        prev?.map((order) =>
           order._id === id ? { ...order, status: newStatus } : order
         )
       );
@@ -61,7 +60,7 @@ const Reviews = () => {
     }
   };
 
-  const rows = orders.map((order) => ({
+  const rows = orders?.map((order) => ({
     id: order._id,
     date: moment(order.createdAt).format("MMMM Do YYYY, h:mm:ss a"),
     customer: order.userDetails[0]?.name,

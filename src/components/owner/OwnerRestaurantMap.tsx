@@ -14,7 +14,7 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 import { RestaurantBranchType } from "@/lib/types";
 
-// @ts-ignore
+// @ts-expect-error : ymar negen error garch magadgui gej l bichih ym shig baina
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({

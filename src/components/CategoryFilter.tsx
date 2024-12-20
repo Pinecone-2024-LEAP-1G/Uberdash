@@ -14,6 +14,19 @@ type newRestaurant = {
 export const CategoryFilter = () => {
   const [restaurants, setRestaurants] = useState<newRestaurant[]>([]);
   const category = useQueryState("category", parseAsString);
+  const [favouriteRestaurants, setFavourites] = useState<Restaurant[]>([]);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      try {
+        const response = await axios.get("/api/users/favourites");
+        setFavourites(response.data.users.favourites);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    dataFetch();
+  }, []);
   useEffect(() => {
     const getRestaurants = async () => {
       try {
@@ -39,11 +52,10 @@ export const CategoryFilter = () => {
             key={restaurant._id._id}
           >
             <MenuItem
+              favourites={favouriteRestaurants}
               restaurantId={restaurant._id._id}
               image={restaurant._id.banner}
               name={restaurant._id.name}
-              points={4}
-              bonus={""}
             />
           </Link>
         ))}

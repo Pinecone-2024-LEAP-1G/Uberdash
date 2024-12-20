@@ -51,7 +51,7 @@ export const POST = async (req: NextRequest) => {
     }
 
     const closestBranch = await restaurantBranches
-      .map((branch) => {
+      ?.map((branch) => {
         const { location: branchLocation } = branch;
         const [branchLongitude, branchLatitude] = branchLocation.coordinates;
 

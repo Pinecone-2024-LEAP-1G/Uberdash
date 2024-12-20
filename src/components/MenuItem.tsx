@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 import { HeartSvg } from "../components/ui/Heart-svg";
 import { useEffect, useState } from "react";
@@ -21,12 +22,12 @@ export type restaurantBranchWithDistance = {
 type MenuTypes = {
   image: string;
   name: string;
-  favourites: Restaurant[];
-  restaurantId: string;
+  favourites?: Restaurant[];
+  restaurantId?: string;
 };
 type Heart = {
-  favourites: Restaurant[];
-  restaurantId: string;
+  favourites?: Restaurant[];
+  restaurantId?: string;
 };
 
 export const MenuItem = ({

@@ -32,8 +32,8 @@ export const UserOrders = ({ orderItem }: { orderItem: OrderItem }) => {
           {menuItem?.description}
         </p>
         <div className="flex justify-between">
-          <p>Тоо: {orderItem.quantity}</p>
-          <p>Үнэ: {orderItem.price.toLocaleString()}₮</p>
+          <p>Тоо: {orderItem?.quantity}</p>
+          <p>Үнэ: {orderItem?.price?.toLocaleString()}₮</p>
         </div>
       </div>
     </div>

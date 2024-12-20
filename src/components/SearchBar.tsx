@@ -62,8 +62,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       />
       {dropdownVisible && (
         <div className="absolute top-full mt-2 left-0 w-full bg-white rounded-b-lg z-10">
-          {filteredSuggestions.length > 0 ? (
-            filteredSuggestions.map((item, index) => (
+          {filteredSuggestions?.length > 0 ? (
+            filteredSuggestions?.map((item, index) => (
               <div
                 key={index}
                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer"

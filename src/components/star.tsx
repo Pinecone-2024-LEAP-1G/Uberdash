@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
@@ -9,7 +10,7 @@ const Star = () => {
   };
   return (
     <div className="flex">
-      {stars.map((star, index) => {
+      {stars?.map((star, index) => {
         return (
           <FaStar
             key={index}

@@ -59,7 +59,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
 
     if (existingItem) {
-      const updatedItems = cartItems.map((cartItem) => {
+      const updatedItems = cartItems?.map((cartItem) => {
         if (cartItem._id === newItem._id) {
           return {
             ...cartItem,
@@ -87,7 +87,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
 
     if (existingItem) {
-      const updatedItems = cartItems.map((cartItem) => {
+      const updatedItems = cartItems?.map((cartItem) => {
         if (cartItem._id === newItem._id) {
           return {
             ...cartItem,

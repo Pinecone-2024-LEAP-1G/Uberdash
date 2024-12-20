@@ -1,7 +1,5 @@
 "use client";
 
-import { LikeSvg } from "../ui/Like-svg";
-
 import { AddOrderModal } from "@/components/AddOrderModal";
 import { MenuItemType } from "@/lib/types";
 
