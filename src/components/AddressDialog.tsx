@@ -23,7 +23,10 @@ const AddressDialog = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-[#22C55E]" onClick={() => getAddress(order)}>
+        <Button
+          className="bg-[#22C55E] hover:bg-[#2eb65f]"
+          onClick={() => getAddress(order)}
+        >
           <FaLocationArrow />
         </Button>
       </DialogTrigger>

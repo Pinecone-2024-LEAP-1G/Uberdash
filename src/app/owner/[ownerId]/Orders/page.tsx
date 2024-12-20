@@ -6,6 +6,7 @@ import { User } from "@/lib/models";
 import { OrderItem } from "@/lib/models";
 import moment from "moment";
 import { MenuItem, Select } from "@mui/material";
+import AddressDialog from "@/components/AddressDialog";
 
 type OrderType = {
   createdAt: Date;
@@ -14,6 +15,7 @@ type OrderType = {
   _id: string;
   status: Status;
   totalPrice: number;
+  deliveryAddressId: string;
 };
 
 type Status =
@@ -28,6 +30,7 @@ type Status =
 const Reviews = () => {
   const [orders, setOrders] = useState<OrderType[]>([]);
   const restaurantId = localStorage.getItem("restaurantId");
+  const [address, setAddress] = useState<Address>(); //
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -42,6 +45,23 @@ const Reviews = () => {
     };
     dataFetch();
   }, [restaurantId]);
+
+  //
+  const GetAddress = async (order: Order) => {
+    console.log(order);
+
+    try {
+      const fetchAddress = await axios.get(
+        `/api/order/address/${order.deliveryAddressId}`
+      );
+      const address = fetchAddress.data.order.deliveryAddressId;
+      setAddress(address);
+      return address;
+    } catch (error) {
+      console.error("Error fetching address:", error);
+    }
+  };
+  //
 
   const handleStatusChange = async (id: string, newStatus: Status) => {
     try {
@@ -98,6 +118,22 @@ const Reviews = () => {
             </MenuItem>
             <MenuItem value="Хүргэгдсэн">Хүргэгдсэн</MenuItem>
           </Select>
+        );
+      },
+    },
+    {
+      field: "address",
+      headerName: "Хаягийн мэдээлэл",
+      width: 100,
+      renderCell: (params) => {
+        const order = orders.find((order) => order._id === params.id);
+        if (!order) return null; // Just in case the order is not found
+        return (
+          <AddressDialog
+            address={address}
+            getAddress={GetAddress}
+            order={order}
+          />
         );
       },
     },

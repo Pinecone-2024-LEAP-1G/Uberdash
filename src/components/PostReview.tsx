@@ -76,7 +76,12 @@ const PostReview = ({ order }: { order: Order }) => {
         value={comment}
         placeholder="Сэтгэгдэл үлдээх"
       />
-      <Button onClick={postFeedPack}>Илгээх</Button>
+      <Button
+        className="bg-[#22C55E] hover:bg-[#2eb65f]"
+        onClick={postFeedPack}
+      >
+        Илгээх
+      </Button>
     </div>
   );
 };

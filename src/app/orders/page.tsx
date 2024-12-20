@@ -4,17 +4,16 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { Suspense, useEffect, useState } from "react";
 import { UserOrders } from "../../components/UserOrders";
-import { Address } from "@/lib/models";
+import { Address, Order } from "@/lib/models";
 import moment from "moment";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import PostReview from "@/components/PostReview";
-import { Order } from "@/lib/models";
+import AddressDialog from "@/components/AddressDialog";
 
 const Orders = () => {
   const { data: session, status } = useSession();
   const [orders, setOrders] = useState<Order[]>([]);
-  const [, setAddress] = useState<Address>();
+  const [address, setAddress] = useState<Address>();
   const userId = session?.user?.id;
   const userImg = session?.user?.image || "/default-avatar.png";
 
@@ -90,18 +89,22 @@ const Orders = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col py-2">
-                <div className="flex gap-2">
-                  <p>Нийт бүтээгдэхүүний тоо:</p>
-                  <p>{order?.orderItemCount}</p>
+              <div className="flex justify-between items-center">
+                <div className="flex flex-col py-2">
+                  <div className="flex gap-2">
+                    <p>Нийт бүтээгдэхүүний тоо:</p>
+                    <p>{order.orderItemCount}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <p>Нийт захиалгын төлбөр:</p>
+                    <p>{Number(order.totalPrice).toLocaleString()}₮</p>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <p>Нийт захиалгын төлбөр:</p>
-                  <p>{Number(order?.totalPrice).toLocaleString()}₮</p>
-                </div>
-              </div>
-              <div>
-                <Button onClick={() => getAddress(order)}>Хаяг харах</Button>
+                <AddressDialog
+                  getAddress={getAddress}
+                  order={order}
+                  address={address}
+                />
               </div>
               <PostReview order={order} />
             </div>
