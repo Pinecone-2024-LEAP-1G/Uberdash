@@ -40,12 +40,22 @@ const Branches = () => {
     coordinates: location.location,
   };
 
+  useEffect(() => {
+    if (restaurantId) {
+      dataFetch();
+    }
+  }, [restaurantId]);
+
   const dataFetch = async () => {
-    const response = await axios.post(
-      "/api/restaurant-branch/branchesByRestaurantId",
-      { restaurantId }
-    );
-    setBranches(response.data.branches);
+    try {
+      const response = await axios.post(
+        "/api/restaurant-branch/branchesByRestaurantId",
+        { restaurantId }
+      );
+      setBranches(response.data.branches || []);
+    } catch (error) {
+      toast.error("Failed to fetch branches. Please try again.");
+    }
   };
 
   const handleSubmit = async () => {

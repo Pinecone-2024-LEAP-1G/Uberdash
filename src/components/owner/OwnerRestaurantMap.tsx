@@ -35,7 +35,7 @@ export const OwnerRestaurantMap = ({
   return (
     <MapContainer
       center={[47.913678, 106.915995]}
-      zoom={18}
+      zoom={14}
       scrollWheelZoom={true}
       className="h-[90vh] w-full rounded-lg z-0"
     >
