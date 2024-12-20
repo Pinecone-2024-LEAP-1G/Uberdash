@@ -2,7 +2,7 @@
 
 import { RestaurantBranchType } from "@/lib/types";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
 import {
   Dialog,
@@ -55,6 +55,7 @@ const Branches = () => {
       setBranches(response.data.branches || []);
     } catch (error) {
       toast.error("Failed to fetch branches. Please try again.");
+      console.log(error);
     }
   };
 
