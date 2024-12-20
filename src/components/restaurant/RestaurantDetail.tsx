@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RestaurantHero } from "./RestaurantHero";
 import { ReviewRating } from "./ReviewRating";
 import { MenuItemLastCard } from "./MenuItemLastCard";
@@ -28,6 +28,19 @@ export const RestaurantDetail = ({
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const [menuItems, setMenuItems] = useState<MenuItemType[]>();
   const [reviews, setReviews] = useState<Review[]>([]);
+
+  const reviewsRef = useRef<HTMLDivElement | null>(null);
+
+  const handleScroll = () => {
+    const targetRef = reviewsRef.current;
+
+    if (targetRef) {
+      targetRef.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -68,6 +81,10 @@ export const RestaurantDetail = ({
     fetchdata();
   }, []);
 
+  const sortedReviews = reviews
+    .filter((review) => review.rating !== null && review.rating !== undefined)
+    .sort((a, b) => b.rating - a.rating);
+
   return (
     <div className="container mx-auto max-w-[1200px]">
       <RestaurantHero
@@ -77,7 +94,11 @@ export const RestaurantDetail = ({
       />
       <div className="flex gap-4">
         <div className="w-2/3">
-          <ReviewRating reviews={reviews} description={restaurant?.info} />
+          <ReviewRating
+            reviews={sortedReviews}
+            description={restaurant?.info}
+            handleScroll={handleScroll}
+          />
         </div>
         <div className="w-1/3 flex flex-col gap-4">
           <DeliveryFee restaurantId={restaurantId} />
@@ -106,7 +127,7 @@ export const RestaurantDetail = ({
           );
         })}
       </div>
-      <div>
+      <div ref={reviewsRef}>
         <RestaurantRating />
       </div>
     </div>
