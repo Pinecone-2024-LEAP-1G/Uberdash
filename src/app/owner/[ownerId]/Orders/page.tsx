@@ -30,7 +30,7 @@ type Status =
 const Reviews = () => {
   const [orders, setOrders] = useState<OrderType[]>([]);
   const restaurantId = localStorage.getItem("restaurantId");
-  const [address, setAddress] = useState<Address>(); //
+  const [address, setAddress] = useState<Address>();
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -54,27 +54,16 @@ const Reviews = () => {
     dataFetch();
   }, [restaurantId]);
 
-  //
-<<<<<<< HEAD
-
   const getAddress = async (order: OrderType) => {
-=======
-  const GetAddress = async (order: OrderType) => {
-    console.log(order);
-
->>>>>>> f581460 (review hesgiig tsegtselsen)
     try {
       const fetchAddress = await axios.get(
         `/api/order/address/${order.deliveryAddressId}`
       );
-      const address = fetchAddress.data.order.deliveryAddressId;
-      setAddress(address);
-      return address;
+      setAddress(fetchAddress.data.order.deliveryAddressId);
     } catch (error) {
       console.error("Error fetching address:", error);
     }
   };
-  //
 
   const handleStatusChange = async (id: string, newStatus: Status) => {
     try {
@@ -137,16 +126,18 @@ const Reviews = () => {
     {
       field: "address",
       headerName: "Хаягийн мэдээлэл",
-      width: 100,
+      width: 200,
       renderCell: (params) => {
         const order = orders.find((order) => order._id === params.id);
         if (!order) return null; // Just in case the order is not found
         return (
-          <AddressDialog
-            address={address}
-            getAddress={GetAddress}
-            order={order}
-          />
+          <div className="flex justify-center items-center h-full">
+            <AddressDialog
+              address={address}
+              getAddress={getAddress}
+              order={order}
+            />
+          </div>
         );
       },
     },
