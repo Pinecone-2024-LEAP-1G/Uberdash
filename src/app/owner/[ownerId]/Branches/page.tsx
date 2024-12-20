@@ -22,6 +22,7 @@ import { Label } from "@/components/ui/label";
 import { useLocation } from "@/Providers/LocationProvider";
 import { OwnerRestaurantMap } from "@/components/owner/OwnerRestaurantMap";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 type location = {
   type: "Point";
