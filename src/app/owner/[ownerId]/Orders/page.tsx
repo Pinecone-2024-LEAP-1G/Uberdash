@@ -46,7 +46,6 @@ const Reviews = () => {
         });
 
         setOrders(sortedOrders);
-        console.log(result.data);
       } catch (error) {
         console.log(error);
       }
