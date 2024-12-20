@@ -27,6 +27,7 @@ const OrderAddress = ({
   const [houseNumber, setHouseNumber] = useState<string>("");
   const [entranceNumber, setEntranceNumber] = useState<string>("");
   const [appartmentNumber, setAppartmentNumber] = useState<string>("");
+  const [openDialog, setOpenDialog] = useState(false);
 
   const { data: session } = useSession();
   const userId = session?.user.id;
@@ -82,15 +83,16 @@ const OrderAddress = ({
     try {
       const response = await axios.post("/api/address", address);
       setOrderAddress(response.data.address);
+      setOpenDialog(false);
     } catch (error) {
       console.error("Failed to post address:", error);
       alert("Хаяг хадгалахад алдаа гарлаа. Дахин оролдоно уу.");
     }
   };
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild className="">
-        <Button className="w-full">
+        <Button className="w-full" onClick={() => setOpenDialog(true)}>
           {orderAddress
             ? "Хүргэлт хүлээн авах хаяг засах"
             : "Хүргэлт хүлээн авах хаяг оруулах"}

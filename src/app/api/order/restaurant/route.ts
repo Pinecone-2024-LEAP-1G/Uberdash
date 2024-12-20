@@ -40,6 +40,7 @@ export const POST = async (req: NextRequest) => {
           status: 1,
           createdAt: 1,
           totalPrice: 1,
+          deliveryAddressId: 1,
         },
       },
     ]);
