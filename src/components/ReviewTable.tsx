@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -16,7 +17,7 @@ type ReviewTableProps = {
 
 const renderRatingStars = (rating: number) => {
   const totalStars = 5;
-  let stars = [];
+  const stars = [];
 
   for (let i = 0; i < totalStars; i++) {
     stars.push(
@@ -45,7 +46,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({ reviews }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {reviews.map((review) => (
+          {reviews?.map((review) => (
             <TableRow key={review._id}>
               <TableCell className="font-medium">{review.comment}</TableCell>
               <TableCell>

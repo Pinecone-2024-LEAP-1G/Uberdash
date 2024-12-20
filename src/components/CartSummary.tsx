@@ -1,3 +1,5 @@
+"use client";
+
 import { ShoppingCart } from "lucide-react";
 import {
   Accordion,
@@ -12,7 +14,7 @@ export const CartSummary = () => {
   const { cartItems } = useCart();
   let count = 0;
 
-  cartItems.map((cartItem) => {
+  cartItems?.map((cartItem) => {
     count += cartItem.quantity;
   });
 
@@ -30,7 +32,7 @@ export const CartSummary = () => {
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            {cartItems.map((cartItem, index) => {
+            {cartItems?.map((cartItem, index) => {
               return (
                 <div
                   key={index}

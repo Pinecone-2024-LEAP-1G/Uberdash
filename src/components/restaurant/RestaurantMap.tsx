@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Location } from "./RestaurantLocation";
 
-// @ts-ignore
+// @ts-expect-error : ymar negen error garch magadgui gej l bichih ym shig baina
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({

@@ -1,3 +1,4 @@
+"use client";
 import { useCart } from "@/Providers/CartProvider";
 import { LikeSvg } from "../ui/Like-svg";
 import { useState } from "react";

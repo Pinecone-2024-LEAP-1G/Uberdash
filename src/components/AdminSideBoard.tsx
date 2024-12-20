@@ -80,7 +80,7 @@ export function AdminSideBar() {
           <SidebarGroupLabel className="mt-34"></SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="border-gray-200 my-13">
-              {items.map((item) => (
+              {items?.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a

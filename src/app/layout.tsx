@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        <Suspense>
+        <Suspense fallback={<p>loading</p>}>
           <SessionProvider>
             <AuthGuard>
               <CartProvider>

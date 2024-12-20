@@ -1,3 +1,4 @@
+"use client";
 import { useQueryStates } from "nuqs";
 import { PopOverSlider } from "./PopOverSlider";
 import { filterOptions, mockItems } from "../utils/FilteredOptions";
@@ -40,7 +41,7 @@ export const FilterTags = () => {
   return (
     <div>
       <div className="flex gap-3 p-2">
-        {filterOptions.map((option) => (
+        {filterOptions?.map((option) => (
           <button
             key={option.id}
             onClick={() => handleFilterClick(option.value)}
@@ -65,7 +66,7 @@ export const FilterTags = () => {
       </div>
 
       <div>
-        {filteredItems.map((item) => (
+        {filteredItems?.map((item) => (
           <div key={item.id}>{item.name}</div>
         ))}
       </div>

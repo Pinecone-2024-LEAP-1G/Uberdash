@@ -1,8 +1,7 @@
+"use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Restaurant } from "@/lib/models";
-import { MenuItemLastCard } from "./restaurant/MenuItemLastCard";
-import Link from "next/link";
 import { MenuItem } from "./MenuItem";
 import { SkeletonCard } from "./SkeletonCard";
 
@@ -48,7 +47,7 @@ export const MostRatedRestaurants = () => {
         {loading
           ? Array(4)
               .fill(null)
-              .map((_, index) => <SkeletonCard key={index} />)
+              ?.map((_, index) => <SkeletonCard key={index} />)
           : restaurantsToShow.map((restaurant, index) => (
               <MenuItem
                 key={index}

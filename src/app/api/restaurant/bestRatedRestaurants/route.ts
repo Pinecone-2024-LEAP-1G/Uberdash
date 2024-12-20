@@ -20,13 +20,13 @@ export const GET = async () => {
     ]);
     console.log(ratings);
 
-    if (ratings.length === 0) {
+    if (ratings?.length === 0) {
       return Response.json({ message: "No reviews available" });
     }
 
     const restaurantsWithRatings = await Promise.all(
-      ratings.map(async (rating) => {
-        const restaurant = await RestaurantModel.findById(rating._id);
+      ratings?.map(async (rating) => {
+        const restaurant = await RestaurantModel.findById(rating?._id);
 
         if (!restaurant) {
           return null;
@@ -34,8 +34,8 @@ export const GET = async () => {
 
         return {
           ...restaurant.toObject(),
-          averageRating: rating.averageRating,
-          reviewCount: rating.reviewCount,
+          averageRating: rating?.averageRating,
+          reviewCount: rating?.reviewCount,
         };
       })
     );

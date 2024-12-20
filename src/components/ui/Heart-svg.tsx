@@ -5,15 +5,15 @@ import { Restaurant } from "@/lib/models";
 import { toast } from "sonner";
 
 type Heart = {
-  favourites: Restaurant[];
-  restaurantId: string;
+  favourites?: Restaurant[];
+  restaurantId?: string;
 };
 
 export const HeartSvg = ({ restaurantId, favourites }: Heart) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const dataFetch = () => {
-    favourites.map((fav) => {
+    favourites?.map((fav) => {
       if (fav._id === restaurantId) {
         setIsClicked(true);
         return;
@@ -38,6 +38,7 @@ export const HeartSvg = ({ restaurantId, favourites }: Heart) => {
         setIsClicked(!isClicked);
       }
     } catch (error) {
+      console.log(error);
       toast.error("error");
     }
   };

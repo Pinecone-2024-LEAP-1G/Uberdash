@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode, useState, useEffect } from "react";
 import LottieAnimation from "@/components/LottieLoader";
 import loaderAnimation from "../../public/loader/lottie.json";

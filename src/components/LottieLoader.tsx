@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, memo, useRef } from "react";
 import Lottie from "react-lottie";
 

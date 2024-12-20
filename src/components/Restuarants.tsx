@@ -4,7 +4,6 @@ import { Restaurant } from "@/lib/models";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MenuItem } from "./MenuItem";
-import Link from "next/link";
 import { SkeletonCard } from "@/components/SkeletonCard";
 
 export const Restaurants = () => {
@@ -49,8 +48,8 @@ export const Restaurants = () => {
         {loading
           ? Array(restaurants.length)
               .fill(null)
-              .map((_, index) => <SkeletonCard key={index} />)
-          : restaurants.map((restaurant, index) => (
+              ?.map((_, index) => <SkeletonCard key={index} />)
+          : restaurants?.map((restaurant, index) => (
               <MenuItem
                 key={index}
                 favourites={favouriteRestaurants}

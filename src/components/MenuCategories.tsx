@@ -42,7 +42,7 @@ export const MenuCategories = () => {
         <CarouselItem>
           <div className="flex gap-3 items-center">
             {loading
-              ? skeletons.map((skeleton, index) => (
+              ? skeletons?.map((skeleton, index) => (
                   <div
                     key={index}
                     className="flex flex-col items-center w-fit cursor-pointer ml-2 rounded-xl p-2"
@@ -50,7 +50,7 @@ export const MenuCategories = () => {
                     {skeleton}
                   </div>
                 ))
-              : categories.map((menuCategory) => (
+              : categories?.map((menuCategory) => (
                   <MenuCategory
                     key={menuCategory._id}
                     id={menuCategory._id}

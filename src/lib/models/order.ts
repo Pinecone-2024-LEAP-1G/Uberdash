@@ -1,4 +1,5 @@
 import { models, Schema, model } from "mongoose";
+import { OrderItem } from "./order-item.model";
 
 export type Order = {
   _id: Schema.Types.ObjectId;
@@ -11,19 +12,12 @@ export type Order = {
     | "Хүргэлтэнд явж байна"
     | "Хүргэгдсэн";
   orderItemCount: number;
-  priceWithoutDiscount: number;
-  priceWithDiscount: number;
   totalPrice: number;
   userId: Schema.Types.ObjectId;
-  cancelledTime?: Date;
-  readyToStartTime?: Date;
-  inPreparationTime?: Date;
-  readyForPickupTime?: Date;
-  onTheWayTime?: Date;
-  deliveredTime?: Date;
-  discountCodeId?: Schema.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
   deliveryAddressId?: Schema.Types.ObjectId;
-  orderItems: Schema.Types.ObjectId[];
+  orderItems: OrderItem[];
 };
 
 const OrderSchema = new Schema<Order>(
@@ -45,28 +39,15 @@ const OrderSchema = new Schema<Order>(
     orderItemCount: {
       type: Number,
     },
-    priceWithoutDiscount: {
-      type: Number,
-    },
-    priceWithDiscount: {
-      type: Number,
-    },
+
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: "users",
     },
     totalPrice: { type: Number },
-    cancelledTime: Date,
-    readyToStartTime: Date,
-    inPreparationTime: Date,
-    readyForPickupTime: Date,
-    onTheWayTime: Date,
-    deliveredTime: Date,
-    discountCodeId: {
-      type: Schema.Types.ObjectId,
-      ref: "discounts",
-    },
+    createdAt: { type: Date },
+    updatedAt: { type: Date },
     deliveryAddressId: {
       type: Schema.Types.ObjectId,
       ref: "addresses",

@@ -46,6 +46,7 @@ export const OwnerMenuItem = ({
       const response = await axios.get(`/api/menu-item/${menuItemId}`);
       setMenuItem(response.data.menuItem);
     } catch (error) {
+      console.log(error);
       toast.error("error"); // toast notification
     }
   };

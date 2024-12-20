@@ -1,3 +1,5 @@
+"use client";
+
 import { Pen, BookOpen } from "lucide-react";
 import { parseAsString, useQueryState } from "nuqs";
 import { Category } from "@/lib/types";

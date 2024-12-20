@@ -1,3 +1,4 @@
+"use client";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSideBar } from "@/components/AdminSideBoard";
 

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import Image from "next/image";
@@ -45,7 +46,7 @@ export const RestaurantList: React.FC = () => {
         </div>
       </div>
       <div ref={scrollRef} className="flex  space-x-4">
-        {restaurant.map((restaurant, index) => (
+        {restaurant?.map((restaurant, index) => (
           <div key={index} className="min-w-[130px] text-center">
             <Image
               alt="img"

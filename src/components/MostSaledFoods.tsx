@@ -1,7 +1,7 @@
+"use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MenuItemType } from "@/lib/types";
-import { RestrauntMenu } from "./restaurant/RestrauntMenu";
 import { MenuItemLastCard } from "./restaurant/MenuItemLastCard";
 
 type FoodWithOrder = {

@@ -68,7 +68,7 @@ export const BasketDrawer: React.FC = () => {
                 {count} Ширхэг захиалга
               </p>
             </div>
-            {cartItems.map((cartItem) => {
+            {cartItems?.map((cartItem) => {
               return (
                 <div
                   className="flex gap-4 justify-between items-center border-b py-2"

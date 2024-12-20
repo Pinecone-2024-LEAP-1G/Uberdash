@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { Review } from "../../lib/models/review.model";
 import { Stars } from "../Stars";
-import axios from "axios";
 
 export const ReviewRating = (props: {
   reviews: Review[];
@@ -17,7 +16,7 @@ export const ReviewRating = (props: {
   const [rating, setRating] = useState<string>("");
   useEffect(() => {
     let sum: number = 0;
-    reviews.map((review) => {
+    reviews?.map((review) => {
       sum += review.rating;
     });
     setRating((sum / reviews.length).toFixed(1).toString());
@@ -60,9 +59,6 @@ export const ReviewRating = (props: {
               comment={review.comment}
               rating={review.rating}
               createdAt={review.createdAt}
-              userId={review.userId}
-              _id={review._id}
-              restaurantId={review.restaurantId}
             />
           ))}
           <Button className="bg-[#f3f3f3] text-black rounded-3xl hover:bg-gray-300">

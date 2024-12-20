@@ -60,7 +60,7 @@ const PostReview = ({ order }: { order: Order }) => {
       <div className="flex justify-between items-center">
         <p>Үнэлгээ ба сэтгэгдэл үлдээх</p>
         <div className="flex">
-          {stars.map((_, index) => (
+          {stars?.map((_, index) => (
             <FaStar
               key={index}
               onClick={() => handleChangeRating(index + 1)}

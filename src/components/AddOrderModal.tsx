@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogContent,
@@ -11,7 +13,7 @@ import { useState } from "react";
 import { SelectQuantity } from "../components/basket-drawer/SelectQuantity";
 import { Button } from "./ui/button";
 import { FaPlus } from "react-icons/fa";
-import { toast } from 'sonner'
+import { toast } from "sonner";
 
 type MenuItem = {
   menuItem?: MenuItemType;
@@ -32,7 +34,7 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
       });
     }
 
-    console.log('hah');
+    console.log("hah");
 
     toast("Амжилттай сагслагдлаа ✅");
   };
@@ -60,8 +62,9 @@ export const AddOrderModal = ({ menuItem }: MenuItem) => {
                     <div
                       className="absolute inset-0 bg-cover bg-center"
                       style={{
-                        backgroundImage: `url(${menuItem.image || "/fallback-image.png"
-                          })`,
+                        backgroundImage: `url(${
+                          menuItem.image || "/fallback-image.png"
+                        })`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         backgroundSize: "cover",

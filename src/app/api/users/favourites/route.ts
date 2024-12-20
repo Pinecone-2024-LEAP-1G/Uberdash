@@ -4,7 +4,7 @@ import { UserModel } from "@/lib/models";
 import { NextRequest } from "next/server";
 connectToMongoDB();
 
-export const GET = async (request: NextRequest) => {
+export const GET = async () => {
   const session = await auth();
 
   if (!session) {

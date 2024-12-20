@@ -4,9 +4,23 @@ import { MenuItem } from "../components/MenuItem"; // Import MenuItem component
 import { MenuItemType } from "@/lib/types";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Restaurant } from "@/lib/models";
 
 export const AllFoods = () => {
   const [mainFood, setMainFood] = useState<MenuItemType[]>([]);
+  const [favouriteRestaurants, setFavourites] = useState<Restaurant[]>([]);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      try {
+        const response = await axios.get("/api/users/favourites");
+        setFavourites(response.data.users.favourites);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    dataFetch();
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -30,13 +44,12 @@ export const AllFoods = () => {
       <h2 className="text-2xl font-semibold mb-4">All Foods</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {mainFood.map((foodItem) => (
+        {mainFood?.map((foodItem) => (
           <MenuItem
+            favourites={favouriteRestaurants}
             key={foodItem._id}
             image={foodItem.image}
             name={foodItem.name}
-            points={foodItem.price}
-            bonus="Buy 1, Get 1 Free"
             restaurantId={""}
           />
         ))}

@@ -44,6 +44,7 @@ const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
           setLocation(parsedLocation);
         }
       } catch (e) {
+        console.log(e);
         setError("Failed to parse location from localStorage");
       }
     }

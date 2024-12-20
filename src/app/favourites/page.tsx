@@ -37,7 +37,7 @@ const Favourites = () => {
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4">Миний Дуртай Ресторанууд</h2>
       <div className=" grid grid-cols-4  mx-auto  ">
-        {restaurants.map((restaurant, index) => (
+        {restaurants?.map((restaurant, index) => (
           <MenuItem
             key={index}
             favourites={favouriteRestaurants}

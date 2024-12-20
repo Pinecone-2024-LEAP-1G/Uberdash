@@ -2,7 +2,7 @@
 
 import { RestaurantBranchType } from "@/lib/types";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Plus } from "lucide-react";
 import {
   Dialog,
@@ -57,8 +57,8 @@ const Branches = () => {
       });
       dataFetch();
       toast.success("Салбар амжилттай нэмэгдлээ!");
-      //amjilttai salbar nemegdlee gdg toast
     } catch (error) {
+      console.log(error);
       toast.error("Салбар нэмэхэд алдаа гарлаа. Дахин оролдоно уу.");
     }
   };

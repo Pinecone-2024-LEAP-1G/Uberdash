@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { X, Ban } from "lucide-react";
+import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type DetailType = {

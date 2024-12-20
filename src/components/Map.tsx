@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import L from "leaflet";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
@@ -8,7 +10,7 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-// @ts-ignore
+// @ts-expect-error : ymar negen error garch magadgui gej l bichih ym shig baina
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconUrl: markerIcon.src,

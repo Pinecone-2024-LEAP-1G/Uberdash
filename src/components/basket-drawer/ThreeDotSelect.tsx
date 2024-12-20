@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import ThreeDot from "../ui/ThreeDot";
 import TrashIcon from "../ui/TrashIcon";

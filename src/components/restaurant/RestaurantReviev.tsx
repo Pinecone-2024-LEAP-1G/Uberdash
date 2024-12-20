@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ReviewType } from "@/lib/types";
 
@@ -31,7 +32,7 @@ export const RestaurantReview: React.FC<RestaurantReviewProps> = ({
         </p>
       </div>
       <div className="w-full h-full grid grid-cols-2 gap-3 ">
-        {reviews.map((review) => (
+        {reviews?.map((review) => (
           <div key={review._id}>
             <div className="  rounded-2xl p-4 mt-4 border">
               <p className="text-[16px] font-medium leading-5 mb-1">
