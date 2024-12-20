@@ -55,8 +55,14 @@ const Reviews = () => {
   }, [restaurantId]);
 
   //
+<<<<<<< HEAD
 
   const getAddress = async (order: OrderType) => {
+=======
+  const GetAddress = async (order: OrderType) => {
+    console.log(order);
+
+>>>>>>> f581460 (review hesgiig tsegtselsen)
     try {
       const fetchAddress = await axios.get(
         `/api/order/address/${order.deliveryAddressId}`
@@ -68,6 +74,7 @@ const Reviews = () => {
       console.error("Error fetching address:", error);
     }
   };
+  //
 
   const handleStatusChange = async (id: string, newStatus: Status) => {
     try {
@@ -130,18 +137,16 @@ const Reviews = () => {
     {
       field: "address",
       headerName: "Хаягийн мэдээлэл",
-      width: 200,
+      width: 100,
       renderCell: (params) => {
         const order = orders.find((order) => order._id === params.id);
         if (!order) return null; // Just in case the order is not found
         return (
-          <div className="flex justify-center items-center h-full">
-            <AddressDialog
-              address={address}
-              getAddress={getAddress}
-              order={order}
-            />
-          </div>
+          <AddressDialog
+            address={address}
+            getAddress={GetAddress}
+            order={order}
+          />
         );
       },
     },
