@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { User } from "@/lib/models";
+import { Address, User } from "@/lib/models";
 import { OrderItem } from "@/lib/models";
 import moment from "moment";
 import { MenuItem, Select } from "@mui/material";
@@ -38,7 +38,15 @@ const Reviews = () => {
         const result = await axios.post(`/api/order/restaurant`, {
           restaurantId: restaurantId,
         });
-        setOrders(result.data);
+
+        const sortedOrders = result.data.sort((a: OrderType, b: OrderType) => {
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        });
+
+        setOrders(sortedOrders);
+        console.log(result.data);
       } catch (error) {
         console.log(error);
       }
@@ -47,9 +55,8 @@ const Reviews = () => {
   }, [restaurantId]);
 
   //
-  const GetAddress = async (order: Order) => {
-    console.log(order);
 
+  const getAddress = async (order: OrderType) => {
     try {
       const fetchAddress = await axios.get(
         `/api/order/address/${order.deliveryAddressId}`
@@ -61,7 +68,6 @@ const Reviews = () => {
       console.error("Error fetching address:", error);
     }
   };
-  //
 
   const handleStatusChange = async (id: string, newStatus: Status) => {
     try {
@@ -124,24 +130,26 @@ const Reviews = () => {
     {
       field: "address",
       headerName: "Хаягийн мэдээлэл",
-      width: 100,
+      width: 200,
       renderCell: (params) => {
         const order = orders.find((order) => order._id === params.id);
         if (!order) return null; // Just in case the order is not found
         return (
-          <AddressDialog
-            address={address}
-            getAddress={GetAddress}
-            order={order}
-          />
+          <div className="flex justify-center items-center h-full">
+            <AddressDialog
+              address={address}
+              getAddress={getAddress}
+              order={order}
+            />
+          </div>
         );
       },
     },
   ];
 
   return (
-    <div className="flex justify-center items-center gap-10 mx-[250px] my-[150px]">
-      <div style={{ flex: 1, height: 500 }}>
+    <div className="flex justify-center items-center gap-10 mx-[250px] my-[150px] w-fit">
+      <div style={{ flex: 1, height: 528 }}>
         <h1 className="text-xl font-bold mb-4">Захиалгууд</h1>
         <DataGrid
           rows={rows}
