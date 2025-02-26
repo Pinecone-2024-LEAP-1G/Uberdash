@@ -1,5 +1,5 @@
 "use client";
-import Map from "./RestaurantMap";
+// import Map from "./RestaurantMap";
 
 export type Location = {
   type: "Point";
@@ -25,10 +25,11 @@ export const RestaurantLocation = ({
     },
     restaurantId: restaurantId,
   };
+  console.log(mapProps);
 
   return (
     <div className="border rounded-2xl h-[334px] flex flex-col justify-end">
-      <Map {...mapProps} />
+      {/* <Map {...mapProps} /> */}
     </div>
   );
 };

@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Address, User } from "@/lib/models";
+import {  User } from "@/lib/models";
 import { OrderItem } from "@/lib/models";
 import moment from "moment";
 import { MenuItem, Select } from "@mui/material";
-import AddressDialog from "@/components/AddressDialog";
+// import AddressDialog from "@/components/AddressDialog";
 
 type OrderType = {
   createdAt: Date;
@@ -30,7 +30,7 @@ type Status =
 const Reviews = () => {
   const [orders, setOrders] = useState<OrderType[]>([]);
   const restaurantId = localStorage.getItem("restaurantId");
-  const [address, setAddress] = useState<Address>();
+  // const [address, setAddress] = useState<Address>();
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -53,16 +53,16 @@ const Reviews = () => {
     dataFetch();
   }, [restaurantId]);
 
-  const getAddress = async (order: OrderType) => {
-    try {
-      const fetchAddress = await axios.get(
-        `/api/order/address/${order.deliveryAddressId}`
-      );
-      setAddress(fetchAddress.data.order.deliveryAddressId);
-    } catch (error) {
-      console.error("Error fetching address:", error);
-    }
-  };
+  // const getAddress = async (order: OrderType) => {
+  //   try {
+  //     const fetchAddress = await axios.get(
+  //       `/api/order/address/${order.deliveryAddressId}`
+  //     );
+  //     setAddress(fetchAddress.data.order.deliveryAddressId);
+  //   } catch (error) {
+  //     console.error("Error fetching address:", error);
+  //   }
+  // };
 
   const handleStatusChange = async (id: string, newStatus: Status) => {
     try {
@@ -131,11 +131,11 @@ const Reviews = () => {
         if (!order) return null; // Just in case the order is not found
         return (
           <div className="flex justify-center items-center h-full">
-            <AddressDialog
+            {/* <AddressDialog
               address={address}
               getAddress={getAddress}
               order={order}
-            />
+            /> */}
           </div>
         );
       },
