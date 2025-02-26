@@ -1,53 +1,58 @@
-// "use client";
+"use client";
 
-// import L from "leaflet";
+import L from "leaflet";
+import dynamic from "next/dynamic";
 
-// // import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
 
-// import "leaflet/dist/leaflet.css";
+import {  Popup } from "react-leaflet";
+const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import("react-leaflet").then((mod) => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import("react-leaflet").then((mod) => mod.Marker), { ssr: false });
 
-// import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import "leaflet/dist/leaflet.css";
 
-// import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 
-// import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
 
-// import { RestaurantBranchType } from "@/lib/types";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-// // @ts-expect-error : ymar negen error garch magadgui gej l bichih ym shig baina
-// delete L.Icon.Default.prototype._getIconUrl;
+import { RestaurantBranchType } from "@/lib/types";
 
-// L.Icon.Default.mergeOptions({
-//   iconUrl: markerIcon.src,
+// @ts-expect-error : ymar negen error garch magadgui gej l bichih ym shig baina
+delete L.Icon.Default.prototype._getIconUrl;
 
-//   iconRetinaUrl: markerIcon2x.src,
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon.src,
 
-//   shadowUrl: markerShadow.src,
-// });
+  iconRetinaUrl: markerIcon2x.src,
 
-// type OwnerRestaurantMapProps = {
-//   restauranBranches?: RestaurantBranchType[];
-// };
+  shadowUrl: markerShadow.src,
+});
 
-// export const OwnerRestaurantMap = ({
-//   restauranBranches,
-// }: OwnerRestaurantMapProps) => {
-//   return (
-//     <MapContainer
-//       center={[47.913678, 106.915995]}
-//       zoom={14}
-//       scrollWheelZoom={true}
-//       className="h-[90vh] w-full rounded-lg z-0"
-//     >
-//       <TileLayer
-//         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//       />
-//       {restauranBranches?.map((branch) => (
-//         <Marker key={branch._id} position={branch.location.coordinates}>
-//           <Popup>{branch.branchName}</Popup>
-//         </Marker>
-//       ))}
-//     </MapContainer>
-//   );
-// };
+type OwnerRestaurantMapProps = {
+  restauranBranches?: RestaurantBranchType[];
+};
+
+export const OwnerRestaurantMap = ({
+  restauranBranches,
+}: OwnerRestaurantMapProps) => {
+  return (
+    <MapContainer
+      center={[47.913678, 106.915995]}
+      zoom={14}
+      scrollWheelZoom={true}
+      className="h-[90vh] w-full rounded-lg z-0"
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {restauranBranches?.map((branch) => (
+        <Marker key={branch._id} position={branch.location.coordinates}>
+          <Popup>{branch.branchName}</Popup>
+        </Marker>
+      ))}
+    </MapContainer>
+  );
+};

@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,7 +49,7 @@ const AddRestaurant = () => {
 
       const data = await response.json();
       if (response.ok) {
-        toast.success("Рестораныг амжилттай үүсгэсэн"); //toast r ajilluulah
+        toast.success("Рестораныг амжилттай үүсгэсэн");
         router.push("/");
       } else {
         toast.error(`Рестораныг үүсгэхэд алдаа гарлаа: ${data.error}`);
@@ -84,9 +84,7 @@ const AddRestaurant = () => {
               <Input
                 id="name"
                 value={name}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setName(e.target.value)
-                }
+                onChange={(e) => setName(e.target.value)}
                 required
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full"
               />
@@ -102,9 +100,7 @@ const AddRestaurant = () => {
               <Input
                 id="image"
                 value={image}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setImage(e.target.value)
-                }
+                onChange={(e) => setImage(e.target.value)}
                 required
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full"
               />
@@ -120,9 +116,7 @@ const AddRestaurant = () => {
               <Input
                 id="banner"
                 value={banner}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setBanner(e.target.value)
-                }
+                onChange={(e) => setBanner(e.target.value)}
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full"
               />
             </div>
@@ -137,9 +131,7 @@ const AddRestaurant = () => {
               <Input
                 id="info"
                 value={info}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setInfo(e.target.value)
-                }
+                onChange={(e) => setInfo(e.target.value)}
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full"
               />
             </div>
