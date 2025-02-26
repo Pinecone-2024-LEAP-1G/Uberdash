@@ -1,8 +1,8 @@
 "use client";
 
-import { FastFoodFilter } from "@/components/FastFoodFilter";
+// import { FastFoodFilter } from "@/components/FastFoodFilter";
 import { Restaurants } from "@/components/Restuarants";
-import { MenuCategories } from "@/components/MenuCategories";
+// import { MenuCategories } from "@/components/MenuCategories";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { parseAsString, useQueryState } from "nuqs";
 import { useEffect, useState } from "react";

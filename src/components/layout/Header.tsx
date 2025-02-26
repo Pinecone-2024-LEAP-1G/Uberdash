@@ -7,7 +7,7 @@ import { parseAsString, useQueryState } from "nuqs";
 import { SearchBar } from "../SearchBar";
 import { SignInButton } from "../SignInButton";
 import { MapPin, ChevronDown } from "lucide-react";
-import Map from "../Map";
+// import Map from "../Map";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -77,7 +77,7 @@ export const Header = () => {
               </DialogDescription>
             </DialogHeader>
             <div>
-              <Map />
+              {/* <Map /> */}
             </div>
             <DialogFooter>
               <DialogClose asChild>

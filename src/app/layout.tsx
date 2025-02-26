@@ -11,7 +11,7 @@ import { AuthGuard } from "./AuthGuard";
 import { usePathname } from "next/navigation";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
-import LoadingWrapper from "@/components/LoadingWrapper";
+// import LoadingWrapper from "@/components/LoadingWrapper";
 import { LocationProvider } from "@/Providers/LocationProvider";
 
 export default function RootLayout({
@@ -36,7 +36,7 @@ export default function RootLayout({
               <CartProvider>
                 <FoodProvider>
                   <NuqsAdapter>
-                    <LoadingWrapper>
+                    
                       <LocationProvider>
                         {!isSignInPage &&
                           !isBusinessAccountPage &&
@@ -48,7 +48,7 @@ export default function RootLayout({
                           <Footer className={isCheckoutPage ? "mt-72" : ""} />
                         )}
                       </LocationProvider>
-                    </LoadingWrapper>
+                    
                     <Toaster position="bottom-left" />
                   </NuqsAdapter>
                 </FoodProvider>
