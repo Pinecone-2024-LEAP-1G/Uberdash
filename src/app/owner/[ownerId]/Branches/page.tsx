@@ -15,12 +15,12 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { MapPin } from "lucide-react";
-// import Map from "@/components/Map";
+import Map from "@/components/Map";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLocation } from "@/Providers/LocationProvider";
-// import { OwnerRestaurantMap } from "@/components/owner/OwnerRestaurantMap";
+import { OwnerRestaurantMap } from "@/components/owner/OwnerRestaurantMap";
 import { toast } from "sonner";
 
 type location = {
@@ -96,7 +96,7 @@ const Branches = () => {
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-5 items-start">
-            {/* <Map /> */}
+            <Map />
             <Label htmlFor="name" className="text-right">
               Салбарын нэр оруулна уу?
             </Label>
@@ -120,7 +120,7 @@ const Branches = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      {/* <OwnerRestaurantMap restauranBranches={branches} /> */}
+      <OwnerRestaurantMap restauranBranches={branches} />
     </div>
   );
 };
